@@ -27,16 +27,19 @@
                         <thead>
                             <th>Type</th>
                             <th>Description</th>
+                            <th></th>
                         </thead>
                         <tbody style="cursor: pointer;">
                             @foreach($course->requirements()->where('Term', '=', $i+1)->get() as $requirement)
                                 <tr data-toggle="modal" data-target="#editRequirement{{ $requirement->id }}">
                                     <td>{{$requirement->Type}}</td>
                                     <td>{{$requirement->Description}}</td>
+                                    <td class="text-right"><button type="button" class="btn btn-danger btn-xs" onclick="">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button></td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <h6><span class="help-block">Note: Click on a record to edit.</span></h6>
                 @else
                     <span class="help-block">No requirements yet.</span>
                 @endif

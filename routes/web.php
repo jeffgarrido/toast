@@ -29,4 +29,6 @@ Route::post('add_requirement/{course}', 'CourseController@addRequirement');
 
 Route::put('edit_requirement/{requirement}', 'CourseController@editRequirement');
 
+Route::post('delete_requiremenet/{requirement}', 'CourseController@deleteRequirement');
+
 Route::get('professor', 'ProfessorController@showDashboard');

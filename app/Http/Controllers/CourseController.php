@@ -115,6 +115,10 @@ class CourseController extends Controller
         return back()->with('id', $request->input('id'));
     }
 
+    public function deleteRequirement(){
+
+    }
+
     private function createLog($action, $description = ""){
         $log = new AuditLog();
 
