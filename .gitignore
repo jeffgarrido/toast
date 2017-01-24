@@ -1,4 +1,2 @@
-/node_modules
-/public/storage
-/storage/*.key
-/vendor
+vendor/
+node_modules/
