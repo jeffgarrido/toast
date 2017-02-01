@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('Code', 10);
             $table->string('Title', 50);
+            $table->int('Units', 10);
             $table->text('Description')->nullable();
             $table->enum('Terms', array(2,3,4));
             $table->timestamps();

@@ -33,6 +33,8 @@ function getCourseDetails(id)
         }
         xmlHttp.send(null);
     }
+
+    return false;
 }
 
 function deleteCourse(id){

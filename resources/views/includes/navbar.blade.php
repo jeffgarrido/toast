@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-primary navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -12,8 +12,9 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="courses">Courses</a></li>
-                <li><a href="professor">Professor</a></li>
+                <li id="navCourses"><a href="/courses">Courses</a></li>
+                <li id="navProfessor"><a href="/professor">Professor</a></li>
+                <li id="navAdmin"><a href="/admin">Admin</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
