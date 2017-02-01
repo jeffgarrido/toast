@@ -38,3 +38,7 @@ Route::get('admin', 'AdminController@adminRedirect');
 Route::get('students', 'AdminController@showStudentPage');
 
 Route::get('sections', 'AdminController@showSectionsPage');
+
+Route::get('log_attendance', function(){
+   dd('Hello world');
+});

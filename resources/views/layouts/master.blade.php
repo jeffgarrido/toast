@@ -5,13 +5,17 @@
 
 <body>
 
-@include('includes.navbar')
-
 <div class="container">
-@yield('body')
-</div>
 
-@include('includes.footer')
+    @include('includes.navbar')
+
+    <div class="container-fluid">
+    @yield('body')
+    </div>
+
+    @include('includes.footer')
+
+</div>
 
 </body>
 </html>
