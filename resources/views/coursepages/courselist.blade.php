@@ -5,9 +5,15 @@
 <script>
     $(document).ready(function(){
         getCourseDetails({{ session('id') }});
-    })
+    });
 </script>
 @endif
+
+<script>
+    $(document).ready(function(){
+        $('#navCourses').addClass("active");
+    });
+</script>
 
 {{--Course List--}}
 <div class=" flexbox">
@@ -59,6 +65,12 @@
                             <label for="Title" class="col-lg-2 control-label">Title</label>
                             <div class="col-lg-10">
                                 <input class="form-control" id="Title" name="Title" placeholder="Title" type="text" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Title" class="col-lg-2 control-label">Units</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="Units" name="Units" placeholder="Units" type="number" required/>
                             </div>
                         </div>
                         <div class="form-group">

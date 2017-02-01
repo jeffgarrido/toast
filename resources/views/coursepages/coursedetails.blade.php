@@ -166,6 +166,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="Title" class="col-lg-2 control-label">Units</label>
+                        <div class="col-lg-10">
+                            <input class="form-control" id="Units" name="Units" placeholder="Units" type="number" value="{{ $course->Units }}" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="Terms" class="col-lg-2 control-label">Number of Terms</label>
                         <div class="col-lg-10">
                             <select class="form-control" id="Terms" name="Terms" required>

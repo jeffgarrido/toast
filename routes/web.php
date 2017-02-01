@@ -32,3 +32,9 @@ Route::put('edit_requirement/{requirement}', 'CourseController@editRequirement')
 Route::post('delete_requiremenet/{requirement}', 'CourseController@deleteRequirement');
 
 Route::get('professor', 'ProfessorController@showDashboard');
+
+Route::get('admin', 'AdminController@adminRedirect');
+
+Route::get('students', 'AdminController@showStudentPage');
+
+Route::get('sections', 'AdminController@showSectionsPage');
