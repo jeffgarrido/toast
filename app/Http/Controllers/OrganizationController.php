@@ -11,4 +11,8 @@ class OrganizationController extends Controller
         $organization = Organization::all();
         return view('organizationpages.orglist', compact('organization'));
     }
+
+    public function getOrgDetails(Organization $organization){
+        return view('organizationpages.orgdetails', compact('organization'));
+    }
 }
