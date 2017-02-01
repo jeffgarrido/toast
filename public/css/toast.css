@@ -3,3 +3,25 @@
     border-bottom: solid 1px #EEEEEE;
     margin-bottom: 10px;
 }
+
+.align-right {
+    text-align: right;
+}
+
+.loading-div {
+    opacity:0.8;
+    background-color:#ccc;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-icon {
+    vertical-align: middle;
+}

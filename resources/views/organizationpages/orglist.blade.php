@@ -20,10 +20,10 @@
             </div>
             <ul class="nav nav-pills nav-stacked">
                 @foreach($organization as $org)
-                    <li class="test" data="{{$org->Organization_Id}}"><a href="#">{{ $org->Organization_Name }}</a></li>
+                    <li class="getOrgDetails" data="{{$org->Organization_Id}}"><a href="#">{{ $org->Organization_Name }}</a></li>
                 @endforeach
                     <script>
-                        $('.test').click(function () {
+                        $('.getOrgDetails').click(function () {
                             getOrganizationDetails(this.getAttribute('data'));
                         });
                     </script>

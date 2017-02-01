@@ -9,6 +9,8 @@
 </script>
 @endif
 
+@include('includes.loader')
+
 <script>
     $(document).ready(function(){
         $('#navCourses').addClass("active");
@@ -28,8 +30,14 @@
         </div>
         <ul class="nav nav-pills nav-stacked">
             @foreach($courses as $course)
-                <li onclick="getCourseDetails({{ $course->id }})"><a href="#">{{ $course->Code }}: {{ $course->Title }}</a></li>
+                <li class="getCourseDetails" data="{{ $course->id }}"><a href="#">{{ $course->Code }}: {{ $course->Title }}</a></li>
             @endforeach
+            <script>
+                $('.getCourseDetails').click(function(){
+                    $('.loading-div').show();
+                    getCourseDetails(this.getAttribute('data'));
+                })
+            </script>
             <li>
                 <a href="#" class="addCourse" data-toggle="modal" data-target="#addCourse">
                     <span class="glyphicon glyphicon-plus">&nbsp;</span>Add Course

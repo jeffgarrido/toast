@@ -1,12 +1,12 @@
 {{--Header--}}
 <div class="flexbox justified-flexbox">
-    <div>
+    <div class="col-lg-8">
         <h4>{{ $course->Code }}: {{ $course->Title }}</h4>
         @if($course->Description)
             <h7>{{ $course->Description }}</h7>
         @endif
     </div>
-    <div>
+    <div class="col-lg-4 align-right">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editCourseModal">Edit&nbsp;<span class="glyphicon glyphicon-pencil"></span></button>
         <button type="button" class="btn btn-danger" onclick="deleteCourse({{ $course->id }})">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
     </div>

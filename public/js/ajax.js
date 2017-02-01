@@ -27,6 +27,7 @@ function getCourseDetails(id)
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 document.getElementById("CourseDetails").innerHTML = this.responseText;
+                $('.loading-div').hide();
                 delete xmlHttp;
                 xmlHttp = null;
             }
