@@ -14,6 +14,8 @@
                 <li id="navCourses"><a href="/courses">Courses</a></li>
                 <li id="navProfessor"><a href="/professor">Professor</a></li>
                 <li id="navAdmin"><a href="/admin">Admin</a></li>
+                <li id="navOrganization"><a href="/organization">Organization</a></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
