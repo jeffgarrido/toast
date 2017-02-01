@@ -42,5 +42,7 @@ Route::get('sections', 'AdminController@showSectionsPage');
 Route::get('organization', 'OrganizationController@showOrganization');
 
 Route::get('log_attendance', function(){
-   dd('Hello world');
+   return response()->json([
+        'name' => 'Jepoy'
+    ]);
 });
