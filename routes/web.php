@@ -40,6 +40,7 @@ Route::get('students', 'AdminController@showStudentPage');
 Route::get('sections', 'AdminController@showSectionsPage');
 
 Route::get('organization', 'OrganizationController@showOrganization');
+Route::get('org_details/{organization}', 'OrganizationController@getOrgDetails');
 
 Route::get('log_attendance', function(){
    return response()->json([

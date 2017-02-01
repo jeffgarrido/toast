@@ -75,3 +75,45 @@ function deleteCourse(id){
     }
 }
 
+function getOrganizationDetails(id)
+{
+    //<editor-fold desc="Creating xmlHttpRequest object">
+    //creating xmlHttpRequest object
+    var xmlHttp = false;
+
+    if (window.ActiveXObject) {
+        try {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (e) {
+            xmlHttp = false;
+        }
+    } else {
+        try {
+            xmlHttp = new XMLHttpRequest();
+        } catch (e) {
+            xmlHttp = false;
+        }
+    }
+
+    if (!xmlHttp) {
+        alert("Cant create that object!");
+    }
+    //--end
+    //</editor-fold>
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "org_details/" + id, true);
+        xmlHttp.onreadystatechange = function () {
+
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                document.getElementById("OrgDetails").innerHTML = this.responseText;
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+        }
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+
