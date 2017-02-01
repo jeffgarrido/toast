@@ -43,6 +43,8 @@ Route::get('organization', 'OrganizationController@showOrganization');
 
 Route::get('log_attendance', function(){
    return response()->json([
-        'name' => 'Jepoy'
+       'attendance' => [
+           'name' => 'Jepoy'
+       ]
     ]);
 });
