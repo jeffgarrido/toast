@@ -43,10 +43,4 @@ Route::get('organization', 'OrganizationController@showOrganization');
 Route::get('org_details/{organization}', 'OrganizationController@getOrgDetails');
 Route::post('add_org', 'OrganizationController@addOrg');
 
-Route::get('log_attendance', function(){
-   return response()->json([
-       'attendance' => [
-           'name' => 'Jepoy'
-       ]
-    ]);
-});
+Route::get('log_attendance/{event}/{student}', 'EventController@logAttendance');

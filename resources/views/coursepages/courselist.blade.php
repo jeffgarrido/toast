@@ -9,7 +9,7 @@
 </script>
 @endif
 
-@include('includes.loader')
+@include('includes.loader ')
 
 <script>
     $(document).ready(function(){

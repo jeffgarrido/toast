@@ -13,13 +13,17 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
+        //
         Schema::create('students', function (Blueprint $table) {
-            $table->increments('StudentID');
-            $table->unsignedSmallInteger('AccountID');
+            $table->increments('Student_Id')->unique();
+            $table->unsignedSmallInteger('Account_Id');
             $table->unsignedInteger('StudentNumber');
             $table->string('FirstName', 50);
             $table->string('MiddleName', 50)->nullable();
             $table->string('LastName', 50);
+            $table->date('Birthday');
+            $table->string('Phone')->nullable();
+            $table->string('PersonalEmail')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +35,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        //
     }
 }
