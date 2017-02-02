@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c2dcd38-ee46-4af2-8e3a-4f3b21d553c7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -242,7 +241,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1486048840875</updated>
-      <workItem from="1486048843298" duration="211000" />
+      <workItem from="1486048843298" duration="270000" />
     </task>
     <task id="LOCAL-00001" summary="emptied .gitignore file">
       <created>1486048909903</created>
@@ -251,11 +250,18 @@
       <option name="project" value="LOCAL" />
       <updated>1486048909903</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added autoload_static.php file">
+      <created>1486049072067</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1486049072067</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="211000" />
+    <option name="totallyTimeSpent" value="270000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -290,7 +296,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="emptied .gitignore file" />
-    <option name="LAST_COMMIT_MESSAGE" value="emptied .gitignore file" />
+    <MESSAGE value="added autoload_static.php file" />
+    <option name="LAST_COMMIT_MESSAGE" value="added autoload_static.php file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
