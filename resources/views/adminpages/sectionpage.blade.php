@@ -1,6 +1,12 @@
 @extends('layouts.master')
 @section('body')
 
+<script>
+    $(document).ready(function(){
+        $('#navAdmin').addClass("active");
+    });
+</script>
+
 @include('adminpages.navlinks')
 
 <script>

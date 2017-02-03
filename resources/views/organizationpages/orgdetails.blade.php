@@ -1,4 +1,3 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 {{--Header--}}
 <div class="row">
     <div class="col-lg-8">
@@ -15,10 +14,35 @@
 {{--/Header--}}
 
 <hr/>
-<div>
-    <ul class="nav nav-pills">
-        <li><a href="#">Members</a></li>
-        <li><a href="#">Events</a></li>
-        </li>
-    </ul>
+
+<ul class="nav nav-tabs" style="margin-bottom: 10px;">
+    <li class="active in"><a href="#members" data-toggle="tab">Members</a></li>
+    <li><a href="#events" data-toggle="tab">Events</a></li>
+</ul>
+
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active in" id="members">
+
+    </div>
+    <div class="tab-pane fade" id="events">
+        @foreach($events->chunk(3) as $eventChunks)
+            @foreach($eventChunks as $event)
+                <div class="col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">{{ $event->Event_Name }}</div>
+                        <div class="panel-body">
+                            <p id="test">Venue : {{ $event->Venue }}</p>
+                            <p>From : {{ $event->Start_Time }}</p>
+                            <p>To : {{ $event->End_Time }}</p>
+                            <p>{{ $event->Description }}</p>
+                            <button class="btn btn-primary center-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList(this)">View Attendance</button>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @endforeach
+    </div>
+</div>
+
+<div id="attendanceList">
 </div>
