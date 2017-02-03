@@ -35,11 +35,13 @@ class AdminController extends Controller
         $students->LastName = $request->input('LastName');
         $students->Birthday = $request->input('Birthday');
         $students->Phone = $request->input('Phone');
+
         $students->PersonalEmail = $request->input('PersonalEmail');
 
         $user->name = strlen($request->input('Nickname'))==0 ? $request->input('FirstName') : $request->input('Nickname');
         $user->email = $request->input('StudentNumber').'@ust.edu.ph';
         $user->password = $request->input('Birthday');
+        $user->access_level = 'Student';
         $user->save();
 
         $user->student()->save($students);
@@ -65,6 +67,13 @@ class AdminController extends Controller
         $log->Description = $description;
 
         $log->save();
+    }
+
+    public function deleteStudent(Student $student){
+        $acc = $student->AccountID;
+        $student->delete();
+        $user = new User();
+        $user->deleteUser($acc);
     }
 
 }

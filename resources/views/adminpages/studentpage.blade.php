@@ -15,7 +15,7 @@
     });
 
     $(document).ready(function(){
-        $('#StudentTable').dataTable( );
+        var table = $('#StudentTable').dataTable( );
     });
 
 </script>
@@ -40,9 +40,10 @@
                 <td>{{ $student->Phone }}</td>
                 <td>{{ $student->PersonalEmail }}</td>
                 <td>
-                    <a href="#" class=" btn btn-warning" data-toggle="modal" data-target="#editStudent" role="button" data="iron">
+                    <a href="#" class=" btn btn-warning" data-toggle="modal" data-target="#editStudent" role="button" >
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
                     </a>
+                    <button type="button" class="btn btn-danger" onclick="deleteStudent({{$student->Student_Id}})">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
                 </td>
             </tr>
         @endforeach
