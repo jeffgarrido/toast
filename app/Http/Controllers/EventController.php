@@ -9,7 +9,8 @@ use Mockery\CountValidator\Exception;
 
 class EventController extends Controller
 {
-    public function logAttendance(Event $event, Student $student) {
+    public function logAttendance(Event $event, $studentToken) {
+        $student = Student::where('StudentNumber', '=', $studentToken)->get()->first();
         try {
             $event->students()->save($student);
             return response()->json([
