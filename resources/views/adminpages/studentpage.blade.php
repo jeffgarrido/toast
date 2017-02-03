@@ -15,12 +15,12 @@
     });
 
     $(document).ready(function(){
-        var table = $('#StudentTable').dataTable( );
+        $('#StudentTable').dataTable( );
     });
-
 </script>
+
 <div>
-    <table id="StudentTable" class="table table-hover table-condensed table-responsive table-bordered" cellspacing="0" width="100%">
+    <table id="StudentTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th class="hide-column">Id</th>

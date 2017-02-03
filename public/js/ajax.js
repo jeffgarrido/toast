@@ -1,5 +1,4 @@
-function getCourseDetails(id){
-    //creating xmlHttpRequest object
+function getXmlInstance() {
     var xmlHttp = false;
 
     if (window.ActiveXObject) {
@@ -16,6 +15,17 @@ function getCourseDetails(id){
         }
     }
 
+    return xmlHttp;
+}
+
+function isXmlReady(xmlHttp) {
+    return xmlHttp.readyState == 4 && xmlHttp.status == 200;
+}
+
+function getCourseDetails(id){
+    //creating xmlHttpRequest object
+    var xmlHttp = getXmlInstance();
+
     if (!xmlHttp) {
         alert("Cant create that object!");
     }
@@ -24,7 +34,7 @@ function getCourseDetails(id){
     if (xmlHttp) {
         xmlHttp.open("GET", "course_details/" + id, true);
         xmlHttp.onreadystatechange = function () {
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            if (isXmlReady(xmlHttp)) {
                 document.getElementById("CourseDetails").innerHTML = this.responseText;
                 $('.loading-div').hide();
                 delete xmlHttp;
@@ -40,21 +50,7 @@ function getCourseDetails(id){
 function deleteCourse(id){
     if(confirm('Are you sure you want to delete this course?')) {
         //creating xmlHttpRequest object
-        var xmlHttp = false;
-
-        if (window.ActiveXObject) {
-            try {
-                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (e) {
-                xmlHttp = false;
-            }
-        } else {
-            try {
-                xmlHttp = new XMLHttpRequest();
-            } catch (e) {
-                xmlHttp = false;
-            }
-        }
+        var xmlHttp = getXmlInstance();
 
         if (!xmlHttp) {
             alert("Cant create that object!");
@@ -64,7 +60,7 @@ function deleteCourse(id){
         if (xmlHttp) {
             xmlHttp.open("GET", "delete_course/" + id, true);
             xmlHttp.onreadystatechange = function () {
-                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                if (isXmlReady(xmlHttp)) {
                     location.reload();
                     delete xmlHttp;
                     xmlHttp = null;
@@ -78,21 +74,7 @@ function deleteCourse(id){
 function getOrganizationDetails(id){
     //<editor-fold desc="Creating xmlHttpRequest object">
     //creating xmlHttpRequest object
-    var xmlHttp = false;
-
-    if (window.ActiveXObject) {
-        try {
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        } catch (e) {
-            xmlHttp = false;
-        }
-    } else {
-        try {
-            xmlHttp = new XMLHttpRequest();
-        } catch (e) {
-            xmlHttp = false;
-        }
-    }
+    var xmlHttp = getXmlInstance();
 
     if (!xmlHttp) {
         alert("Cant create that object!");
@@ -103,9 +85,35 @@ function getOrganizationDetails(id){
     if (xmlHttp) {
         xmlHttp.open("GET", "org_details/" + id, true);
         xmlHttp.onreadystatechange = function () {
-
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            if (isXmlReady(xmlHttp)) {
                 document.getElementById("OrgDetails").innerHTML = this.responseText;
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+
+function getAttendanceList(btnAttendanceList){
+    $('#loadingDiv').show();
+    //creating xmlHttpRequest object
+    var xmlHttp = getXmlInstance();
+
+    if (!xmlHttp) {
+        alert("Cant create that object!");
+    }
+    //--end
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "attendance_list/" + btnAttendanceList.id, true);
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+                document.getElementById("attendanceList").innerHTML = this.responseText;
+                $('#loadingDiv').hide();
+                $('#attendanceListModal').modal('show');
                 delete xmlHttp;
                 xmlHttp = null;
             }
@@ -120,21 +128,7 @@ function deleteStudent(id){
     if(confirm('Are you sure you want to remove this student')) {
 
         //<editor-fold desc="Creating xmlHttpRequest">
-        var xmlHttp = false;
-
-        if (window.ActiveXObject) {
-            try {
-                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (e) {
-                xmlHttp = false;
-            }
-        } else {
-            try {
-                xmlHttp = new XMLHttpRequest();
-            } catch (e) {
-                xmlHttp = false;
-            }
-        }
+        var xmlHttp = getXmlInstance();
 
         if (!xmlHttp) {
             alert("Cant create that object!");
@@ -145,7 +139,7 @@ function deleteStudent(id){
         if (xmlHttp) {
             xmlHttp.open("GET", "delete_student/" + id, true);
             xmlHttp.onreadystatechange = function () {
-                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                if (isXmlReady(xmlHttp)) {
                     location.reload();
                     delete xmlHttp;
                     xmlHttp = null;
@@ -155,4 +149,3 @@ function deleteStudent(id){
         }
     }
 }
-
