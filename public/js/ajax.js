@@ -30,7 +30,7 @@ function getCourseDetails(id){
                 delete xmlHttp;
                 xmlHttp = null;
             }
-        }
+        };
         xmlHttp.send(null);
     }
 
@@ -69,7 +69,7 @@ function deleteCourse(id){
                     delete xmlHttp;
                     xmlHttp = null;
                 }
-            }
+            };
             xmlHttp.send(null);
         }
     }
@@ -109,7 +109,7 @@ function getOrganizationDetails(id){
                 delete xmlHttp;
                 xmlHttp = null;
             }
-        }
+        };
         xmlHttp.send(null);
     }
 
@@ -150,7 +150,7 @@ function deleteStudent(id){
                     delete xmlHttp;
                     xmlHttp = null;
                 }
-            }
+            };
             xmlHttp.send(null);
         }
     }
