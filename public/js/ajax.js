@@ -1,5 +1,4 @@
-function getCourseDetails(id)
-{
+function getCourseDetails(id){
     //creating xmlHttpRequest object
     var xmlHttp = false;
 
@@ -76,8 +75,7 @@ function deleteCourse(id){
     }
 }
 
-function getOrganizationDetails(id)
-{
+function getOrganizationDetails(id){
     //<editor-fold desc="Creating xmlHttpRequest object">
     //creating xmlHttpRequest object
     var xmlHttp = false;
@@ -116,5 +114,45 @@ function getOrganizationDetails(id)
     }
 
     return false;
+}
+
+function deleteStudent(id){
+    if(confirm('Are you sure you want to remove this student')) {
+
+        //<editor-fold desc="Creating xmlHttpRequest">
+        var xmlHttp = false;
+
+        if (window.ActiveXObject) {
+            try {
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {
+                xmlHttp = false;
+            }
+        } else {
+            try {
+                xmlHttp = new XMLHttpRequest();
+            } catch (e) {
+                xmlHttp = false;
+            }
+        }
+
+        if (!xmlHttp) {
+            alert("Cant create that object!");
+        }
+        //</editor-fold>
+
+
+        if (xmlHttp) {
+            xmlHttp.open("GET", "delete_student/" + id, true);
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    location.reload();
+                    delete xmlHttp;
+                    xmlHttp = null;
+                }
+            }
+            xmlHttp.send(null);
+        }
+    }
 }
 

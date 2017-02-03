@@ -85,9 +85,4 @@
     </div>
 </div>
 
-{{--Ajax Scripts--}}
-<script src="js/ajax.js"></script>
-{{--customjs Scripts--}}
-<script src="js/customjs.js"></script>
-
 @endsection
