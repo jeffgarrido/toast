@@ -43,4 +43,6 @@ Route::get('organization', 'OrganizationController@showOrganization');
 Route::get('org_details/{organization}', 'OrganizationController@getOrgDetails');
 Route::post('add_org', 'OrganizationController@addOrg');
 
+Route::post('add_student', 'AdminController@addStudent');
+
 Route::get('log_attendance/{event}/{student}', 'EventController@logAttendance');

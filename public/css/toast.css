@@ -24,4 +24,8 @@
 
 .loading-icon {
     vertical-align: middle;
+
+}
+.hide-column {
+    display: none;
 }

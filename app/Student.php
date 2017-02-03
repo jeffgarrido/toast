@@ -11,4 +11,8 @@ class Student extends Model
     public function events() {
         return $this->belongsToMany(Event::class);
     }
+
+    public function user(){
+        return $this->belongsTo(Student::class, 'AccountID');
+    }
 }
