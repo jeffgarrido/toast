@@ -152,6 +152,7 @@
                     </fieldset>
                 {{ Form::close() }}
             </div>
+        </div>
     </div>
 </div>
 <!--</editor-fold>-->

@@ -9,7 +9,7 @@ class Student extends Model
     protected $primaryKey = 'Student_Id';
 
     public function events() {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class)->withTimestamps();
     }
 
     public function user(){
