@@ -45,6 +45,9 @@ Route::post('add_org', 'OrganizationController@addOrg');
 
 Route::post('add_student', 'AdminController@addStudent');
 Route::get('delete_student/{student}', 'AdminController@deleteStudent');
+Route::get('edit_student/{student}', 'AdminController@editStudent');
+
+Route::post('edit_complete/{student}', 'AdminController@saveEditStudent');
 
 
 Route::get('log_attendance/{event}/{student}', 'EventController@logAttendance');

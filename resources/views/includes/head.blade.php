@@ -26,6 +26,10 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://nightly.datatables.net/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://nightly.datatables.net/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://nightly.datatables.net/css/dataTables.foundation.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://nightly.datatables.net/css/dataTables.jqueryui.min.css"/>
 
     <!-- DataTables JQuery-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -35,6 +39,16 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://nightly.datatables.net/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://nightly.datatables.net/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://nightly.datatables.net/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://nightly.datatables.net/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://nightly.datatables.net/js/dataTables.foundation.min.js"></script>
+    <script type="text/javascript" src="https://nightly.datatables.net/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://nightly.datatables.net/js/dataTables.jqueryui.min.js"></script>
+
+    <!-- DataTables JQuery-->
+
 
     {{--Ajax Scripts--}}
     <script src="js/ajax.js"></script>
