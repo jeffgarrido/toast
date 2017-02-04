@@ -40,7 +40,7 @@
                 <td>{{ $student->Phone }}</td>
                 <td>{{ $student->PersonalEmail }}</td>
                 <td>
-                    <a href="#" class=" btn btn-warning" data-toggle="modal" data-target="#editStudent" role="button" >
+                    <a href="edit_student/{{$student->Student_Id}}" id="edit" class=" btn btn-warning" role="button" data-id="{{$student->Student_Id}}">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
                     </a>
                     <button type="button" class="btn btn-danger" onclick="deleteStudent({{$student->Student_Id}})">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
@@ -65,7 +65,11 @@
                 <h4 class="modal-title">Modal title</h4>
             </div>
             <div class="modal-body">
-                <p>One fine body…
+                <p id="demo"></p>
+                <script>
+                    var id = document.getElementById("edit").getAttribute("data-id");
+                    document.getElementById("demo").innerHTML = id;
+                </script>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
