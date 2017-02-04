@@ -37,6 +37,6 @@ class User extends Authenticatable
     }
 
     public function deleteUser($id){
-        $q = $this-self::destroy($id);
+        $this-self::destroy($id);
     }
 }

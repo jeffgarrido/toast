@@ -1,7 +1,6 @@
 .bottom-border {
     padding-bottom: 2px;
     border-bottom: solid 1px #EEEEEE;
-    margin-bottom: 10px;
 }
 
 .align-right {
@@ -14,8 +13,8 @@
     position:fixed;
     width:100%;
     height:100%;
-    top:0px;
-    left:0px;
+    top: 0;
+    left: 0;
     z-index:1000;
     display: flex;
     align-items: center;

@@ -13833,10 +13833,6 @@ input:focus,
     justify-content: space-between;
 }
 
-.border-right {
-    border-right: 1px #EEEEEE solid;
-}
-
 .profile-pic {
     height: 25px;
     max-width: 25px;

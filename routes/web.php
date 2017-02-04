@@ -42,6 +42,8 @@ Route::get('sections', 'AdminController@showSectionsPage');
 Route::get('organization', 'OrganizationController@showOrganization');
 Route::get('org_details/{organization}', 'OrganizationController@getOrgDetails');
 Route::post('add_org', 'OrganizationController@addOrg');
+Route::get('attendance_list/{event}', 'OrganizationController@getAttendanceList');
+Route::get('download_attendance/{event}', 'OrganizationController@downloadAttendanceList');
 
 Route::post('add_student', 'AdminController@addStudent');
 Route::get('delete_student/{student}', 'AdminController@deleteStudent');
@@ -49,5 +51,4 @@ Route::get('edit_student/{student}', 'AdminController@editStudent');
 
 Route::post('edit_complete/{student}', 'AdminController@saveEditStudent');
 
-
-Route::get('log_attendance/{event}/{student}', 'EventController@logAttendance');
+Route::get('log_attendance/event={event}&token={studentToken}', 'EventController@logAttendance');

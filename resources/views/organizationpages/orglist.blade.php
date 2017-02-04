@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('body')
 
+@include('includes.loader')
+
 <script>
     $(document).ready(function(){
         $('#navOrganization').addClass("active");
@@ -9,7 +11,7 @@
 
 {{--Org List--}}
 <div class=" flexbox">
-    <div class="col-lg-3 border-right" style="border-right: solid">
+    <div class="col-lg-3">
         <div class="form-group">
             <div class="input-group">
                 <input class="form-control" type="text" placeholder="Search Course" />
@@ -84,5 +86,17 @@
         </div>
     </div>
 </div>
+<script>
+    $('.btnAttendance').click(function () {
 
+    });
+    //        $('#loadingDiv').show();
+    //        getAttendanceList(this.getAttribute('data'));
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#attendanceTable').dataTable( );
+    });
+</script>
 @endsection
