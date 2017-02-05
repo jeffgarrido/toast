@@ -89,13 +89,11 @@ function getOrganizationDetails(id){
                 document.getElementById("OrgDetails").innerHTML = this.responseText;
                 delete xmlHttp;
                 xmlHttp = null;
-                $('#OrgDetails').ready(function () {
-                    $('#loadingDiv').hide();
-                });
             }
         };
         xmlHttp.send(null);
     }
+
     return false;
 }
 
