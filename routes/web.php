@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.master');
+    return redirect('organization');
+//    return view('layouts.master');
 });
 
 Route::get('courses', 'CourseController@showCourses');

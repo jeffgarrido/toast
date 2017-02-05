@@ -12,20 +12,21 @@
 {{--Org List--}}
 <div class=" flexbox">
     <div class="col-lg-3">
-        <div class="form-group">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search Course" />
-                <span class="input-group-btn">
-            <button class="btn btn-default" type="button">&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;</button>
-            </span>
-            </div>
-        </div>
+        {{--<div class="form-group">--}}
+            {{--<div class="input-group">--}}
+                {{--<input class="form-control" type="text" placeholder="Search Course" />--}}
+                {{--<span class="input-group-btn">--}}
+            {{--<button class="btn btn-default" type="button">&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;</button>--}}
+            {{--</span>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <ul class="nav nav-pills nav-stacked">
             @foreach($organization as $org)
                 <li class="getOrgDetails" data="{{$org->Organization_Id}}"><a href="#">{{ $org->Organization_Name }}</a></li>
             @endforeach
                 <script>
                     $('.getOrgDetails').click(function () {
+                        $('.loading-div').show();
                         getOrganizationDetails(this.getAttribute('data'));
                     });
                 </script>
