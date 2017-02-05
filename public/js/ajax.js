@@ -87,14 +87,13 @@ function getOrganizationDetails(id){
         xmlHttp.onreadystatechange = function () {
             if (isXmlReady(xmlHttp)) {
                 document.getElementById("OrgDetails").innerHTML = this.responseText;
-                $('.loading-div').hide();
                 delete xmlHttp;
                 xmlHttp = null;
+                $('.loading-div').hide();
             }
         };
         xmlHttp.send(null);
     }
-
     return false;
 }
 
