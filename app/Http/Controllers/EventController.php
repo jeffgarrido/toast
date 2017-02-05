@@ -19,21 +19,29 @@ class EventController extends Controller
                     ]
                 ]);
             }else{
-                $pivot = $event->students()->wherePivot('Student_Id', '=' , $guest->Student_Id)->get()->first()->pivot;
-                //dd($pivot);
-                $paymentStatus = $pivot->PaymentStatus;
-                if(strcasecmp($paymentStatus, 'Paid') == 0) {
-                    $event->students()->updateExistingPivot($guest->Student_Id, array('Attendance' => Carbon::now('Asia/Singapore')));
+                if($event->students()->wherePivot('Student_Id', '=' , $guest->Student_Id)->get()->first() != null) {
+                    $pivot = $event->students()->wherePivot('Student_Id', '=', $guest->Student_Id)->get()->first()->pivot;
+                    //dd($pivot);
+                    $paymentStatus = $pivot->PaymentStatus;
+                    if (strcasecmp($paymentStatus, 'Paid') == 0) {
+                        $event->students()->updateExistingPivot($guest->Student_Id, array('Attendance' => Carbon::now('Asia/Singapore')));
 
-                    return response()->json([
-                        'attendance' => [
-                            'status' => 'Welcome to ' . $event->Event_Name
-                        ]
-                    ]);
+                        return response()->json([
+                            'attendance' => [
+                                'status' => 'Welcome to ' . $event->Event_Name
+                            ]
+                        ]);
+                    } else {
+                        return response()->json([
+                            'attendance' => [
+                                'status' => 'Payment not yet settled.'
+                            ]
+                        ]);
+                    }
                 } else {
                     return response()->json([
                         'attendance' => [
-                            'status' => 'Payment not yet settled.'
+                            'status' => 'Student not in the guest list.'
                         ]
                     ]);
                 }
