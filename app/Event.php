@@ -9,7 +9,7 @@ class Event extends Model
     protected $primaryKey = 'Event_Id';
 
     public function students() {
-        return $this->belongsToMany(Student::class)->withTimestamps();
+        return $this->belongsToMany(Student::class)->withPivot(array('PaymentStatus', 'Attendance'))->withTimestamps();
     }
 
     public function organization() {
