@@ -11,4 +11,8 @@ class Organization extends Model
     public function events() {
         return $this->hasMany(Event::class);
     }
+
+    public function students() {
+        return $this->belongsToMany(Student::class)->withTimestamps();
+    }
 }

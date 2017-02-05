@@ -7,7 +7,6 @@ use App\Organization;
 use App\AuditLog;
 use Illuminate\Http\Request;
 use League\Csv\Writer;
-use App\Student;
 
 class OrganizationController extends Controller
 {
@@ -18,7 +17,8 @@ class OrganizationController extends Controller
 
     public function getOrgDetails(Organization $organization){
         $events = $organization->events()->get();
-        return view('organizationpages.orgdetails', compact('organization', 'events'));
+        $students = $organization->students()->get();
+        return view('organizationpages.orgdetails', compact('organization', 'events', 'students'));
     }
 
     public function getAttendanceList(Event $event) {

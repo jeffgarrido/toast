@@ -1,3 +1,9 @@
+<script>
+    $(document).ready(function(){
+        $('#StudentTable').dataTable( );
+    });
+</script>
+
 {{--Header--}}
 <div class="row">
     <div class="col-lg-8">
@@ -22,7 +28,28 @@
 
 <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active in" id="members">
-
+        <table id="StudentTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="hide-column">Id</th>
+                <th>Student Number</th>
+                <th>Name</th>
+                <th>Contact Num</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($students as $student)
+                <tr>
+                    <td class="hide-column">{{ $student->Student_Id }}</td>
+                    <td>{{ $student->StudentNumber }}</td>
+                    <td>{{ $student->LastName }}, {{ $student->FirstName }}</td>
+                    <td>{{ $student->Phone }}</td>
+                    <td>{{ $student->PersonalEmail }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
     <div class="tab-pane fade" id="events">
         @foreach($events->chunk(3) as $eventChunks)
