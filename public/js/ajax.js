@@ -89,7 +89,7 @@ function getOrganizationDetails(id){
                 document.getElementById("OrgDetails").innerHTML = this.responseText;
                 delete xmlHttp;
                 xmlHttp = null;
-                $('.loading-div').hide();
+                $('#loadingDiv').hide();
             }
         };
         xmlHttp.send(null);

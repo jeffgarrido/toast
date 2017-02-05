@@ -26,7 +26,7 @@
             @endforeach
                 <script>
                     $('.getOrgDetails').click(function () {
-                        $('.loading-div').show();
+                        $('#loadingDiv').show();
                         getOrganizationDetails(this.getAttribute('data'));
                     });
                 </script>
