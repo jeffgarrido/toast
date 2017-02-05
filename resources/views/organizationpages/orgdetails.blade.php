@@ -28,7 +28,7 @@
         @foreach($events->chunk(3) as $eventChunks)
             <div class="custom-flexbox">
                 @foreach($eventChunks as $event)
-                    <div class="col-lg-4" style="border: black 1px solid;">
+                    <div class="col-lg-4">
                         <div class="panel panel-primary flex-content">
                             <div class="panel-heading">{{ $event->Event_Name }}</div>
                             <div class="panel-body">
