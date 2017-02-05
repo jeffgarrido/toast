@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AuditLog;
 use App\Event;
 use App\Student;
 use Carbon\Carbon;
@@ -25,7 +26,7 @@ class EventController extends Controller
                     $paymentStatus = $pivot->PaymentStatus;
                     if (strcasecmp($paymentStatus, 'Paid') == 0) {
                         $event->students()->updateExistingPivot($guest->Student_Id, array('Attendance' => Carbon::now('Asia/Singapore')));
-
+                        $this->createLog("Update", "Updated Event " . $event->Event_Id . " Attendance Timestamp for student " . $guest->Student_Id);
                         return response()->json([
                             'attendance' => [
                                 'status' => 'Welcome to ' . $event->Event_Name
@@ -53,5 +54,15 @@ class EventController extends Controller
                 ]
             ]);
         }
+    }
+
+    private function createLog($action, $description = ""){
+        $log = new AuditLog();
+
+        $log->AccountID = 1;
+        $log->Action = $action;
+        $log->Description = $description;
+
+        $log->save();
     }
 }

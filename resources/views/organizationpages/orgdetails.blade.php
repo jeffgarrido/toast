@@ -26,20 +26,22 @@
     </div>
     <div class="tab-pane fade" id="events">
         @foreach($events->chunk(3) as $eventChunks)
-            @foreach($eventChunks as $event)
-                <div class="col-lg-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">{{ $event->Event_Name }}</div>
-                        <div class="panel-body">
-                            <p id="test">Venue : {{ $event->Venue }}</p>
-                            <p>From : {{ $event->Start_Time }}</p>
-                            <p>To : {{ $event->End_Time }}</p>
-                            <p>{{ $event->Description }}</p>
-                            <button class="btn btn-primary center-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList(this)">View Attendance</button>
+            <div class="custom-flexbox">
+                @foreach($eventChunks as $event)
+                    <div class="col-lg-4" style="border: black 1px solid;">
+                        <div class="panel panel-primary flex-content">
+                            <div class="panel-heading">{{ $event->Event_Name }}</div>
+                            <div class="panel-body">
+                                <p id="test">Venue : {{ $event->Venue }}</p>
+                                <p>From : {{ $event->Start_Time }}</p>
+                                <p>To : {{ $event->End_Time }}</p>
+                                <p>{{ $event->Description }}</p>
+                                <button class="btn btn-primary center-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList(this)">View Attendance</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         @endforeach
     </div>
 </div>
