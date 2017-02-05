@@ -64,7 +64,7 @@ class AdminController extends Controller
 
        $student->save();
 
-        $user->name = strlen($request->input('Nickname'))==0 ? $request->input('FirstName') : $request->input('Nickname');
+        $user->name = strlen($request->input('Nickname', ''))==0 ? $request->input('FirstName') : $request->input('Nickname');
         $user->email = $request->input('StudentNumber').'@ust.edu.ph';
         $user->password = $request->input('Birthday');
         $user->access_level = 'Student';

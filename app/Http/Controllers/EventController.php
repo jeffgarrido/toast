@@ -4,24 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Student;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Mockery\CountValidator\Exception;
 
 class EventController extends Controller
 {
     public function logAttendance(Event $event, $studentToken) {
-        $student = Student::where('StudentNumber', '=', $studentToken)->get()->first();
+        $guest = Student::where('StudentNumber', '=', $studentToken)->get()->first();
         try {
-            $event->students()->save($student);
-            return response()->json([
-                'attendance' => [
-                    'status' => true
-                ]
-            ]);
+            if($guest == null) {
+                return response()->json([
+                    'attendance' => [
+                        'status' => 'Unregistered user'
+                    ]
+                ]);
+            }else{
+                $pivot = $event->students()->wherePivot('Student_Id', '=' , $guest->Student_Id)->get()->first()->pivot;
+                //dd($pivot);
+                $paymentStatus = $pivot->PaymentStatus;
+                if(strcasecmp($paymentStatus, 'Paid') == 0) {
+                    $event->students()->updateExistingPivot($guest->Student_Id, array('Attendance' => Carbon::now('Asia/Singapore')));
+
+                    return response()->json([
+                        'attendance' => [
+                            'status' => 'Welcome to ' . $event->Event_Name
+                        ]
+                    ]);
+                } else {
+                    return response()->json([
+                        'attendance' => [
+                            'status' => 'Payment not yet settled.'
+                        ]
+                    ]);
+                }
+            }
         }catch (Exception $exception) {
             return response()->json([
                 'attendance' => [
-                    'status' => false
+                    'status' => 'Error 404'
                 ]
             ]);
         }
