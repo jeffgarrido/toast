@@ -14,6 +14,10 @@ class Student extends Model
         return $this->belongsToMany(Event::class)->withTimestamps();
     }
 
+    public function organizations() {
+        return $this->belongsToMany(Organization::class)->withTimestamps();
+    }
+
     public function user(){
         return $this->belongsTo(Student::class, 'AccountID');
     }
