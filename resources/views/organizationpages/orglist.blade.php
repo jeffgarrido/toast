@@ -29,11 +29,11 @@
                         getOrganizationDetails(this.getAttribute('data'));
                     });
                 </script>
-            <li>
-                <a href="#" class="addOrg" data-toggle="modal" data-target="#addOrg">
-                    <span class="glyphicon glyphicon-plus">&nbsp;</span>Add Organization
-                </a>
-            </li>
+            {{--<li>--}}
+                {{--<a href="#" class="addOrg" data-toggle="modal" data-target="#addOrg">--}}
+                    {{--<span class="glyphicon glyphicon-plus">&nbsp;</span>Add Organization--}}
+                {{--</a>--}}
+            {{--</li>--}}
         </ul>
     </div>
 
