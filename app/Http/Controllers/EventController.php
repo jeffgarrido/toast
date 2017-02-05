@@ -10,6 +10,11 @@ use Mockery\CountValidator\Exception;
 
 class EventController extends Controller
 {
+    public function eventGuest(Event $event){
+        $student = Student::all();
+        return view('organizationpages.guestlist', compact('student', 'event'));
+    }
+
     public function logAttendance(Event $event, $studentToken) {
         $guest = Student::where('StudentNumber', '=', $studentToken)->get()->first();
         try {

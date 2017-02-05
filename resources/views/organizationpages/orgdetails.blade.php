@@ -36,7 +36,10 @@
                                 <p>From : {{ $event->Start_Time }}</p>
                                 <p>To : {{ $event->End_Time }}</p>
                                 <p>{{ $event->Description }}</p>
-                                <button class="btn btn-primary center-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList(this)">View Attendance</button>
+                                <div>
+                                    <a href="guest_list/{{$event->Event_Id}}" role="button" class="btn btn-primary center-block" style="margin-bottom: 5px" id="GuestList">{{ $event->Event_Id }}Guest List</a>
+                                    <button class="btn btn-primary center-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList(this)">View Attendance</button>
+                                </div>
                             </div>
                         </div>
                     </div>

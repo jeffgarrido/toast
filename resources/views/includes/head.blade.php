@@ -47,8 +47,12 @@
     <script type="text/javascript" src="https://nightly.datatables.net/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://nightly.datatables.net/js/dataTables.jqueryui.min.js"></script>
 
-    <!-- DataTables JQuery-->
+    <!-- Dual list box-->
+    <link rel="stylesheet" type="text/css" href="duallist/bootstrap-duallistbox.css">
+    <link rel="stylesheet" type="text/css" href="duallist/bootstrap-duallistbox.min.css">
 
+    <script type="text/javascript" src="/duallist/jquery.bootstrap-duallistbox.js"></script>
+    <script type="text/javascript" src="/duallist/jquery.bootstrap-duallistbox.min.js"></script>
 
     {{--Ajax Scripts--}}
     <script src="js/ajax.js"></script>

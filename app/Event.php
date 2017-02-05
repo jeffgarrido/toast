@@ -15,4 +15,6 @@ class Event extends Model
     public function organization() {
         return $this->belongsTo(Organization::class, 'Organization_Id');
     }
+
+    protected $fillable  = array('Event_Name','Organization_Id','Event_Date','Start_Time','End_Time','Venue','Description',);
 }
