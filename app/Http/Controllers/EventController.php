@@ -17,7 +17,6 @@ class EventController extends Controller
     }
 
     public function populateGuestList(Event $event, Request $request) {
-        dd($request);
         $event->students()->sync($request->input('students', []));
 
         return back();
