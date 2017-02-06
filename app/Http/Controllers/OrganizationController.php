@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Organization;
 use App\AuditLog;
+use App\Student;
 use Illuminate\Http\Request;
 use League\Csv\Writer;
 
@@ -22,6 +23,8 @@ class OrganizationController extends Controller
     }
 
     public function getAttendanceList(Event $event) {
+        $student = Student::find(391)->with('events')->get();
+        dd($student);
         $students = $event->students()->wherePivot('Attendance', '!=', 'null')->get();
         return view('organizationpages.attendancelist', compact('event', 'students'));
     }
