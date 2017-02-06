@@ -46,7 +46,7 @@ Route::post('add_org', 'OrganizationController@addOrg');
 
 Route::get('attendance_list/{event}', 'OrganizationController@getAttendanceList');
 Route::get('guest_list/{event}', 'EventController@eventGuest');
-Route::get('populate_list/{event}', 'EventController@populateGuestList');
+Route::post('populate_list/{event}', 'EventController@populateGuestList');
 
 
 Route::get('download_attendance/{event}', 'OrganizationController@downloadAttendanceList');
