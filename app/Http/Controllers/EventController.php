@@ -12,7 +12,7 @@ use Mockery\CountValidator\Exception;
 class EventController extends Controller
 {
     public function eventGuest(Event $event){
-        $student = Student::find(391)->with('events')->get();
+        $student = Student::find(391);
         dd($student);
         $students = Student::with('events')->get();
         return view('organizationpages.guestlist', compact('students', 'event'));
