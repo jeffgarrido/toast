@@ -9,7 +9,7 @@
             <h1>{{$event->Event_Name}}</h1><br/>
         </div>
         <div class="form-group">
-            <select multiple="multiple" id="inputs" size="10" name="students[]">
+            <select multiple="multiple" id="inputs" size="10" name="students">
                 @foreach($students as $student)
                     <option value="{{ $student->Student_Id }}" {{ ($student->whereHas('events')) ? 'selected=selected' : '' }}>{{$student->StudentNumber}}: {{$student->LastName}}, {{$student->FirstName}}</option>
                 @endforeach
