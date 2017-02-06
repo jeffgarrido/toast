@@ -10,8 +10,8 @@
         </div>
         <div class="form-group">
             <select multiple="multiple" id="inputs" size="10" name="students[]">
-                @foreach($student as $students)
-                    <option value="{{ $students->Student_Id }}" {{ $students->Event->pivot->PaymentStatus }}>{{$students->StudentNumber}}: {{$students->LastName}}, {{$students->FirstName}}</option>
+                @foreach($students as $student)
+                    <option value="{{ $students->Student_Id }}" {{ $events->contains($student) ? 'selected=selected' : '' }}>{{$students->StudentNumber}}: {{$students->LastName}}, {{$students->FirstName}}</option>
                 @endforeach
             </select>
         </div>
@@ -21,8 +21,8 @@
 </div>
 <script>
     var GuestList = $('select[name="students"]').bootstrapDualListbox({
-        nonSelectedListLabel: 'All Courses',
-        selectedListLabel: 'Selected Courses',
+        nonSelectedListLabel: 'All Students',
+        selectedListLabel: 'Guest List',
         moveOnSelect: false
     });
 //    var demo1 = $('select[name="students"]').bootstrapDualListbox();
