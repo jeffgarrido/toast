@@ -13,7 +13,7 @@ class EventController extends Controller
 {
     public function eventGuest(Event $event){
         $student = Student::find(391);
-        dd($student);
+        dd($student->events()->where('Event_Id', '=', $event->Event_Id)->get());
         $students = Student::with('events')->get();
         return view('organizationpages.guestlist', compact('students', 'event'));
     }
