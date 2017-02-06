@@ -4,7 +4,7 @@
 
 @include('includes.loader')
 <div class="container center-block">
-    <form id="demoform" action="/populateguestlist" method="post">
+    <form id="demoform" action="/populate_list/{{$event->Event_Id}}" method="post">
         <div>
             <h1>{{$event->Event_Name}}</h1><br/>
         </div>
