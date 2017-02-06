@@ -11,7 +11,7 @@
         <div class="form-group">
             <select multiple="multiple" id="inputs" size="10" name="students">
                 @foreach($student as $students)
-                <option>{{$students->Student_Id}}: {{$students->LastName}}, {{$students->FirstName}}</option>
+                <option>{{$students->StudentNumber}}: {{$students->LastName}}, {{$students->FirstName}}</option>
                 @endforeach
             </select>
         </div>
