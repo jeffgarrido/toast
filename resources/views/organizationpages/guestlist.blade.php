@@ -15,7 +15,8 @@
                 @endforeach
             </select>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <a href="/organization" class="btn btn-default align-right">Back</a>
+        <button type="submit" class="btn btn-primary align-right">Submit</button>
     </form>
 </div>
 <script>
