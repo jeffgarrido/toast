@@ -22,7 +22,7 @@ class OrganizationController extends Controller
     }
 
     public function getAttendanceList(Event $event) {
-        $students = $event->students()->get();
+        $students = $event->students()->wherePivot('Attendance', 'not', 'null')->get();
         return view('organizationpages.attendancelist', compact('event', 'students'));
     }
 

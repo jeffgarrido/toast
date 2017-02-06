@@ -4,14 +4,14 @@
 
 @include('includes.loader')
 <div class="container center-block">
-    <form id="demoform" action="#" method="post">
+    <form id="demoform" action="/populateguestlist" method="post">
         <div>
             <h1>{{$event->Event_Name}}</h1><br/>
         </div>
         <div class="form-group">
-            <select multiple="multiple" id="inputs" size="10" name="students">
+            <select multiple="multiple" id="inputs" size="10" name="students[]">
                 @foreach($student as $students)
-                <option>{{$students->StudentNumber}}: {{$students->LastName}}, {{$students->FirstName}}</option>
+                    <option value="{{ $students->Student_Id }}" {{ $students->Event->pivot->PaymentStatus }}>{{$students->StudentNumber}}: {{$students->LastName}}, {{$students->FirstName}}</option>
                 @endforeach
             </select>
         </div>
@@ -20,9 +20,14 @@
     </form>
 </div>
 <script>
-    var demo1 = $('select[name="students"]').bootstrapDualListbox();
-    $("#demoform").submit(function() {alert($('[name="students"]').val());
-        return false;
+    var GuestList = $('select[name="students"]').bootstrapDualListbox({
+        nonSelectedListLabel: 'All Courses',
+        selectedListLabel: 'Selected Courses',
+        moveOnSelect: false
     });
+//    var demo1 = $('select[name="students"]').bootstrapDualListbox();
+//    $("#demoform").submit(function() {alert($('[name="students"]').val());
+//        return false;
+//    });
 </script>
 @endsection

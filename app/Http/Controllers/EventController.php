@@ -6,6 +6,7 @@ use App\AuditLog;
 use App\Event;
 use App\Student;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Mockery\CountValidator\Exception;
 
 class EventController extends Controller
@@ -13,6 +14,11 @@ class EventController extends Controller
     public function eventGuest(Event $event){
         $student = Student::with('events')->get();
         return view('organizationpages.guestlist', compact('student', 'event'));
+    }
+
+    public function populateGuestList(Event $event, Request $request) {
+        $event->students()->sync($request->input('students', []));
+        return back();
     }
 
     public function logAttendance(Event $event, $studentToken) {
