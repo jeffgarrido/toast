@@ -4,7 +4,7 @@
 
 @include('includes.loader')
 <div class="container center-block">
-    <form id="demoform" action="/populate_list/{{$event->Event_Id}}" method="post">
+    {{ Form::open(array('action' => array('EventController@populateGuestList', $event->Event_Id), 'method' => 'post')) }}
         <div>
             <h1>{{$event->Event_Name}}</h1><br/>
         </div>
@@ -17,7 +17,7 @@
         </div>
         <a href="/organization" class="btn btn-default align-right">Back</a>
         <button type="submit" class="btn btn-primary align-right">Submit</button>
-    </form>
+    {{ Form::close() }}
 </div>
 <script>
     var GuestList = $('select[name="students"]').bootstrapDualListbox({
