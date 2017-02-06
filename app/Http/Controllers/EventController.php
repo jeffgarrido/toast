@@ -12,8 +12,8 @@ use Mockery\CountValidator\Exception;
 class EventController extends Controller
 {
     public function eventGuest(Event $event){
-        $student = Student::with('events')->get();
-        return view('organizationpages.guestlist', compact('student', 'event'));
+        $students = Student::with('events')->get();
+        return view('organizationpages.guestlist', compact('students', 'event'));
     }
 
     public function populateGuestList(Event $event, Request $request) {

@@ -11,7 +11,7 @@
         <div class="form-group">
             <select multiple="multiple" id="inputs" size="10" name="students[]">
                 @foreach($students as $student)
-                    <option value="{{ $students->Student_Id }}" {{ $events->contains($student) ? 'selected=selected' : '' }}>{{$students->StudentNumber}}: {{$students->LastName}}, {{$students->FirstName}}</option>
+                    <option value="{{ $student->Student_Id }}" {{ $events->contains($student) ? 'selected=selected' : '' }}>{{$student->StudentNumber}}: {{$student->LastName}}, {{$student->FirstName}}</option>
                 @endforeach
             </select>
         </div>
