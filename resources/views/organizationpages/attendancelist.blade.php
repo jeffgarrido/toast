@@ -27,7 +27,7 @@
                             <td>{{ $student->StudentNumber }}</td>
                             <td>{{ $student->LastName }}</td>
                             <td>{{ $student->FirstName }}</td>
-                            <td>{{ $student->pivot->created_at }}</td>
+                            <td>{{ $student->pivot->Attendance }}</td>
                         </tr>
                     @endforeach
                     </tbody>
