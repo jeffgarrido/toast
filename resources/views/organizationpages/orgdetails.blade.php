@@ -58,11 +58,13 @@
                     <div class="col-lg-4">
                         <div class="panel panel-primary flex-content">
                             <div class="panel-heading">{{ $event->Event_Name }}</div>
-                            <div class="panel-body">
+                            <div class="panel-body" style="height: 100%;">
                                 <p id="test">Venue : {{ $event->Venue }}</p>
                                 <p>From : {{ $event->Start_Time }}</p>
                                 <p>To : {{ $event->End_Time }}</p>
                                 <p>{{ $event->Description }}</p>
+                            </div>
+                            <div class="panel panel-default panel-footer">
                                 <a href="guest_list/{{$event->Event_Id}}" role="button" class="btn btn-primary btn-block" style="margin-bottom: 5px" id="GuestList">Guest List</a>
                                 <button class="btn btn-primary btn-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList(this)">View Attendance</button>
                             </div>
