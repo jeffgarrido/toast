@@ -56,15 +56,15 @@
             <div class="custom-flexbox">
                 @foreach($eventChunks as $event)
                     <div class="col-lg-4">
-                        <div class="panel panel-primary flex-content">
+                        <div class="panel panel-primary flex-content" style="position: relative;">
                             <div class="panel-heading">{{ $event->Event_Name }}</div>
-                            <div class="panel-body" style="flex: auto; background-color: red;">
+                            <div class="panel-body">
                                 <p id="test">Venue : {{ $event->Venue }}</p>
                                 <p>From : {{ $event->Start_Time }}</p>
                                 <p>To : {{ $event->End_Time }}</p>
                                 <p>{{ $event->Description }}</p>
                             </div>
-                            <div class="panel panel-default panel-footer">
+                            <div class="panel panel-default panel-footer" style="position: absolute; bottom: 10%;">
                                 <a href="guest_list/{{$event->Event_Id}}" role="button" class="btn btn-primary btn-block" style="margin-bottom: 5px" id="GuestList">Guest List</a>
                                 <button class="btn btn-primary btn-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList(this)">View Attendance</button>
                             </div>
