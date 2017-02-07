@@ -58,7 +58,7 @@
                     <div class="col-lg-4">
                         <div class="panel panel-primary flex-content">
                             <div class="panel-heading">{{ $event->Event_Name }}</div>
-                            <div class="panel-body" style="flex: auto;">
+                            <div class="panel-body" style="flex: auto; background-color: red;">
                                 <p id="test">Venue : {{ $event->Venue }}</p>
                                 <p>From : {{ $event->Start_Time }}</p>
                                 <p>To : {{ $event->End_Time }}</p>
