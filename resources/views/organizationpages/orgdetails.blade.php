@@ -1,9 +1,3 @@
-<script>
-    $(document).ready(function(){
-        $('#StudentTable').dataTable( );
-    });
-</script>
-
 {{--Header--}}
 <div class="row">
     <div>
@@ -22,13 +16,13 @@
 <hr/>
 
 <ul class="nav nav-tabs" style="margin-bottom: 10px;">
-    <li class="active in"><a href="#members" data-toggle="tab">Members</a></li>
+    <li class="active"><a href="#members" data-toggle="tab" aria-expanded="true">Members</a></li>
     <li><a href="#events" data-toggle="tab">Events</a></li>
 </ul>
 
 <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active in" id="members">
-        <table id="StudentTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
+        <table id="StudentList" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
             <thead>
             <tr>
                 <th class="hide-column">Id</th>
@@ -51,6 +45,7 @@
             </tbody>
         </table>
     </div>
+
     <div class="tab-pane fade" id="events">
         @foreach($events->chunk(3) as $eventChunks)
             <div class="custom-flexbox">

@@ -87,6 +87,9 @@ function getOrganizationDetails(id){
         xmlHttp.onreadystatechange = function () {
             if (isXmlReady(xmlHttp)) {
                 document.getElementById("OrgDetails").innerHTML = this.responseText;
+                $(document).ready(function(){
+                    $('#StudentList').dataTable( );
+                });
                 delete xmlHttp;
                 xmlHttp = null;
             }
@@ -113,7 +116,11 @@ function getAttendanceList(btnAttendanceList){
             if (isXmlReady(xmlHttp)) {
                 document.getElementById("attendanceList").innerHTML = this.responseText;
                 $('#loadingDiv').hide();
+                $(document).ready(function(){
+                    $('#attendanceTable').dataTable( );
+                });
                 $('#attendanceListModal').modal('show');
+
                 delete xmlHttp;
                 xmlHttp = null;
             }
