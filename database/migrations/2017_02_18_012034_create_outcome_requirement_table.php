@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOutcomeStudentTable extends Migration
+class CreateOutcomeRequirementTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateOutcomeStudentTable extends Migration
      */
     public function up()
     {
-        Schema::create('outcome_student', function (Blueprint $table) {
+        Schema::create('outcome_requirement', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('Outcome_Id');
-            $table->integer('Student_Id');
-            $table->integer('P1');
-            $table->integer('P2');
-            $table->integer('P3');
+            $table->integer('Requirement_Id');
+            $table->integer('Score');
             $table->timestamps();
         });
     }

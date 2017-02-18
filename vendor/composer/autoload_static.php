@@ -288,10 +288,12 @@ class ComposerStaticInit88d6170b807a87835d784446fcbaeadb
 
     public static $classMap = array (
         'CreateAuditLogsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_072741_create_audit_logs_table.php',
+        'CreateCourseOutcomeTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_17_155834_create_course_outcome_table.php',
         'CreateCourseRequirementsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_070639_create_course_requirements_table.php',
         'CreateCoursesTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_060240_create_courses_table.php',
         'CreateEventStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_140805_create_event_student_table.php',
         'CreateEventsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_133245_create_events_table.php',
+        'CreateOutcomeRequirementTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_012034_create_outcome_requirement_table.php',
         'CreateOutcomeStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_17_140543_create_outcome_student_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateProfessorsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_060153_create_professors_table.php',
