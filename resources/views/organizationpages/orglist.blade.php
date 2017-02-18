@@ -87,16 +87,7 @@
     </div>
 </div>
 <script>
-    $('.btnAttendance').click(function () {
-
-    });
-    //        $('#loadingDiv').show();
-    //        getAttendanceList(this.getAttribute('data'));
+    $('.btnAttendance').click(function () {});
 </script>
 
-<script>
-    $(document).ready(function(){
-        $('#attendanceTable').dataTable( );
-    });
-</script>
 @endsection
