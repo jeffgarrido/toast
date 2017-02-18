@@ -21,6 +21,8 @@
     <!-- Toast StyleSheet -->
     <link rel="stylesheet" href="css/toast.css">
 
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
     <!-- DataTables CSS-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>

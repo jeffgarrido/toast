@@ -11,9 +11,9 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                {{--<li id="navCourses"><a href="/courses">Courses</a></li>--}}
-                {{--<li id="navProfessor"><a href="/professor">Professor</a></li>--}}
-                {{--<li id="navAdmin"><a href="/admin">Admin</a></li>--}}
+                <li id="navCourses"><a href="/courses">Courses</a></li>
+                <li id="navProfessor"><a href="/professor">Professor</a></li>
+                <li id="navAdmin"><a href="/admin">Admin</a></li>
                 <li id="navOrganization"><a href="/organization">Organizations</a></li>
 
             </ul>
