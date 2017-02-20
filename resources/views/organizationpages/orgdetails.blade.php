@@ -20,6 +20,8 @@
     <li><a href="#events" data-toggle="tab">Events</a></li>
 </ul>
 
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+
 <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active in" id="members">
         <table id="StudentList" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
