@@ -288,8 +288,12 @@ class ComposerStaticInit88d6170b807a87835d784446fcbaeadb
 
     public static $classMap = array (
         'CreateAuditLogsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_072741_create_audit_logs_table.php',
+        'CreateClassStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_063325_create_class_student_table.php',
+        'CreateClassesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_062632_create_classes_table.php',
         'CreateCourseOutcomeTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_17_155834_create_course_outcome_table.php',
         'CreateCourseRequirementsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_070639_create_course_requirements_table.php',
+        'CreateCourseSectionTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_050722_create_course_section_table.php',
+        'CreateCourseStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_044201_create_course_student_table.php',
         'CreateCoursesTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_060240_create_courses_table.php',
         'CreateEventStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_140805_create_event_student_table.php',
         'CreateEventsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_133245_create_events_table.php',
@@ -297,6 +301,7 @@ class ComposerStaticInit88d6170b807a87835d784446fcbaeadb
         'CreateOutcomeStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_17_140543_create_outcome_student_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateProfessorsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_060153_create_professors_table.php',
+        'CreateRequirementStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_025524_create_requirement_student_table.php',
         'CreateSectionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_060254_create_sections_table.php',
         'CreateStudentOutcomesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_17_111717_create_student_outcomes_table.php',
         'CreateStudentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_125631_create_students_table.php',

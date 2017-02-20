@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect('organization');
+//Route::get('/', function () {
+////    return redirect('organization');
 //    return view('layouts.master');
-});
+//});
+
+Route::get('/', 'HomeController@index');
 
 Route::get('courses', 'CourseController@showCourses');
 
@@ -58,3 +60,6 @@ Route::get('edit_student/{student}', 'AdminController@editStudent');
 Route::post('edit_complete/{student}', 'AdminController@saveEditStudent');
 
 Route::get('log_attendance/event={event}&token={studentToken}', 'EventController@logAttendance');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
