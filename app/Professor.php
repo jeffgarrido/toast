@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Professor extends Model
 {
-    protected $primaryKey = 'ProfessorID';
+    protected $primaryKey = 'Professor_Id';
 
     public function user(){
         return $this->belongsTo(Professor::class, 'AccountID');

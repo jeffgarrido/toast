@@ -19,10 +19,11 @@
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <div>
-            <table id="ProfTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
+            <table id="ProfTable" class="table table-stripe table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th class="hide-column">Id</th>
+                    {{--<th class="hide-column">Id</th>--}}
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Contact Number</th>
                     <th>Email</th>
@@ -33,7 +34,8 @@
                 <tbody>
                 @foreach($professors as $professor)
                     <tr>
-                        <td class="hide-column">{{$professor->ProfessorId}}</td>
+                        {{--<td class="hide-column">{{$professor->ProfessorId}}</td>--}}
+                        <td>{{$professor->Professor_Id}}</td>
                         <td>{{$professor->LastName}}, {{$professor->FirstName}} {{$professor->MiddleName}}</td>
                         <td>{{$professor->Phone}}</td>
                         <td>{{$professor->Email}}</td>

@@ -20,7 +20,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">&nbsp;{{ Auth::user()->name }}&nbsp;<span class="caret"></span></a>
+                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">&nbsp;{{ Auth::user()->name }}&nbsp;<span class="caret"></span></a>--}}
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Account Settings</a></li>
                         <li>
