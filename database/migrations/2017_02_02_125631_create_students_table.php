@@ -18,8 +18,8 @@ class CreateStudentsTable extends Migration
             $table->increments('Student_Id')->unique();
             $table->unsignedSmallInteger('Account_Id');
             $table->integer('StudentNumber');
-            $table->string('AcademicStatus');
-            $table->string('Section');
+            $table->set('AcademicStatus');
+            $table->string('Section')->nullable();
             $table->string('FirstName', 50);
             $table->string('MiddleName', 50)->nullable();
             $table->string('LastName', 50);

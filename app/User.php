@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'api_token',
     ];
 
     /**
@@ -26,18 +26,19 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'api_token'
     ];
 
     public function student(){
-        return $this->hasOne(Student::class, 'AccountID');
+        return $this->hasOne(Student::class, 'Account_Id');
     }
 
     public function professor(){
-        return $this->hasOne(Professor::class, 'AccountID');
+        return $this->hasOne(Professor::class, 'Account_Id');
     }
 
     public function getUser($id){
+        return $this-self::find($id);
     }
 
     public function deleteUser($id){

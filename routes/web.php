@@ -81,8 +81,11 @@ Route::post('add_professor', 'AdminController@addProfessor');
 });
 
 //Mobile Routes
-Route::get('login/{email}/{password}', 'MobileController@login');
 
-Route::get('fetch_events', 'MobileController@getEvents');
+Route::group(['prefix' => 'toast_api', 'middleware' => 'auth:api'], function() {
+    Route::post('login', 'MobileController@login');
 
-Route::get('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
+    Route::get('fetch_events', 'MobileController@getEvents');
+
+    Route::get('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
+});
