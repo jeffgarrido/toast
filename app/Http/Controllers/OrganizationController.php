@@ -11,6 +11,11 @@ use League\Csv\Writer;
 
 class OrganizationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function showOrganization(){
         $organization = Organization::all();
         return view('organizationpages.orglist', compact('organization'));

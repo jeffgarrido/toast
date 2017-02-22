@@ -6,13 +6,24 @@ use App\AuditLog;
 use App\Section;
 use App\Student;
 use App\User;
+use App\Professor;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function adminRedirect(){
         $students = Student::all();
         return view('adminpages.studentpage', compact('students'));
+    }
+
+    public function showProfessorPage(){
+        $professors = Professor::all();
+        return view('adminpages.profpage', compact('professors'));
     }
 
     public function showStudentPage(){
@@ -107,6 +118,37 @@ class AdminController extends Controller
         );
 
         return back();
+    }
+
+    public function addProfessor(Request $request){
+        $professors = new Professor();
+        $user = new User();
+
+        $professors->FirstName = $request->input('FirstName');
+        $professors->MiddleName = $request->input('MiddleName');
+        $professors->LastName = $request->input('LastName');
+        $professors->Birthday = $request->input('Birthday');
+        $professors->Phone = $request->input('Phone');
+        $professors->Email = $request->input('Email');
+
+        $user->name = $request->input('FirstName');
+        $user->email = $request->input('Email');
+        $user->password = $request->input('Birthday');
+        $user->access_level = 'Professor';
+
+        $user->save();
+        $user->professor()->save($professors);
+
+        $this->createLog(
+            'Add Professor',
+            'Name: '.$request->input('FirstName').' '.$request->input('MiddleName').' '.$request->input('LastName').                     '\n'.
+            'Birthday: '.$request->input('Birthday').  '\n'.
+            'Phone: '.$request->input('Phone').  '\n'.
+            'PersonalEmail: '.$request->input('Email').  '\n'
+
+        );
+        return back();
+
     }
 
     private function createLog($action, $description = ""){

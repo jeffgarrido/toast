@@ -29,7 +29,7 @@
             <tr>
                 <th class="hide-column">Id</th>
                 <th>Student Number</th>
-                <th>Name</th>
+                <th>z</th>
                 <th>Contact Num</th>
                 <th>Email</th>
             </tr>
