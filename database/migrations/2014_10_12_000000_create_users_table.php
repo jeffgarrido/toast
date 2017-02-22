@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('Access_Level', ['Admin', 'Professor', 'Student']);
+            $table->enum('Access_Level', ['Admin', 'Professor', 'Student'])->default('Student');
             $table->string('api_token', 60)->unique;
             $table->rememberToken();
             $table->timestamps();

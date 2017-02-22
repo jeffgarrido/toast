@@ -73,7 +73,7 @@ class OrganizationController extends Controller
     private function createLog($action, $description = ""){
         $log = new AuditLog();
 
-        $log->AccountID = 1;
+        $log->AccountID = Auth::user()->id;
         $log->Action = $action;
         $log->Description = $description;
 
