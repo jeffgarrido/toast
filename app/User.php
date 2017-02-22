@@ -33,6 +33,10 @@ class User extends Authenticatable
         return $this->hasOne(Student::class, 'AccountID');
     }
 
+    public function professor(){
+        return $this->hasOne(Professor::class, 'AccountID');
+    }
+
     public function getUser($id){
     }
 
