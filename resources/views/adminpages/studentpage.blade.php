@@ -20,7 +20,7 @@
 </script>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <div>
-    <table id="StudentTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
+    <table id="StudentTable" class="table display compact table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th class="hide-column">Id</th>
