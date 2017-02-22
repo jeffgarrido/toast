@@ -14,8 +14,8 @@ class CreateAuditLogsTable extends Migration
     public function up()
     {
         Schema::create('audit_logs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('AccountID');
+            $table->increments('Log_Id');
+            $table->unsignedInteger('Account_Id');
             $table->string('Action', 50);
             $table->text('Description');
             $table->timestamps();

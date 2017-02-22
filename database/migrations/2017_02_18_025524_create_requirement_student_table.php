@@ -17,7 +17,7 @@ class CreateRequirementStudentTable extends Migration
             $table->increments('id');
             $table->integer('Requirement_Id');
             $table->integer('Student_Id');
-            $table->integer('Score');
+            $table->integer('Score')->default(0);
             $table->timestamps();
         });
     }

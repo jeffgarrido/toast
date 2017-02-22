@@ -15,6 +15,16 @@
         </div>
 
         <div class="form-group">
+            <label for="StudentNumber" class="col-md-4 control-label" >Academic Status</label>
+            <div class="col-md-6">
+                <select class="form-control input-md" id="AcademicStatus" name="AcademicStatus" required>
+                    <option value="regular" {{ (strcasecmp($student->AcademicStatus, 'regular') == 0) ? 'selected="selected"' : '' }}>Regular</option>
+                    <option value="irregular" {{ (strcasecmp($student->AcademicStatus, 'irregular') == 0) ? 'selected="selected"' : '' }}>Irregular</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="FirstName" class="col-lg-4 control-label">First Name</label>
             <div class="col-lg-8">
                 <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="First Name" value="{{$student->FirstName}}">

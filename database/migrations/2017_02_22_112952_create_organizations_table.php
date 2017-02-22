@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class OrganizationStudent extends Migration
+class CreateOrganizationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class OrganizationStudent extends Migration
      */
     public function up()
     {
-        Schema::create('organization_student', function(Blueprint $table) {
-           $table->increments('id');
-           $table->unsignedSmallInteger('Organization_Id');
-           $table->unsignedSmallInteger('Student_Id');
-           $table->timestamps();
+        Schema::create('organizations', function (Blueprint $table) {
+            $table->increments('Organization_Id');
+            $table->string('Organization_Name', 100);
+            $table->text('Description');
+            $table->unsignedInteger('Adviser_Id');
+            $table->timestamps();
         });
     }
 

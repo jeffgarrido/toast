@@ -16,6 +16,8 @@ class CreateSectionsTable extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Code', 10);
+            $table->date('AcademicYearStart');
+            $table->date('AcademicYearEnd');
             $table->timestamps();
         });
     }

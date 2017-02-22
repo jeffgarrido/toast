@@ -14,10 +14,10 @@ class CreateCoursesTable extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('Code', 10);
+            $table->increments('Course_Id');
+            $table->string('Code', 15);
             $table->string('Title', 50);
-            $table->int('Units', 10);
+            $table->unsignedInteger('Units');
             $table->text('Description')->nullable();
             $table->enum('Terms', array(2,3,4));
             $table->timestamps();

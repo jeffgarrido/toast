@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('admin');
-//    }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function adminRedirect(){
         $students = Student::all();
@@ -42,7 +42,7 @@ class AdminController extends Controller
     }
 
     public function saveEditStudent( Request $request,Student $student ){
-        $user = User::all()->find($student->AccountID);
+        $user = User::all()->find($student->Account_Id);
         //dd($user);
         //$user = User::query("select * from users where id='".$student->AccountID."'")->get();
 
@@ -65,6 +65,7 @@ class AdminController extends Controller
         );
 
         $student->StudentNumber = $request->input('StudentNumber');
+        $student->AcademicStatus = $request->input('AcademicStatus');
         $student->FirstName = $request->input('FirstName');
         $student->MiddleName = $request->input('MiddleName');
         $student->LastName = $request->input('LastName');
@@ -88,9 +89,10 @@ class AdminController extends Controller
 
     public function addStudent(Request $request){
         $students = new Student();
-        $user = new User();
+//        $user = new User();
 
         $students->StudentNumber = $request->input('StudentNumber');
+        $students->AcademicStatus = $request->input('AcademicStatus');
         $students->FirstName = $request->input('FirstName');
         $students->MiddleName = $request->input('MiddleName');
         $students->LastName = $request->input('LastName');
@@ -99,11 +101,13 @@ class AdminController extends Controller
         $students->PersonalEmail = $request->input('PersonalEmail');
         $students->Nickname = strlen($request->input('Nickname'))==0 ? $request->input('FirstName') : $request->input('Nickname');
 
-        $user->name = strlen($request->input('Nickname'))==0 ? $request->input('FirstName') : $request->input('Nickname');
-        $user->email = $request->input('StudentNumber').'@ust.edu.ph';
-        $user->password = $request->input('Birthday');
-        $user->access_level = 'Student';
-        $user->save();
+        $user = User::create([
+            'name' => strlen($request->input('Nickname'))==0 ? $request->input('FirstName') : $request->input('Nickname'),
+            'email' => $request->input('StudentNumber').'@ust.edu.ph',
+            'password' => bcrypt($request->input('Birthday')),
+            'access_level' => ,
+            'api_token' => str_random(60),
+        ]);
 
         $user->student()->save($students);
         //Create Audit Log
@@ -114,7 +118,11 @@ class AdminController extends Controller
             'Birthday: '.$request->input('Birthday').  '\n'.
             'Phone: '.$request->input('Phone').  '\n'.
             'PersonalEmail: '.$request->input('PersonalEmail').  '\n'
+        );
 
+        $this->createLog(
+            'Add User',
+            $user
         );
 
         return back();

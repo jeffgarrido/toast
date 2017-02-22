@@ -19,7 +19,7 @@ class Student extends Model
     }
 
     public function user(){
-        return $this->belongsTo(Student::class, 'AccountID');
+        return $this->belongsTo(Student::class, 'Account_Id');
     }
 
 

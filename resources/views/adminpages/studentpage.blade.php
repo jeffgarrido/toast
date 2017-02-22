@@ -75,6 +75,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="StudentNumber" class="col-md-4 control-label" >Academic Status</label>
+                            <div class="col-md-6">
+                                <select class="form-control input-md" id="AcademicStatus" name="AcademicStatus" required>
+                                    <option selected="selected" value="Regular">Regular</option>
+                                    <option value="Irregular">Irregular</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="FirstName" class="col-md-4 control-label" >First Name</label>
                             <div class="col-lg-6">
                                 <input class="form-control input-md" id="FirstName" name="FirstName" placeholder="FirstName" type="text" required/>
@@ -105,7 +115,7 @@
                         <div class="form-group">
                             <label for="Birthday" class="col-lg-4 control-label" >Birthday</label>
                             <div class="col-lg-6">
-                                <input class="form-control input-md" id="Birthday" name="Birthday" placeholder="Birthday" type="date" required/>
+                                <input class="form-control input-md" id="Birthday" name="Birthday" placeholder="yyyy-mm-dd" type="date" required/>
                             </div>
                         </div>
 
