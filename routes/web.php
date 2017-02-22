@@ -70,6 +70,8 @@ Route::post('edit_complete/{student}', 'AdminController@saveEditStudent');
 
 Route::get('log_attendance/event={event}&token={studentToken}', 'EventController@logAttendance');
 
+Auth::routes();
+
 Route::get('/home', 'HomeController@index');
 
 Route::get('/professor', 'AdminController@showProfessorPage');
@@ -79,3 +81,9 @@ Route::get('/professor', 'AdminController@showProfessorPage');
 Auth::routes();
 
 });
+//Mobile Routes
+Route::post('login/', 'MobileController@login');
+
+Route::get('fetch_events', 'MobileController@getEvents');
+
+Route::get('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
