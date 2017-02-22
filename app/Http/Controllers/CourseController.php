@@ -122,7 +122,7 @@ class CourseController extends Controller
     private function createLog($action, $description = ""){
         $log = new AuditLog();
 
-        $log->AccountID = 1;
+        $log->Account_Id = Auth::user()->id;
         $log->Action = $action;
         $log->Description = $description;
 

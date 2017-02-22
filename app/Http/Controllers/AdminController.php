@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\AuditLog;
 use App\Section;
 use App\Student;
@@ -78,8 +79,8 @@ class AdminController extends Controller
 
         $user->name = strlen($request->input('Nickname', ''))==0 ? $request->input('FirstName') : $request->input('Nickname');
         $user->email = $request->input('StudentNumber').'@ust.edu.ph';
-        $user->password = $request->input('Birthday');
-        $user->access_level = 'Student';
+        $user->password = bcrypt($request->input('Birthday'));
+        $user->Access_Level = 'Student';
 
         $user->save();
 
@@ -105,8 +106,8 @@ class AdminController extends Controller
             'name' => strlen($request->input('Nickname'))==0 ? $request->input('FirstName') : $request->input('Nickname'),
             'email' => $request->input('StudentNumber').'@ust.edu.ph',
             'password' => bcrypt($request->input('Birthday')),
-            'access_level' => ,
             'api_token' => str_random(60),
+            'Access_Level' => 'Student',
         ]);
 
         $user->student()->save($students);
@@ -122,7 +123,11 @@ class AdminController extends Controller
 
         $this->createLog(
             'Add User',
-            $user
+            'name: ' . $user->name . '\n' .
+            'email: ' . $user->email . '\n' .
+            'password: ' . $user->getAuthPassword() . '\n' .
+            'api_token: ' . $user->api_token . '\n' .
+            'Access_Level: ' . 'Student' . '\n'
         );
 
         return back();
@@ -162,7 +167,7 @@ class AdminController extends Controller
     private function createLog($action, $description = ""){
         $log = new AuditLog();
 
-        $log->AccountID = 1;
+        $log->Account_Id = Auth::user()->id;
         $log->Action = $action;
         $log->Description = $description;
 
