@@ -15,8 +15,10 @@ class CreateEventStudentTable extends Migration
     {
         Schema::create('event_student', function(Blueprint $table) {
            $table->increments('id');
-           $table->integer('Event_Id')->unsigned();
-           $table->integer('Student_Id')->unsigned();
+           $table->unsignedInteger('Event_Id');
+           $table->unsignedInteger('Student_Id');
+           $table->enum('PaymentStatus', ['Unpaid', 'Paid'])->default('Unpaid');
+           $table->dateTime('Attendance');
            $table->timestamps();
         });
     }

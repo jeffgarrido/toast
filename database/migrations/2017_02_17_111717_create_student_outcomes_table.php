@@ -14,9 +14,9 @@ class CreateStudentOutcomesTable extends Migration
     public function up()
     {
         Schema::create('student_outcomes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('Outcome_Code');
-            $table->string('Description');
+            $table->increments('Outcome_Id');
+            $table->string('Outcome_Code', 20);
+            $table->text('Description');
             $table->timestamps();
         });
     }

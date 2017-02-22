@@ -65,7 +65,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 //Mobile Routes
-Route::post('login/', 'MobileController@login');
+Route::get('login/{email}/{password}', 'MobileController@login');
 
 Route::get('fetch_events', 'MobileController@getEvents');
 

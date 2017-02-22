@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class MobileController extends Controller
 {
     public function login($email, $password) {
-        return $email. ' ' . $password;
+        return $user;
     }
     /*
      * Fetch all events

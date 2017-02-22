@@ -14,11 +14,14 @@ class CreateProfessorsTable extends Migration
     public function up()
     {
         Schema::create('professors', function (Blueprint $table) {
-            $table->increments('ProfessorID');
-            $table->unsignedInteger('AccountID');
+            $table->increments('Professor_Id');
+            $table->unsignedInteger('Account_Id');
             $table->string('FirstName', 50);
             $table->string('MiddleName', 50)->nullable();
             $table->string('LastName', 50);
+            $table->string('Phone', 11)->nullable();
+            $table->string('Email', 50)->nullable();
+            $table->date('Birthday');
             $table->timestamps();
         });
     }
