@@ -67,19 +67,12 @@ Route::get('delete_student/{student}', 'AdminController@deleteStudent');
 Route::get('edit_student/{student}', 'AdminController@editStudent');
 
 Route::post('edit_complete/{student}', 'AdminController@saveEditStudent');
-    
+
 Auth::routes();
 
 Route::get('log_attendance/event={event}&token={studentToken}', 'EventController@logAttendance');
 
 Route::get('/home', 'HomeController@index');
-
-//Mobile Routes
-Route::post('login/', 'MobileController@login');
-
-Route::get('fetch_events', 'MobileController@getEvents');
-
-Route::get('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
 
 Route::get('/professor', 'AdminController@showProfessorPage');
 
