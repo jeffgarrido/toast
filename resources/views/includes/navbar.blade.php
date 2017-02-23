@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/organization">TOAsT</a>
+            <a class="navbar-brand" href="/organization" style="padding-left: 50px">TOAsT</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -18,7 +18,7 @@
                 <li id="navOrganization"><a href="/organization">Organizations</a></li>
 
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="padding-right: 20px">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">&nbsp;{{ Auth::user()->name }}&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">

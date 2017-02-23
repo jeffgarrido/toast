@@ -64,6 +64,8 @@ Route::post('add_student', 'AdminController@addStudent');
 
 Route::get('delete_student/{student}', 'AdminController@deleteStudent');
 
+Route::get('delete_professor/{professor}', 'AdminController@');
+
 Route::get('edit_student/{student}', 'AdminController@editStudent');
 
 Route::post('edit_complete/{student}', 'AdminController@saveEditStudent');

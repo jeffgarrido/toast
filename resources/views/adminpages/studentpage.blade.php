@@ -20,10 +20,10 @@
 </script>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <div>
-    <table id="StudentTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
+    <table id="StudentTable" class="table display compact table-condensed table-responsive" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th class="hide-column">Id</th>
+                <th>Id</th>
                 <th>Student Number</th>
                 <th>Name</th>
                 <th>Contact Num</th>
@@ -34,7 +34,7 @@
         <tbody>
         @foreach($students as $student)
             <tr>
-                <td class="hide-column">{{ $student->Student_Id }}</td>
+                <td>{{ $student->Student_Id }}</td>
                 <td>{{ $student->StudentNumber }}</td>
                 <td>{{ $student->LastName }}, {{ $student->FirstName }}</td>
                 <td>{{ $student->Phone }}</td>
