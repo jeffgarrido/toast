@@ -1,6 +1,12 @@
 body {
     padding-top: 70px;
     padding-bottom: 20px;
+    background-color: red;
+}
+
+.basic{
+    padding-bottom: 20px;
+    padding-top: 70px;
 }
 
 .bottom-border {

@@ -156,3 +156,29 @@ function deleteStudent(id){
         }
     }
 }
+
+function deleteProfessor(id){
+    if(confirm('Are you sure you want to remove this professor')) {
+
+        //<editor-fold desc="Creating xmlHttpRequest">
+        var xmlHttp = getXmlInstance();
+
+        if (!xmlHttp) {
+            alert("Cant create that object!");
+        }
+        //</editor-fold>
+
+
+        if (xmlHttp) {
+            xmlHttp.open("GET", "delete_professor/" + id, true);
+            xmlHttp.onreadystatechange = function () {
+                if (isXmlReady(xmlHttp)) {
+                    location.reload();
+                    delete xmlHttp;
+                    xmlHttp = null;
+                }
+            };
+            xmlHttp.send(null);
+        }
+    }
+}

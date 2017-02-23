@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use Auth;
 use App\AuditLog;
 use App\Section;
@@ -25,6 +26,11 @@ class AdminController extends Controller
     public function showProfessorPage(){
         $professors = Professor::all();
         return view('adminpages.profpage', compact('professors'));
+    }
+
+    public function showCourses(){
+        $courses = Course::all();
+        return view('adminpages.coursepage', compact('courses'));
     }
 
     public function showStudentPage(){
@@ -133,9 +139,36 @@ class AdminController extends Controller
         return back();
     }
 
+    private function createLog($action, $description = ""){
+        $log = new AuditLog();
+
+        $log->Account_Id = Auth::user()->id;
+        $log->Action = $action;
+        $log->Description = $description;
+
+        $log->save();
+    }
+
+    public function deleteStudent(Student $student){
+        $acc = $student->Account_Id;
+        $student->delete();
+        $user = new User();
+        $user->deleteUser($acc);
+
+        return redirect('/admin');
+    }
+
+    public function deleteProfessor(Professor $professor){
+        $acc = $professor->Account_Id;
+        $professor->delete();
+        $user = new User();
+        $user->deleteUser($acc);
+
+        return redirect('/professor');
+    }
+
     public function addProfessor(Request $request){
         $professors = new Professor();
-        $user = new User();
 
         $professors->FirstName = $request->input('FirstName');
         $professors->MiddleName = $request->input('MiddleName');
@@ -144,13 +177,18 @@ class AdminController extends Controller
         $professors->Phone = $request->input('Phone');
         $professors->Email = $request->input('Email');
 
-        $user->name = $request->input('FirstName');
-        $user->email = $request->input('Email');
-        $user->password = $request->input('Birthday');
-        $user->access_level = 'Professor';
+        $user = User::create([
+            'name' => $request->input('FirstName'),
+            'email' => $request->input('Email'),
+            'password' => bcrypt($request->input('Birthday')),
+            'api_token' => str_random(60),
+            'Access_Level' => 'Professor',
+        ]);
 
-        $user->save();
         $user->professor()->save($professors);
+
+//        $user->save();
+//        $user->professor()->save($professors);
 
         $this->createLog(
             'Add Professor',
@@ -164,21 +202,48 @@ class AdminController extends Controller
 
     }
 
-    private function createLog($action, $description = ""){
-        $log = new AuditLog();
-
-        $log->Account_Id = Auth::user()->id;
-        $log->Action = $action;
-        $log->Description = $description;
-
-        $log->save();
+    public function editProfessor(Professor $professor){
+        return view ('adminpages.editProfessor', compact('professor'));
     }
 
-    public function deleteStudent(Student $student){
-        $acc = $student->AccountID;
-        $student->delete();
-        $user = new User();
-        $user->deleteUser($acc);
-    }
+    public function saveEditProfessor(Request $request,Professor $professor){
+        $user = User::all()->find($professor->Account_Id);
+        //dd($user);
+        //$user = User::query("select * from users where id='".$student->AccountID."'")->get();
 
+        //dd($user);
+        $this->createLog(
+            'Edit Professor',
+            'From'.
+            'Name: '.$professor->FirstName.' '.$professor->MiddleName.' '.$professor->LastName.               '\n'.
+            'Birthday: '.$professor->Birthday.  '\n'.
+            'Phone: '.$professor->Phone.        '\n'.
+            'PersonalEmail: '.$professor->Email.  '\n\n'.
+
+            'To'.
+            'Name: '.$request->input('FirstName').' '.$request->input('MiddleName').' '.$request->input('LastName').                     '\n'.
+            'Birthday: '.$request->input('Birthday').  '\n'.
+            'Phone: '.$request->input('Phone').  '\n'.
+            'PersonalEmail: '.$request->input('PersonalEmail').  '\n'
+        );
+
+        $professor->FirstName = $request->input('FirstName');
+        $professor->MiddleName = $request->input('MiddleName');
+        $professor->LastName = $request->input('LastName');
+        $professor->Birthday = $request->input('Birthday');
+        $professor->Phone = $request->input('Phone');
+        $professor->Email = $request->input('PersonalEmail');
+
+        $professor->save();
+
+        $user->name = $request->input('FirstName');
+        $user->email = $request->input('PersonalEmail');
+        $user->password = bcrypt($request->input('Birthday'));
+        $user->Access_Level = 'Professor';
+
+        $user->save();
+
+        //return back()->with('Student_Id', $student->Student_Id);
+        return redirect('/professor');
+    }
 }
