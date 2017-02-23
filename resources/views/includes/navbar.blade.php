@@ -32,14 +32,34 @@
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
+                    <div class="dropdown">
+                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
+                            {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
+                        {{--</a>--}}
+                        <button onclick="myFunction()" class="dropbtn glyphicon glyphicon-user"> {{ Auth::user()->name }}</button>
+                        <script>
+                            function myFunction() {
+                                document.getElementById("myDropdown").classList.toggle("show");
+                            }
 
-                        <ul class="dropdown-menu" role="menu">
+                            // Close the dropdown menu if the user clicks outside of it
+                            window.onclick = function(event) {
+                                if (!event.target.matches('.dropbtn')) {
 
-                            <li>
+                                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                                    var i;
+                                    for (i = 0; i < dropdowns.length; i++) {
+                                        var openDropdown = dropdowns[i];
+                                        if (openDropdown.classList.contains('show')) {
+                                            openDropdown.classList.remove('show');
+                                        }
+                                    }
+                                }
+                            }
+                        </script>
+                        <div class="dropdown-content" id="myDropdown">
+
+
                                 <a href="{{ url('/logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -49,9 +69,8 @@
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
-                            </li>
-                        </ul>
-                    </li>
+                        </div>
+                    </div>
                 @endif
             </ul>
         </div>

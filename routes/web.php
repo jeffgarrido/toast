@@ -46,9 +46,19 @@ Route::get('students', 'AdminController@showStudentPage');
 
 Route::get('sections', 'AdminController@showSectionsPage');
 
+Route::post('add_section', 'AdminController@addSection');
+
+Route::post('admin_add_course', 'AdminController@addCourse');
+
+Route::get('admincourses', 'AdminController@showCourses');
+
 Route::get('organization', 'OrganizationController@showOrganization');
 
 Route::get('org_details/{organization}', 'OrganizationController@getOrgDetails');
+
+Route::get('prof_list', 'AdminController@getProfList');
+
+Route::get('get_prof_subj', 'AdminController@getProfSubj');
 
 Route::post('add_org', 'OrganizationController@addOrg');
 

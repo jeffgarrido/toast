@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\_Class;
 use Auth;
 use App\AuditLog;
 use App\Section;
@@ -15,7 +16,7 @@ class AdminController extends Controller
 {
 //    public function __construct()
 //    {
-//        $this->middleware('auth');
+//        $this->middleware('admin');
 //    }
 
     public function adminRedirect(){
@@ -46,6 +47,62 @@ class AdminController extends Controller
 
     public function editStudent(Student $student){
         return view('adminpages.editStudent', compact('student'));
+    }
+
+    public function getProfList(){
+        $professors = Professor::all();
+        return view('adminpages.proflistpage', compact('professors'));
+
+    }
+
+    public function getProfSubj(){
+        $professors = Professor::all();
+        $courses = Course::all();
+        return view('adminpages.assignsubject', compact('professors','courses'));
+    }
+
+    public function addSection(Request $request){
+//        dd($request);
+        $section = new Section();
+
+        $section->Code = $request->input('Code');
+        $section->AcademicYearStart = $request->input('AcademicYearStart');
+        $section->AcademicYearEnd = $request->input('AcademicYearEnd');
+
+        $section->save();
+
+        $this->createLog(
+            'Add Section',
+            'Code: '.$request->input('Code').                                           '\n'.
+            'AcademicYearStart: '.$request->input('AcademicYearStart').  '\n'.
+            'AcademicYearEnd: '.$request->input('AcademicYearEnd').  '\n'
+        );
+
+        return back();
+    }
+
+    public function addCourse(Request $request){
+//        dd($request);
+        $course = new Course();
+
+        $course->Code = $request->input('Code');
+        $course->Title = $request->input('Title');
+        $course->Units = $request->input('Units');
+        $course->Description = $request->input('Description');
+        $course->Terms = $request->input('Terms');
+
+        $course->save();
+
+        $this->createLog(
+            'Add Section',
+            'Code: '.$request->input('Code').                                           '\n'.
+            'Title: '.$request->input('Title').  '\n'.
+            'Units: '.$request->input('Units').  '\n'.
+            'Description: '.$request->input('Description').  '\n'.
+            'Terms: '.$request->input('Terms').  '\n'
+        );
+
+        return back();
     }
 
     public function saveEditStudent( Request $request,Student $student ){
