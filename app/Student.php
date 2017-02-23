@@ -22,5 +22,7 @@ class Student extends Model
         return $this->belongsTo(Student::class, 'Account_Id');
     }
 
-
+    public function classes() {
+        return $this->belongsToMany(_Class::class);
+    }
 }
