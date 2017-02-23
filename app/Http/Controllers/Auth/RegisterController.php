@@ -67,6 +67,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'api_token' => str_random(60),
+            'Access_Level' => 'Admin',
         ]);
     }
 }
