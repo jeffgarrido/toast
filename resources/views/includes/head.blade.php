@@ -54,7 +54,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
 
-
+    {{--<script src="/js/app.js"></script>--}}
 
     <!-- Styles -->
     {{--<link href="/css/app.css" rel="stylesheet">--}}
