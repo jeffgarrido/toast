@@ -9,6 +9,6 @@ class Course extends Model
     public $primaryKey = "Course_Id";
 
     public function requirements(){
-        return $this->hasMany(CourseRequirement::class, 'CourseID');
+        return $this->hasMany(CourseRequirement::class, 'Requirement_Id');
     }
 }
