@@ -16,8 +16,8 @@
             } );
         } );
     </script>
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    {{--<div class="col-md-1"></div>--}}
+    {{--<div class="col-md-10">--}}
         <div>
             <table id="ProfTable" class="table table-stripe table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
                 <thead>
@@ -52,8 +52,8 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="col-md-1"></div>
+    {{--</div>--}}
+    {{--<div class="col-md-1"></div>--}}
 
     <!--<editor-fold desc="Modal for adding professor">-->
     <div class="modal" id="addProfessor" tabindex="-1" role="dialog">
