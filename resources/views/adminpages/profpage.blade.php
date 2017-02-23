@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('body')
+@section('body2')
     <script>
         $(document).ready(function() {
             $('#ProfTable').DataTable( {
@@ -16,44 +16,43 @@
             } );
         } );
     </script>
-    {{--<div class="col-md-1"></div>--}}
-    {{--<div class="col-md-10">--}}
-        <div>
-            <table id="ProfTable" class="table table-stripe table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th class="hide-column">Id</th>
-                    <th>No.</th>
-                    <th>Name</th>
-                    <th>Contact Number</th>
-                    <th>Email</th>
-                    <th>Birthday</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php $count = 1;?>
-                @foreach($professors as $professor)
-                    <tr>
-                        <td class="hide-column">{{$professor->ProfessorId}}</td>
-                        <td><?php echo $count; $count++;?></td>
-                        <td>{{$professor->LastName}}, {{$professor->FirstName}} {{$professor->MiddleName}}</td>
-                        <td>{{$professor->Phone}}</td>
-                        <td>{{$professor->Email}}</td>
-                        <td>{{\Carbon\Carbon::parse($professor->Birthday)->format('M d, Y')}}</td>
-                        <td>
-                            <a href="edit_professor/{{$professor->Professor_Id}}" id="edit" class=" btn btn-warning" role="button">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
-                            </a>
-                            <button type="button" class="btn btn-danger" onclick="deleteProfessor({{$professor->Professor_Id}})">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+    <div class="col-md-3">
+        <div class="nav-side-menu">
+            <div class="brand">Administrator</div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+            <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li class="getProfessorList">
+                        <a href="#list">
+                            <i class="fa fa-dashboard fa-lg glyphicon glyphicon-user"></i> Professor List
+                        </a>
+                    </li>
+                    <script>
+                        $('.getProfessorList').click(function(){
+                            $('.loading-div').show();
+                            getProfessorList();
+                        });
+                    </script>
+                    <li class="getProfAndSubject">
+                        <a href="#">
+                            <i class="fa fa-dashboard fa-lg glyphicon glyphicon-plus-sign"></i> Assign Subject
+                        </a>
+                    </li>
+                    <script>
+                        $('.getProfAndSubject').click(function(){
+                            $('.loading-div').show();
+                            getProfAndSubject();
+
+                        });
+                    </script>
+                </ul>
+            </div>
         </div>
-    {{--</div>--}}
-    {{--<div class="col-md-1"></div>--}}
+    </div>
+    <div class="col-md-9" id="proflist">
+    </div>
 
     <!--<editor-fold desc="Modal for adding professor">-->
     <div class="modal" id="addProfessor" tabindex="-1" role="dialog">

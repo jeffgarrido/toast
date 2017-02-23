@@ -36,7 +36,7 @@
                         {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
                             {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
                         {{--</a>--}}
-                        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                        <button onclick="myFunction()" class="dropbtn glyphicon glyphicon-user"> {{ Auth::user()->name }}</button>
                         <script>
                             function myFunction() {
                                 document.getElementById("myDropdown").classList.toggle("show");
