@@ -8,7 +8,7 @@
     </div>
     <div class="col-lg-4 align-right">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editCourseModal">Edit&nbsp;<span class="glyphicon glyphicon-pencil"></span></button>
-        <button type="button" class="btn btn-danger" onclick="deleteCourse({{ $course->id }})">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+        <button type="button" class="btn btn-danger" onclick="deleteCourse({{ $course->Course_Id }})">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
     </div>
 </div>
 {{--/Header--}}
@@ -31,7 +31,7 @@
                         </thead>
                         <tbody style="cursor: pointer;">
                             @foreach($course->requirements()->where('Term', '=', $i+1)->get() as $requirement)
-                                <tr data-toggle="modal" data-target="#editRequirement{{ $requirement->id }}">
+                                <tr data-toggle="modal" data-target="#editRequirement{{ $requirement->Requirement_Id }}">
                                     <td>{{$requirement->Type}}</td>
                                     <td>{{$requirement->Description}}</td>
                                     <td class="text-right"><button type="button" class="btn btn-danger btn-xs" onclick="">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button></td>
@@ -52,7 +52,7 @@
 
     {{--Edit Requirement Modal--}}
     @foreach($course->requirements()->where('Term', '=', $i+1)->get() as $requirement)
-        <div class="modal fade" id="editRequirement{{ $requirement->id }}" tabindex="-1" role="dialog">
+        <div class="modal fade" id="editRequirement{{ $requirement->Requirement_Id }}" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -62,9 +62,9 @@
                         <h3 class="modal-title" id="myModalLabel">Edit Requirement</h3>
                     </div>
                     <div class="modal-body">
-                        {{ Form::open(array('action' => array('CourseController@editRequirement', $requirement->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+                        {{ Form::open(array('action' => array('CourseController@editRequirement', $requirement->Requirement_Id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
                         <fieldset>
-                            <input type="hidden" name="id" value="{{ $course->id }}"/>
+                            <input type="hidden" name="id" value="{{ $course->Course_Id }}"/>
                             <div class="form-group">
                                 <label for="Type" class="col-lg-2 control-label">Type of Requirement</label>
                                 <div class="col-lg-10">
@@ -106,7 +106,7 @@
                     <h3 class="modal-title" id="myModalLabel">Add Requirement</h3>
                 </div>
                 <div class="modal-body">
-                    {{ Form::open(array('action' => array('CourseController@addRequirement', $course->id), 'method' => 'POST', 'class' => 'form-horizontal')) }}
+                    {{ Form::open(array('action' => array('CourseController@addRequirement', $course->Course_Id), 'method' => 'POST', 'class' => 'form-horizontal')) }}
                     <fieldset>
                         <input type="hidden" name="Term" value="{{ $i+1 }}"/>
                         <div class="form-group">
@@ -151,7 +151,7 @@
                 <h3 class="modal-title" id="myModalLabel">Edit Course</h3>
             </div>
             <div class="modal-body">
-                {{ Form::open(array('action' => array('CourseController@editCourse', $course->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+                {{ Form::open(array('action' => array('CourseController@editCourse', $course->Course_Id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
                 <fieldset>
                     <div class="form-group">
                         <label for="Code" class="col-lg-2 control-label">Course Code</label>

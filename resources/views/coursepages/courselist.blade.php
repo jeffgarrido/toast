@@ -30,7 +30,7 @@
         </div>
         <ul class="nav nav-pills nav-stacked">
             @foreach($courses as $course)
-                <li class="getCourseDetails" data="{{ $course->id }}"><a href="#">{{ $course->Code }}: {{ $course->Title }}</a></li>
+                <li class="getCourseDetails" data="{{ $course->Course_Id }}"><a href="#">{{ $course->Code }}: {{ $course->Title }}</a></li>
             @endforeach
             <script>
                 $('.getCourseDetails').click(function(){

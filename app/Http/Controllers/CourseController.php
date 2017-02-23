@@ -93,7 +93,7 @@ class CourseController extends Controller
             'Description: '.$request->input('Description'). '\n'
         );
 
-        return back()->with('id', $course->id);
+        return back()->with('id', $course->Course_Id);
     }
 
     public function editRequirement(CourseRequirement $requirement, Request $request){
