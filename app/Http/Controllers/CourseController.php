@@ -67,7 +67,7 @@ class CourseController extends Controller
     }
 
     public function getDetails(Course $course){
-        $course = $course->load('professors');
+        $course = $course->with('professors')->get();
         $professors = Professor::all();
         switch ($course->Terms){
             case 2:

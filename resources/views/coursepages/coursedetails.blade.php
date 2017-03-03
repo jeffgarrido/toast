@@ -150,7 +150,7 @@
 {{--            {{ Form::open(array('action' => array(), 'method' => 'post', 'class' => 'form-horizontal')) }}--}}
                 <select id="professorList" multiple="multiple" name="professorList[]">
                     @foreach($professors as $professor)
-                        <option value="{{ $professor->Professor_Id }}">
+                        <option value="{{ $professor->Professor_Id }}" {{ $course->contains($professor) ? 'selected="selected"' : '' }}>
                             {{ $professor->LastName. ", " . $professor->FirstName . " " . $professor->MiddleName}}
                         </option>
                     @endforeach
