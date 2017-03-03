@@ -36,7 +36,7 @@
                         {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
                             {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
                         {{--</a>--}}
-                        <button onclick="myFunction()" class="dropbtn glyphicon glyphicon-user"> {{ Auth::user()->name }}</button>
+                        <button onclick="myFunction()" class="dropbtn glyphicon glyphicon-user"> {{ Auth::user()->name }} <span class="caret"></span></button>
                         <script>
                             function myFunction() {
                                 document.getElementById("myDropdown").classList.toggle("show");
@@ -58,17 +58,15 @@
                             }
                         </script>
                         <div class="dropdown-content" id="myDropdown">
+                            <a href="{{ url('/logout') }}"
+                               onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
 
-
-                                <a href="{{ url('/logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </div>
                     </div>
                 @endif

@@ -37,6 +37,12 @@ function getCourseDetails(id){
             if (isXmlReady(xmlHttp)) {
                 document.getElementById("CourseDetails").innerHTML = this.responseText;
                 $('.loading-div').hide();
+                $('#professorList').bootstrapDualListbox({
+                    nonSelectedListLabel: 'Non-selected',
+                    selectedListLabel: 'Selected',
+                    preserveSelectionOnMove: 'moved',
+                    moveOnSelect: false,
+                });
                 delete xmlHttp;
                 xmlHttp = null;
             }

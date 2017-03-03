@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CourseRequirement;
+use App\Professor;
 use Illuminate\Http\Request;
 use App\Course;
 use App\AuditLog;
@@ -66,16 +67,18 @@ class CourseController extends Controller
     }
 
     public function getDetails(Course $course){
+        $course = $course->load('professors');
+        $professors = Professor::all();
         switch ($course->Terms){
             case 2:
                 $terms = ['Prelim', 'Final'];
-                return view('coursepages.coursedetails', compact('course', 'terms'));
+                return view('coursepages.coursedetails', compact('course', 'terms', 'professors'));
             case 3:
                 $terms = ['Prelim', 'Midterm', 'Final'];
-                return view('coursepages.coursedetails', compact('course', 'terms'));
+                return view('coursepages.coursedetails', compact('course', 'terms', 'professors'));
             case 4:
                 $terms = ['Prelim', 'Midterm', 'Pre-final', 'Final'];
-                return view('coursepages.coursedetails', compact('course', 'terms'));
+                return view('coursepages.coursedetails', compact('course', 'terms', 'professors'));
         }
     }
 

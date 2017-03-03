@@ -11,4 +11,8 @@ class Professor extends Model
     public function user(){
         return $this->belongsTo(Professor::class, 'AccountID');
     }
+
+    public function courses() {
+        return $this->hasMany(Course::class, 'classes');
+    }
 }
