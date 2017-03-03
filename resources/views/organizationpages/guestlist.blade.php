@@ -20,14 +20,6 @@
     {{ Form::close() }}
 </div>
 <script>
-    var GuestList = $('select[name="students[]"]').bootstrapDualListbox({
-        nonSelectedListLabel: 'All Students',
-        selectedListLabel: 'Guest List',
-        moveOnSelect: false
-    });
-//    var demo1 = $('select[name="students"]').bootstrapDualListbox();
-//    $("#demoform").submit(function() {alert($('[name="students"]').val());
-//        return false;
-//    });
+    var GuestList = $('select[name="students[]"]').DualListbox();
 </script>
 @endsection

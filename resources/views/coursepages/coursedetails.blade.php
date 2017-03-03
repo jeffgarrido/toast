@@ -16,128 +16,145 @@
 <hr/>
 
 {{--Body--}}
-<h6>Requirements:</h6>
-@for($i = 0; $i < $course->Terms; $i++)
-    <div id="requirements">
-        <div class="panel panel-primary">
-            <div class="panel-body">
-                <Legend style="border-bottom: 1px #eeeeee solid;">{{ $terms[$i] }}</Legend>
-                @if(count($course->requirements()->where('Term', '=', $i+1)->get()) > 0)
-                    <table class="table table-hover">
-                        <thead>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th></th>
-                        </thead>
-                        <tbody style="cursor: pointer;">
-                            @foreach($course->requirements()->where('Term', '=', $i+1)->get() as $requirement)
-                                <tr data-toggle="modal" data-target="#editRequirement{{ $requirement->Requirement_Id }}">
-                                    <td>{{$requirement->Type}}</td>
-                                    <td>{{$requirement->Description}}</td>
-                                    <td class="text-right"><button type="button" class="btn btn-danger btn-xs" onclick="">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <h6><span class="help-block">Note: Click on a record to edit.</span></h6>
-                @else
-                    <span class="help-block">No requirements yet.</span>
-                @endif
-                <button type="button" class="btn btn-default btn-block btn-sm" data-toggle="modal" data-target="#addRequirement{{ $i }}">
-                    <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Requirement
-                </button>
-            </div>
-        </div>
-    </div>
-
-    {{--Edit Requirement Modal--}}
-    @foreach($course->requirements()->where('Term', '=', $i+1)->get() as $requirement)
-        <div class="modal fade" id="editRequirement{{ $requirement->Requirement_Id }}" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#requirements" data-toggle="tab" aria-expanded="true">Requirements</a></li>
+    <li><a href="#professors" data-toggle="tab" aria-expanded="false">Professors</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active in" id="requirements">
+        <div class="top-pad">
+            @for($i = 0; $i < $course->Terms; $i++)
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <Legend style="border-bottom: 1px #eeeeee solid;">{{ $terms[$i] }}</Legend>
+                        @if(count($course->requirements()->where('Term', '=', $i+1)->get()) > 0)
+                            <table class="table table-hover">
+                                <thead>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th></th>
+                                </thead>
+                                <tbody style="cursor: pointer;">
+                                @foreach($course->requirements()->where('Term', '=', $i+1)->get() as $requirement)
+                                    <tr data-toggle="modal" data-target="#editRequirement{{ $requirement->Requirement_Id }}">
+                                        <td>{{$requirement->Type}}</td>
+                                        <td>{{$requirement->Description}}</td>
+                                        <td class="text-right"><button type="button" class="btn btn-danger btn-xs" onclick="">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            <h6><span class="help-block">Note: Click on a record to edit.</span></h6>
+                        @else
+                            <span class="help-block">No requirements yet.</span>
+                        @endif
+                        <button type="button" class="btn btn-default btn-block btn-sm" data-toggle="modal" data-target="#addRequirement{{ $i }}">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Requirement
                         </button>
-                        <h3 class="modal-title" id="myModalLabel">Edit Requirement</h3>
-                    </div>
-                    <div class="modal-body">
-                        {{ Form::open(array('action' => array('CourseController@editRequirement', $requirement->Requirement_Id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
-                        <fieldset>
-                            <input type="hidden" name="id" value="{{ $course->Course_Id }}"/>
-                            <div class="form-group">
-                                <label for="Type" class="col-lg-2 control-label">Type of Requirement</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="Type" name="Type" placeholder="Type" type="text" required value="{{ $requirement->Type }}"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Description" class="col-lg-2 control-label">Description</label>
-                                <div class="col-lg-10">
-                                    <textarea class="form-control" rows="3" id="Description" name="Description">{{ $requirement->Description }}</textarea>
-                                    <span class="help-block">Note: Description is optional</span>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2 text-right">
-                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                                    <button type="reset" class="btn btn-info">Clear Form</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                        {{ Form::close() }}
                     </div>
                 </div>
-            </div>
-        </div>
-    @endforeach
-    {{--/Edit Requirement Modal--}}
 
-    {{--Add Requirement Modal--}}
-    <div class="modal fade" id="addRequirement{{ $i }}" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h3 class="modal-title" id="myModalLabel">Add Requirement</h3>
+                {{--Edit Requirement Modal--}}
+                @foreach($course->requirements()->where('Term', '=', $i+1)->get() as $requirement)
+                    <div class="modal fade" id="editRequirement{{ $requirement->Requirement_Id }}" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h3 class="modal-title" id="myModalLabel">Edit Requirement</h3>
+                                </div>
+                                <div class="modal-body">
+                                    {{ Form::open(array('action' => array('CourseController@editRequirement', $requirement->Requirement_Id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+                                    <fieldset>
+                                        <input type="hidden" name="id" value="{{ $course->Course_Id }}"/>
+                                        <div class="form-group">
+                                            <label for="Type" class="col-lg-2 control-label">Type of Requirement</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" id="Type" name="Type" placeholder="Type" type="text" required value="{{ $requirement->Type }}"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Description" class="col-lg-2 control-label">Description</label>
+                                            <div class="col-lg-10">
+                                                <textarea class="form-control" rows="3" id="Description" name="Description">{{ $requirement->Description }}</textarea>
+                                                <span class="help-block">Note: Description is optional</span>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group">
+                                            <div class="col-lg-10 col-lg-offset-2 text-right">
+                                                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                                <button type="reset" class="btn btn-info">Clear Form</button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    {{ Form::close() }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                {{--/Edit Requirement Modal--}}
+
+                {{--Add Requirement Modal--}}
+                <div class="modal fade" id="addRequirement{{ $i }}" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h3 class="modal-title" id="myModalLabel">Add Requirement</h3>
+                            </div>
+                            <div class="modal-body">
+                                {{ Form::open(array('action' => array('CourseController@addRequirement', $course->Course_Id), 'method' => 'POST', 'class' => 'form-horizontal')) }}
+                                <fieldset>
+                                    <input type="hidden" name="Term" value="{{ $i+1 }}"/>
+                                    <div class="form-group">
+                                        <label for="Type" class="col-lg-2 control-label">Type of Requirement</label>
+                                        <div class="col-lg-10">
+                                            <input class="form-control" id="Type" name="Type" placeholder="Type" type="text" required/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Description" class="col-lg-2 control-label">Description</label>
+                                        <div class="col-lg-10">
+                                            <textarea class="form-control" rows="3" id="Description" name="Description"></textarea>
+                                            <span class="help-block">Note: Description is optional</span>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="form-group">
+                                        <div class="col-lg-10 col-lg-offset-2 text-right">
+                                            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                            <button type="reset" class="btn btn-info">Clear Form</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                {{ Form::close() }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    {{ Form::open(array('action' => array('CourseController@addRequirement', $course->Course_Id), 'method' => 'POST', 'class' => 'form-horizontal')) }}
-                    <fieldset>
-                        <input type="hidden" name="Term" value="{{ $i+1 }}"/>
-                        <div class="form-group">
-                            <label for="Type" class="col-lg-2 control-label">Type of Requirement</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" id="Type" name="Type" placeholder="Type" type="text" required/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Description" class="col-lg-2 control-label">Description</label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control" rows="3" id="Description" name="Description"></textarea>
-                                <span class="help-block">Note: Description is optional</span>
-                            </div>
-                        </div>
-                        <hr/>
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2 text-right">
-                                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                                <button type="reset" class="btn btn-info">Clear Form</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                    {{ Form::close() }}
-                </div>
-            </div>
+                {{--/Add Requirement Modal--}}
+            @endfor
         </div>
     </div>
-    {{--/Add Requirement Modal--}}
-@endfor
+
+    <div class="tab-pane fade" id="professors">
+        <div class="top-pad">
+            <select multiple="multiple" name="professorList[]">
+                @foreach($professors as $professor)
+                    <option value="{{ $professor->Professor_Id }}">{{ $Professor->FirstName }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+</div>
 {{--/Body--}}
 
 {{--Edit Course Modal--}}

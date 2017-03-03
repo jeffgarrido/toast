@@ -3,8 +3,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Student Outcomes Assessment Tool</title>
 
@@ -41,11 +39,8 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
 
     <!-- Dual list box-->
-    <link rel="stylesheet" type="text/css" href="duallist/bootstrap-duallistbox.css">
-    <link rel="stylesheet" type="text/css" href="duallist/bootstrap-duallistbox.min.css">
-
-    <script type="text/javascript" src="/duallist/jquery.bootstrap-duallistbox.js"></script>
-    <script type="text/javascript" src="/duallist/jquery.bootstrap-duallistbox.min.js"></script>
+    <script src="/public/bootstrap-duallistbox-master/dist/jquery.bootstrap-duallistbox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/bootstrap-duallistbox-master/src/bootstrap-duallistbox.css">
 
     {{--Ajax Scripts--}}
     <script src="js/ajax.js"></script>
@@ -53,18 +48,5 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
-
-    {{--<script src="/js/app.js"></script>--}}
-
-    <!-- Styles -->
-    {{--<link href="/css/app.css" rel="stylesheet">--}}
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
-
 
 </head>
