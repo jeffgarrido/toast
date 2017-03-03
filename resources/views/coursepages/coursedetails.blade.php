@@ -147,11 +147,15 @@
 
     <div class="tab-pane fade" id="professors">
         <div class="top-pad">
-            <select multiple="multiple" name="professorList[]">
-                @foreach($professors as $professor)
-                    <option value="{{ $professor->Professor_Id }}">{{ $Professor->FirstName }}</option>
-                @endforeach
-            </select>
+{{--            {{ Form::open(array('action' => array(), 'method' => 'post', 'class' => 'form-horizontal')) }}--}}
+                <select id="professorList" multiple="multiple" name="professorList[]">
+                    @foreach($professors as $professor)
+                        <option value="{{ $professor->Professor_Id }}">
+                            {{ $professor->LastName. ", " . $professor->FirstName . " " . $professor->MiddleName}}
+                        </option>
+                    @endforeach
+                </select>
+            {{--{{ Form::close() }}--}}
         </div>
     </div>
 </div>

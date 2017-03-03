@@ -11,4 +11,8 @@ class Course extends Model
     public function requirements(){
         return $this->hasMany(CourseRequirement::class, 'Requirement_Id');
     }
+
+    public function professors() {
+        return $this->belongsToMany(Professor::class, 'classes');
+    }
 }
