@@ -67,9 +67,7 @@ class CourseController extends Controller
     }
 
     public function getDetails(Course $course){
-
         $course = $course->load('professors');
-        dd($course);
         $professors = Professor::all();
         switch ($course->Terms){
             case 2:
@@ -118,6 +116,11 @@ class CourseController extends Controller
         $requirement->save();
 
         return back()->with('id', $request->input('id'));
+    }
+
+    public function tagProfessor(Course $course, Request $request) {
+        $course->professors()->sync($request->input('professorList', []));
+        return back();
     }
 
     public function deleteRequirement(){

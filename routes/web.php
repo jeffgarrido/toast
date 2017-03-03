@@ -90,6 +90,8 @@ Route::get('/professor', 'AdminController@showProfessorPage');
 
 Route::post('add_professor', 'AdminController@addProfessor');
 
+Route::post('tag_professor/{course}', 'CourseController@tagProfessor');
+
 });
 
 //Mobile Routes

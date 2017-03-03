@@ -38,10 +38,10 @@ function getCourseDetails(id){
                 document.getElementById("CourseDetails").innerHTML = this.responseText;
                 $('.loading-div').hide();
                 $('#professorList').bootstrapDualListbox({
-                    nonSelectedListLabel: 'Non-selected',
-                    selectedListLabel: 'Selected',
-                    preserveSelectionOnMove: 'moved',
-                    moveOnSelect: false,
+                    nonSelectedListLabel: 'All Professors',
+                    selectedListLabel: 'Selected Professor/s',
+                    preserveSelectionOnMove: false,
+                    moveOnSelect: true,
                 });
                 delete xmlHttp;
                 xmlHttp = null;

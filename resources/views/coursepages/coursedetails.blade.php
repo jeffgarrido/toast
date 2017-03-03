@@ -144,20 +144,22 @@
             @endfor
         </div>
     </div>
-    {{ dd($professors) }}
-    <div class="tab-pane fade" id="professors">
+    <div class="tab-pane fade container-fluid" id="professors">
         <div class="top-pad">
-{{--            {{ Form::open(array('action' => array(), 'method' => 'post', 'class' => 'form-horizontal')) }}--}}
-                <select id="professorList" multiple="multiple" name="professorList[]">
-                    {{--{{ $course->contains($professor->Professor_Id) ? 'selected="selected"' : '' }}--}}
-
-                    @foreach($professors as $professor)
-                        <option value="{{ $professor->Professor_Id }}">
-                            {{ $professor->LastName. ", " . $professor->FirstName . " " . $professor->MiddleName}}
-                        </option>
-                    @endforeach
-                </select>
-            {{--{{ Form::close() }}--}}
+            {{ Form::open(array('action' => array('CourseController@tagProfessor', $course->Course_Id), 'method' => 'post', 'class' => 'form-horizontal')) }}
+                <div class="form-group">
+                    <select id="professorList" multiple="multiple" name="professorList[]">
+                        @foreach($professors as $professor)
+                            <option value="{{ $professor->Professor_Id }}" {{ $course->professors->contains($professor)? 'selected="selected"' : '' }}>
+                                {{ $professor->LastName. ", " . $professor->FirstName . " " . $professor->MiddleName}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                </div>
+            {{ Form::close() }}
         </div>
     </div>
 </div>
