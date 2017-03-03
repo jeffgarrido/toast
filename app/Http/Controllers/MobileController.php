@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Organization;
 use Auth;
 use App\Event;
 use App\User;
@@ -37,6 +38,16 @@ class MobileController extends Controller
 
         return $this->sendFailedLoginResponse($request);
     }
+
+    /*
+     * Fetch all organiations
+     */
+    public function getOrganizations() {
+        return response()->json([
+            'organizations' =>
+                Organization::all()
+        ]);
+    }
     /*
      * Fetch all events
      */
@@ -48,6 +59,7 @@ class MobileController extends Controller
             ]
         ]);
     }
+
     /*
      * Log a student for attendance to an event
      */

@@ -1,6 +1,6 @@
 {{--Attendance List Modal--}}
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
-<div class="modal fade" id="attendanceListModal" tabindex="-1" role="dialog">
+<div class="modal modal fade" id="attendanceListModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

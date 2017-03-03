@@ -101,5 +101,7 @@ Route::post('mlogin', 'MobileController@login');
 Route::group(['prefix' => 'toast_api', 'middleware' => 'auth:api'], function() {
     Route::get('fetch_events', 'MobileController@getEvents');
 
+    Route::get('fetch_organizations', 'MobileController@getOrganizations');
+
     Route::post('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
 });
