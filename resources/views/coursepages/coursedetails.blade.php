@@ -144,13 +144,15 @@
             @endfor
         </div>
     </div>
-
+    {{ dd($professors) }}
     <div class="tab-pane fade" id="professors">
         <div class="top-pad">
 {{--            {{ Form::open(array('action' => array(), 'method' => 'post', 'class' => 'form-horizontal')) }}--}}
                 <select id="professorList" multiple="multiple" name="professorList[]">
+                    {{--{{ $course->contains($professor->Professor_Id) ? 'selected="selected"' : '' }}--}}
+
                     @foreach($professors as $professor)
-                        <option value="{{ $professor->Professor_Id }}" {{ $course->contains($professor) ? 'selected="selected"' : '' }}>
+                        <option value="{{ $professor->Professor_Id }}">
                             {{ $professor->LastName. ", " . $professor->FirstName . " " . $professor->MiddleName}}
                         </option>
                     @endforeach
