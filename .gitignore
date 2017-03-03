@@ -1,2 +1,3 @@
 /.idea/workspace.xml
 /vendor/composer/autoload_classmap.php
+.env
