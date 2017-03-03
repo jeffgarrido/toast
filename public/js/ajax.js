@@ -219,7 +219,6 @@ function deleteStudent(id){
         }
         //</editor-fold>
 
-
         if (xmlHttp) {
             xmlHttp.open("GET", "delete_student/" + id, true);
             xmlHttp.onreadystatechange = function () {
