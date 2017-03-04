@@ -16,8 +16,8 @@
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>--}}
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Toast StyleSheet -->
     <link rel="stylesheet" type="text/css" href="/css/toast.css">
@@ -35,10 +35,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
 
     {{--Ajax Scripts--}}
-    <script src="js/ajax.js"></script>
+    <script src="/js/ajax.js"></script>
 
     {{--Dual list box--}}
-    <script src="bootstrap-duallistbox-master/src/jquery.bootstrap-duallistbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="bootstrap-duallistbox-master/src/bootstrap-duallistbox.css">
+    <script src="/bootstrap-duallistbox-master/src/jquery.bootstrap-duallistbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bootstrap-duallistbox-master/src/bootstrap-duallistbox.css">
 
 </head>
