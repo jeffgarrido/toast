@@ -16,10 +16,9 @@ class StudentController extends Controller
     }
 
     public function showStudentPage(){
-        $students = Student::where('Account_Id', Auth::user()->id)->first();
-        $organizations = $students->organizations()->get();
 
-        return view('studentpages.dashboard',compact('organizations'));
+
+        return view('studentpages.dashboard');
     }
 
     public function showOrganization(){
