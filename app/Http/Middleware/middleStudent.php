@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
-class middleAdministrator
+class middleStudent
 {
     /**
      * Handle an incoming request.
@@ -17,14 +17,14 @@ class middleAdministrator
     public function handle($request, Closure $next)
     {
         $user = $request->user();
-
-        if($user && $user->access_level == 'Admin'){
+        if($user && ($user->Access_Level == 'Student' || $user->Access_Level == 'Admin')){
             return $next($request);
-        }elseif( Auth::guest() ) {
+        }
+        elseif( Auth::guest() ) {
             return redirect('/login');
-        }else{
+        }
+        else{
             abort(503);
         }
-
     }
 }
