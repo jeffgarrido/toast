@@ -14,19 +14,71 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    //<editor-fold desc="Constructor">
+    /**
+     * AdminController constructor.
+     */
     public function __construct()
     {
         $this->middleware('admin');
     }
+    //</editor-fold>
 
-    public function adminRedirect(){
+    //<editor-fold desc="Show Dashboard Method">
+    /**
+     * Show Dashboard
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showDashboard() {
+        $nav = 'navAdminDashboard';
+        return view('admin.menu.dashboard', compact('nav'));
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Show Manage Professors Page Method">
+    /**
+     * Show Manage Professors Page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showManageProfessors() {
+        $nav = 'navManageUsers';
+        $professors = Professor::all();
+        return view('admin.menu.manageProfessors', compact('nav', 'professors'));
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Show Manage Students Page Method">
+    /**
+     * Show Manage Students Page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showManageStudents() {
+        $nav = 'navManageUsers';
         $students = Student::all();
-        return view('adminpages.studentpage', compact('students'));
+        return view('admin.menu.manageStudents', compact('nav', 'students'));
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Show Manage Accounts Page Method">
+    /**
+     * Show Manage Accounts Page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showManageAccounts() {
+        $nav = 'navManageUsers';
+        $accounts = User::all();
+        return view('admin.menu.manageAccounts', compact('nav', 'accounts'));
+    }
+    //</editor-fold>
+
+    public function adminRedirect(){ //tmp
+        $students = Student::all();
+        return view('admin.studentpage', compact('students'));
     }
 
     public function showProfessorPage(){
         $professors = Professor::all();
-        return view('adminpages.profpage', compact('professors'));
+        return view('admin.profpage', compact('professors'));
     }
 
     public function showCourses(){

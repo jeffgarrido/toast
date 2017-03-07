@@ -11,16 +11,28 @@
 |
 */
 
-//Route::get('/', function () {
-////    return redirect('organization');
-//    return view('layouts.master');
-//});
-
 Route::group(['middleware' => ['web']], function(){
 
+
+//<editor-fold desc="<!-- HomeController Routes -->">
 Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/dashboard', 'HomeController@index');
+//</editor-fold>
+
+//<editor-fold desc="<!-- AdminController Routes -->">
+Route::get('/admin', 'AdminController@adminRedirect'); //tmp
+
+Route::get('/managestudents', 'AdminController@showManageStudents');
+
+Route::get('/manageaccounts', 'AdminController@showManageAccounts');
+//</editor-fold> -->
+
+//<editor-fold desc="<!-- ProfessorController Routes -->">
+Route::resource('professors', 'ProfessorController');
+//</editor-fold>
 
 Route::get('courses', 'CourseController@showCourses');
 
@@ -38,9 +50,7 @@ Route::put('edit_requirement/{requirement}', 'CourseController@editRequirement')
 
 Route::post('delete_requiremenet/{requirement}', 'CourseController@deleteRequirement');
 
-Route::get('professor', 'ProfessorController@showDashboard');
-
-Route::get('admin', 'AdminController@adminRedirect');
+//Route::get('professor', 'ProfessorController@showDashboard');
 
 Route::get('students', 'AdminController@showStudentPage');
 
@@ -85,15 +95,14 @@ Auth::routes();
 Route::get('log_attendance/event={event}&token={studentToken}', 'EventController@logAttendance');
 
 
-Route::get('/professor', 'AdminController@showProfessorPage');
+//Route::get('/professor', 'AdminController@showProfessorPage');
 
-Route::post('add_professor', 'AdminController@addProfessor');
+//Route::post('add_professor', 'AdminController@addProfessor');
 
 Route::post('tag_professor/{course}', 'CourseController@tagProfessor');
 
 
 //<editor-fold desc="Student Pages">
-    Route::get('dashboard', 'StudentController@showStudentPage');
 
     Route::get('my_organization', 'StudentController@showOrganization');
 

@@ -7,7 +7,7 @@
     });
 </script>
 
-@include('adminpages.navlinks')
+@include('admin.navlinks')
 
 <script>
     $(document).ready(function(){
@@ -57,7 +57,7 @@
 </div>
 
 <!--<editor-fold desc="Modal for adding student">-->
-<div class="modal" id="addStudent" tabindex="-1" role="dialog">
+<div class="modal fade" id="addStudent" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
