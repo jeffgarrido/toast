@@ -21,7 +21,13 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 &nbsp;<li id="navCourses"><a href="/dashboard">Dashboard</a></li>
-                &nbsp;<li id="navCourses"><a href="/my_organization">Organization</a></li>
+                {{--&nbsp;<li class="dro" id="navCourses"><a href="/my_organization">Organization</a></li>--}}
+                &nbsp;<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Organization <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @yield('dropdown')
+                    </ul>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
