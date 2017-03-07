@@ -16,7 +16,7 @@ class StudentController extends Controller
     }
 
     public function showStudentPage(){
-        $students = Student::all();
+
 
         return view('studentpages.dashboard');
     }

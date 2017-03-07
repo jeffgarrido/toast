@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Student;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,11 @@ class HomeController extends Controller
         $user = User::find(Auth::user()->id);
 
         if(Auth::user()->Access_Level == 'Student') {
-            return view('studentpages.dashboard', compact('user'));
+
+            $students = Student::where('Account_Id', Auth::user()->id)->first();
+            $organizations = $students->organizations()->get();
+
+            return view('studentpages.dashboard', compact('user', 'organizations'));
         }
         elseif (Auth::user()->Access_Level == 'Admin'){
             return view('home', compact('user'));

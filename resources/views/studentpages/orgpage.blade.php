@@ -4,9 +4,9 @@
 @endsection
 
 @section('content')
-
-    @foreach($organizations as $organization)
-        <p>{{$organization->Description}}</p>
-    @endforeach
-
+    @section('dropdown')
+        @foreach($organizations as $organization)
+            <p>{{$organization->Description}}</p>
+        @endforeach
+    @endsection
 @endsection

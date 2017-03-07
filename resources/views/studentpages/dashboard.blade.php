@@ -5,6 +5,12 @@
 
 @section('content')
 
+    @section('dropdown')
+        @foreach($organizations as $organization)
+            <p>{{$organization->Description}}</p>
+        @endforeach
+    @endsection
+
     <div class="container">
         <div class="col-lg-4">
             <div class="card card-primary text-center z-depth-2">
