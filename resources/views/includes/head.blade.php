@@ -19,8 +19,14 @@
     {{--<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>--}}
     {{--<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>--}}
 
+<<<<<<< HEAD
     {{--<!-- Toast StyleSheet -->--}}
     {{--<link rel="stylesheet" type="text/css" href="/css/toast.css"/>--}}
+=======
+
+    <!-- Toast StyleSheet -->
+    <link rel="stylesheet" type="text/css" href="/css/toast.css">
+>>>>>>> 9b6c665695ef59ccfb9a8bbce5e107e8e5681909
 
     {{--<link rel="stylesheet" type="text/css" href="/css/style.css"/>--}}
 

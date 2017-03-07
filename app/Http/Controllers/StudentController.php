@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use App\Organization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -17,6 +19,13 @@ class StudentController extends Controller
         $students = Student::all();
 
         return view('studentpages.dashboard');
+    }
+
+    public function showOrganization(){
+        $students = Student::where('Account_Id', Auth::user()->id)->first();
+        $organizations = $students->organizations()->get();
+
+        return view('studentpages.orgpage', compact('organizations'));
     }
 
 
