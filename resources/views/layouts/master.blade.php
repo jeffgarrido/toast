@@ -7,7 +7,7 @@
 <div id="app">
 
     @include('includes.navbar')
-
+    @yield('body2')
     <div class="container">
         @yield('body')
     </div>
