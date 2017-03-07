@@ -8,6 +8,7 @@ use App\AuditLog;
 use App\Student;
 use Illuminate\Http\Request;
 use League\Csv\Writer;
+use Auth;
 
 class OrganizationController extends Controller
 {
@@ -73,7 +74,7 @@ class OrganizationController extends Controller
     private function createLog($action, $description = ""){
         $log = new AuditLog();
 
-        $log->AccountID = Auth::user()->id;
+        $log->Account_ID = Auth::user()->id;
         $log->Action = $action;
         $log->Description = $description;
 
