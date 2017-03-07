@@ -93,9 +93,9 @@ Route::post('tag_professor/{course}', 'CourseController@tagProfessor');
 
 
 //<editor-fold desc="Student Pages">
-    Route::get('dashboard', 'StudentController@showStudentPage');
+    Route::get('dashboard', 'HomeController@index');
 
-    Route::get('my_organization', 'StudentController@showOrganization');
+    Route::get('my_organization/{organization}', 'StudentController@showOrganization');
 
 //</editor-fold>
 

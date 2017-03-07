@@ -1,12 +1,14 @@
-.dropdown-menu{
-    width: 300px;
+.dropdown-menu, .drpdwn>li>a{
+    background-color: #000;
+    color: white;
 }
 
-/*
- * Base structure
- */
+.panel-primary>.panel-heading, .events{color:#fff;background-color:#000;border-color:#337ab7}
 
-/* Move down content because we have a fixed navbar that is 50px tall */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
 body {
     padding-top: 70px;
 }

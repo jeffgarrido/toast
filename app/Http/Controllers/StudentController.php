@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Student;
 use App\Organization;
 use Illuminate\Http\Request;
@@ -16,16 +17,26 @@ class StudentController extends Controller
     }
 
     public function showStudentPage(){
-
-
-        return view('studentpages.dashboard');
-    }
-
-    public function showOrganization(){
         $students = Student::where('Account_Id', Auth::user()->id)->first();
         $organizations = $students->organizations()->get();
 
-        return view('studentpages.orgpage', compact('organizations'));
+        return view('studentpages.dashboard', compact('organizations'));
+    }
+
+    public function showOrganization(Organization $organization){
+        $orgs = $organization;
+        $events = Event::where('Organization_Id', $orgs->Organization_Id)->get();
+
+//        dd($events);
+
+
+        $students = Student::where('Account_Id', Auth::user()->id)->first();
+        $organizations = $students->organizations()->get();
+
+
+
+
+        return view('studentpages.orgpage', compact('organizations', 'events', 'orgs'));
     }
 
 

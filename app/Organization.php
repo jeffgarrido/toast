@@ -15,4 +15,8 @@ class Organization extends Model
     public function students() {
         return $this->belongsToMany(Student::class)->withTimestamps();
     }
+
+    public function professors(){
+        return $this->belongsTo(Professor::class);
+    }
 }

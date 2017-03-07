@@ -15,4 +15,8 @@ class Professor extends Model
     public function courses() {
         return $this->hasMany(Course::class, 'classes');
     }
+
+    public function organizations() {
+        return $this->hasMany(Organization::class, 'classes');
+    }
 }
