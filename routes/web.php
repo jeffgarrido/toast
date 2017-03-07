@@ -18,9 +18,9 @@
 
 Route::group(['middleware' => ['web']], function(){
 
-
-
 Route::get('/', 'HomeController@index');
+
+Route::get('/home', 'HomeController@index');
 
 Route::get('courses', 'CourseController@showCourses');
 
@@ -84,13 +84,18 @@ Auth::routes();
 
 Route::get('log_attendance/event={event}&token={studentToken}', 'EventController@logAttendance');
 
-Route::get('/home', 'HomeController@index');
 
 Route::get('/professor', 'AdminController@showProfessorPage');
 
 Route::post('add_professor', 'AdminController@addProfessor');
 
 Route::post('tag_professor/{course}', 'CourseController@tagProfessor');
+
+
+//<editor-fold desc="Student Pages">
+    Route::get('dashboard', 'StudentController@showStudentPage');
+
+//</editor-fold>
 
 });
 

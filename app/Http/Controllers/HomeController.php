@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = User::find(Auth::user()->id);
+
+        if(Auth::user()->Access_Level == 'Student') {
+            return view('studentpages.dashboard', compact('user'));
+        }
+        elseif (Auth::user()->Access_Level == 'Admin'){
+            return view('home', compact('user'));
+        }
     }
 }

@@ -4,6 +4,9 @@
         <title>Be right back.</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
         <style>
             html, body {
@@ -16,8 +19,7 @@
                 width: 100%;
                 color: #B0BEC5;
                 display: table;
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
+
             }
 
             .container {
@@ -32,15 +34,23 @@
             }
 
             .title {
-                font-size: 72px;
                 margin-bottom: 40px;
+            }
+
+            .info {
+                font-weight: 100;
+                font-family: 'Lato', sans-serif;
+                font-size: 72px;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="title">
+                    <p class="info">Unauthorized user </p><br>
+                    <a class="btn btn-default" href="/">go back to home page..</a>
+                </div>
             </div>
         </div>
     </body>
