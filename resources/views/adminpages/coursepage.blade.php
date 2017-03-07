@@ -20,14 +20,20 @@
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Search Course" />
                     <span class="input-group-btn">
-            <button class="btn btn-default" type="button">&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;</button>
-            </span>
+                        <button class="btn btn-default" type="button">&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+                    </span>
                 </div>
             </div>
             <ul class="nav nav-pills nav-stacked">
                 @foreach($courses as $course)
-                    <li><a href="#">{{$course->Code}}</a></li>
+                    <li class="getCourseDetails" data="{{ $course->Course_Id }}"><a href="#">{{$course->Code}}: {{ $course->Title }}</a></li>
                 @endforeach
+                <script>
+                    $('.getCourseDetails').click(function(){
+                        $('.loading-div').show();
+                        getCourseDetails(this.getAttribute('data'));
+                    })
+                </script>
                 <li>
                     <a href="#" class="addCourse" data-toggle="modal" data-target="#addCourse">
                         <span class="glyphicon glyphicon-plus">&nbsp;</span>Add Courses

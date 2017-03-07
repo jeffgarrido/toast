@@ -17,12 +17,14 @@ class middleAdministrator
     public function handle($request, Closure $next)
     {
         $user = $request->user();
-        if($user && $user->Access_Level == 'Admin'){
+
+        if($user && $user->access_level == 'Admin'){
             return $next($request);
         }elseif( Auth::guest() ) {
             return redirect('/login');
         }else{
             abort(503);
         }
+
     }
 }
