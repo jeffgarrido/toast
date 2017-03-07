@@ -5,12 +5,14 @@
 
 @section('content')
 
-    <div class="col-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-        <h4>Label</h4>
-        <span class="text-muted">Something else</span>
+    <div class="container">
+        <div class="col-lg-4">
+            <div class="card card-primary text-center z-depth-2">
+                <div class="card-block">
+                    <p class="white-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 
 @endsection
