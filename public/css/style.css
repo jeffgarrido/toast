@@ -1,13 +1,15 @@
-.dropdown-menu{
-    width: 300px;
+.dropdown-menu, .drpdwn>li>a{
+    background-color: #000;
+    color: white;
 }
 
-/*
- * Base structure
- */
+.panel-primary>.panel-heading, .events{color:#fff;background-color:#000;border-color:#337ab7}
 
-/* Move down content because we have a fixed navbar that is 50px tall */
-.pullBody {
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+body {
     padding-top: 70px;
 }
 
@@ -71,4 +73,16 @@ h1 {
 .placeholder img {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+}
+
+
+/*  STUDENT ORG EVENTS  */
+.stylish-panel > div:hover > div{
+    margin-top: -5px;
+    border: 1px solid rgb(200, 200, 200);
+    transition: 0.5s;
+}
+
+.event{
+    background-color: white;
 }
