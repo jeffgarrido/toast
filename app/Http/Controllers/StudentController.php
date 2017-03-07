@@ -25,18 +25,19 @@ class StudentController extends Controller
 
     public function showOrganization(Organization $organization){
         $orgs = $organization;
+
+        $students = $orgs->students()->get();
+//        dd($students);
+
         $events = Event::where('Organization_Id', $orgs->Organization_Id)->get();
 
-//        dd($events);
-
-
-        $students = Student::where('Account_Id', Auth::user()->id)->first();
-        $organizations = $students->organizations()->get();
+        $lists = Student::where('Account_Id', Auth::user()->id)->first();
+        $organizations = $lists->organizations()->get();
 
 
 
 
-        return view('studentpages.orgpage', compact('organizations', 'events', 'orgs'));
+        return view('studentpages.orgpage', compact('organizations', 'events', 'orgs','students'));
     }
 
 

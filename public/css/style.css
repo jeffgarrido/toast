@@ -74,3 +74,15 @@ h1 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
+
+
+/*  STUDENT ORG EVENTS  */
+.stylish-panel > div:hover > div{
+    margin-top: -5px;
+    border: 1px solid rgb(200, 200, 200);
+    transition: 0.5s;
+}
+
+.event{
+    background-color: white;
+}
