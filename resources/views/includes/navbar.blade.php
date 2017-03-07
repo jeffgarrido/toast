@@ -12,18 +12,19 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name') }}
+                {{ config('app.name', 'Laravel') }}
             </a>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                &nbsp;<li id="navCourses"><a href="/courses">Courses</a></li>
+                <li id="navCourses"><a href="/courses">Courses</a></li>
                 <li id="navProfessor"><a href="/professor">Professor</a></li>
                 <li id="navAdmin"><a href="/admin">Admin</a></li>
                 <li id="navOrganization"><a href="/organization">Organizations</a></li>
             </ul>
+
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
@@ -33,45 +34,24 @@
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/logout">Logout</a>
-                                {{--{{ Form::open(array('url' => array('logout'), 'method' => 'POST')) }}--}}
-                                    {{--<button type="submit">Logout</button>--}}
-                                {{--{{ Form::close() }}--}}
+                            <li>
+                                <a href="{{ url('/logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                         </ul>
                     </li>
-                    {{--<div class="dropdown">--}}
-                        {{--<script>--}}
-
-                            {{--// Close the dropdown menu if the user clicks outside of it--}}
-                            {{--window.onclick = function(event) {--}}
-                                {{--if (!event.target.matches('.dropbtn')) {--}}
-
-                                    {{--var dropdowns = document.getElementsByClassName("dropdown-content");--}}
-                                    {{--var i;--}}
-                                    {{--for (i = 0; i < dropdowns.length; i++) {--}}
-                                        {{--var openDropdown = dropdowns[i];--}}
-                                        {{--if (openDropdown.classList.contains('show')) {--}}
-                                            {{--openDropdown.classList.remove('show');--}}
-                                        {{--}--}}
-                                    {{--}--}}
-                                {{--}--}}
-                            {{--}--}}
-                        {{--</script>--}}
-                        {{--<div class="dropdown-content" id="myDropdown">--}}
-                            {{--<a href="{{ url('/logout') }}"--}}
-                               {{--onclick="event.preventDefault();--}}
-                               {{--document.getElementById('logout-form').submit();">--}}
-                                {{--Logout--}}
-                            {{--</a>--}}
-
-                            {{--<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">--}}
-                                {{--{{ csrf_field() }}--}}
-                            {{--</form>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
                 @endif
             </ul>
         </div>

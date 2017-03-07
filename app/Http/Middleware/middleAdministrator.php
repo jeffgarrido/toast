@@ -18,7 +18,7 @@ class middleAdministrator
     {
         $user = $request->user();
 
-        if($user && $user->access_level == 'Admin'){
+        if($user && $user->Access_Level == 'Admin'){
             return $next($request);
         }elseif( Auth::guest() ) {
             return redirect('/login');
