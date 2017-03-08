@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    private $nav = 'navAdminDashboard';
+
     //<editor-fold desc="Constructor">
     /**
      * AdminController constructor.

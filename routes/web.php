@@ -37,6 +37,10 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('professors', 'ProfessorController', ['except' => ['create']]);
     //</editor-fold>
 
+    //<editor-fold desc="<!-- StudentController Routes -->">
+    Route::resource('students', 'StudentController', ['except' => ['create']]);
+    //</editor-fold>
+
     Route::get('courses', 'CourseController@showCourses');
 
     Route::get('course_details/{course}', 'CourseController@getDetails');
@@ -57,7 +61,7 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::get('admin', 'AdminController@adminRedirect');
 
-    Route::get('students', 'AdminController@showStudentPage');
+//    Route::get('students', 'AdminController@showStudentPage');
 
     Route::get('sections', 'AdminController@showSectionsPage');
 
