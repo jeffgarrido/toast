@@ -1,15 +1,20 @@
 {{--Header--}}
 <div class="row">
     <div>
-        <h4>{{ $organization->Organization_Name }}</h4>
-        @if($organization->Description)
-            <h7>{{ $organization->Description }}</h7>
-        @endif
+        <div class="col-md-8">
+            <h4>{{ $organization->Organization_Name }}</h4>
+            @if($organization->Description)
+                <h7>{{ $organization->Description }}</h7>
+            @endif
+        </div>
+        <div class="col-lg-4" style="text-align: right">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editOrg" style="width: 11.5ch">Edit&nbsp;<span class="glyphicon glyphicon-pencil"></span></button>
+            <button type="button" class="btn btn-danger">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+        </div>
+        <div class="col-lg-4" style="text-align: right; padding-top: 1ch">
+            <a role="button" href="organization/manage_members/{{$organization->Organization_Id}}" type="button" class="btn btn-success">Add / Delete Member&nbsp;<span class="glyphicon glyphicon-plus"></span></a>
+        </div>
     </div>
-    {{--<div class="col-lg-4" style="text-align: right">--}}
-        {{--<button type="button" class="btn btn-default" >Edit&nbsp;<span class="glyphicon glyphicon-pencil"></span></button>--}}
-        {{--<button type="button" class="btn btn-danger">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button>--}}
-    {{--</div>--}}
 </div>
 {{--/Header--}}
 
@@ -29,7 +34,7 @@
             <tr>
                 <th class="hide-column">Id</th>
                 <th>Student Number</th>
-                <th>z</th>
+                <th>Name</th>
                 <th>Contact Num</th>
                 <th>Email</th>
             </tr>
@@ -75,3 +80,4 @@
 
 <div id="attendanceList">
 </div>
+

@@ -3,7 +3,7 @@
     color: white;
 }
 
-.panel-primary>.panel-heading, .events{color:#fff;background-color:#000;border-color:#337ab7}
+.events{color:#fff;background-color:#000;border-color:#337ab7}
 
 .dropdown:hover .dropdown-menu {
     display: block;

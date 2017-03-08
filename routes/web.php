@@ -31,6 +31,10 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/managestudents', 'AdminController@showManageStudents');
 
     Route::get('/manageaccounts', 'AdminController@showManageAccounts');
+
+    Route::get('/organization/manage_members/{organization}', 'AdminController@manageOrgMembers');
+
+    Route::post('populate_members/{organization}', 'AdminController@populateMemberList');
     //</editor-fold> -->
 
     //<editor-fold desc="<!-- ProfessorController Routes -->">
@@ -112,14 +116,14 @@ Route::group(['middleware' => ['web']], function(){
 
 });
 
-//<editor-fold desc="<!-- Mobile Routes -->">
-Route::post('mlogin', 'MobileController@login');
+    //<editor-fold desc="<!-- Mobile Routes -->">
+    Route::post('mlogin', 'MobileController@login');
 
-Route::group(['prefix' => 'toast_api', 'middleware' => 'auth:api'], function() {
-    Route::get('fetch_events', 'MobileController@getEvents');
+    Route::group(['prefix' => 'toast_api', 'middleware' => 'auth:api'], function() {
+        Route::get('fetch_events', 'MobileController@getEvents');
 
-    Route::get('fetch_organizations', 'MobileController@getOrganizations');
+        Route::get('fetch_organizations', 'MobileController@getOrganizations');
 
-    Route::post('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
-});
-//</editor-fold>
+        Route::post('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
+    });
+    //</editor-fold>
