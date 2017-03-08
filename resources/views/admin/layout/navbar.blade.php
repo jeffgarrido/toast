@@ -46,7 +46,7 @@
                         <a href="/professors"><i class="fa fa-fw fa-male"></i> Professors</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-child"></i> Students</a>
+                        <a href="/students"><i class="fa fa-fw fa-child"></i> Students</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-user"></i> User Accounts</a>

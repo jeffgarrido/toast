@@ -45,6 +45,10 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('organizations', 'OrganizationController', ['except' => ['create']]);
     //</editor-fold>
 
+    //<editor-fold desc="<!-- StudentController Routes -->">
+    Route::resource('students', 'StudentController', ['except' => ['create']]);
+    //</editor-fold>
+
     Route::get('courses', 'CourseController@showCourses');
 
     Route::get('course_details/{course}', 'CourseController@getDetails');
@@ -65,7 +69,7 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::get('admin', 'AdminController@adminRedirect');
 
-    Route::get('students', 'AdminController@showStudentPage');
+//    Route::get('students', 'AdminController@showStudentPage');
 
     Route::get('sections', 'AdminController@showSectionsPage');
 
@@ -120,14 +124,14 @@ Route::group(['middleware' => ['web']], function(){
 
 });
 
-    //<editor-fold desc="<!-- Mobile Routes -->">
-    Route::post('mlogin', 'MobileController@login');
+//<editor-fold desc="<!-- Mobile Routes -->">
+Route::post('mlogin', 'MobileController@login');
 
-    Route::group(['prefix' => 'toast_api', 'middleware' => 'auth:api'], function() {
-        Route::get('fetch_events', 'MobileController@getEvents');
+Route::group(['prefix' => 'toast_api', 'middleware' => 'auth:api'], function() {
+    Route::get('fetch_events', 'MobileController@getEvents');
 
-        Route::get('fetch_organizations', 'MobileController@getOrganizations');
+    Route::get('fetch_organizations', 'MobileController@getOrganizations');
 
-        Route::post('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
-    });
-    //</editor-fold>
+    Route::post('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
+});
+//</editor-fold>

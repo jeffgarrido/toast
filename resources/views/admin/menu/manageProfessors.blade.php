@@ -91,42 +91,42 @@
                     <fieldset>
                         <div class="form-group">
                             <label for="FirstName" class="col-md-4 control-label" >First Name</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <input class="form-control input-md" id="FirstName" name="FirstName" placeholder="Given Name" type="text" required/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="MiddleName" class="col-lg-4 control-label" >Middle Name</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <input class="form-control input-md" id="MiddleName" name="MiddleName" placeholder="Mother's Maiden Name" type="text" required/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="LastName" class="col-lg-4 control-label" >Last Name</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <input class="form-control input-md" id="LastName" name="LastName" placeholder="Family Name" type="text" required/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Birthday" class="col-lg-4 control-label" >Birthday</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <input class="form-control input-md" id="Birthday" name="Birthday" placeholder="ex. 2017-02-14 (yyyy-mm-dd)" type="date" required/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Phone" class="col-lg-4 control-label" >Contact Number</label>
-                            <div class="col-lg-6">
-                                <input class="form-control input-md" id="Phone" name="Phone" placeholder="ex. 09123456789" type="number" required/>
+                            <div class="col-lg-7">
+                                <input class="form-control input-md" id="Phone" name="Phone" placeholder="ex. 09123457789" type="number" required/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Email" class="col-lg-4 control-label" >Email</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <input class="form-control input-md" id="Email" name="Email" placeholder="Personal Email" type="email" required/>
                                 <span class="help-block">Note: Used for password reset.</span>
                             </div>
