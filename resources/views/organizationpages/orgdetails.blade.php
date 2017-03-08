@@ -8,7 +8,7 @@
             @endif
         </div>
         <div class="col-lg-4" style="text-align: right">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editOrg" style="width: 11.5ch">Edit&nbsp;<span class="glyphicon glyphicon-pencil"></span></button>
+            <button type="button" class="btn btn-info" onclick="editOrganizationDetails({{$organization->Organization_Id}})" style="width: 11.5ch">Edit&nbsp;<span class="glyphicon glyphicon-pencil"></span></button>
             <button type="button" class="btn btn-danger">Delete&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
         </div>
         <div class="col-lg-4" style="text-align: right; padding-top: 1ch">

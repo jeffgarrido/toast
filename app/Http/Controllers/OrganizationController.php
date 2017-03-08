@@ -2,19 +2,103 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
-use App\Organization;
 use App\AuditLog;
-use App\Student;
+use App\Organization;
 use Illuminate\Http\Request;
-use League\Csv\Writer;
-use Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class OrganizationController extends Controller
 {
     public function __construct()
     {
         $this->middleware('admin');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $organization = Organization::find($id);
+        return view('admin.edit.editOrganization', compact('organization'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $organization = Organization::find($id);
+        $organization->update($request->all());
+
+        $this->createLog(
+            'Update Organization',
+            'Name: '.$organization->Organization_Name.                     '\n'.
+            'Description: '.$organization->Description.  '\n'
+        );
+
+        return redirect('/organization');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 
     public function showOrganization(){

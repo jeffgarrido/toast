@@ -8,6 +8,8 @@ class Organization extends Model
 {
     protected $primaryKey = 'Organization_Id';
 
+    protected $fillable  = ['Organization_Id', 'Description', 'Adviser_Id'];
+
     public function events() {
         return $this->hasMany(Event::class);
     }
