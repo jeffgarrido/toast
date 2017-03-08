@@ -53,45 +53,6 @@ function getCourseDetails(id){
     return false;
 }
 
-function getProfessorList(){
-    //creating xmlHttpRequest object
-    var xmlHttp = getXmlInstance();
-
-    if (!xmlHttp) {
-        alert("Cant create that object!");
-    }
-    //--end
-
-    if (xmlHttp) {
-        xmlHttp.open("GET", "prof_list/", true);
-        xmlHttp.onreadystatechange = function () {
-            if (isXmlReady(xmlHttp)) {
-                document.getElementById("proflist").innerHTML = this.responseText;
-                $(document).ready(function() {
-                    $('#ProfTable').DataTable( {
-                        dom: 'Bfrtip',
-                        buttons: [
-                            {
-                                text: 'Add New Professor    ',
-                                action: function ( e, dt, node, config ) {
-                                    $("#addProfessor").modal();
-                                    //alert( 'Button activated' );
-                                }
-                            }
-                        ]
-                    } );
-                } );
-                $('.loading-div').hide();
-                delete xmlHttp;
-                xmlHttp = null;
-            }
-        };
-        xmlHttp.send(null);
-    }
-
-    return false;
-}
-
 function getProfAndSubject() {
     //creating xmlHttpRequest object
     var xmlHttp = getXmlInstance();

@@ -38,7 +38,7 @@ Route::group(['middleware' => ['web']], function(){
     //</editor-fold> -->
 
     //<editor-fold desc="<!-- ProfessorController Routes -->">
-    Route::resource('professors', 'ProfessorController');
+    Route::resource('professors', 'ProfessorController', ['except' => ['create']]);
     //</editor-fold>
 
     Route::get('courses', 'CourseController@showCourses');

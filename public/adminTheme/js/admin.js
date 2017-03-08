@@ -31,7 +31,7 @@ function isXmlReady(xmlHttp) {
     return xmlHttp.readyState == 4 && xmlHttp.status == 200;
 }
 
-function getProfessorDetails(id){
+function editProfessorDetails(id){
     //creating xmlHttpRequest object
     var xmlHttp = getXmlInstance();
 
@@ -41,17 +41,24 @@ function getProfessorDetails(id){
     //--end
 
     if (xmlHttp) {
-        xmlHttp.open("GET", "getProfessorDetails/" + id, true);
+        xmlHttp.open("GET", "professors/" + id + "/edit", true);
         xmlHttp.onreadystatechange = function () {
             if (isXmlReady(xmlHttp)) {
-                document.getElementById("CourseDetails").innerHTML = this.responseText;
-                $('.loading-div').hide();
+                document.getElementById("editProfessorWrapper").innerHTML = this.responseText;
+                $('#editProfessorWrapper').ready(function() {
+                    $('#editProfessorModal').modal();
+                });
                 delete xmlHttp;
                 xmlHttp = null;
             }
+
         };
         xmlHttp.send(null);
     }
 
     return false;
 }
+
+$('.form-delete').submit(function() {
+    return confirm('Are you sure to delete record?');
+});
