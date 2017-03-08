@@ -51,10 +51,14 @@
                             <td>{{$professor->Email}}</td>
                             <td>{{\Carbon\Carbon::parse($professor->Birthday)->format('M d, Y')}}</td>
                             <td>
-                                <a href="edit_professor/{{$professor->Professor_Id}}" id="edit" class=" btn btn-warning" role="button">
-                                    <span class="fa fa-pencil" aria-hidden="true"></span> Edit
-                                </a>
-                                <button type="button" class="btn btn-danger" onclick="deleteProfessor({{$professor->Professor_Id}})">Delete&nbsp;<span class="fa fa-remove"></span></button>
+                                {{ Form::open(array('url' => '/professors/' . $professor->Professor_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
+                                    <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editProfessorDetails({{ $professor->Professor_Id }})">
+                                        <span class="fa fa-pencil" aria-hidden="true"></span> Edit
+                                    </button>
+                                    <button type="submit" class="btn btn-danger" aria-hidden="true">
+                                        <span class="fa fa-remove"></span> Delete
+                                    </button>
+                                {{ Form::close() }}
                             </td>
                         </tr>
                     @endforeach
@@ -72,7 +76,6 @@
         <button class="btn btn-success" data-toggle="modal" data-target="#addProfessor">
             <i class="fa fa-user-plus" aria-hidden="true"></i> Add Professor
         </button>
-
     </div><!-- container fluid -->
 
     <!--<editor-fold desc="Modal for adding professor">-->
@@ -143,8 +146,9 @@
     </div>
     <!--</editor-fold>-->
 
-    <!--Modal for editing professor-->
+    <!--<editor-fold desc="Modal for editing professor">-->
     <div id="editProfessorWrapper"></div>
+    <!--</editor-fold>-->
 
 
 </div><!-- page-wrapper -->

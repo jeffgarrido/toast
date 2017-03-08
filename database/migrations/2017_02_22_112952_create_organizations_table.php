@@ -17,7 +17,7 @@ class CreateOrganizationsTable extends Migration
             $table->increments('Organization_Id');
             $table->string('Organization_Name', 100);
             $table->text('Description');
-            $table->unsignedInteger('Adviser_Id');
+            $table->unsignedInteger('Adviser_Id')->nullable();
             $table->timestamps();
         });
     }

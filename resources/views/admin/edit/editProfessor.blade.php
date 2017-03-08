@@ -1,4 +1,4 @@
-<div class="modal fade" id="editProfessor" tabindex="-1" role="dialog">
+<div class="modal fade" id="editProfessorModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,7 +6,7 @@
                 <h4 class="modal-title"><span class="fa fa-fw fa-male" aria-hidden="true"></span> Edit Professor</h4>
             </div>
             <div class="modal-body">
-                {{ Form::open(array('action' => 'AdminController@addProfessor', 'method' => 'POST', 'class' => 'form-horizontal')) }}
+                {{ Form::open(array('url' => '/professors/' . $professor->Professor_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
                 <fieldset>
                     <div class="form-group">
                         <label for="FirstName" class="col-md-4 control-label" >First Name</label>
@@ -32,21 +32,21 @@
                     <div class="form-group">
                         <label for="Birthday" class="col-lg-4 control-label" >Birthday</label>
                         <div class="col-lg-6">
-                            <input class="form-control input-md" id="Birthday" name="Birthday" placeholder="ex. 2017/12/25" type="date" required/>
+                            <input class="form-control input-md" id="Birthday" name="Birthday" placeholder="ex. 2017/12/25" type="date" value="{{ $professor->Birthday }}" required/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="Phone" class="col-lg-4 control-label" >Contact Number</label>
                         <div class="col-lg-6">
-                            <input class="form-control input-md" id="Phone" name="Phone" placeholder="ex. 09123456789" type="number" required/>
+                            <input class="form-control input-md" id="Phone" name="Phone" placeholder="ex. 09123456789" type="number" value="{{ $professor->Phone }}" required/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="Email" class="col-lg-4 control-label" >Email</label>
                         <div class="col-lg-6">
-                            <input class="form-control input-md" id="Email" name="Email" placeholder="Personal Email" type="email" required/>
+                            <input class="form-control input-md" id="Email" name="Email" placeholder="Personal Email" type="email" value="{{ $professor->Email }}" required/>
                             <span class="help-block">Note: Used for password reset.</span>
                         </div>
                     </div>
