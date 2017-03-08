@@ -11,98 +11,108 @@
 |
 */
 
-//Route::get('/', function () {
-////    return redirect('organization');
-//    return view('layouts.master');
-//});
-
 Route::group(['middleware' => ['web']], function(){
 
-Route::get('/', 'HomeController@index');
+    //<editor-fold desc="<!-- Authentication Routes -->">
+    Auth::routes();
+    //</editor-fold>
 
-Route::get('/home', 'HomeController@index');
+    //<editor-fold desc="<!-- HomeController Routes -->">
+    Route::get('/', 'HomeController@index');
 
-Route::get('courses', 'CourseController@showCourses');
+    Route::get('/home', 'HomeController@index');
 
-Route::get('course_details/{course}', 'CourseController@getDetails');
+    Route::get('/dashboard', 'HomeController@index');
+    //</editor-fold>
 
-Route::post('add_course', 'CourseController@addCourse');
+    //<editor-fold desc="<!-- AdminController Routes -->">
+    Route::get('/admin', 'AdminController@adminRedirect'); //tmp
 
-Route::put('edit_course/{course}', 'CourseController@editCourse');
+    Route::get('/managestudents', 'AdminController@showManageStudents');
 
-Route::get('delete_course/{course}', 'CourseController@deleteCourse');
+    Route::get('/manageaccounts', 'AdminController@showManageAccounts');
+    //</editor-fold> -->
 
-Route::post('add_requirement/{course}', 'CourseController@addRequirement');
+    //<editor-fold desc="<!-- ProfessorController Routes -->">
+    Route::resource('professors', 'ProfessorController');
+    //</editor-fold>
 
-Route::put('edit_requirement/{requirement}', 'CourseController@editRequirement');
+    Route::get('courses', 'CourseController@showCourses');
 
-Route::post('delete_requiremenet/{requirement}', 'CourseController@deleteRequirement');
+    Route::get('course_details/{course}', 'CourseController@getDetails');
 
-Route::get('professor', 'ProfessorController@showDashboard');
+    Route::post('add_course', 'CourseController@addCourse');
 
-Route::get('admin', 'AdminController@adminRedirect');
+    Route::put('edit_course/{course}', 'CourseController@editCourse');
 
-Route::get('students', 'AdminController@showStudentPage');
+    Route::get('delete_course/{course}', 'CourseController@deleteCourse');
 
-Route::get('sections', 'AdminController@showSectionsPage');
+    Route::post('add_requirement/{course}', 'CourseController@addRequirement');
 
-Route::post('add_section', 'AdminController@addSection');
+    Route::put('edit_requirement/{requirement}', 'CourseController@editRequirement');
 
-Route::post('admin_add_course', 'AdminController@addCourse');
+    Route::post('delete_requiremenet/{requirement}', 'CourseController@deleteRequirement');
 
-Route::get('admincourses', 'AdminController@showCourses');
+    //Route::get('professor', 'ProfessorController@showDashboard');
 
-Route::get('organization', 'OrganizationController@showOrganization');
+    Route::get('admin', 'AdminController@adminRedirect');
 
-Route::get('org_details/{organization}', 'OrganizationController@getOrgDetails');
+    Route::get('students', 'AdminController@showStudentPage');
 
-Route::get('prof_list', 'AdminController@getProfList');
+    Route::get('sections', 'AdminController@showSectionsPage');
 
-Route::get('get_prof_subj', 'AdminController@getProfSubj');
+    Route::post('add_section', 'AdminController@addSection');
 
-Route::post('add_org', 'OrganizationController@addOrg');
+    Route::post('admin_add_course', 'AdminController@addCourse');
 
-Route::get('attendance_list/{event}', 'OrganizationController@getAttendanceList');
+    Route::get('admincourses', 'AdminController@showCourses');
 
-Route::get('guest_list/{event}', 'EventController@eventGuest');
+    Route::get('organization', 'OrganizationController@showOrganization');
 
-Route::post('populate_list/{event}', 'EventController@populateGuestList');
+    Route::get('org_details/{organization}', 'OrganizationController@getOrgDetails');
 
-Route::get('download_attendance/{event}', 'OrganizationController@downloadAttendanceList');
+    Route::get('prof_list', 'AdminController@getProfList');
 
-Route::post('add_student', 'AdminController@addStudent');
+    Route::get('get_prof_subj', 'AdminController@getProfSubj');
 
-Route::get('delete_student/{student}', 'AdminController@deleteStudent');
+    Route::post('add_org', 'OrganizationController@addOrg');
 
-Route::get('delete_professor/{professor}', 'AdminController@');
+    Route::get('attendance_list/{event}', 'OrganizationController@getAttendanceList');
 
-Route::get('edit_student/{student}', 'AdminController@editStudent');
+    Route::get('guest_list/{event}', 'EventController@eventGuest');
 
-Route::post('edit_complete/{student}', 'AdminController@saveEditStudent');
+    Route::post('populate_list/{event}', 'EventController@populateGuestList');
 
-Auth::routes();
+    Route::get('download_attendance/{event}', 'OrganizationController@downloadAttendanceList');
 
-Route::get('log_attendance/event={event}&token={studentToken}', 'EventController@logAttendance');
+    Route::post('add_student', 'AdminController@addStudent');
+
+    Route::get('delete_student/{student}', 'AdminController@deleteStudent');
+
+    Route::get('delete_professor/{professor}', 'AdminController@');
+
+    Route::get('edit_student/{student}', 'AdminController@editStudent');
+
+    Route::post('edit_complete/{student}', 'AdminController@saveEditStudent');
+
+    Route::get('log_attendance/event={event}&token={studentToken}', 'EventController@logAttendance');
+
+    //Route::get('/professor', 'AdminController@showProfessorPage');
+
+    //Route::post('add_professor', 'AdminController@addProfessor');
+
+    Route::post('tag_professor/{course}', 'CourseController@tagProfessor');
 
 
-Route::get('/professor', 'AdminController@showProfessorPage');
-
-Route::post('add_professor', 'AdminController@addProfessor');
-
-Route::post('tag_professor/{course}', 'CourseController@tagProfessor');
-
-
-//<editor-fold desc="Student Pages">
+    //<editor-fold desc="<!-- Student Pages -->">
     Route::get('dashboard', 'HomeController@index');
-
+    Route::get('my_organization', 'StudentController@showOrganization');
     Route::get('my_organization/{organization}', 'StudentController@showOrganization');
-
-//</editor-fold>
+    //</editor-fold>
 
 });
 
-//Mobile Routes
-
+//<editor-fold desc="<!-- Mobile Routes -->">
 Route::post('mlogin', 'MobileController@login');
 
 Route::group(['prefix' => 'toast_api', 'middleware' => 'auth:api'], function() {
@@ -112,3 +122,4 @@ Route::group(['prefix' => 'toast_api', 'middleware' => 'auth:api'], function() {
 
     Route::post('log_attendance/event={event}&token={studentToken}', 'MobileController@logAttendance');
 });
+//</editor-fold>

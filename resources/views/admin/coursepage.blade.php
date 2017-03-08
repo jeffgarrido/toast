@@ -11,7 +11,7 @@
         });
     </script>
 
-    @include('adminpages.navlinks')
+    @include('admin.navlinks')
 
     {{--Course List--}}
     <div class="flexbox">

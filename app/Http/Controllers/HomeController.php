@@ -36,7 +36,8 @@ class HomeController extends Controller
             return view('studentpages.dashboard', compact('user', 'organizations'));
         }
         elseif (Auth::user()->Access_Level == 'Admin'){
-            return view('home', compact('user'));
+            $nav = 'navAdminDashboard';
+            return view('admin.menu.dashboard', compact('nav'));
         }
     }
 }
