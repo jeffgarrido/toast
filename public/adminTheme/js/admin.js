@@ -59,6 +59,35 @@ function editProfessorDetails(id){
     return false;
 }
 
+function editOrganizationDetails(id){
+    //creating xmlHttpRequest object
+    var xmlHttp = getXmlInstance();
+
+    if (!xmlHttp) {
+        alert("Error. Cant create xml object!");
+    }
+    //--end
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "organizations/" + id + "/edit", true);
+
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+                document.getElementById("editOrgWrapper").innerHTML = this.responseText;
+                $('#editOrgWrapper').ready(function() {
+                    $('#editOrgModal').modal();
+                });
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+
 $('.form-delete').submit(function() {
     return confirm('Are you sure to delete record?');
 });

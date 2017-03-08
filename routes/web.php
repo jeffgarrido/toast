@@ -31,10 +31,18 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/managestudents', 'AdminController@showManageStudents');
 
     Route::get('/manageaccounts', 'AdminController@showManageAccounts');
+
+    Route::get('/organization/manage_members/{organization}', 'AdminController@manageOrgMembers');
+
+    Route::post('populate_members/{organization}', 'AdminController@populateMemberList');
     //</editor-fold> -->
 
     //<editor-fold desc="<!-- ProfessorController Routes -->">
     Route::resource('professors', 'ProfessorController', ['except' => ['create']]);
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- ProfessorController Routes -->">
+    Route::resource('organizations', 'OrganizationController', ['except' => ['create']]);
     //</editor-fold>
 
     //<editor-fold desc="<!-- StudentController Routes -->">

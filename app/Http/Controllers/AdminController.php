@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\_Class;
+use App\Organization;
 use Auth;
 use App\AuditLog;
 use App\Section;
@@ -356,5 +357,21 @@ class AdminController extends Controller
 
         //return back()->with('Student_Id', $student->Student_Id);
         return redirect('/professor');
+    }
+
+    public function manageOrgMembers(Organization $organization){
+
+        $members = $organization->students()->get();
+
+        $students = Student::all();
+
+        return view('admin.orgmembers',compact('members','students','organization'));
+    }
+
+    public function populateMemberList(Organization $organization, Request $request) {
+
+        $organization->students()->sync($request->input('memberList', []));
+
+        return back();
     }
 }

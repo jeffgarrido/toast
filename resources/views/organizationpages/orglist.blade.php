@@ -38,6 +38,10 @@
     </div>
 
     <div id="OrgDetails" class="col-lg-9"></div>
+
+    <!--<editor-fold desc="Modal for editing professor">-->
+    <div id="editOrgWrapper"></div>
+    <!--</editor-fold>-->
 </div>
 
 {{--Organization Modal --}}
@@ -88,6 +92,10 @@
 </div>
 <script>
     $('.btnAttendance').click(function () {});
+
+
 </script>
+<!-- Admin ajax -->
+<script src="/adminTheme/js/admin.js"></script>
 
 @endsection
