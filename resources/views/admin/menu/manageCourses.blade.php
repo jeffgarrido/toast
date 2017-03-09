@@ -35,7 +35,7 @@
                             <th>Units</th>
                             <th>Description</th>
                             <th>Terms</th>
-                            <th>Actions</th>
+                            <th class="th-fit">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -49,7 +49,7 @@
                                 <td>{{$course->Units}}</td>
                                 <td>{{$course->Description}}</td>
                                 <td>{{$course->Terms}}</td>
-                                <td>
+                                <td class="td-fit">
                                     {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
                                         <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editCourseDetails({{ $course->Course_Id }})">
                                             <span class="fa fa-pencil" aria-hidden="true"></span> Edit

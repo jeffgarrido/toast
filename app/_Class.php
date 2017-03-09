@@ -21,11 +21,11 @@ class _Class extends Model
     }
 
     public function section() {
-        return $this->belongsTo(Section::class, 'Section_Id');
+        return $this->belongsTo(Section::class, 'Section');
     }
 
     public function students() {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class, 'class_student', 'Class_Id');
     }
 
     public function requirements() {

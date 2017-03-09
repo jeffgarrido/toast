@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\_Class;
+use App\Course;
+use App\Professor;
+use App\Section;
+use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
@@ -73,7 +77,13 @@ class ClassController extends Controller
     public function edit($id)
     {
         $class = _Class::find($id);
-        return view('admin.edit.editClass', compact('class'));
+        $class->load('students');
+        $courses = Course::all();
+        $professors = Professor::all();
+        $students = Student::all();
+        $sections = Section::all();
+
+        return view('admin.edit.editClass', compact('class', 'courses', 'professors', 'students', 'sections'));
     }
 
     /**
@@ -85,7 +95,15 @@ class ClassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $class = _Class::find($id);
+        $class->Course_Id = $request->input('course');
+        $class->Professor_Id = $request->input('professor');
+        $class->Section = $request->input('section');
+        $class->update();
+
+        $class->students()->sync($request->input('studentList', []));
+
+        return back();
     }
 
     /**
