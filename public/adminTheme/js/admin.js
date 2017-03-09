@@ -59,6 +59,32 @@ function editProfessorDetails(id){
     return false;
 }
 
+function editStudentDetails(id){
+    var xmlHttp = getXmlInstance();
+    if (!xmlHttp) {
+        alert("Error. Cant create xml object!");
+    }
+    //--end
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "students/" + id + "/edit", true);
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+                document.getElementById("editStudentWrapper").innerHTML = this.responseText;
+                $('#editStudentWrapper').ready(function() {
+                    $('#editStudentModal').modal();
+                });
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+
 function editOrganizationDetails(id){
     //creating xmlHttpRequest object
     var xmlHttp = getXmlInstance();

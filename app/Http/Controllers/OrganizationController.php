@@ -86,7 +86,6 @@ class OrganizationController extends Controller
             'Name: '.$organization->Organization_Name.                     '\n'.
             'Description: '.$organization->Description.  '\n'
         );
-
         return redirect('/organization');
     }
 
