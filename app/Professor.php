@@ -25,7 +25,7 @@ class Professor extends Model
     public function delete() {
         $account = $this->account()->get()->first();
         $account != null ? $account->delete(): '';
-        $this->courses()->sync([]);
+        //$this->courses()->sync([]);
         foreach($this->organizations()->get() as $organization) {
             $organization->update(['Adviser_Id' => null]);
         }

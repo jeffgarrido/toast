@@ -88,6 +88,35 @@ function editOrganizationDetails(id){
     return false;
 }
 
+function editSectionDetails(id){
+    //creating xmlHttpRequest object
+    var xmlHttp = getXmlInstance();
+
+    if (!xmlHttp) {
+        alert("Error. Cant create xml object!");
+    }
+    //--end
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "/sections/" + id + "/edit", true);
+
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+                document.getElementById("editSectionWrapper").innerHTML = this.responseText;
+                $('#editSectionWrapper').ready(function() {
+                    $('#editSectionModal').modal();
+                });
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+
 $('.form-delete').submit(function() {
     return confirm('Are you sure to delete record?');
 });
