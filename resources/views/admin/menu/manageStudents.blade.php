@@ -2,7 +2,7 @@
 
 @section('body')
 
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="margin-top: -5ch">
 
         <div class="container-fluid">
 
@@ -161,9 +161,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="Email" class="col-lg-4 control-label" >Email</label>
+                                <label for="PersonalEmail" class="col-lg-4 control-label" >Email</label>
                                 <div class="col-lg-7">
-                                    <input class="form-control input-md" id="Email" name="Email" placeholder="Personal Email" type="email" required/>
+                                    <input class="form-control input-md" id="PersonalEmail" name="PersonalEmail" placeholder="Personal Email" type="email" required/>
                                     <span class="help-block">Note: Used for password reset.</span>
                                 </div>
                             </div>

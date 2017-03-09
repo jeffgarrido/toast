@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AuditLog;
 use App\Event;
 use App\Organization;
 use App\Student;
@@ -40,19 +41,33 @@ class StudentController extends Controller
      */
     public function create(Request $request)
     {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $student = new Student();
+        $student->StudentNumber = $request->input('StudentNumber');
         $student->FirstName = $request->input('FirstName');
         $student->MiddleName = $request->input('MiddleName', '');
         $student->LastName = $request->input('LastName');
         $student->Phone = $request->input('Phone');
-        $student->Email = $request->input('Email');
+        $student->PersonalEmail = $request->input('PersonalEmail');
         $student->Birthday = $request->input('Birthday');
+        $student->AcademicStatus = $request->input('AcademicStatus');
 
+//        dd($student);
 //        dd($request->input('Email'));
 
         $user = new User();
-        $user->name = $student->Lastname . ', ' . $student->FirstName . ' ' . $student->Middlename;
-        $user->email = $student->Email;
+        $user->name = $student->LastName . ', ' . $student->FirstName . ' ' . $student->MiddleName;
+        $user->email = $student->PersonalEmail;
         $user->password = bcrypt($student->birthday);
         $user->Access_Level = 'Professor';
         $user->api_token = str_random(60);
@@ -62,7 +77,9 @@ class StudentController extends Controller
         $user->student()->save($student);
 
         $this->createLog(
-            'Add Professor',
+            'Add Student',
+            'Student Number: '.$request->input('StudentNumber').  '\n'.
+            'Academic Status: '.$request->input('AcademicStatus').  '\n'.
             'Name: '.$request->input('FirstName').' '.$request->input('MiddleName').' '.$request->input('LastName').                     '\n'.
             'Birthday: '.$request->input('Birthday').  '\n'.
             'Phone: '.$request->input('Phone').  '\n'.
@@ -80,17 +97,6 @@ class StudentController extends Controller
         );
 
         return back();
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -112,7 +118,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::find($id);
+        return view('admin.edit.editStudent', compact('student'));
     }
 
     /**
@@ -124,7 +131,27 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+//        dd($request->AcademicStatus);
+
+        $student = Student::find($id);
+
+//        dd($student->AcademicStatus);
+        $student->AcademicStatus = $request->input('AcademicStatus');
+        $student->update($request->all());
+        $user = $student->user()->first();
+        $user->update(['name' => $student->LastName . ', ' . $student->FirstName . ' ' . $student->MiddleName]);
+
+        $this->createLog(
+            'Edit Student',
+            'Student Number: '.$request->input('StudentNumber').  '\n'.
+            'Academic Status: '.$request->input('AcademicStatus').  '\n'.
+            'Name: '.$request->input('FirstName').' '.$request->input('MiddleName').' '.$request->input('LastName').                     '\n'.
+            'Birthday: '.$request->input('Birthday').  '\n'.
+            'Phone: '.$request->input('Phone').  '\n'.
+            'Email: '.$request->input('PersonalEmail').  '\n'
+        );
+
+        return redirect('/students');
     }
 
     /**
@@ -135,7 +162,25 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        $acc = $student->Account_Id;
+        $user = User::find($acc);
+
+
+        $this->createLog(
+            'Add Student',
+            'Student Number: '.$student->StudentNumber.  '\n'.
+            'Academic Status: '.$student->AcademicStatus.  '\n'.
+            'Name: '.$student->FirstName.' '.$student->MiddleName.' '.$student->LastName.                  '\n'.
+            'Birthday: '.$student->Birthday.  '\n'.
+            'Phone: '.$student->Phone.  '\n'.
+            'Email: '.$student->PersonalEmail.  '\n'
+        );
+
+        $student->delete();
+        $user->delete();
+
+        return back();
     }
 
     public function showStudentPage(){
@@ -160,5 +205,15 @@ class StudentController extends Controller
 
 
         return view('studentpages.orgpage', compact('organizations', 'events', 'orgs','students'));
+    }
+
+    private function createLog($action, $description = ""){
+        $log = new AuditLog();
+
+        $log->Account_Id = Auth::user()->id;
+        $log->Action = $action;
+        $log->Description = $description;
+
+        $log->save();
     }
 }
