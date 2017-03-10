@@ -6,7 +6,8 @@
 
         <div class="container-fluid">
 
-            <!-- Page Heading -->
+
+            <!--<editor-fold desc="Page Header">-->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
@@ -21,11 +22,12 @@
                         </li>
                     </ol>
                 </div>
-            </div><!-- row -->
+            </div>
+            <!--</editor-fold>-->
 
             <div class="row">
                 <div class="col-lg-12">
-                    <table id="CourseTable" class="table table-stripe table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
+                    <table id="CourseTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th class="hidden">Id</th>
@@ -41,24 +43,26 @@
                         <tbody>
                         <?php $count = 1;?>
                         @foreach($courses as $course)
-                            <tr>
-                                <td class="hidden">{{$course->Course_Id}}</td>
-                                <td>{{$count++}}</td>
-                                <td>{{$course->Code}}</td>
-                                <td>{{$course->Title}}</td>
-                                <td>{{$course->Units}}</td>
-                                <td>{{$course->Description}}</td>
-                                <td>{{$course->Terms}}</td>
-                                <td class="td-fit">
-                                    {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
-                                        <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editCourseDetails({{ $course->Course_Id }})">
-                                            <span class="fa fa-pencil" aria-hidden="true"></span> Edit
-                                        </button>
-                                    <button type="submit" class="btn btn-danger" aria-hidden="true">
-                                        <span class="fa fa-remove"></span> Delete
-                                    </button>
-                                    {{ Form::close() }}
-                                </td>
+                            <tr class="record-details" data-href="/courses/{{ $course->Course_Id }}">
+
+                                    <td class="hidden">{{$course->Course_Id}}</td>
+                                    <td>{{$count++}}</td>
+                                    <td>{{$course->Code}}</td>
+                                    <td>{{$course->Title}}</td>
+                                    <td>{{$course->Units}}</td>
+                                    <td>{{$course->Description}}</td>
+                                    <td>{{$course->Terms}}</td>
+                                    <td class="td-fit">
+                                        {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
+                                            <a href="/courses/{{ $course->Course_Id }}/edit" class="btn btn-warning" aria-hidden="true">
+                                                <span class="fa fa-pencil" aria-hidden="true"></span> Edit
+                                            </a>
+                                            <button type="submit" class="btn btn-danger" aria-hidden="true">
+                                                <span class="fa fa-remove"></span> Delete
+                                            </button>
+                                        {{ Form::close() }}
+                                    </td>
+
                             </tr>
                         @endforeach
                         </tbody>
@@ -67,14 +71,17 @@
                     <script>
                         $(document).ready(function() {
                             $('#CourseTable').DataTable();
+                            $('.record-details').click(function() {
+                                window.location = $(this).data('href');
+                            });
                         } );
                     </script>
                 </div>
-            </div><!-- Professor table row -->
+            </div>
 
-            <button class="btn btn-success" data-toggle="modal" data-target="#addCourse">
+            <a href="/courses/create" class="btn btn-success">
                 <i class="fa fa-user-plus" aria-hidden="true"></i> Add Course
-            </button>
+            </a>
         </div><!-- container fluid -->
 
         <!--<editor-fold desc="Modal for adding courses">-->

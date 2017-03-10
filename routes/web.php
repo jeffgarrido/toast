@@ -50,7 +50,7 @@ Route::group(['middleware' => ['web']], function(){
     //</editor-fold>
 
     //<editor-fold desc="<!-- CourseController Routes -->">
-    Route::resource('courses', 'CourseController', ['except' => ['create']]);
+    Route::resource('courses', 'CourseController');
     //</editor-fold>
 
     //<editor-fold desc="<!-- ClassController Routes -->">

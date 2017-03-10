@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Professor;
+use App\Section;
+use App\StudentOutcome;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
@@ -38,7 +41,11 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $professors = Professor::all();
+        $outcomes = StudentOutcome::all();
+        $sections = Section::all();
+
+        return view('admin.create.createCourse', compact('professors', 'outcomes', 'sections'));
     }
 
     /**
@@ -49,7 +56,21 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course = new Course();
+
+        $course->Code = $request->input('Code');
+        $course->Title = $request->input('Title');
+        $course->Units = $request->input('Units');
+        $course->Description = $request->input('Description');
+        $course->Terms = $request->input('Terms', 2);
+
+        $course->save();
+
+        $course->professors()->sync($request->input('professorsList', []));
+
+        $course->outcomes()->sync($request->input('outcomesList', []));
+
+        return redirect('/courses/' . $course->Course_Id);
     }
 
     /**
@@ -60,7 +81,10 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::find($id);
+        $professors = $course->professors()->get();
+
+        return view('admin.show.showCourse', compact('course', 'professors'));
     }
 
     /**
@@ -71,7 +95,11 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $course = Course::find($id);
+        $outcomes = StudentOutcome::all();
+        $professors = Professor::all();
+
+        return view('admin.edit.editCourse', compact('course', 'outcomes', 'professors'));
     }
 
     /**

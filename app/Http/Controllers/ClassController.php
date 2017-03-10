@@ -54,7 +54,7 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
