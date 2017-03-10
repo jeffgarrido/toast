@@ -49,7 +49,7 @@
                         <a href="/students"><i class="fa fa-fw fa-child"></i> Students</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> User Accounts</a>
+                        <a href="/users"><i class="fa fa-fw fa-user"></i> User Accounts</a>
                     </li>
                 </ul>
             </li>

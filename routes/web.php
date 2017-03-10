@@ -60,6 +60,25 @@ Route::group(['middleware' => ['web']], function(){
     //<editor-fold desc="<!-- SectionController Routes -->">
     Route::resource('sections', 'SectionController');
     //</editor-fold>
+    //<editor-fold desc="<!-- UserContoller Routes -->">
+    Route::resource('users', 'UserController', ['except' => ['create']]);
+    //</editor-fold>
+
+    Route::get('/users/{user}/resetpassword', 'UserController@resetPass');
+    Route::post('/users/{user}/reset', 'UserController@reset');
+
+    Route::get('courses', 'CourseController@showCourses');
+    //<editor-fold desc="<!-- CourseController Routes -->">
+    Route::resource('courses', 'CourseController');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- ClassController Routes -->">
+    Route::resource('classes', 'ClassController');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- SectionController Routes -->">
+    Route::resource('sections', 'SectionController');
+    //</editor-fold>
 
     Route::get('course_details/{course}', 'CourseController@getDetails');
 

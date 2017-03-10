@@ -28,7 +28,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <table id="StudentTable" class="table table-stripe table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
+                    <table id="StudentTable" class="table table-stripe table-condensed table-responsive table-bordered compact" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th class="hidden">Id</th>

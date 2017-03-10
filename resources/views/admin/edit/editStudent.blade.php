@@ -9,7 +9,7 @@
                 {{ Form::open(array('url' => '/students/' . $student->Student_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
                 <fieldset>
                     <div class="form-group">
-                        <label for="FirstName" class="col-md-4 control-label" >Student Number</label>
+                        <label for="StudentNumber" class="col-md-4 control-label" >Student Number</label>
                         <div class="col-lg-7">
                             <input class="form-control input-md" id="StudentNumber" name="StudentNumber" value="{{$student->StudentNumber}}" placeholder="ex. 2017010203" type="number" required/>
                         </div>
