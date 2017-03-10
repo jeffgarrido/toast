@@ -57,6 +57,17 @@ Route::group(['middleware' => ['web']], function(){
     Route::post('/users/{user}/reset', 'UserController@reset');
 
     Route::get('courses', 'CourseController@showCourses');
+    //<editor-fold desc="<!-- CourseController Routes -->">
+    Route::resource('courses', 'CourseController');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- ClassController Routes -->">
+    Route::resource('classes', 'ClassController');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- SectionController Routes -->">
+    Route::resource('sections', 'SectionController');
+    //</editor-fold>
 
     Route::get('course_details/{course}', 'CourseController@getDetails');
 
@@ -78,7 +89,7 @@ Route::group(['middleware' => ['web']], function(){
 
 //    Route::get('students', 'AdminController@showStudentPage');
 
-    Route::get('sections', 'AdminController@showSectionsPage');
+//    Route::get('sections', 'AdminController@showSectionsPage');
 
     Route::post('add_section', 'AdminController@addSection');
 

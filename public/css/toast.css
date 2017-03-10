@@ -237,3 +237,9 @@
 .top-pad {
     padding-top: 10px;
 }
+
+.td-fit,
+.th-fit {
+    white-space: nowrap;
+    width: 1%;
+}

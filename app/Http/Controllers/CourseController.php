@@ -2,14 +2,129 @@
 
 namespace App\Http\Controllers;
 
-use App\CourseRequirement;
-use App\Professor;
-use Illuminate\Http\Request;
 use App\Course;
-use App\AuditLog;
+use App\Professor;
+use App\Section;
+use App\StudentOutcome;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 class CourseController extends Controller
 {
+    private $nav = 'navManageCourses';
+
+    //<editor-fold desc="Construct">
+    function __construct()
+    {
+        $this->middleware('admin');
+
+        View::share('nav', $this->nav);
+    }
+    //</editor-fold>
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $courses = Course::all();
+        return view('admin.menu.manageCourses', compact('courses'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $professors = Professor::all();
+        $outcomes = StudentOutcome::all();
+        $sections = Section::all();
+
+        return view('admin.create.createCourse', compact('professors', 'outcomes', 'sections'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $course = new Course();
+
+        $course->Code = $request->input('Code');
+        $course->Title = $request->input('Title');
+        $course->Units = $request->input('Units');
+        $course->Description = $request->input('Description');
+        $course->Terms = $request->input('Terms', 2);
+
+        $course->save();
+
+        $course->professors()->sync($request->input('professorsList', []));
+
+        $course->outcomes()->sync($request->input('outcomesList', []));
+
+        return redirect('/courses/' . $course->Course_Id);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $course = Course::find($id);
+        $professors = $course->professors()->get();
+
+        return view('admin.show.showCourse', compact('course', 'professors'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $course = Course::find($id);
+        $outcomes = StudentOutcome::all();
+        $professors = Professor::all();
+
+        return view('admin.edit.editCourse', compact('course', 'outcomes', 'professors'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
     public function showCourses(){
         $courses = Course::all();
         return view('coursepages.courselist', compact('courses'));

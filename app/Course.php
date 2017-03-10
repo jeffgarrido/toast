@@ -13,6 +13,10 @@ class Course extends Model
     }
 
     public function professors() {
-        return $this->belongsToMany(Professor::class, 'classes');
+        return $this->belongsToMany(Professor::class, 'classes')->withTimestamps();
+    }
+
+    public function outcomes() {
+        return $this->belongsToMany(StudentOutcome::class, 'course_outcome', 'Course_Id', 'Outcome_Id')->withTimestamps();
     }
 }
