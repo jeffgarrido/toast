@@ -59,6 +59,64 @@ function editProfessorDetails(id){
     return false;
 }
 
+function editUserDetails(id){
+    //creating xmlHttpRequest object
+    var xmlHttp = getXmlInstance();
+
+    if (!xmlHttp) {
+        alert("Error. Cant create xml object!");
+    }
+    //--end
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "/users/" + id + "/edit", true);
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+                document.getElementById("editUserWrapper").innerHTML = this.responseText;
+                $('#editUserWrapper').ready(function() {
+                    $('#editUserModal').modal();
+
+                });
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+
+function resetUserPassword(id){
+    //creating xmlHttpRequest object
+    var xmlHttp = getXmlInstance();
+
+    if (!xmlHttp) {
+        alert("Error. Cant create xml object!");
+    }
+    //--end
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "/users/" + id + "/resetpassword", true);
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+                document.getElementById("editUserWrapper").innerHTML = this.responseText;
+                $('#editUserWrapper').ready(function() {
+                    $('#resetPasswordModal').modal();
+
+                });
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+
 function editStudentDetails(id){
     var xmlHttp = getXmlInstance();
     if (!xmlHttp) {
@@ -113,6 +171,8 @@ function editOrganizationDetails(id){
 
     return false;
 }
+
+
 
 $('.form-delete').submit(function() {
     return confirm('Are you sure to delete record?');
