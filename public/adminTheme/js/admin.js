@@ -202,7 +202,6 @@ function editSectionDetails(id){
 }
 
 
-
 $('.form-delete').submit(function() {
     return confirm('Are you sure to delete record?');
 });
