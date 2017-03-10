@@ -17,6 +17,9 @@ class CreateStudentOutcomesTable extends Migration
             $table->increments('Outcome_Id');
             $table->string('Outcome_Code', 20);
             $table->text('Description');
+            $table->text('P1_Description');
+            $table->text('P2_Description');
+            $table->text('P3_Description');
             $table->timestamps();
         });
     }
