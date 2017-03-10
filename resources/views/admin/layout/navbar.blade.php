@@ -54,18 +54,13 @@
                 </ul>
             </li>
             <li id="navManageCourses">
-                <a href="/courses"><i class="fa fa-fw fa-book"></i> Manage Courses</a>
+                <a href="/courses"><i class="fa fa-fw fa-book"></i> Courses</a>
             </li>
-            <li id="navManageClasses">
-                <a href="javascript:;" data-toggle="collapse" data-target="#classesSubMenu"><i class="fa fa-fw fa-edit"></i> Manage Classes <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="classesSubMenu" class="collapse">
-                    <li>
-                        <a href="/classes"><i class="fa fa-fw fa-edit"></i> Classes</a>
-                    </li>
-                    <li>
-                        <a href="/sections"><i class="fa fa-fw fa-server"></i> Sections</a>
-                    </li>
-                </ul>
+            <li>
+                <a href="/classes"><i class="fa fa-fw fa-edit"></i> Classes</a>
+            </li>
+            <li>
+                <a href="/sections"><i class="fa fa-fw fa-server"></i> Sections</a>
             </li>
             <li>
                 <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>

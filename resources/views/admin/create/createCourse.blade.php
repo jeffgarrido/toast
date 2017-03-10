@@ -17,7 +17,7 @@
                         <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
                     </li>
                     <li>
-                        <i class="fa fa-book"></i> <a href="/courses">Manage Courses</a>
+                        <i class="fa fa-book"></i> <a href="/courses"> Courses</a>
                     </li>
                     <li class="active">
                         <i class="fa fa-book"></i> Add Course
@@ -124,7 +124,6 @@
                 <hr />
                 <div class="form-group">
                     <div class="col-lg-12 text-right">
-                        <a href="/courses" class="btn btn-info" data-dismiss="modal">Back</a>
                         <button type="reset" class="btn btn-info">Clear Form</button>
                         <button type="submit" class="btn btn-primary">Create Course</button>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\_Class;
 use App\Course;
 use App\Professor;
 use App\Section;
@@ -82,9 +83,11 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::find($id);
+
+        $class = _Class::find($course->professors->first()->pivot->Class_Id);
         $professors = $course->professors()->get();
 
-        return view('admin.show.showCourse', compact('course', 'professors'));
+        return view('admin.show.showCourse', compact('course', 'professors', 'class'));
     }
 
     /**
@@ -95,7 +98,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $course = Course::find($id);
+        $course = Course::find($id)->load('outcomes')->load('professors');
         $outcomes = StudentOutcome::all();
         $professors = Professor::all();
 
@@ -111,7 +114,17 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $course = Course::find($id);
+        $course->Code = $request->input('Code', '');
+        $course->Title = $request->input('Title', '');
+        $course->Units = $request->input('Units', 0);
+        $course->Description = $request->input('Description', '');
+        $course->update();
+
+        $course->outcomes()->sync($request->input('outcomesList', []));
+        $course->professors()->sync($request->input('professorsList', []));
+
+        return redirect('/courses/' . $course->Course_Id);
     }
 
     /**
@@ -122,7 +135,10 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = Course::find($id);
+        $course->delete();
+
+        return back();
     }
 
     public function showCourses(){

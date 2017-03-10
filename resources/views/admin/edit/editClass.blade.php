@@ -8,20 +8,20 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    <b class="fa fa-lg fa-edit"></b> {{ $class->course->Code }}: {{ $class->course->Title }}
+                    <b class="fa fa-lg fa-edit"></b> Edit Class
                 </h1>
                 <ol class="breadcrumb">
                     <li>
                         <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
                     </li>
                     <li>
-                        <i class="fa fa-edit"></i> Manage Classes
+                        <i class="fa fa-edit"></i> <a href="/classes"> Classes</a>
                     </li>
                     <li>
-                        <i class="fa fa-edit"></i> <a href="/classes">All Classes</a>
+                        <i class="fa fa-edit"></i> <a href="/classes/{{ $class->Class_Id}}">{{ $class->course->Code }}</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-edit"></i> {{ $class->course->Code }}
+                        <i class="fa fa-edit"></i> Edit
                     </li>
                 </ol>
             </div>
@@ -50,7 +50,7 @@
                         <select class="form-control" id="professor" name="professor" required>
                             @foreach($professors as $professor)
                                 <option value="{{$professor->Professor_Id}}" {{ ($class->professor == $professor) ? 'selected="selected"' : '' }}>
-                                    {{ $professor->LastName}}, {{ $professor->FirtName}} {{ $professor->MiddleName }}
+                                    {{ $professor->LastName}}, {{ $professor->FirstName}} {{ $professor->MiddleName }}
                                 </option>
                             @endforeach
                         </select>
@@ -77,7 +77,7 @@
                     <select id="studentList" multiple="multiple" name="studentList[]">
                         @foreach($students as $student)
                             <option value="{{ $student->Student_Id }}" {{ $class->students->contains($student)? 'selected="selected"' : '' }}>
-                                {{ $student->LastName. ", " . $student->FirstName . " " . $student->MiddleName}}
+                                {{ $student->StudentNumber }}: {{ $student->LastName. ", " . $student->FirstName . " " . $student->MiddleName}}
                             </option>
                         @endforeach
                     </select>
@@ -91,15 +91,18 @@
                         selectedListLabel: 'Selected Student/s',
                         preserveSelectionOnMove: false,
                         moveOnSelect: true,
+                        selectorMinimalHeight: 200,
                     });
                 });
             </script>
 
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2 text-right">
-                    <a href="/classes" type="button" class="btn btn-info" data-dismiss="modal">Back</a>
-                    <button type="reset" class="btn btn-info">Clear Form</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+            <div class="col-lg-12">
+                <hr/>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2 text-right">
+                        <button type="reset" class="btn btn-info">Clear Form</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </fieldset>

@@ -11,14 +11,17 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        <b class="fa fa-lg fa-book"></b> Manage Courses
+                        <b class="fa fa-lg fa-book"></b> Courses
+                        <a href="/courses/create" class="btn btn-lg btn-success pull-right">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Add Course
+                        </a>
                     </h1>
                     <ol class="breadcrumb">
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-book"></i> Manage Courses
+                            <i class="fa fa-book"></i> Courses
                         </li>
                     </ol>
                 </div>
@@ -53,11 +56,11 @@
                                     <td>{{$course->Description}}</td>
                                     <td>{{$course->Terms}}</td>
                                     <td class="td-fit">
-                                        {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
+                                        {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
                                             <a href="/courses/{{ $course->Course_Id }}/edit" class="btn btn-warning" aria-hidden="true">
                                                 <span class="fa fa-pencil" aria-hidden="true"></span> Edit
                                             </a>
-                                            <button type="submit" class="btn btn-danger" aria-hidden="true">
+                                            <button type="submit" class="btn btn-danger button-delete" aria-hidden="true">
                                                 <span class="fa fa-remove"></span> Delete
                                             </button>
                                         {{ Form::close() }}
@@ -71,17 +74,10 @@
                     <script>
                         $(document).ready(function() {
                             $('#CourseTable').DataTable();
-                            $('.record-details').click(function() {
-                                window.location = $(this).data('href');
-                            });
                         } );
                     </script>
                 </div>
             </div>
-
-            <a href="/courses/create" class="btn btn-success">
-                <i class="fa fa-user-plus" aria-hidden="true"></i> Add Course
-            </a>
         </div><!-- container fluid -->
 
         <!--<editor-fold desc="Modal for adding courses">-->

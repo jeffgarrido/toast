@@ -143,6 +143,16 @@ function editSectionDetails(id){
     return false;
 }
 
-$('.form-delete').submit(function() {
-    return confirm('Are you sure to delete record?');
-});
+$(document).ready(function() {
+
+    $('.record-details').click(function(e) {
+        if($(e.target).hasClass('button-delete')) {
+            $('.form-delete').submit(function() {
+                return confirm('Are you sure to delete record?');
+            });
+        } else {
+            window.location = $(this).data('href');
+        }
+    });
+
+} );

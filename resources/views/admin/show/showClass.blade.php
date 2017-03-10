@@ -8,14 +8,14 @@
 
 
             <!--<editor-fold desc="Page Header">-->
+            <!--<editor-fold desc="Page Header">-->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        <b class="fa fa-lg fa-book"></b> {{ $course->Code }}: {{ $course->Title }}
-
+                        <b class="fa fa-lg fa-edit"></b> {{ $class->Code }}: {{ $class->Title }}
                         <div class="pull-right">
-                            {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
-                            <a href="/courses/{{ $course->Course_Id }}/edit" class="btn btn-lg btn-warning" aria-hidden="true">
+                            {{ Form::open(array('url' => '/classes/' . $class->Class_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
+                            <a href="/courses/{{ $class->Class_Id }}/edit" class="btn btn-lg btn-warning" aria-hidden="true">
                                 <span class="fa fa-pencil" aria-hidden="true"></span> Edit
                             </a>
                             <button type="submit" class="btn btn-lg btn-danger button-danger" aria-hidden="true">
@@ -29,10 +29,13 @@
                             <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
                         </li>
                         <li>
-                            <i class="fa fa-book"></i> <a href="/courses"> Courses</a>
+                            <i class="fa fa-edit"></i> <a href="/classes"> Classes</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-edit"></i> <a href="/classes/{{ $class->Class_Id}}">{{ $class->course->Code }}</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-book"></i> {{ $course->Code }}
+                            <i class="fa fa-edit"></i> Edit
                         </li>
                     </ol>
                 </div>
@@ -56,7 +59,7 @@
                         <?php $count = 1;?>
                         @foreach($professors as $professor)
                             <?php
-                                $class = App\_Class::find($professor->pivot->Class_Id);
+                            $class = App\_Class::find($professor->pivot->Class_Id);
                             ?>
                             <tr>
                                 <td class="hidden">{{$class->Class_Id}}</td>

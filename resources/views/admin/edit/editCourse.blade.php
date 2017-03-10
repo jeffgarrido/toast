@@ -17,7 +17,7 @@
                             <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
                         </li>
                         <li>
-                            <i class="fa fa-book"></i> <a href="/courses">Manage Courses</a>
+                            <i class="fa fa-book"></i> <a href="/courses"> Courses</a>
                         </li>
                         <li>
                             <i class="fa fa-book"></i> <a href="/courses/{{ $course->Course_Id }}">{{ $course->Code }}</a>
@@ -30,7 +30,7 @@
             </div>
             <!--</editor-fold>-->
 
-            {{ Form::open(array('url' => '/courses', 'method' => 'POST', 'class' => 'form-horizontal')) }}
+            {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
             <fieldset>
 
                 <!--<editor-fold desc="Course Details Form">-->
@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <select id="outcomesList" multiple="multiple" name="outcomesList[]">
                             @foreach($outcomes as $outcome)
-                                <option value="{{ $outcome->Outcome_Id}}">
+                                <option value="{{ $outcome->Outcome_Id}}" {{ $course->outcomes->contains($outcome)? 'selected="selected"' : '' }}>
                                     {{ $outcome->Outcome_Code }}
                                 </option>
                             @endforeach
@@ -100,9 +100,9 @@
                 <!--<editor-fold desc="Professors list and script">-->
                 <div class="col-lg-7">
                     <div class="form-group">
-                        <select id="professorsList" multiple="multiple" name="professorsList[]" required>
+                        <select id="professorsList" multiple="multiple" name="professorsList[]">
                             @foreach($professors as $professor)
-                                <option value="{{ $professor->Professor_Id }}">
+                                <option value="{{ $professor->Professor_Id }}" {{ $course->professors->contains($professor)? 'selected="selected"' : '' }}>
                                     {{ $professor->LastName. ", " . $professor->FirstName . " " . $professor->MiddleName}}
                                 </option>
                             @endforeach
@@ -127,7 +127,7 @@
                     <div class="form-group">
                         <div class="col-lg-12 text-right">
                             <button type="reset" class="btn btn-info">Clear Form</button>
-                            <button type="submit" class="btn btn-primary">Create Course</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </div>
                 </div>

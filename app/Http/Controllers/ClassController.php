@@ -43,7 +43,12 @@ class ClassController extends Controller
      */
     public function create()
     {
-        //
+        $courses = Course::all();
+        $professors = Professor::all();
+        $sections = Section::all();
+        $students = Student::all();
+
+        return view('admin.create.createClass', compact('courses', 'professors', 'sections', 'students'));
     }
 
     /**
@@ -54,7 +59,16 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        $class = new _Class();
 
+        $class->Course_Id = $request->input('course');
+        $class->Professor_Id = $request->input('professor');
+        $class->Section_Id = $request->input('section');
+        $class->save();
+
+        $class->students()->sync($request->input('studentsList', []));
+
+        return redirect('/classes/' . $class->Course_Id);
     }
 
     /**
@@ -65,7 +79,9 @@ class ClassController extends Controller
      */
     public function show($id)
     {
-        //
+        $class = _Class::find($id);
+
+        return view('admin.show.showClass', compact('class'));
     }
 
     /**
