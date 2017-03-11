@@ -236,13 +236,13 @@ function addEvent(id){
 $(document).ready(function() {
 
     $('.record-details').click(function(e) {
-        if($(e.target).hasClass('button-delete')) {
-            $('.form-delete').submit(function() {
-                return confirm('Are you sure to delete record?');
-            });
-        } else {
+        if(!$(e.target).hasClass('button-delete')) {
             window.location = $(this).data('href');
         }
+    });
+
+    $('.form-delete').submit(function() {
+        return confirm('Are you sure to delete record?');
     });
 
 } );

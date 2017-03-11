@@ -14,7 +14,7 @@
                         <b class="fa fa-lg fa-book"></b> {{ $course->Code }}: {{ $course->Title }}
 
                         <div class="pull-right">
-                            {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
+                            {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
                             <a href="/courses/{{ $course->Course_Id }}/edit" class="btn btn-lg btn-warning" aria-hidden="true">
                                 <span class="fa fa-pencil" aria-hidden="true"></span> Edit
                             </a>

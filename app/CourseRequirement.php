@@ -10,9 +10,9 @@ class CourseRequirement extends Model
 
     protected $table = 'course_requirements';
 
-    protected $hidden = ['Term'];
-
-    public function course(){
-        return $this->belongsTo(_Class::class, 'Class_Id');
+    public function _class() {
+        return $this->belongsTo(_Class::class);
     }
+
+
 }

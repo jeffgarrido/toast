@@ -80,8 +80,11 @@ class ClassController extends Controller
     public function show($id)
     {
         $class = _Class::find($id);
+        $students = $class->students()->get();
+        $professor = $class->professor;
+        $requirements = $class->requirements()->get();
 
-        return view('admin.show.showClass', compact('class'));
+        return view('admin.show.showClass', compact('class', 'students', 'professor'));
     }
 
     /**
@@ -119,7 +122,7 @@ class ClassController extends Controller
 
         $class->students()->sync($request->input('studentList', []));
 
-        return back();
+        return redirect('/classes/' . $class->Class_Id);
     }
 
     /**
@@ -130,6 +133,8 @@ class ClassController extends Controller
      */
     public function destroy($id)
     {
-        //
+        _Class::find($id)->delete();
+
+        return redirect('/classes');
     }
 }
