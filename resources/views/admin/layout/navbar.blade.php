@@ -8,7 +8,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">{{ config('app.name', 'TOAsT') }}</a>
+        <a class="navbar-brand" href="/">
+            <img id="app_logo" class="col-sm-1" src="/images/T_Logo.png"/>
+            <div class="pull-right" style="padding: 15px;">{{ config('app.name', 'TOAsT') }}</div>
+        </a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">

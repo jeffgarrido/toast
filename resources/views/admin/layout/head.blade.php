@@ -7,6 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="shortcut icon" type="images/x-icon" href="/images/TOAsT_Logo.jpg" />
+
     <title>{{ config('app.name', 'TOAsT') }}</title>
 
     <!-- jQuery library -->

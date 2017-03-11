@@ -53,8 +53,9 @@
                     <tr>
                         <th class="th-fit">Student Number</th>
                         <th>Name</th>
-                        <th></th>
-                        <th></th>
+                        @foreach($class->requirements() as $requirement)
+                            <th>$requirement->Type</th>
+                        @endforeach
                     </tr>
                     </thead>
                     <!--</editor-fold>-->
@@ -64,8 +65,9 @@
                         <tr class="record-details" data-href="/students/{{ $student->Student_Id }}">
                             <td class="td-fit">{{$student->StudentNumber}}</td>
                             <td>{{$student->LastName . ', ' . $student->FirstName . ' ' . $student->MiddleName}}</td>
-                            <td></td>
-                            <td></td>
+                            @foreach($class->requirements() as $requirement)
+                                <td></td>
+                            @endforeach
                         </tr>
                     @endforeach
                     </tbody>

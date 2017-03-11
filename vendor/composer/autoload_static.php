@@ -291,6 +291,7 @@ class ComposerStaticInit88d6170b807a87835d784446fcbaeadb
         'CreateClassStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_063325_create_class_student_table.php',
         'CreateClassesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_062632_create_classes_table.php',
         'CreateCourseOutcomeTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_17_155834_create_course_outcome_table.php',
+        'CreateCourseProfessorTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_11_154314_create_course_professor_table.php',
         'CreateCourseRequirementsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_070639_create_course_requirements_table.php',
         'CreateCourseSectionTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_050722_create_course_section_table.php',
         'CreateCourseStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_044201_create_course_student_table.php',

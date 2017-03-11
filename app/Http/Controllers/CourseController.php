@@ -83,11 +83,9 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::find($id);
-
-        $class = _Class::find($course->professors->first()->pivot->Class_Id);
         $professors = $course->professors()->get();
 
-        return view('admin.show.showCourse', compact('course', 'professors', 'class'));
+        return view('admin.show.showCourse', compact('course', 'professors'));
     }
 
     /**

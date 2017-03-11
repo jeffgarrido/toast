@@ -91,7 +91,10 @@ class ProfessorController extends Controller
      */
     public function show($id)
     {
-        return Professor::find($id);
+        $professor = Professor::find($id);
+        $courses = $professor->classes();
+
+        return view('admin.show.showProfessor', compact('professor'));
     }
 
     /**

@@ -54,7 +54,7 @@
                     <label for="Terms" class="col-lg-4 control-label">Number of Terms</label>
                     <div class="col-lg-7">
                         <select class="form-control" id="Terms" name="Terms" disabled required>
-                            <option selected="selected">2</option>
+                            <option value="2" selected="selected">2</option>
                             <option>3</option>
                             <option>4</option>
                         </select>

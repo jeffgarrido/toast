@@ -36,8 +36,7 @@
                     <tr>
                         <th>No.</th>
                         <th>Course</th>
-                        <th>Instructor</th>
-                        <th>Section</th>
+                        <th>Professor</th>
                         <th class="th-fit">Actions</th>
                     </tr>
                     </thead>

@@ -15,8 +15,10 @@ class CreateCourseRequirementsTable extends Migration
     {
         Schema::create('course_requirements', function (Blueprint $table) {
             $table->increments('Requirement_Id');
-            $table->unsignedInteger('Class_Id');
+            $table->unsignedInteger('Course_Id');
+            $table->unsignedInteger('Professor_Id');
             $table->string('Type', 100);
+            $table->double('Weight', 3,2)->default(0);
             $table->text('Description');
             $table->enum('Term', array(1,2,3,4));
             $table->timestamps();

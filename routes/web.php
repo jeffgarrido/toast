@@ -29,8 +29,12 @@ Route::group(['middleware' => ['web']], function(){
     Auth::routes();
     //</editor-fold>
 
+    //<editor-fold desc="<!-- BaseClassController Routes -->">
+    Route::get('/classes', 'BaseClassController@index');
+    //</editor-fold>
+
     //<editor-fold desc="<!-- ClassController Routes -->">
-    Route::resource('classes', 'ClassController');
+    Route::resource('class', 'ClassController');
     //</editor-fold>
 
     //<editor-fold desc="<!-- CourseController Routes -->">
@@ -54,6 +58,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/requirements/{class}/list', 'RequirementController@index');
 
     Route::get('/requirements/{class}/create', 'RequirementController@create');
+    Route::post('/requirements/{class}', 'RequirementController@store');
     //</editor-fold>
 
     //<editor-fold desc="<!-- SectionController Routes -->">
@@ -75,13 +80,9 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/users/{user}/resetpassword', 'UserController@resetPass');
     Route::post('/users/{user}/reset', 'UserController@reset');
 
-    Route::get('courses', 'CourseController@showCourses');
+//    Route::get('courses', 'CourseController@showCourses');
     //<editor-fold desc="<!-- CourseController Routes -->">
     Route::resource('courses', 'CourseController');
-    //</editor-fold>
-
-    //<editor-fold desc="<!-- ClassController Routes -->">
-    Route::resource('classes', 'ClassController');
     //</editor-fold>
 
     //<editor-fold desc="<!-- SectionController Routes -->">
