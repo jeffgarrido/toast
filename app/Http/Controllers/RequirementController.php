@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\_Class;
+use App\CourseRequirement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CourseRequirement extends Controller
+class RequirementController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(_Class $class)
     {
-        //
+        dd($class);
     }
 
     /**
@@ -22,9 +24,10 @@ class CourseRequirement extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(_Class $class)
     {
-        //
+
+        return view('admin.create.createRequirement', compact('class'));
     }
 
     /**

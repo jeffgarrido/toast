@@ -78,7 +78,7 @@
             </button>
         </div><!-- container fluid -->
 
-        <!--<editor-fold desc="Modal for adding professor">-->
+        <!--<editor-fold desc="Modal for adding student">-->
         <div class="modal fade" id="addStudent" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -182,7 +182,7 @@
         </div>
         <!--</editor-fold>-->
 
-        <!--<editor-fold desc="Modal for editing professor">-->
+        <!--<editor-fold desc="Modal for editing student">-->
         <div id="editStudentWrapper"></div>
         <!--</editor-fold>-->
 

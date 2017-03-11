@@ -243,3 +243,7 @@
     white-space: nowrap;
     width: 1%;
 }
+
+.bottom-pad {
+    padding-bottom: 10px;
+}

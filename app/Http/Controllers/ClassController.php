@@ -84,8 +84,6 @@ class ClassController extends Controller
         $professor = $class->professor;
         $requirements = $class->requirements()->get();
 
-        dd($requirements);
-
         return view('admin.show.showClass', compact('class', 'students', 'professor'));
     }
 

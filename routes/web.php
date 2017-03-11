@@ -50,7 +50,10 @@ Route::group(['middleware' => ['web']], function(){
     //</editor-fold>
 
     //<editor-fold desc="<!-- RequirementController Routes -->">
-    Route::resource('sections', 'SectionController');
+
+    Route::get('/requirements/{class}/list', 'RequirementController@index');
+
+    Route::get('/requirements/{class}/create', 'RequirementController@create');
     //</editor-fold>
 
     //<editor-fold desc="<!-- SectionController Routes -->">
