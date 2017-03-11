@@ -13,18 +13,6 @@
 
 Route::group(['middleware' => ['web']], function(){
 
-    //<editor-fold desc="<!-- Authentication Routes -->">
-    Auth::routes();
-    //</editor-fold>
-
-    //<editor-fold desc="<!-- HomeController Routes -->">
-    Route::get('/', 'HomeController@index');
-
-    Route::get('/home', 'HomeController@index');
-
-    Route::get('/dashboard', 'HomeController@index');
-    //</editor-fold>
-
     //<editor-fold desc="<!-- AdminController Routes -->">
     Route::get('/admin', 'AdminController@adminRedirect'); //tmp
 
@@ -37,29 +25,46 @@ Route::group(['middleware' => ['web']], function(){
     Route::post('populate_members/{organization}', 'AdminController@populateMemberList');
     //</editor-fold> -->
 
-    //<editor-fold desc="<!-- ProfessorController Routes -->">
-    Route::resource('professors', 'ProfessorController', ['except' => ['create']]);
-    //</editor-fold>
-
-    //<editor-fold desc="<!-- ProfessorController Routes -->">
-    Route::resource('organizations', 'OrganizationController', ['except' => ['create']]);
-    //</editor-fold>
-
-    //<editor-fold desc="<!-- StudentController Routes -->">
-    Route::resource('students', 'StudentController', ['except' => ['create']]);
-    //</editor-fold>
-
-    //<editor-fold desc="<!-- CourseController Routes -->">
-    Route::resource('courses', 'CourseController');
+    //<editor-fold desc="<!-- Authentication Routes -->">
+    Auth::routes();
     //</editor-fold>
 
     //<editor-fold desc="<!-- ClassController Routes -->">
     Route::resource('classes', 'ClassController');
     //</editor-fold>
 
+    //<editor-fold desc="<!-- CourseController Routes -->">
+    Route::resource('courses', 'CourseController');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- HomeController Routes -->">
+    Route::get('/', 'HomeController@index');
+
+    Route::get('/home', 'HomeController@index');
+
+    Route::get('/dashboard', 'HomeController@index');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- ProfessorController Routes -->">
+    Route::resource('professors', 'ProfessorController', ['except' => ['create']]);
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- RequirementController Routes -->">
+    Route::resource('sections', 'SectionController');
+    //</editor-fold>
+
     //<editor-fold desc="<!-- SectionController Routes -->">
     Route::resource('sections', 'SectionController');
     //</editor-fold>
+
+    //<editor-fold desc="<!-- StudentController Routes -->">
+    Route::resource('students', 'StudentController', ['except' => ['create']]);
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- ProfessorController Routes -->">
+    Route::resource('organizations', 'OrganizationController', ['except' => ['create']]);
+    //</editor-fold>
+
     //<editor-fold desc="<!-- UserContoller Routes -->">
     Route::resource('users', 'UserController', ['except' => ['create']]);
     //</editor-fold>

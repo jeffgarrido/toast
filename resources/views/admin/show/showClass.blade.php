@@ -47,11 +47,10 @@
                     <!--<editor-fold desc="Class Table Head">-->
                     <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Course</th>
-                        <th>Instructor</th>
-                        <th>Section</th>
-                        <th class="th-fit">Actions</th>
+                        <th>Student Number</th>
+                        <th>Name</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <!--</editor-fold>-->
