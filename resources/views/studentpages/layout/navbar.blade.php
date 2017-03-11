@@ -40,54 +40,12 @@
                 <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li id="navManageUsers">
-                <a href="javascript:;" data-toggle="collapse" data-target="#usersSubMenu"><i class="fa fa-fw fa-users"></i> Manage Users <i class="fa fa-fw fa-caret-down"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#usersSubMenu"><i class="fa fa-fw fa-users"></i> My Organization <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="usersSubMenu" class="collapse">
-                    <li>
-                        <a href="/professors"><i class="fa fa-fw fa-male"></i> Professors</a>
-                    </li>
-                    <li>
-                        <a href="/students"><i class="fa fa-fw fa-child"></i> Students</a>
-                    </li>
-                    <li>
-                        <a href="/users"><i class="fa fa-fw fa-user"></i> User Accounts</a>
-                    </li>
+                    @yield('organizations')
                 </ul>
             </li>
-            <li id="navManageCourses">
-                <a href="/courses"><i class="fa fa-fw fa-book"></i> Courses</a>
-            </li>
-            <li>
-                <a href="/classes"><i class="fa fa-fw fa-edit"></i> Classes</a>
-            </li>
-            <li>
-                <a href="/sections"><i class="fa fa-fw fa-server"></i> Sections</a>
-            </li>
-            <li>
-                <a href="/organizations"><i class="fa fa-fw fa-connectdevelop"></i> Organizations</a>
-            </li>
-            <li>
-                <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-            </li>
-            <li>
-                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-            </li>
-            <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="demo" class="collapse">
-                    <li>
-                        <a href="#">Dropdown Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Dropdown Item</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-            </li>
-            <li>
-                <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-            </li>
+            
         </ul>
     </div>
     <!-- /.navbar-collapse -->

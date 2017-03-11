@@ -15,7 +15,7 @@ class Student extends Model
     }
 
     public function organizations() {
-        return $this->belongsToMany(Organization::class)->withTimestamps();
+        return $this->belongsToMany(Organization::class)->withTimestamps()->withPivot('Position');
     }
 
     public function user(){

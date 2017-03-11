@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Professor;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
@@ -31,13 +32,21 @@ class HomeController extends Controller
         if(Auth::user()->Access_Level == 'Student') {
 
             $students = Student::where('Account_Id', Auth::user()->id)->first();
+
             $organizations = $students->organizations()->get();
 
-            return view('studentpages.dashboard', compact('user', 'organizations'));
+            return view('studentpages.menu.dashboard', compact('user', 'organizations'));
         }
         elseif (Auth::user()->Access_Level == 'Admin'){
             $nav = 'navAdminDashboard';
             return view('admin.menu.dashboard', compact('nav'));
+        }
+        elseif (Auth::user()->Access_Level == 'Professor'){
+            $user = User::find(Auth::user()->id);
+            $professor = $user->professor()->first();
+
+            return view('professor.menu.dashboard', compact('professor'));
+
         }
     }
 }

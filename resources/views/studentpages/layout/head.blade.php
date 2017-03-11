@@ -55,5 +55,5 @@
             'csrfToken' => csrf_token(),
         ]) }}
     </script>
-
+    @yield('try')
 </head>

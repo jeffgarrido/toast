@@ -201,6 +201,38 @@ function editSectionDetails(id){
     return false;
 }
 
+//<editor-fold desc="Staff Adding of Event">
+function addEvent(id){
+    //creating xmlHttpRequest object
+    var xmlHttp = getXmlInstance();
+
+    if (!xmlHttp) {
+        alert("Error. Cant create xml object!");
+    }
+    //--end
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "/events/" + id + "/edit", true);
+
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+                document.getElementById("addEventWrapper").innerHTML = this.responseText;
+                $('#addEventWrapper').ready(function() {
+                    $('#addEventModal').modal();
+                });
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+//</editor-fold>
+
+
 $(document).ready(function() {
 
     $('.record-details').click(function(e) {

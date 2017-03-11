@@ -60,14 +60,29 @@ Route::group(['middleware' => ['web']], function(){
     //<editor-fold desc="<!-- SectionController Routes -->">
     Route::resource('sections', 'SectionController');
     //</editor-fold>
+
     //<editor-fold desc="<!-- UserContoller Routes -->">
     Route::resource('users', 'UserController', ['except' => ['create']]);
-    //</editor-fold>
 
     Route::get('/users/{user}/resetpassword', 'UserController@resetPass');
     Route::post('/users/{user}/reset', 'UserController@reset');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- OrganizationController Routes -->">
+    Route::resource('organizations', 'OrganizationController', ['except' => ['create']]);
+
+    Route::get('organizations/add_member/{organization}', 'OrganizationController@studentList');
+
+    Route::post('populate_members/{organization}', 'OrganizationController@populateMemberList');
+    //</editor-fold>
+
+    //<editor-fold desc="EventController Routes">
+    Route::resource('events', 'EventController', ['except' => ['create']]);
+    //</editor-fold>
+
 
     Route::get('courses', 'CourseController@showCourses');
+
     //<editor-fold desc="<!-- CourseController Routes -->">
     Route::resource('courses', 'CourseController');
     //</editor-fold>
@@ -146,7 +161,7 @@ Route::group(['middleware' => ['web']], function(){
 
 
     //<editor-fold desc="<!-- Student Pages -->">
-    Route::get('dashboard', 'HomeController@index');
+    //Route::get('dashboard', 'HomeController@index');
     Route::get('my_organization', 'StudentController@showOrganization');
     Route::get('my_organization/{organization}', 'StudentController@showOrganization');
     //</editor-fold>
