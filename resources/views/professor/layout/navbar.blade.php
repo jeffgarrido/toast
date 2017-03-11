@@ -8,10 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">
-            <img id="app_logo" class="col-sm-1" src="/images/T_Logo.png"/>
-            <div class="pull-right" style="padding: 15px;">{{ config('app.name', 'TOAsT') }}</div>
-        </a>
+        <a class="navbar-brand" href="/">{{ config('app.name', 'TOAsT') }}</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
@@ -65,32 +62,7 @@
             <li>
                 <a href="/sections"><i class="fa fa-fw fa-server"></i> Sections</a>
             </li>
-            <li>
-                <a href="/organizations"><i class="fa fa-fw fa-connectdevelop"></i> Organizations</a>
-            </li>
-            <li>
-                <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-            </li>
-            <li>
-                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-            </li>
-            <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="demo" class="collapse">
-                    <li>
-                        <a href="#">Dropdown Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Dropdown Item</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-            </li>
-            <li>
-                <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-            </li>
+
         </ul>
     </div>
     <!-- /.navbar-collapse -->

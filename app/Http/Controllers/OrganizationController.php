@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AuditLog;
 use App\Organization;
+use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ class OrganizationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('auth');
     }
 
     /**
@@ -54,7 +55,26 @@ class OrganizationController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $uid = Auth::user()->id;
+        $org = Organization::find($id);
+
+        $students = $org->students;
+        $status = $org->students->where('Account_Id',$uid)->first()->pivot->Position;
+        $events = $org->events;
+        $count = 1;
+
+        $organizations = Student::where('Account_Id', $uid)->first()->organizations()->get();
+        if($status == 'Member') {
+
+            return view('studentpages.menu.manageOrganizations', compact('org', 'organizations','status','events'));
+        }
+        elseif ($status == 'Staff'){
+
+            return view('studentpages.menu.manageOrganizationsStaff', compact('organizations','org','status','events','students','count'));
+        }
+
+
     }
 
     /**
@@ -162,5 +182,21 @@ class OrganizationController extends Controller
         $log->Description = $description;
 
         $log->save();
+    }
+
+    public function studentList(Organization $organization){
+        $members = $organization->students()->get();
+        $students = Student::all();
+        $uid = Auth::user()->id;
+        $orgs = Student::where('Account_Id', $uid)->first()->organizations()->get();
+
+        return view('studentpages.edit.addMember',compact('organization','members','students','orgs'));
+    }
+
+    public function populateMemberList(Organization $organization, Request $request) {
+
+        $organization->students()->sync($request->input('memberList', []));
+
+        return back();
     }
 }
