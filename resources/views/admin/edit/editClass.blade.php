@@ -15,31 +15,35 @@
                         <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
                     </li>
                     <li>
-                        <i class="fa fa-edit"></i> <a href="/classes"> Classes</a>
+                        <i class="fa fa-edit"></i> <a href="/classes">Classes</a>
                     </li>
                     <li>
-                        <i class="fa fa-edit"></i> <a href="/classes/{{ $class->Class_Id}}">{{ $class->course->Code }}</a>
+                        <i class="fa fa-book"></i>  <a href="/courses/{{ $course->Course_Id }}">{{ $course->Code }}</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-male"></i> <a href="/classes/{{ $class->baseClass->BaseClass_Id }}">{{ $professor->LastName }}, {{ substr($professor->FirstName, 0,1) }}.</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-edit"></i> Edit
+                        <i class="fa fa-edit"></i> <a href="/class/{{ $class->Class_Id }}">{{ $section->Code }}</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-pencil"></i> Edit Class
                     </li>
                 </ol>
             </div>
         </div>
         <!--</editor-fold>-->
 
-        {{ Form::open(array('url' => '/classes/' .  $class->Class_Id , 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
+        {{ Form::open(array('url' => '/class/' .  $class->Class_Id , 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
         <fieldset>
             <div class="col-lg-5">
                 <div class="form-group">
                     <label for="Code" class="col-lg-4 control-label" >Change Course</label>
                     <div class="col-lg-7">
-                        <select class="form-control" id="course" name="course" required>
-                            @foreach($courses as $course)
-                                <option value="{{$course->Course_Id}}" {{ ($class->course == $course) ? 'selected="selected"' : '' }}>
+                        <select class="form-control" id="course" name="course" disabled required>
+                                <option value="{{$course->Course_Id}}">
                                     {{ $course->Code }}: {{ $course->Title }}
                                 </option>
-                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -47,12 +51,10 @@
                 <div class="form-group">
                     <label for="AcademicYearStart" class="col-lg-4 control-label" >Change Professor</label>
                     <div class="col-lg-7">
-                        <select class="form-control" id="professor" name="professor" required>
-                            @foreach($professors as $professor)
-                                <option value="{{$professor->Professor_Id}}" {{ ($class->professor == $professor) ? 'selected="selected"' : '' }}>
+                        <select class="form-control" id="professor" name="professor" disabled required>
+                                <option value="{{$professor->Professor_Id}}">
                                     {{ $professor->LastName}}, {{ $professor->FirstName}} {{ $professor->MiddleName }}
                                 </option>
-                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -60,13 +62,10 @@
                 <div class="form-group">
                     <label for="AcademicYearStart" class="col-lg-4 control-label" >Change Section</label>
                     <div class="col-lg-7">
-                        <select class="form-control" id="section" name="section" required>
-                            <option value="">None Specified</option>
-                            @foreach($sections as $section)
-                                <option value="{{$section->Section_Id}}" {{ ($class->section == $section) ? 'selected="selected"' : '' }}>
-                                    {{ $section->Code}} A.Y {{ $section->AcademicYearStart }} - {{ $section->AcademicYearEnd }}
-                                </option>
-                            @endforeach
+                        <select class="form-control" id="section" name="section" disabled required>
+                            <option value="{{$section->Section_Id}}">
+                                {{ $section->Code}} A.Y {{ $section->AcademicYearStart }} - {{ $section->AcademicYearEnd }}
+                            </option>
                         </select>
                     </div>
                 </div>

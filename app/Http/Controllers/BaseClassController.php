@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\_Class;
 use App\BaseClass;
 use App\Course;
 use App\Professor;
+use App\Section;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
@@ -42,7 +45,8 @@ class BaseClassController extends Controller
     {
         $courses = Course::all();
         $professors = Professor::all();
-        return view('admin.create.createBaseClass', compact('courses', 'professors'));
+        $sections = Section::all();
+        return view('admin.create.createBaseClass', compact('courses', 'professors', 'sections'));
     }
 
     /**
@@ -53,7 +57,17 @@ class BaseClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $baseClass = new BaseClass();
+
+        $baseClass->Course_Id = $request->input('CoursesList');
+        $baseClass->Professor_Id = $request->input('ProfessorsList');
+        $baseClass->save();
+
+        $baseClass->classes()->sync($request->input('sectionsList', []));
+
+
+
+        return view('admin.show.showBaseClass', compact('baseClass'));
     }
 
     /**
@@ -65,8 +79,9 @@ class BaseClassController extends Controller
     public function show($id)
     {
         $baseClass = BaseClass::find($id);
+        $classes = $baseClass->classes()->get()->load('Students');
 
-        return view('admin.show.showBaseClass', compact('baseClass'));
+        return view('admin.show.showBaseClass', compact('baseClass', 'classes'));
     }
 
     /**
@@ -77,9 +92,10 @@ class BaseClassController extends Controller
      */
     public function edit($id)
     {
-        $baseClass = BaseClass::find($id);
+        $baseClass = BaseClass::find($id)->load('classes');
+        $sections = Section::all();
 
-        return view('admin.edit.editBaseClass', compact('baseClass'));
+        return view('admin.edit.editBaseClass', compact('baseClass', 'sections'));
     }
 
     /**
@@ -91,7 +107,26 @@ class BaseClassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $baseClass = BaseClass::find($id);
+
+        $sections = $baseClass->classes()->whereNotIn('sections.Section_Id', $request->input('sectionsList', []))->get();
+
+        if($sections->count()) {
+            foreach ($sections as $section) {
+                $class = _Class::find($section->pivot->Class_Id);
+                $class->students()->detach();
+            }
+        }
+
+        $syncData = $baseClass->classes()->sync($request->input('sectionsList', []));
+
+        foreach ($syncData['attached'] as $sectionId) {
+            $students = Section::find($sectionId)->students()->where('AcademicStatus' , '=', 'Regular')->get();
+            $class = _Class::find($baseClass->classes()->where('sections.Section_Id', '=', $sectionId)->first()->pivot->Class_Id);
+            $class->students()->sync($students);
+        }
+
+        return redirect('/classes/' . $baseClass->BaseClass_Id);
     }
 
     /**
@@ -102,6 +137,9 @@ class BaseClassController extends Controller
      */
     public function destroy($id)
     {
-        dd('deleted');
+        $baseClass = BaseClass::find($id);
+        $baseClass->delete();
+
+        return redirect('/classes');
     }
 }

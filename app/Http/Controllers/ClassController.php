@@ -68,22 +68,24 @@ class ClassController extends Controller
 
         $class->students()->sync($request->input('studentsList', []));
 
-        return redirect('/classes/' . $class->Course_Id);
+        return redirect('/class/' . $class->Course_Id);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show($id)
     {
         $class = _Class::find($id);
+        $section = $class->section;
         $students = $class->students()->get();
-        $professor = $class->professor;
+        $course = $class->baseClass->course;
+        $professor = $class->baseClass->professor;
 
-        return view('admin.show.showClass', compact('class', 'students', 'professor'));
+        return view('admin.show.showClass', compact('class', 'students', 'professor', 'section', 'course'));
     }
 
     /**
@@ -94,14 +96,13 @@ class ClassController extends Controller
      */
     public function edit($id)
     {
-        $class = _Class::find($id);
-        $class->load('students');
-        $courses = Course::all();
-        $professors = Professor::all();
+        $class = _Class::find($id)->load('students');
+        $course = $class->baseClass->course;
+        $professor = $class->baseClass->professor;
+        $section = $class->section()->first();
         $students = Student::all();
-        $sections = Section::all();
 
-        return view('admin.edit.editClass', compact('class', 'courses', 'professors', 'students', 'sections'));
+        return view('admin.edit.editClass', compact('class', 'course', 'professor', 'students', 'section'));
     }
 
     /**
@@ -114,14 +115,10 @@ class ClassController extends Controller
     public function update(Request $request, $id)
     {
         $class = _Class::find($id);
-        $class->Course_Id = $request->input('course');
-        $class->Professor_Id = $request->input('professor');
-        $class->Section = $request->input('section');
-        $class->update();
 
         $class->students()->sync($request->input('studentList', []));
 
-        return redirect('/classes/' . $class->Class_Id);
+        return redirect('/class/' . $class->Class_Id);
     }
 
     /**

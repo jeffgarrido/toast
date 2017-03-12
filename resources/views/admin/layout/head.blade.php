@@ -35,6 +35,10 @@
     <script src="/duallistbox/src/jquery.bootstrap-duallistbox.js"></script>
     <link rel="stylesheet" type="text/css" href="/duallistbox/src/bootstrap-duallistbox.css"/>
 
+    <!-- Multiselect -->
+    <script src="/multiselect/dist/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" type="text/css" href="/multiselect/dist/css/bootstrap-multiselect.css"/>
+
     <!-- Admin ajax -->
     <script src="/adminTheme/js/admin.js"></script>
 

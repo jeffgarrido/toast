@@ -1,7 +1,6 @@
 @extends('admin.layout.adminLayout')
 
 @section('body')
-
     <div id="page-wrapper">
         <div class="container-fluid">
 
@@ -29,10 +28,10 @@
                             <i class="fa fa-edit"></i> <a href="/classes"> Classes</a>
                         </li>
                         <li>
-                            <i class="fa fa-edit"></i> <a href="/courses/{{ $baseClass->course->Course_Id }}">{{ $baseClass->course->Code }}</a>
+                            <i class="fa fa-book"></i> <a href="/courses/{{ $baseClass->course->Course_Id }}">{{ $baseClass->course->Code }}</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-edit"></i> {{ $baseClass->professor->LastName }}, {{ substr($baseClass->professor->FirstName, 0,1) }}.
+                            <i class="fa fa-male"></i> {{ $baseClass->professor->LastName }}, {{ substr($baseClass->professor->FirstName, 0,1) }}.
                         </li>
                     </ol>
                 </div>
@@ -41,27 +40,38 @@
 
             <div class="row">
                 <div class="col-lg-12 text-right bottom-pad">
-                    <a href="/requirements/{{$baseClass->BaseClass_Id}}/list" class="btn btn-success"><i class="fa fa-search"></i> View Requirement</a>
+                    <a href="/requirements/{{$baseClass->BaseClass_Id}}/list" class="btn btn-success"><i class="fa fa-search"></i> View Requirements</a>
                 </div>
                 <div class="col-lg-12">
                     <table id="ClassTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
 
                         <!--<editor-fold desc="Class Table Head">-->
                         <thead>
-                        <tr>
-                            <th>Section</th>
-                        </tr>
+                            <tr>
+                                <th class="th-fit">Section</th>
+                                <th>Academic Year</th>
+                                <th class="th-fit">Actions</th>
+                            </tr>
                         </thead>
                         <!--</editor-fold>-->
 
                         <tbody>
-                        @foreach($baseClass->classes() as $student)
-                            <tr class="record-details" data-href="/students/{{ $student->Student_Id }}">
-                                <td class="td-fit">{{$student->StudentNumber}}</td>
-                                <td>{{$student->LastName . ', ' . $student->FirstName . ' ' . $student->MiddleName}}</td>
-                                @foreach($class->requirements() as $requirement)
-                                    <td></td>
-                                @endforeach
+                        @foreach($classes as $class)
+                            <tr class="record-details" data-href="/class/{{ $class->pivot->Class_Id }}">
+                                <td class="td-fit">{{$class->Code}}</td>
+                                <td>{{$class->AcademicYearStart}} - {{$class->AcademicYearEnd}}</td>
+                                <td class="td-fit">
+                                    <div class="pull-right">
+                                        {{ Form::open(array('url' => '/class/' . $baseClass->BaseClass_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
+                                        <a href="/class/{{ $baseClass->BaseClass_Id }}/edit" class="btn btn-warning" aria-hidden="true">
+                                            <span class="fa fa-pencil" aria-hidden="true"></span> Edit
+                                        </a>
+                                        <button type="submit" class="btn btn-danger button-delete" aria-hidden="true">
+                                            <span class="fa fa-remove"></span> Delete
+                                        </button>
+                                        {{ Form::close() }}
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -71,8 +81,7 @@
                     <!--<editor-fold desc="Class Data Table Script">-->
                     <script>
                         $(document).ready(function() {
-                            $('#ClassTable').DataTable({
-                            });
+                            $('#ClassTable').DataTable();
                         } );
                     </script>
                     <!--</editor-fold>-->
