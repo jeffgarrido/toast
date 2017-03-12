@@ -13,11 +13,11 @@ class BaseClass extends Model
     protected $with = ['course', 'professor'];
 
     public function course() {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class, 'Course_Id');
     }
 
     public function professor() {
-        return $this->belongsTo(Professor::class);
+        return $this->belongsTo(Professor::class, 'Professor_Id');
     }
 
     public function classes() {

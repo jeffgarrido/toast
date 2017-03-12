@@ -43,16 +43,14 @@
                     <!--</editor-fold>-->
 
                     <tbody>
-                    <?php $count = 1;?>
-                    @foreach($classes as $class)
-                        <tr class="record-details" data-href="/classes/{{ $class->Class_Id }}">
-                            <td>{{$count++}}</td>
-                            <td>{{$class->course->Code}}: {{ $class->course->Title }}</td>
-                            <td>{{$class->professor->LastName . ', ' . $class->professor->FirstName . ' ' . $class->professor->MiddleName}}</td>
-                            <td>{{($class->section != null) ? $class->section->Code . ' ' . $class->section->AcademicYearStart . ' - ' . $class->section->AcademicYearEnd : ''}}</td>
+                    @foreach($baseClasses as $baseClass)
+                        <tr class="record-details" data-href="/classes/{{ $baseClass->BaseClass_Id }}">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{$baseClass->course->Code}}: {{ $baseClass->course->Title }}</td>
+                            <td>{{$baseClass->professor->LastName . ', ' . $baseClass->professor->FirstName . ' ' . $baseClass->professor->MiddleName}}</td>
                             <td class="td-fit">
-                                {{ Form::open(array('url' => '/classes/' . $class->Class_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
-                                <a href="/classes/{{ $class->Class_Id }}/edit" class="btn btn-warning" aria-hidden="true">
+                                {{ Form::open(array('url' => '/classes/' . $baseClass->BaseClass_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
+                                <a href="/classes/{{ $baseClass->BaseClass_Id }}/edit" class="btn btn-warning" aria-hidden="true">
                                     <span class="fa fa-pencil" aria-hidden="true"></span> Edit
                                 </a>
                                 <button type="submit" class="btn btn-danger button-delete" aria-hidden="true">
