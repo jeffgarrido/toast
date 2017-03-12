@@ -19,6 +19,6 @@ class Organization extends Model
     }
 
     public function professors(){
-        return $this->belongsTo(Professor::class);
+        return $this->belongsTo(Professor::class, 'Adviser_Id');
     }
 }

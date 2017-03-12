@@ -12,11 +12,11 @@
                     <tr>
                         <td>
                             <h4 class="purple-text">
-                                Are you sure to change password for {{$user->name}}?
+                                Are you sure to reset password for {{$user->name}}?
                             </h4>
                             <div class="pull-right">
                             <button type="submit" class="btn btn-lg btn-success">Yes</button>
-                            <button type="submit" class="btn btn-lg btn-danger" >No</button>
+                            <button type="button" data-dismiss="modal" class="btn btn-lg btn-danger" >No</button>
                             </div>
                         </td>
                     </tr>

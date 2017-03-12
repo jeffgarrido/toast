@@ -121,7 +121,7 @@ ul.alert-dropdown {
         margin-left: -225px;
         border: none;
         border-radius: 0;
-        overflow-y: auto;
+        overflow-y: hidden;
         background-color: #222;
         bottom: 0;
         overflow-x: hidden;

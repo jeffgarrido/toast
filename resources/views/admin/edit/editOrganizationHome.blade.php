@@ -1,10 +1,4 @@
-@extends('studentpages.layout.studentLayout')
-
-@section('try')
-<style>
-
-</style>
-@endsection
+@extends('admin.layout.adminLayout')
 
 @section('body')
     <div id="page-wrapper">
@@ -15,29 +9,20 @@
             <div class="row">
                 <div class="col-lg-12" style="margin-top: -3ch">
                     <h1 class="page-header">
-                        <i class="fa fa-fw fa-connectdevelop"></i>{{$org->Description}} <small>({{$status}})</small><button class="btn btn-success pull-right" onclick="success('All Saved.')">iron</button>
+                        <i class="fa fa-fw fa-connectdevelop"></i>{{$org->Description}} <small>({{$org->Organization_Name}})</small>
                     </h1>
-                    <script>
-                        window.success = function(msg) {
-                            var dom = '<div class="top-alert"><div class="alert alert-success alert-dismissible fade in " role="alert"><i class="glyphicon glyphicon-ok"></i> ' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div></div>';
-                            var jdom = $(dom);
-                            jdom.hide();
-                            $("body").append(jdom);
-                            jdom.fadeIn();
-                            setTimeout(function() {
-                                jdom.fadeOut(function() {
-                                    jdom.remove();
-                                });
-                            }, 6000);
-                        }
-                    </script>
+                </div>
+                <div class="col-lg-12">
                     <ol class="breadcrumb">
                         <li><i class="glyphicon glyphicon-home"></i></li>
-                        <li class="active">
-                            <i class="fa fa-dashboard"></i> Dashboard
+                        <li>
+                            <i class="fa fa-dashboard"></i> <a href="/">Dashboard</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-users"></i> Manage Users
                         </li>
                         <li class="active">
-                            <i class="fa fa-users"></i> My Organization
+                            <i class="fa fa-child"></i> Organizations
                         </li>
                         <li class="active">
                             <i class="fa fa-connectdevelop"></i> {{$org->Organization_Name}}
@@ -121,7 +106,12 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="memberss">
-                    <div class="col-lg-12">
+                    <div class="col-lg-4" style="margin-top: 3ch">
+                        <div class="well well-sm">
+                            <strong>Organization Adviser:</strong> {{$org->professors->FirstName}} {{$org->professors->MiddleName}} {{$org->professors->LastName}}
+                        </div>
+                    </div>
+                    <div class="col-lg-12" style="margin-top: -5ch">
                         <h3 class="page-header">
                             Members
                             <a href="add_member/{{$org->Organization_Id}}" class="btn btn-success pull-right" >
@@ -146,7 +136,7 @@
                             @foreach($students as $student)
                                 <tr>
                                     <td class="hide-column">{{ $student->Student_Id }}</td>
-                                    <td>{{$count++}}</td>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{ $student->StudentNumber }}</td>
                                     <td>{{ $student->LastName }}, {{ $student->FirstName }}</td>
                                     <td>{{ $student->Phone }}</td>
@@ -233,10 +223,3 @@
     </div>
 @endsection
 
-@section('organizations')
-    @foreach($organizations as $organization)
-        <li>
-            <a href="/organizations/{{$organization->Organization_Id}}"><i class="fa fa-fw fa-edit"></i> {{$organization->Organization_Name}}</a>
-        </li>
-    @endforeach
-@endsection

@@ -28,37 +28,35 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <table id="StudentTable" class="table table-stripe table-condensed table-responsive table-bordered compact" width="100%" cellspacing="0">
+                    <table id="orgTable" class="table table-stripe table-condensed table-responsive hover table-bordered compact" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th class="hidden">Id</th>
                             <th>No.</th>
                             <th>Name</th>
-                            <th>Contact Number</th>
-                            <th>Email</th>
-                            <th>Birthday</th>
+                            <th>Description</th>
+                            <th>Adviser</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php $count = 1;?>
-                        @foreach($students as $student)
-                            <tr>
-                                <td class="hidden"></td>
-                                <td>{{$count++}}</td>
-                                <td>{{$student->LastName}}, {{$student->FirstName}} {{$student->MiddleName}}</td>
-                                <td>{{$student->Phone}}</td>
-                                <td>{{$student->Email}}</td>
-                                <td>{{\Carbon\Carbon::parse($student->Birthday)->format('M d, Y')}}</td>
+                        @foreach($organizations as $organization)
+                            <tr class="record-details" data-href="/organizations_admin/{{ $organization->Organization_Id }}/home">
+                                <td class="hidden">{{$organization->Organization_Id}}</td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$organization->Organization_Name}}</td>
+                                <td>{{$organization->Description}}</td>
+                                <td>{{$organization->professors->LastName}}, {{$organization->professors->FirstName}} {{$organization->professors->MiddleName}}</td>
                                 <td>
-                                    {{ Form::open(array('url' => '/students/' . $student->Student_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
-                                    <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editStudentDetails({{ $student->Student_Id }})">
+                                    {{--{{ Form::open(array('url' => '/students/' . $student->Student_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}--}}
+                                    <button type="button" class="btn btn-warning" aria-hidden="true">
                                         <span class="fa fa-pencil" aria-hidden="true"></span> Edit
                                     </button>
                                     <button type="submit" class="btn btn-danger" aria-hidden="true">
                                         <span class="fa fa-remove"></span> Delete
                                     </button>
-                                    {{ Form::close() }}
+                                    {{--{{ Form::close() }}--}}
                                 </td>
                             </tr>
                         @endforeach
@@ -67,7 +65,7 @@
 
                     <script>
                         $(document).ready(function() {
-                            $('#StudentTable').DataTable();
+                            $('#orgTable').DataTable();
                         } );
                     </script>
                 </div>
@@ -87,7 +85,7 @@
                         <h4 class="modal-title"><span class="fa fa-fw fa-child" aria-hidden="true"></span> Add Student</h4>
                     </div>
                     <div class="modal-body">
-                        {{ Form::open(array('url' => '/students', 'method' => 'POST', 'class' => 'form-horizontal')) }}
+                        {{ Form::open(array('url' => '/organizations_admin', 'method' => 'POST', 'class' => 'form-horizontal')) }}
                         <fieldset>
                             <div class="form-group">
                                 <label for="FirstName" class="col-md-4 control-label" >Student Number</label>
@@ -183,7 +181,7 @@
         <!--</editor-fold>-->
 
         <!--<editor-fold desc="Modal for editing professor">-->
-        <div id="editStudentWrapper"></div>
+        <div id="editOrgWrapper"></div>
         <!--</editor-fold>-->
 
 

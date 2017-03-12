@@ -66,7 +66,7 @@
                 <a href="/sections"><i class="fa fa-fw fa-server"></i> Sections</a>
             </li>
             <li>
-                <a href="/organizations"><i class="fa fa-fw fa-connectdevelop"></i> Organizations</a>
+                <a href="/organizations_admin"><i class="fa fa-fw fa-connectdevelop"></i> Organizations</a>
             </li>
             <li>
                 <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
