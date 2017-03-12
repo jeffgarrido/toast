@@ -30,6 +30,7 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="/datatables/media/css/jquery.dataTables.css"/>
     <script type="text/javascript" src="/datatables/media/js/jquery.dataTables.js"></script>
+    @include('/exportButtonsLinks')
 
     <!-- Dual list box -->
     <script src="/duallistbox/src/jquery.bootstrap-duallistbox.js"></script>

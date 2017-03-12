@@ -1,5 +1,4 @@
 {{--Attendance List Modal--}}
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <div class="modal fade" id="attendanceListModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -10,7 +9,7 @@
                 <h3 class="modal-title" id="myModalLabel">Attendance List: {{ $event->Event_Name }}</h3>
             </div>
             <div class="modal-body">
-                <table id="attendanceTable" class="table table-hover table-condensed table-responsive">
+                <table id="attendanceTable" class="table table-hover table-condensed table-responsive table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>No.</th>
@@ -35,7 +34,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a href="download_attendance/{{ $event->Event_Id }}" class="btn btn-primary">Download</a>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -47,7 +48,8 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $event = Event::where('Event_Id',$id)->with('organization')->first();
+        return view('admin.edit.editEvent', compact('event'));
     }
 
     /**
@@ -94,13 +96,15 @@ class EventController extends Controller
         //
     }
 
-    public function eventGuest(Event $event){
+    public function eventGuest($id){
+        $event = Event::find($id);
         $event = $event->load('students');
         $students = Student::all();
-        return view('organizationpages.guestlist', compact('students', 'event'));
+        return view('admin.menu.manageGuestList', compact('students', 'event'));
     }
 
     public function populateGuestList(Event $event, Request $request) {
+        dd($request);
         $event->students()->sync($request->input('students', []));
 
         return back();
@@ -114,5 +118,12 @@ class EventController extends Controller
         $log->Description = $description;
 
         $log->save();
+    }
+
+    public function updateEvent($id,Request $request){
+        $event = Event::where('Event_Id',$id)->with('organization')->first();
+        $event->Organization_Id = $event->organization->Organization_Id;
+        $event->update($request->all());
+        return back();
     }
 }

@@ -232,6 +232,79 @@ function addEvent(id){
 }
 //</editor-fold>
 
+function editEventDetails(id){
+    //creating xmlHttpRequest object
+    var xmlHttp = getXmlInstance();
+
+    if (!xmlHttp) {
+        alert("Error. Cant create xml object!");
+    }
+    //--end
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "/events/" + id, true);
+
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+                document.getElementById("addEventWrapper").innerHTML = this.responseText;
+                $('#addEventWrapper').ready(function() {
+                    $('#editEventModal').modal();
+                });
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+
+function getAttendanceList(id){
+    //creating xmlHttpRequest object
+    var xmlHttp = getXmlInstance();
+
+    if (!xmlHttp) {
+        alert("Error. Cant create xml object!");
+    }
+    //--end
+
+    if (xmlHttp) {
+        xmlHttp.open("GET", "/attendance_list/" + id, true);
+
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+                document.getElementById("addEventWrapper").innerHTML = this.responseText;
+                $(document).ready(function() {
+                    $('#attendanceTable').DataTable( {
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'copy',
+                                text: 'COPY'
+                            },
+                            {
+                                extend: 'excel',
+                                text: 'EXCEL'
+                            }
+                            , 'csv'
+                        ]
+                    } );
+                } );
+                $('#addEventWrapper').ready(function() {
+                    $('#attendanceListModal').modal();
+                });
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
 
 $(document).ready(function() {
 

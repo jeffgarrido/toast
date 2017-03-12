@@ -22,7 +22,7 @@
                             <i class="fa fa-users"></i> Manage Users
                         </li>
                         <li class="active">
-                            <i class="fa fa-child"></i> Organizations
+                            <i class="fa fa-child"></i> <a href="/organizations_admin">Organizations</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-connectdevelop"></i> {{$org->Organization_Name}}
@@ -70,6 +70,11 @@
                                                     <p>To : {{ $event->End_Time }}</p>
                                                     <p>{{ $event->Description }}</p>
                                                 </div>
+                                                <div class="panel-footer">
+                                                    {{--<a href="guest_list/{{$event->Event_Id}}" role="button" class="btn btn-primary btn-block" style="margin-bottom: 5px" id="GuestList">Guest List</a>--}}
+                                                    <button class="btn btn-primary btn-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList({{ $event->Event_Id }})">View Attendance</button>
+                                                    <button class="btn btn-primary btn-block" onclick="editEventDetails({{ $event->Event_Id }})">Edit Details</button>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
@@ -96,6 +101,11 @@
                                                     <p>From : {{ $event->Start_Time }}</p>
                                                     <p>To : {{ $event->End_Time }}</p>
                                                     <p>{{ $event->Description }}</p>
+                                                </div>
+                                                <div class="panel-footer">
+                                                    {{--<a href="/guest_list/{{$event->Event_Id}}" role="button" class="btn btn-danger btn-block" style="margin-bottom: 5px" id="GuestList">Guest List</a>--}}
+                                                    <button class="btn btn-danger btn-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList({{ $event->Event_Id }})">View Attendance</button>
+                                                    <button class="btn btn-danger btn-block" onclick="editEventDetails({{ $event->Event_Id }})" disabled>Edit Details</button>
                                                 </div>
                                             </div>
                                         </div>

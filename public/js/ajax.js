@@ -138,36 +138,7 @@ function getOrganizationDetails(id){
     return false;
 }
 
-function getAttendanceList(btnAttendanceList){
-    $('#loadingDiv').show();
-    //creating xmlHttpRequest object
-    var xmlHttp = getXmlInstance();
 
-    if (!xmlHttp) {
-        alert("Cant create that object!");
-    }
-    //--end
-
-    if (xmlHttp) {
-        xmlHttp.open("GET", "attendance_list/" + btnAttendanceList.id, true);
-        xmlHttp.onreadystatechange = function () {
-            if (isXmlReady(xmlHttp)) {
-                document.getElementById("attendanceList").innerHTML = this.responseText;
-                $('#loadingDiv').hide();
-                $(document).ready(function(){
-                    $('#attendanceTable').dataTable( );
-                });
-                $('#attendanceListModal').modal('show');
-
-                delete xmlHttp;
-                xmlHttp = null;
-            }
-        };
-        xmlHttp.send(null);
-    }
-
-    return false;
-}
 
 function deleteStudent(id){
     if(confirm('Are you sure you want to remove this student')) {

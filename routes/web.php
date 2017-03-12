@@ -90,6 +90,12 @@ Route::group(['middleware' => ['web']], function(){
     Route::post('/users/{user}/reset', 'UserController@reset');
     //</editor-fold>
 
+    //<editor-fold desc="<!-- EventController Routes -->">
+    Route::resource('events', 'EventController', ['except' => ['create']]);
+
+    Route::post('events/{event}','EventController@updateEvent');
+    //</editor-fold>
+
     Route::get('course_details/{course}', 'CourseController@getDetails');
 
     Route::post('add_course', 'CourseController@addCourse');
@@ -130,7 +136,7 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::get('attendance_list/{event}', 'OrganizationController@getAttendanceList');
 
-    Route::get('guest_list/{event}', 'EventController@eventGuest');
+    Route::get('/guest_list/{event}', 'EventController@eventGuest');
 
     Route::post('populate_list/{event}', 'EventController@populateGuestList');
 
