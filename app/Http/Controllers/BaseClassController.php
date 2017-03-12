@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\BaseClass;
+use App\Course;
+use App\Professor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
@@ -38,7 +40,9 @@ class BaseClassController extends Controller
      */
     public function create()
     {
-        //
+        $courses = Course::all();
+        $professors = Professor::all();
+        return view('admin.create.createBaseClass', compact('courses', 'professors'));
     }
 
     /**
@@ -73,7 +77,9 @@ class BaseClassController extends Controller
      */
     public function edit($id)
     {
-        //
+        $baseClass = BaseClass::find($id);
+
+        return view('admin.edit.editBaseClass', compact('baseClass'));
     }
 
     /**
@@ -96,6 +102,6 @@ class BaseClassController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd('deleted');
     }
 }

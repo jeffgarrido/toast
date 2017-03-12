@@ -55,14 +55,14 @@
                                 <td class="td-fit">{{ $loop->iteration }}</td>
                                 <td>{{$professor->LastName}}, {{$professor->FirstName}} {{$professor->MiddleName}}</td>
                                 <td class="td-fit">
-                                    {{--{{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}--}}
-                                    {{--<a href="/courses/{{ $course->Course_Id }}/edit" class="btn btn-warning" aria-hidden="true">--}}
-                                        {{--<span class="fa fa-pencil" aria-hidden="true"></span> Edit--}}
-                                    {{--</a>--}}
-                                    {{--<button type="submit" class="btn btn-danger button-delete" aria-hidden="true">--}}
-                                        {{--<span class="fa fa-remove"></span> Delete--}}
-                                    {{--</button>--}}
-                                    {{--{{ Form::close() }}--}}
+                                    {{ Form::open(array('url' => '/classes/' . $professor->pivot->BaseClass_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
+                                    <a href="/classes/{{ $professor->pivot->BaseClass_Id }}/edit" class="btn btn-warning" aria-hidden="true">
+                                        <span class="fa fa-pencil" aria-hidden="true"></span> Edit
+                                    </a>
+                                    <button type="submit" class="btn btn-danger button-delete" aria-hidden="true">
+                                        <span class="fa fa-remove"></span> Delete
+                                    </button>
+                                    {{ Form::close() }}
                                 </td>
                             </tr>
                         @endforeach

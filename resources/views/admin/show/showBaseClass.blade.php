@@ -28,11 +28,11 @@
                         <li>
                             <i class="fa fa-edit"></i> <a href="/classes"> Classes</a>
                         </li>
-                        <li class="active">
-                            <i class="fa fa-edit"></i> {{ $baseClass->course->Code }}
+                        <li>
+                            <i class="fa fa-edit"></i> <a href="/courses/{{ $baseClass->course->Course_Id }}">{{ $baseClass->course->Code }}</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-edit"></i> {{ $baseClass->professor->Code }}
+                            <i class="fa fa-edit"></i> {{ $baseClass->professor->LastName }}, {{ substr($baseClass->professor->FirstName, 0,1) }}.
                         </li>
                     </ol>
                 </div>
