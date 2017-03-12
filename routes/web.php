@@ -29,8 +29,12 @@ Route::group(['middleware' => ['web']], function(){
     Auth::routes();
     //</editor-fold>
 
+    //<editor-fold desc="<!-- BaseClassController Routes -->">
+    Route::get('/classes', 'BaseClassController@index');
+    //</editor-fold>
+
     //<editor-fold desc="<!-- ClassController Routes -->">
-    Route::resource('classes', 'ClassController');
+    Route::resource('class', 'ClassController');
     //</editor-fold>
 
     //<editor-fold desc="<!-- CourseController Routes -->">
@@ -66,24 +70,21 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/requirements/{class}/list', 'RequirementController@index');
 
     Route::get('/requirements/{class}/create', 'RequirementController@create');
+    Route::post('/requirements/{class}', 'RequirementController@store');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- SectionController Routes -->">
+    Route::resource('sections', 'SectionController');
     //</editor-fold>
 
     //<editor-fold desc="<!-- StudentController Routes -->">
     Route::resource('students', 'StudentController', ['except' => ['create']]);
     //</editor-fold>
 
-    //<editor-fold desc="<!-- SectionController Routes -->">
-    Route::resource('sections', 'SectionController');
-    //</editor-fold>
-
     //<editor-fold desc="<!-- UserContoller Routes -->">
     Route::resource('users', 'UserController', ['except' => ['create']]);
     Route::get('/users/{user}/resetpassword', 'UserController@resetPass');
     Route::post('/users/{user}/reset', 'UserController@reset');
-    //</editor-fold>
-
-    //<editor-fold desc="<!-- SectionController Routes -->">
-    Route::resource('sections', 'SectionController');
     //</editor-fold>
 
     Route::get('course_details/{course}', 'CourseController@getDetails');
@@ -152,7 +153,6 @@ Route::group(['middleware' => ['web']], function(){
 
 
     //<editor-fold desc="<!-- Student Pages -->">
-    //Route::get('dashboard', 'HomeController@index');
     Route::get('my_organization', 'StudentController@showOrganization');
     Route::get('my_organization/{organization}', 'StudentController@showOrganization');
     //</editor-fold>
