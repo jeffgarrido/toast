@@ -53,12 +53,18 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/dashboard', 'HomeController@index');
     //</editor-fold>
 
-    //<editor-fold desc="<!-- OrganizationController Routes -->">
+    //<editor-fold desc="<!-- OrganizationController Routes for Student-->">
     Route::resource('organizations', 'OrganizationController', ['except' => ['create']]);
 
     Route::get('organizations/add_member/{organization}', 'OrganizationController@studentList');
 
     Route::post('populate_members/{organization}', 'OrganizationController@populateMemberList');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- OrganizationController Routes for Admin-->">
+    Route::resource('organizations_admin', 'AdminOrgController', ['except' => ['create']]);
+
+    Route::get('organizations_admin/{organization}/home', 'AdminOrgController@showOrganization');
     //</editor-fold>
 
     //<editor-fold desc="<!-- ProfessorController Routes -->">

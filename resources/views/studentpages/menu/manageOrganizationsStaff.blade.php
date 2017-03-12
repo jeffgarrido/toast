@@ -7,9 +7,6 @@
 @endsection
 
 @section('body')
-    <script>
-        new WOW().init();
-    </script>
     <div id="page-wrapper">
 
         <div class="container-fluid">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Organization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,9 @@ class AdminOrgController extends Controller
      */
     public function index()
     {
-        //
+        $organizations = Organization::with('professors')->get();
+
+        return view('admin.menu.manageOrganizations',compact('organizations'));
     }
 
     /**
@@ -81,5 +84,13 @@ class AdminOrgController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showOrganization($id){
+        $org = Organization::find($id)->with('professors')->first();
+        $students = $org->students;
+        $events = $org->events;
+        $prof = $org->professors;
+        return view('admin.edit.editOrganizationHome', compact('$prof','org','events','students'));
     }
 }
