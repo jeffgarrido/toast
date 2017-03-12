@@ -16,7 +16,6 @@ class RequirementController extends Controller
      */
     public function index(BaseClass $baseClass)
     {
-        $requirements = $baseClass->requirements()->get();
         $course = $baseClass->course;
         $professor = $baseClass->professor;
 
@@ -32,7 +31,7 @@ class RequirementController extends Controller
                 break;
         }
 
-        return view('admin.menu.manageRequirements', compact('baseClass', 'course', 'professor', 'requirements', 'terms'));
+        return view('admin.menu.manageRequirements', compact('baseClass', 'course', 'professor', 'terms'));
     }
 
     /**
@@ -51,9 +50,21 @@ class RequirementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, BaseClass $baseClass)
     {
+        $requirement = new CourseRequirement();
 
+        $requirement->Name = $request->input('Name');
+        $requirement->HPS = $request->input('HPS', 0);
+        $requirement->Weight = $request->input('Weight', 0);
+        $requirement->Description = $request->input('Description', '');
+        $requirement->Term = $request->input('Term');
+
+        $baseClass->requirements()->save($requirement);
+
+
+
+        return redirect('/requirements/' . $baseClass->BaseClass_Id);
     }
 
     /**
@@ -85,9 +96,17 @@ class RequirementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CourseRequirement $requirement)
     {
-        //
+        $requirement->Name = $request->input('Name', '');
+        $requirement->HPS = $request->input('HPS', 0);
+        $requirement->Weight = $request->input('Weight', 0);
+        $requirement->Description = $request->input('Description', '');
+        $requirement->update();
+
+        $requirement->outcomes()->sync($request->input('outcomes', []));
+
+        return redirect('/requirements/' . $requirement->BaseClass_Id);
     }
 
     /**

@@ -17,4 +17,12 @@ class CourseRequirement extends Model
     public function professor() {
         return $this->belongsTo(Professor::class, 'Professor_Id');
     }
+
+    public function outcomes() {
+        return $this->belongsToMany(PerformanceIndicator::class, 'outcome_requirement', 'Requirement_Id', 'Outcome_Id');
+    }
+
+    public function students() {
+        return $this->belongsToMany(Student::class, 'requirement_student', 'Requirement_Id');
+    }
 }

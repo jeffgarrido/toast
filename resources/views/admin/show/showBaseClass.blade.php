@@ -40,7 +40,7 @@
 
             <div class="row">
                 <div class="col-lg-12 text-right bottom-pad">
-                    <a href="/requirements/{{$baseClass->BaseClass_Id}}/list" class="btn btn-success"><i class="fa fa-search"></i> View Requirements</a>
+                    <a href="/requirements/{{$baseClass->BaseClass_Id}}" class="btn btn-success"><i class="fa fa-search"></i> View Requirements</a>
                 </div>
                 <div class="col-lg-12">
                     <table id="ClassTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">

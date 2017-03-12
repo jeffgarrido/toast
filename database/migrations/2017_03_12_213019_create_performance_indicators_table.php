@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOutcomeRequirementTable extends Migration
+class CreatePerformanceIndicatorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateOutcomeRequirementTable extends Migration
      */
     public function up()
     {
-        Schema::create('outcome_requirement', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('Outcome_Id');
-            $table->integer('Requirement_Id');
+        Schema::create('performance_indicators', function (Blueprint $table) {
+            $table->increments('PI_Id');
+            $table->unsignedInteger('Outcome_Id');
+            $table->string('Code');
+            $table->text('Description')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateOutcomeRequirementTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('performance_indicators');
     }
 }

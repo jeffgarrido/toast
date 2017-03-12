@@ -72,7 +72,8 @@ Route::group(['middleware' => ['web']], function(){
     //</editor-fold>
 
     //<editor-fold desc="<!-- RequirementController Routes -->">
-    Route::get('/requirements/{baseClass}/list', 'RequirementController@index');
+    Route::get('/requirements/{baseClass}', 'RequirementController@index');
+    Route::patch('/requirements/{requirement}', 'RequirementController@update');
     Route::post('/requirements/{baseClass}', 'RequirementController@store');
     //</editor-fold>
 

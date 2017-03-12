@@ -11,7 +11,7 @@ class Student extends Model
     protected $fillable  = array('StudentNumber', 'FirstName', 'MiddleName', 'LastName', 'Birthday','Phone','PersonalEmail', 'created_at', 'updated_at','Nickname');
 
     public function section() {
-
+        return $this->belongsTo(Section::class, 'Section_Id');
     }
 
     public function events() {

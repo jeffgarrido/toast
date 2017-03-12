@@ -16,7 +16,7 @@ class CreateCourseRequirementsTable extends Migration
         Schema::create('course_requirements', function (Blueprint $table) {
             $table->increments('Requirement_Id');
             $table->unsignedInteger('BaseClass_Id');
-            $table->string('Type', 100);
+            $table->string('Name', 100);
             $table->integer('HPS')->default(0);
             $table->double('Weight', 3,2)->default(0);
             $table->text('Description');

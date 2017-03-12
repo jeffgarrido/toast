@@ -303,6 +303,7 @@ class ComposerStaticInit88d6170b807a87835d784446fcbaeadb
         'CreateOutcomeRequirementTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_012034_create_outcome_requirement_table.php',
         'CreateOutcomeStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_17_140543_create_outcome_student_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreatePerformanceIndicatorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_12_213019_create_performance_indicators_table.php',
         'CreateProfessorsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_060153_create_professors_table.php',
         'CreateRequirementStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_025524_create_requirement_student_table.php',
         'CreateSectionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_060254_create_sections_table.php',
