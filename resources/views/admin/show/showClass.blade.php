@@ -30,10 +30,10 @@
                         <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
                     </li>
                     <li>
-                        <i class="fa fa-edit"></i> <a href="/classes"> Classes</a>
+                        <i class="fa fa-edit"></i> <a href="/classes">Classes</a>
                     </li>
-                    <li class="active">
-                        <i class="fa fa-edit"></i> {{ $class->course->Code }}
+                    <li>
+                        <i class="fa fa-edit"></i>  <a href="/classes/{{ $class->BaseClass_Id }}">{{ $class->course->Code }}</a>
                     </li>
                 </ol>
             </div>

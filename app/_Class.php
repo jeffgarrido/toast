@@ -10,7 +10,7 @@ class _Class extends Model
 
     protected $table = 'classes';
 
-    protected $with = ['course', 'professor', 'section'];
+    protected $with = ['section'];
 
     public function course() {
         return $this->belongsTo(Course::class, 'Course_Id');

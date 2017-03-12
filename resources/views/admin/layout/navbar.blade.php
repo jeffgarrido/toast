@@ -59,10 +59,10 @@
             <li id="navManageCourses">
                 <a href="/courses"><i class="fa fa-fw fa-book"></i> Courses</a>
             </li>
-            <li>
+            <li id="navManageClasses">
                 <a href="/classes"><i class="fa fa-fw fa-edit"></i> Classes</a>
             </li>
-            <li>
+            <li id="navManageSections">
                 <a href="/sections"><i class="fa fa-fw fa-server"></i> Sections</a>
             </li>
             <li>

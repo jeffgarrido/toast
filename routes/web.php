@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function(){
     //</editor-fold>
 
     //<editor-fold desc="<!-- BaseClassController Routes -->">
-    Route::get('/classes', 'BaseClassController@index');
+    Route::resource('classes', 'BaseClassController');
     //</editor-fold>
 
     //<editor-fold desc="<!-- ClassController Routes -->">

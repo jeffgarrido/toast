@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BaseClass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
@@ -26,7 +27,8 @@ class BaseClassController extends Controller
      */
     public function index()
     {
-        return view('admin.menu.manageBaseClasses');
+        $baseClasses = BaseClass::all();
+        return view('admin.menu.manageBaseClasses', compact('baseClasses'));
     }
 
     /**
@@ -58,7 +60,9 @@ class BaseClassController extends Controller
      */
     public function show($id)
     {
-        //
+        $baseClass = BaseClass::find($id);
+
+        return view('admin.show.showBaseClass', compact('baseClass'));
     }
 
     /**
