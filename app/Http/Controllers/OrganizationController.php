@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AuditLog;
+use App\Event;
 use App\Organization;
 use App\Student;
 use Illuminate\Http\Request;
@@ -131,8 +132,9 @@ class OrganizationController extends Controller
         return view('organizationpages.orgdetails', compact('organization', 'events', 'students'));
     }
 
-    public function getAttendanceList(Event $event) {
-        $students = $event->students()->wherePivot('Attendance', '!=', 'null')->get();
+    public function getAttendanceList($id) {
+        $event = Event::find($id);
+        $students = $event->studentslist;
         return view('organizationpages.attendancelist', compact('event', 'students'));
     }
 
