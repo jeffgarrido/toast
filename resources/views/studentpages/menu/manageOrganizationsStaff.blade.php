@@ -2,29 +2,7 @@
 
 @section('try')
 <style>
-    .top-alert {
-        position: fixed;
-        top: 0px;
-        width: 100%;
-        z-index: 100000;
-        left: 0;
-        padding: 20px;
-        display: inline-block;
-        text-align: right;
-    }
-    .top-alert .alert {
-        width: auto !important;
-        height: 100%;
-        display: inline;
-        position: relative;
-        margin: 0;
-    }
-    .top-alert .alert .close {
-        position: absolute;
-        top: 11px;
-        right: 10px;
-        color: inherit;
-    }
+
 </style>
 @endsection
 

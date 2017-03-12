@@ -38,6 +38,8 @@
 
     <!-- TOAsT css -->
     <link rel="stylesheet" type="text/css" href="/css/toast.css"/>
+    {{--<link rel="stylesheet" type="text/css" href="/css/style.css"/>--}}
+
 
     <!-- Notify Js -->
     <script type="text/javascript" src="/adminTheme/notify/notify.js"></script>

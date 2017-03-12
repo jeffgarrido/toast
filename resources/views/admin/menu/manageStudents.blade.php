@@ -48,7 +48,7 @@
                                 <td>{{$count++}}</td>
                                 <td>{{$student->LastName}}, {{$student->FirstName}} {{$student->MiddleName}}</td>
                                 <td>{{$student->Phone}}</td>
-                                <td>{{$student->Email}}</td>
+                                <td>{{$student->PersonalEmail}}</td>
                                 <td>{{\Carbon\Carbon::parse($student->Birthday)->format('M d, Y')}}</td>
                                 <td>
                                     {{ Form::open(array('url' => '/students/' . $student->Student_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
