@@ -66,6 +66,7 @@ class OrganizationController extends Controller
         $count = 1;
 
         $organizations = Student::where('Account_Id', $uid)->first()->organizations()->get();
+
         if($status == 'Member') {
 
             return view('studentpages.menu.manageOrganizations', compact('org', 'organizations','status','events'));

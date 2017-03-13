@@ -65,6 +65,12 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('organizations_admin', 'AdminOrgController', ['except' => ['create']]);
 
     Route::get('organizations_admin/{organization}/home', 'AdminOrgController@showOrganization');
+
+    Route::get('add_member/{organization}', 'AdminOrgController@studentList');
+
+    Route::post('populate_members/{organization}', 'AdminOrgController@populateMemberList');
+
+    Route::post('add_org', 'AdminOrgController@addOrg');
     //</editor-fold>
 
     //<editor-fold desc="<!-- ProfessorController Routes -->">

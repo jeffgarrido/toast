@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Organization;
+use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AdminOrgController extends Controller
 {
@@ -87,10 +89,45 @@ class AdminOrgController extends Controller
     }
 
     public function showOrganization($id){
-        $org = Organization::find($id)->with('professors')->first();
+        $org = Organization::with('professors')->get()->find($id);
         $students = $org->students;
         $events = $org->events;
         $prof = $org->professors;
         return view('admin.edit.editOrganizationHome', compact('$prof','org','events','students'));
+    }
+
+    public function studentList(Organization $organization){
+        $members = $organization->students()->get();
+
+        $students = Student::all();
+        $uid = Auth::user()->id;
+
+        return view('admin.edit.addOrgMembers',compact('organization','members','students'));
+    }
+
+    public function populateMemberList(Organization $organization, Request $request) {
+
+        $organization->students()->sync($request->input('memberList', []));
+
+        return back();
+    }
+
+    public function addOrg(Request $request){
+        $org = new Organization();
+
+        $org->Organization_Name = $request->input('Organization_Name');
+        $org->Description = $request->input('Description');
+        $org->Adviser_Id = $request->input('Adviser_Id');
+        $org->save();
+
+        //Create Audit Log
+        $this->createLog(
+            'Add Org',
+            'Org Name: '.$request->input('Code').                                           '\n'.
+            'Description: '.$request->input('Title').                                         '\n'.
+            'Adviser ID: '.$request->input('Description', 'No Description Provided').  '\n'
+        );
+
+        return back();
     }
 }
