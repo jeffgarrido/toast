@@ -19,10 +19,10 @@ class CourseRequirement extends Model
     }
 
     public function outcomes() {
-        return $this->belongsToMany(PerformanceIndicator::class, 'outcome_requirement', 'Requirement_Id', 'Outcome_Id');
+        return $this->belongsToMany(PerformanceIndicator::class, 'outcome_requirement', 'Requirement_Id', 'PI_Id')->withPivot('SOEval_Id');
     }
 
     public function students() {
-        return $this->belongsToMany(Student::class, 'requirement_student', 'Requirement_Id');
+        return $this->belongsToMany(Student::class, 'requirement_student', 'Requirement_Id')->withPivot('Score', 'id')->withTimestamps();
     }
 }

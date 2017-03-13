@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        <b class="fa fa-lg fa-edit"></b> Add Class
+                        <b class="fa fa-lg fa-edit"></b> Edit Class
                     </h1>
                     <ol class="breadcrumb">
                         <li>

@@ -44,6 +44,7 @@
 
         <div class="row">
             <div class="col-lg-12">
+                {{ Form::open(array('url' => '/updatescores/' . $class->Class_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
                 <table id="ClassTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
 
                     <!--<editor-fold desc="Class Table Head">-->
@@ -51,21 +52,49 @@
                     <tr>
                         <th class="th-fit">Student Number</th>
                         <th>Name</th>
-                        @foreach($class->requirements() as $requirement)
-                            <th>$requirement->Type</th>
+                        @foreach($class->baseClass->requirements()->where('Term', '=', 1)->get() as $requirement)
+                            <th class="th-fit">{{$requirement->Name}}</th>
                         @endforeach
+                        <th class="th-fit">Prelim Grade</th>
+                        @foreach($class->baseClass->requirements()->where('Term', '=', 2)->get() as $requirement)
+                            <th class="th-fit">{{$requirement->Name}}</th>
+                        @endforeach
+                        <th class="th-fit">Final Grade</th>
+                        <th class="th-fit">Semestral Grade</th>
+                        <th class="th-fit">Transmuted Grade</th>
                     </tr>
                     </thead>
                     <!--</editor-fold>-->
 
                     <tbody>
                     @foreach($students as $student)
-                        <tr class="record-details" data-href="/students/{{ $student->Student_Id }}">
+                        <tr>
                             <td class="td-fit">{{$student->StudentNumber}}</td>
                             <td>{{$student->LastName . ', ' . $student->FirstName . ' ' . $student->MiddleName}}</td>
-                            @foreach($class->requirements() as $requirement)
-                                <td></td>
+                            @foreach($student->requirements()->where('Term', '=', 1)->get() as $requirement)
+                                <td class="td-fit">
+                                    <input type="hidden"  name="Score[]" value="{{$requirement->pivot->id}}"/>
+                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="0" max="{{$requirement->HPS}}"/>
+                                </td>
                             @endforeach
+                            <td class="td-fit">
+                                {{$student->pivot->PrelimGrade}}
+                            </td>
+                            @foreach($student->requirements()->where('Term', '=', 2)->get() as $requirement)
+                                <td class="td-fit">
+                                    <input type="hidden"  name="Score[]" value="{{$requirement->pivot->id}}"/>
+                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="0" max="{{$requirement->HPS}}"/>
+                                </td>
+                            @endforeach
+                            <td class="td-fit">
+                                {{$student->pivot->FinalGrade}}
+                            </td>
+                            <td class="td-fit">
+                                {{$student->pivot->SemestralGrade}}
+                            </td>
+                            <td class="td-fit">
+                                {{$student->pivot->TransmutedGrade}}
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -84,6 +113,16 @@
                 <!--</editor-fold>-->
 
             </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <hr/>
+                    <div class="col-lg-10 col-lg-offset-2 text-right">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            {{ Form::close() }}
         </div>
 
     </div>

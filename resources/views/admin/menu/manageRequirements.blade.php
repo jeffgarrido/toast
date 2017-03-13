@@ -39,16 +39,20 @@
                         <div class="panel-body">
                             <Legend style="border-bottom: 1px #eeeeee solid;">{{ $terms[$i] }}</Legend>
                             @if(count($baseClass->requirements()->where('Term', '=', $i+1)->get()) > 0)
-                                <table class="table table-hover">
+                                <table class="table table-hover table-condensed table-responsive table-bordered">
                                     <thead>
-                                    <th>Type</th>
+                                    <th class="th-fit">Name</th>
+                                    <th class="th-fit">Highest Possible Score</th>
+                                    <th class="th-fit">Weight</th>
                                     <th>Description</th>
                                     <th class="th-fit">Actions</th>
                                     </thead>
                                     <tbody>
                                     @foreach($baseClass->requirements()->where('Term', '=', $i+1)->get() as $requirement)
                                         <tr data-toggle="modal" data-target="#editRequirement{{ $requirement->Requirement_Id }}">
-                                            <td>{{$requirement->Name}}</td>
+                                            <td class="td-fit">{{$requirement->Name}}</td>
+                                            <td class="td-fit">{{$requirement->HPS}}</td>
+                                            <td class="td-fit">{{$requirement->Weight}}</td>
                                             <td>{{$requirement->Description}}</td>
                                             <td class="td-fit"><button type="button" class="btn btn-danger btn-xs button-delete"><i class="fa fa-remove"></i> Delete</button></td>
                                         </tr>

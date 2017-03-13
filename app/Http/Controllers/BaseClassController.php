@@ -7,6 +7,7 @@ use App\BaseClass;
 use App\Course;
 use App\Professor;
 use App\Section;
+use App\SOEvaluation;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -65,8 +66,6 @@ class BaseClassController extends Controller
 
         $baseClass->classes()->sync($request->input('sectionsList', []));
 
-
-
         return view('admin.show.showBaseClass', compact('baseClass'));
     }
 
@@ -115,6 +114,13 @@ class BaseClassController extends Controller
             foreach ($sections as $section) {
                 $class = _Class::find($section->pivot->Class_Id);
                 $class->students()->detach();
+                foreach($class->baseClass->requirements()->get() as $requirement){
+                    $requirement->students()->detach();
+                    foreach ($requirement->outcomes()->get() as $outcome){
+                        $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+                        $eval->students()->detach();
+                    }
+                }
             }
         }
 
@@ -124,6 +130,13 @@ class BaseClassController extends Controller
             $students = Section::find($sectionId)->students()->where('AcademicStatus' , '=', 'Regular')->get();
             $class = _Class::find($baseClass->classes()->where('sections.Section_Id', '=', $sectionId)->first()->pivot->Class_Id);
             $class->students()->sync($students);
+            foreach($class->baseClass->requirements()->get() as $requirement){
+                $requirement->students()->attach($class->students()->get());
+                foreach ($requirement->outcomes()->get() as $outcome){
+                    $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+                    $eval->students()->attach($class->students()->get());
+                }
+            }
         }
 
         return redirect('/classes/' . $baseClass->BaseClass_Id);

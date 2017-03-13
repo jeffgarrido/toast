@@ -6,6 +6,7 @@ use App\AuditLog;
 use App\Event;
 use App\Organization;
 use App\Student;
+use App\StudentOutcome;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -107,7 +108,35 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id)->load('studentOutcomes');
+        foreach ($student->studentOutcomes as $evaluation) {
+            $evaluation->load('performanceIndicators');
+            $evaluation->pivot->Evaluation = 0;
+            $evaluation->pivot->P1 = 0;
+            $evaluation->pivot->P2 = 0;
+            $evaluation->pivot->P3 = 0;
+
+//            dd($evaluation->performanceIndicators);
+
+            foreach ($student->SOEvaluations()->get() as $SOEvaluation) {
+                if($index = $evaluation->performanceIndicators->search($SOEvaluation->performanceIndicator)){
+                    dd($SOEvaluation);
+                    switch ($index) {
+                        case 0:
+                            $evaluation->pivot->P1 += $SOEvaluation->pivot->Evaluation;
+                            break;
+                        case 1:
+                            $evaluation->pivot->P1 += $SOEvaluation->pivot->Evaluation;
+                            break;
+                        case 2:
+                            $evaluation->pivot->P1 += $SOEvaluation->pivot->Evaluation;
+                            break;
+                    }
+                }
+            }
+
+            $evaluation->update();
+        }
     }
 
     /**
