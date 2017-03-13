@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\_Class;
+use App\BaseClass;
 use App\CourseRequirement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,9 +14,24 @@ class RequirementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(_Class $class)
+    public function index(BaseClass $baseClass)
     {
-        dd($class);
+        $course = $baseClass->course;
+        $professor = $baseClass->professor;
+
+        switch ($course->Terms){
+            case 2:
+                $terms = ['Prelim', 'Final'];
+                break;
+            case 3:
+                $terms = ['Prelim', 'Midterm', 'Final'];
+                break;
+            case 4:
+                $terms = ['Prelim', 'Midterm', 'Pre-final', 'Final'];
+                break;
+        }
+
+        return view('admin.menu.manageRequirements', compact('baseClass', 'course', 'professor', 'terms'));
     }
 
     /**
@@ -26,17 +41,7 @@ class RequirementController extends Controller
      */
     public function create(_Class $class)
     {
-        switch ($class->course->Terms){
-            case 2:
-                $terms = ['Prelim', 'Final'];
-                return view('admin.create.createRequirement', compact('class', 'terms'));
-            case 3:
-                $terms = ['Prelim', 'Midterm', 'Final'];
-                return view('admin.create.createRequirement', compact('class', 'terms'));
-            case 4:
-                $terms = ['Prelim', 'Midterm', 'Pre-final', 'Final'];
-                return view('admin.create.createRequirement', compact('class', 'terms'));
-        }
+        //
     }
 
     /**
@@ -45,9 +50,21 @@ class RequirementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, BaseClass $baseClass)
     {
-        //
+        $requirement = new CourseRequirement();
+
+        $requirement->Name = $request->input('Name');
+        $requirement->HPS = $request->input('HPS', 0);
+        $requirement->Weight = $request->input('Weight', 0);
+        $requirement->Description = $request->input('Description', '');
+        $requirement->Term = $request->input('Term');
+
+        $baseClass->requirements()->save($requirement);
+
+
+
+        return redirect('/requirements/' . $baseClass->BaseClass_Id);
     }
 
     /**
@@ -79,9 +96,17 @@ class RequirementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CourseRequirement $requirement)
     {
-        //
+        $requirement->Name = $request->input('Name', '');
+        $requirement->HPS = $request->input('HPS', 0);
+        $requirement->Weight = $request->input('Weight', 0);
+        $requirement->Description = $request->input('Description', '');
+        $requirement->update();
+
+        $requirement->outcomes()->sync($request->input('outcomes', []));
+
+        return redirect('/requirements/' . $requirement->BaseClass_Id);
     }
 
     /**

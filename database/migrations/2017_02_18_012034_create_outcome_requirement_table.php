@@ -17,7 +17,6 @@ class CreateOutcomeRequirementTable extends Migration
             $table->increments('id');
             $table->integer('Outcome_Id');
             $table->integer('Requirement_Id');
-            $table->integer('Score');
             $table->timestamps();
         });
     }

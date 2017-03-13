@@ -10,18 +10,14 @@ class _Class extends Model
 
     protected $table = 'classes';
 
-    protected $with = ['section'];
+    protected $with = ['baseClass', 'section'];
 
-    public function course() {
-        return $this->belongsTo(Course::class, 'Course_Id');
-    }
-
-    public function professor() {
-        return $this->belongsTo(Professor::class, 'Professor_Id');
+    public function baseClass() {
+        return $this->belongsTo(BaseClass::class, 'BaseClass_Id');
     }
 
     public function section() {
-        return $this->belongsTo(Section::class, 'Section');
+        return $this->belongsTo(Section::class, 'Section_Id');
     }
 
     public function students() {

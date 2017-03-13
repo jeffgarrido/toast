@@ -11,7 +11,7 @@ class Section extends Model
     protected $fillable = ['Code', 'AcademicYearStart', 'AcademicYearEnd'];
 
     public function classes() {
-        return $this->hasMany(_Class::class);
+        return $this->hasMany(_Class::class, 'classes', 'Section_Id')->withPivot('Class_Id')->withTimestamps();
     }
 
     public function students() {

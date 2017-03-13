@@ -9,6 +9,11 @@
             <div class="col-lg-12">
                 <h1 class="page-header">
                     <b class="fa fa-lg fa-server"></b> Manage Sections
+                    <!--<editor-fold desc="Add Section Button">-->
+                    <button class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#addSection">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add Section
+                    </button>
+                    <!--</editor-fold>-->
                 </h1>
                 <ol class="breadcrumb">
                     <li>
@@ -70,12 +75,6 @@
 
             </div>
         </div>
-
-        <!--<editor-fold desc="Add Section Button">-->
-        <button class="btn btn-success" data-toggle="modal" data-target="#addSection">
-            <i class="fa fa-user-plus" aria-hidden="true"></i> Add Section
-        </button>
-        <!--</editor-fold>-->
 
     </div>
 
