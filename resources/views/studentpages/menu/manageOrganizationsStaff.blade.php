@@ -65,7 +65,7 @@
                     <div class="col-lg-12">
                         <h3 class="page-header">
                             Upcoming Events
-                            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addEventModal">
+                            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addEventModal" disabled>
                                 <i class="fa fa-list-alt" aria-hidden="true"></i> Add Events
                             </button>
                         </h3>

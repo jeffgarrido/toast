@@ -124,7 +124,7 @@
                     <div class="col-lg-12" style="margin-top: -5ch">
                         <h3 class="page-header">
                             Members
-                            <a href="add_member/{{$org->Organization_Id}}" class="btn btn-success pull-right" >
+                            <a href="/add_member/{{$org->Organization_Id}}" class="btn btn-success pull-right" >
                                 <i class="fa fa-list-alt" aria-hidden="true"></i> Add Member
                             </a>
                         </h3>

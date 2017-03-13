@@ -6,6 +6,7 @@ use App\Event;
 use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -71,7 +72,9 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   $event = new Event();
+    {
+        $uid = Auth::user()->id;
+        $event = new Event();
 
         $event->Organization_Id = $id;
         $event->Event_Name = $request->input('Event_Name');
@@ -80,6 +83,8 @@ class EventController extends Controller
         $event->Start_Time = $request->input('Start_Time');
         $event->End_Time = $request->input('End_Time');
         $event->Venue = $request->input('Venue');
+        if($uid == 'Student') $event->Status = "Pending";
+        else $event->Status = "Approved";
 
         $event->save();
         return back();
