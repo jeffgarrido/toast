@@ -11,6 +11,9 @@
             <div class="col-lg-12">
                 <h1 class="page-header">
                     Manage Professors
+                    <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addProfessor">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i> Add Professor
+                    </button>
                 </h1>
                 <ol class="breadcrumb">
                     <li>
@@ -73,9 +76,7 @@
             </div>
         </div><!-- Professor table row -->
 
-        <button class="btn btn-success" data-toggle="modal" data-target="#addProfessor">
-            <i class="fa fa-user-plus" aria-hidden="true"></i> Add Professor
-        </button>
+
     </div><!-- container fluid -->
 
     <!--<editor-fold desc="Modal for adding professor">-->
