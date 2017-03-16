@@ -27,6 +27,18 @@ class Student extends Model
     }
 
     public function classes() {
-        return $this->belongsToMany(_Class::class);
+        return $this->belongsToMany(_Class::class, 'Student_Id', 'Class_Id')->withPivot('PrelimGrade', 'FinalGrade', 'SemestralGrade', 'TransmutedGrade');
+    }
+
+    public function requirements() {
+        return $this->belongsToMany(CourseRequirement::class, 'requirement_student', 'Student_Id', 'Requirement_Id')->withPivot('Score', 'id')->withTimestamps();
+    }
+
+    public function SOEvaluations() {
+        return $this->belongsToMany(SOEvaluation::class, 'outcome_student', 'Student_Id', 'SOEval_Id')->withPivot('Evaluation', 'id');
+    }
+
+    public function studentOutcomes() {
+        return $this->belongsToMany(StudentOutcome::class, 'so_student', 'Student_Id', 'StudentOutcome_Id')->withPivot('Evaluation', 'P1', 'P2', 'P3');
     }
 }

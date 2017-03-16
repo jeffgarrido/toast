@@ -6,6 +6,7 @@ use App\AuditLog;
 use App\Event;
 use App\Organization;
 use App\Student;
+use App\StudentOutcome;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -68,8 +69,8 @@ class StudentController extends Controller
         $user = new User();
         $user->name = $student->LastName . ', ' . $student->FirstName . ' ' . $student->MiddleName;
         $user->email = $student->PersonalEmail;
-        $user->password = bcrypt($student->birthday);
-        $user->Access_Level = 'Professor';
+        $user->password = bcrypt($student->Birthday);
+        $user->Access_Level = 'Student';
         $user->api_token = str_random(60);
 
         $user->save();
@@ -107,7 +108,50 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id)->load('studentOutcomes');
+        foreach ($student->studentOutcomes as $evaluation) {
+            $evaluation->load('performanceIndicators');
+            $evaluation->pivot->Evaluation = 0;
+            $evaluation->pivot->P1 = 0;
+            $evaluation->pivot->P2 = 0;
+            $evaluation->pivot->P3 = 0;
+            $p1_ave_ctr = 0;
+            $p2_ave_ctr = 0;
+            $p3_ave_ctr = 0;
+//            dd($student);
+            echo 'Outcome: ' . $evaluation->Outcome_Code . '<br/>';
+            foreach ($student->SOEvaluations()->get() as $SOEvaluation) {
+                $index = $evaluation->performanceIndicators->search($SOEvaluation->performanceIndicator);
+                if (is_integer($index)) {
+                    switch ($index) {
+                        case 0:
+                            $p1_ave_ctr++;
+                            $evaluation->pivot->P1 += $SOEvaluation->pivot->Evaluation;
+                            break;
+                        case 1:
+                            $p2_ave_ctr++;
+                            $evaluation->pivot->P2 += $SOEvaluation->pivot->Evaluation;
+                            break;
+                        case 2:
+                            $p3_ave_ctr++;
+                            $evaluation->pivot->P3 += $SOEvaluation->pivot->Evaluation;
+                            break;
+                    }
+                }
+                $evaluation->pivot->update();
+            }
+
+            if ($p1_ave_ctr) {
+
+            }
+            if ($p2_ave_ctr) {
+
+            }
+            if ($p3_ave_ctr) {
+
+            }
+        }
+
     }
 
     /**

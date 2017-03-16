@@ -21,10 +21,6 @@ class _Class extends Model
     }
 
     public function students() {
-        return $this->belongsToMany(Student::class, 'class_student', 'Class_Id');
-    }
-
-    public function requirements() {
-        return $this->hasMany(CourseRequirement::class, 'Course_Id');
+        return $this->belongsToMany(Student::class, 'class_student', 'Class_Id')->withPivot('PrelimGrade', 'FinalGrade', 'SemestralGrade', 'TransmutedGrade');
     }
 }

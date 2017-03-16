@@ -13,6 +13,10 @@ class PerformanceIndicator extends Model
     }
 
     public function requirements() {
-        return $this->belongsToMany(CourseRequirement::class, 'outcome_requirement', 'Outcome_Id', 'Requirement_Id');
+        return $this->belongsToMany(CourseRequirement::class, 'outcome_requirement', 'PI_Id', 'Requirement_Id');
+    }
+
+    public function students() {
+        return $this->belongsToMany(Student::class, 'outcome_student', 'Outcome_Id', 'Student_Id')->withPivot('Evaluation');
     }
 }
