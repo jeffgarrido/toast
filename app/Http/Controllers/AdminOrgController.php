@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Organization;
 use App\Student;
+use App\StudentOutcome;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -89,11 +90,12 @@ class AdminOrgController extends Controller
     }
 
     public function showOrganization($id){
+        $outcomes = StudentOutcome::all();
         $org = Organization::with('professors')->get()->find($id);
         $students = $org->students;
         $events = $org->events;
         $prof = $org->professors;
-        return view('admin.edit.editOrganizationHome', compact('$prof','org','events','students'));
+        return view('admin.edit.editOrganizationHome', compact('$prof','org','events','students','outcomes'));
     }
 
     public function studentList(Organization $organization){

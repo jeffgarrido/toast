@@ -288,7 +288,7 @@ function getAttendanceList(id){
                                 extend: 'excel',
                                 text: 'EXCEL'
                             }
-                            , 'csv'
+                            , 'csv', 'pdf'
                         ]
                     } );
                 } );
