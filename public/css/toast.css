@@ -3,6 +3,10 @@
     padding-top: 70px;
 }
 
+/*.mainmain{*/
+    /*background-image: wc*/
+/*}*/
+
 .bottom-border {
     padding-bottom: 2px;
     border-bottom: solid 1px #EEEEEE;
@@ -295,4 +299,8 @@ input[type=number]::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield;
+}
+
+.banner {
+
 }
