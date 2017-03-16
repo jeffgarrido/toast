@@ -112,9 +112,9 @@ class StudentController extends Controller
         foreach ($student->studentOutcomes as $evaluation) {
             $evaluation->load('performanceIndicators');
             $evaluation->pivot->Evaluation = 0;
-            $evaluation->pivot->P1 = 0;
-            $evaluation->pivot->P2 = 0;
-            $evaluation->pivot->P3 = 0;
+            $p1 = $evaluation->pivot->P1 = 0;
+            $p2 = $evaluation->pivot->P2 = 0;
+            $p3 = $evaluation->pivot->P3 = 0;
             $p1_ave_ctr = 0;
             $p2_ave_ctr = 0;
             $p3_ave_ctr = 0;
@@ -126,30 +126,30 @@ class StudentController extends Controller
                     switch ($index) {
                         case 0:
                             $p1_ave_ctr++;
-                            $evaluation->pivot->P1 += $SOEvaluation->pivot->Evaluation;
+                            $p1 += $SOEvaluation->pivot->Evaluation;
                             break;
                         case 1:
                             $p2_ave_ctr++;
-                            $evaluation->pivot->P2 += $SOEvaluation->pivot->Evaluation;
+                            $p2 += $SOEvaluation->pivot->Evaluation;
                             break;
                         case 2:
                             $p3_ave_ctr++;
-                            $evaluation->pivot->P3 += $SOEvaluation->pivot->Evaluation;
+                            $p3 += $SOEvaluation->pivot->Evaluation;
                             break;
                     }
                 }
-                $evaluation->pivot->update();
             }
 
             if ($p1_ave_ctr) {
-
+                $evaluation->pivot->P1 = $p1 / $p1_ave_ctr;
             }
             if ($p2_ave_ctr) {
-
+                $evaluation->pivot->P2 = $p2 / $p2_ave_ctr;
             }
             if ($p3_ave_ctr) {
-
+                $evaluation->pivot->P3 = $p3 / $p3_ave_ctr;
             }
+            $evaluation->pivot->Evaluation = $p1 + $p2 + $p3;
         }
 
     }
