@@ -35,7 +35,7 @@ class Student extends Model
     }
 
     public function SOEvaluations() {
-        return $this->belongsToMany(SOEvaluation::class, 'outcome_student', 'Student_Id', 'SOEval_Id')->withPivot('Evaluation');
+        return $this->belongsToMany(SOEvaluation::class, 'outcome_student', 'Student_Id', 'SOEval_Id')->withPivot('Evaluation', 'id');
     }
 
     public function studentOutcomes() {
