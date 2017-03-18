@@ -99,7 +99,7 @@
                                             <div class="form-group">
                                                 <label for="Weight" class="col-lg-4 control-label">Grade Weight</label>
                                                 <div class="col-lg-7">
-                                                    <input class="form-control" id="Weight" name="Weight" placeholder="%" type="number" min="0" value="{{ $requirement->Weight }}" required/>
+                                                    <input class="form-control" id="Weight" name="Weight" placeholder="%" type="number" step="0.01" min="0" value="{{ $requirement->Weight }}" required/>
                                                     <span class="help-block">
                                                 Note: Percentages are applied on a per term basis.<br>
                                                 Semestral grade is computed as 50% prelim grade + 50% final grade.
@@ -182,7 +182,7 @@
                                         <div class="form-group">
                                             <label for="Weight" class="col-lg-4 control-label">Grade Weight</label>
                                             <div class="col-lg-7">
-                                                <input class="form-control" id="Weight" name="Weight" placeholder="%" type="number" min="0" required/>
+                                                <input class="form-control" id="Weight" name="Weight" placeholder="%" type="number" step="0.01" min="0" required/>
                                                 <span class="help-block">
                                                 Note: Percentages are applied on a per term basis.<br>
                                                 Semestral grade is computed as 50% prelim grade + 50% final grade.
@@ -237,7 +237,8 @@
 </div>
 
 <script>
-    $('.outcomeList').multiselect();
+    $('.outcomeList').multiselect({
+    });
 </script>
 
 @endsection

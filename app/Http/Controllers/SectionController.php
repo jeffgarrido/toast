@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AuditLog;
 use App\Section;
+use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +31,9 @@ class SectionController extends Controller
     public function index()
     {
         $sections = Section::all()->sortByDesc('Code');
+        $students = Student::all();
 
-        return view('admin.menu.manageSections', compact('sections'));
+        return view('admin.menu.manageSections', compact('sections', 'students'));
     }
 
     /**
@@ -45,6 +47,11 @@ class SectionController extends Controller
         $section = new Section();
         $section->fill($request->all());
         $section->save();
+
+        foreach ($request->input('studentsList', []) as $studentid) {
+            $student = Student::find($studentid);
+            $section->students()->save($student);
+        }
 
         $this->createLog(
             'Add Section',
@@ -75,8 +82,10 @@ class SectionController extends Controller
      */
     public function edit($id)
     {
-        $section = Section::find($id);
-        return view('admin.edit.editSection', compact('section'));
+        $section = Section::find($id)->load('students');
+        $students = Student::all();
+
+        return view('admin.edit.editSection', compact('section', 'students'));
     }
 
     /**
@@ -89,7 +98,20 @@ class SectionController extends Controller
     public function update(Request $request, $id)
     {
         $section = Section::find($id);
-        $section->update($request->all());
+        $section->Code = $request->input('Code');
+        $section->AcademicYearStart = $request->input('AcademicYearStart');
+        $section->AcademicYearEnd = $request->input('AcademicYearEnd');
+        $section->update();
+
+        foreach ($section->students()->get() as $student) {
+            $student->Section = null;
+            $student->update();
+        }
+
+        foreach ($request->input('editStudentsList', []) as $studentid) {
+            $student = Student::find($studentid);
+            $section->students()->save($student);
+        }
 
         $this->createLog(
             'Edit Section',

@@ -15,7 +15,7 @@ class Professor extends Model
     }
 
     public function courses() {
-        return $this->belongsToMany(Course::class)->withTimestamps()->withPivot('BaseClass_Id');
+        return $this->hasMany(BaseClass::class, 'Professor_Id');
     }
 
     public function organizations() {

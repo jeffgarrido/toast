@@ -32,6 +32,18 @@
                     </div>
 
                     <div class="form-group">
+                        <div class="col-lg-12">
+                            <select id="editStudentsList" multiple="multiple" name="editStudentsList[]">
+                                @foreach($students as $student)
+                                    <option value="{{ $student->Student_Id}}" {{ $section->students->contains($student) ? 'selected="selected"': '' }}>
+                                        {{$student->LastName}}, {{$student->FirstName}} {{$student->MiddleName}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2 text-right">
                             <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                             <button type="reset" class="btn btn-info">Clear Form</button>

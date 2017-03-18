@@ -100,11 +100,11 @@ function resetUserPassword(id){
     if (xmlHttp) {
         xmlHttp.open("GET", "/users/" + id + "/resetpassword", true);
         xmlHttp.onreadystatechange = function () {
+            alert(xmlHttp.readyState + ' ' + xmlHttp.status)
             if (isXmlReady(xmlHttp)) {
                 document.getElementById("editUserWrapper").innerHTML = this.responseText;
                 $('#editUserWrapper').ready(function() {
                     $('#resetPasswordModal').modal();
-
                 });
                 delete xmlHttp;
                 xmlHttp = null;
@@ -183,11 +183,18 @@ function editSectionDetails(id){
 
     if (xmlHttp) {
         xmlHttp.open("GET", "/sections/" + id + "/edit", true);
-
         xmlHttp.onreadystatechange = function () {
             if (isXmlReady(xmlHttp)) {
                 document.getElementById("editSectionWrapper").innerHTML = this.responseText;
                 $('#editSectionWrapper').ready(function() {
+                    $(document).ready(function() {
+                        $('#editStudentsList').bootstrapDualListbox({
+                            nonSelectedListLabel: 'All Students',
+                            selectedListLabel: 'Selected Student/s',
+                            preserveSelectionOnMove: false,
+                            moveOnSelect: true,
+                        });
+                    });
                     $('#editSectionModal').modal();
                 });
                 delete xmlHttp;

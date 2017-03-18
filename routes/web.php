@@ -42,7 +42,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('courses', 'CourseController');
     //</editor-fold>
 
-    //<editor-fold desc="EventController Routes">
+    //<editor-fold desc="<!-- EventController Routes -->">
     Route::resource('events', 'EventController', ['except' => ['create']]);
     //</editor-fold>
 
@@ -54,7 +54,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/dashboard', 'HomeController@index');
     //</editor-fold>
 
-    //<editor-fold desc="<!-- OrganizationController Routes for Student-->">
+    //<editor-fold desc="<!-- OrganizationController Routes for Student -->">
     Route::resource('organizations', 'OrganizationController', ['except' => ['create']]);
 
     Route::get('organizations/add_member/{organization}', 'OrganizationController@studentList');
@@ -62,7 +62,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::post('populate_members/{organization}', 'OrganizationController@populateMemberList');
     //</editor-fold>
 
-    //<editor-fold desc="<!-- OrganizationController Routes for Admin-->">
+    //<editor-fold desc="<!-- OrganizationController Routes for Admin -->">
     Route::resource('organizations_admin', 'AdminOrgController', ['except' => ['create']]);
 
     Route::get('organizations_admin/{organization}/home', 'AdminOrgController@showOrganization');
@@ -88,7 +88,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('sections', 'SectionController');
     //</editor-fold>
 
-    //<editor-fold desc="<!-- StudentController Routes -->">
+    //<editor-fold desc="<!-- Student Controller -->">
     Route::resource('students', 'StudentController', ['except' => ['create']]);
     //</editor-fold>
 

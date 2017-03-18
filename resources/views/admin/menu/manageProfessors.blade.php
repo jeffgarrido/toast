@@ -11,6 +11,9 @@
             <div class="col-lg-12">
                 <h1 class="page-header">
                     Manage Professors
+                    <button class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#addProfessor">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i> Add Professor
+                    </button>
                 </h1>
                 <ol class="breadcrumb">
                     <li>
@@ -37,7 +40,7 @@
                         <th>Contact Number</th>
                         <th>Email</th>
                         <th>Birthday</th>
-                        <th>Actions</th>
+                        <th class="th-fit">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,7 +53,7 @@
                             <td>{{$professor->Phone}}</td>
                             <td>{{$professor->Email}}</td>
                             <td>{{\Carbon\Carbon::parse($professor->Birthday)->format('M d, Y')}}</td>
-                            <td>
+                            <td class="td-fit">
                                 {{ Form::open(array('url' => '/professors/' . $professor->Professor_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
                                     <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editProfessorDetails({{ $professor->Professor_Id }})">
                                         <span class="fa fa-pencil" aria-hidden="true"></span> Edit
@@ -73,9 +76,6 @@
             </div>
         </div><!-- Professor table row -->
 
-        <button class="btn btn-success" data-toggle="modal" data-target="#addProfessor">
-            <i class="fa fa-user-plus" aria-hidden="true"></i> Add Professor
-        </button>
     </div><!-- container fluid -->
 
     <!--<editor-fold desc="Modal for adding professor">-->
@@ -99,7 +99,7 @@
                         <div class="form-group">
                             <label for="MiddleName" class="col-lg-4 control-label" >Middle Name</label>
                             <div class="col-lg-7">
-                                <input class="form-control input-md" id="MiddleName" name="MiddleName" placeholder="Mother's Maiden Name" type="text" required/>
+                                <input class="form-control input-md" id="MiddleName" name="MiddleName" placeholder="Mother's Maiden Name" type="text"/>
                             </div>
                         </div>
 

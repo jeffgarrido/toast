@@ -149,9 +149,9 @@ class StudentController extends Controller
             if ($p3_ave_ctr) {
                 $evaluation->pivot->P3 = $p3 / $p3_ave_ctr;
             }
-            $evaluation->pivot->Evaluation = $p1 + $p2 + $p3;
+            $evaluation->pivot->Evaluation = ($p1 + $p2 + $p3) /3;
+            $evaluation->pivot->update();
         }
-
     }
 
     /**

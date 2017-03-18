@@ -20,9 +20,6 @@
                         <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
                     </li>
                     <li>
-                        <i class="fa fa-edit"></i> Manage Classes
-                    </li>
-                    <li>
                         <i class="fa fa-server"></i> Manage Sections
                     </li>
                 </ol>
@@ -51,7 +48,7 @@
                             <td>{{$section->Code}}</td>
                             <td>{{$section->AcademicYearStart . ' - ' . $section->AcademicYearEnd}}</td>
                             <td class="td-fit">
-                                {{ Form::open(array('url' => '/sections/' . $section->Section_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
+                                {{ Form::open(array('url' => '/sections/' . $section->Section_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
                                 <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editSectionDetails({{ $section->Section_Id }})">
                                     <span class="fa fa-pencil" aria-hidden="true"></span> Edit
                                 </button>
@@ -110,6 +107,30 @@
                                 <input class="form-control input-md" id="AcademicYearEnd" name="AcademicYearEnd" placeholder="{{ $year + 1 }}" type="number" value="{{ $year+1 }}" required/>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <select id="studentsList" multiple="multiple" name="studentsList[]">
+                                    @foreach($students as $student)
+                                        <option value="{{ $student->Student_Id}}">
+                                            {{$student->LastName}}, {{$student->FirstName}} {{$student->MiddleName}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <script>
+                            $(document).ready(function() {
+                                $('#studentsList').bootstrapDualListbox({
+                                    nonSelectedListLabel: 'All Students',
+                                    selectedListLabel: 'Selected Student/s',
+                                    preserveSelectionOnMove: false,
+                                    moveOnSelect: true,
+                                });
+                            });
+                        </script>
+
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2 text-right">
                                 <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>

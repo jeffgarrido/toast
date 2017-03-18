@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AuditLog;
 use App\Professor;
+use App\Student;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -92,9 +93,10 @@ class ProfessorController extends Controller
     public function show($id)
     {
         $professor = Professor::find($id);
-        $courses = $professor->classes();
+        $courses = $professor->courses()->get();
+//        dd($courses);
 
-        return view('admin.show.showProfessor', compact('professor'));
+        return view('admin.show.showProfessor', compact('professor', 'courses', 'students'));
     }
 
     /**

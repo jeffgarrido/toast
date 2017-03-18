@@ -98,7 +98,7 @@
             <!--<editor-fold desc="Professors list and script">-->
             <div class="col-lg-7">
                 <div class="form-group">
-                    <select id="professorsList" multiple="multiple" name="professorsList[]" required>
+                    <select id="professorsList" multiple="multiple" name="professorsList[]">
                         @foreach($professors as $professor)
                             <option value="{{ $professor->Professor_Id }}">
                                 {{ $professor->LastName. ", " . $professor->FirstName . " " . $professor->MiddleName}}
