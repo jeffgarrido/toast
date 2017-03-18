@@ -11,11 +11,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">
                     Manage Professors
-<<<<<<< HEAD
                     <button class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#addProfessor">
-=======
-                    <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addProfessor">
->>>>>>> 6198f634fad1ec2fd0bf0cbc81b717edd18d0b86
                         <i class="fa fa-user-plus" aria-hidden="true"></i> Add Professor
                     </button>
                 </h1>

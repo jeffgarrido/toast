@@ -119,7 +119,38 @@ class ClassController extends Controller
     {
         $class = _Class::find($id);
 
-        $class->students()->sync($request->input('studentList', []));
+//        dd($class->baseClass->requirements()->get()->load('students'));
+
+//        foreach ($class->baseClass->requirements()->get() as $requirement) {
+//
+//        }
+
+        $detachedStudents = $class->students()->whereNotIn('students.Student_Id', $request->input('studentList', []))->get();
+
+        if($detachedStudents->count()){
+            foreach ($class->requirements()->get() as $requirement) {
+                $requirement->students()->detach($detachedStudents);
+            }
+        }
+
+        $studentIds = $class->students()->sync($request->input('studentList', []));
+        
+        foreach ($studentIds['attached'] as $studentId) {
+            $student = Student::find($studentId);
+            foreach ( as $item) {
+                
+            }
+        }
+
+        foreach ($class->baseClass->requirements()->get() as $requirement) {
+            $requirement->students()->attach($class->students()->get());
+            foreach ($requirement->outcomes()->get() as $outcome){
+                $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+                $eval->students()->attach($class->students()->get());
+            }
+        }
+
+        dd($class->students()->get()->load('requirements'));
 
         return redirect('/class/' . $class->Class_Id);
     }

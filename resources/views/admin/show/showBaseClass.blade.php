@@ -63,7 +63,7 @@
                                 <td class="td-fit">
                                     <div class="pull-right">
                                         {{ Form::open(array('url' => '/class/' . $baseClass->BaseClass_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
-                                        <a href="/class/{{ $baseClass->BaseClass_Id }}/edit" class="btn btn-warning" aria-hidden="true">
+                                        <a href="/class/{{ $class->pivot->Class_Id}}/edit" class="btn btn-warning" aria-hidden="true">
                                             <span class="fa fa-pencil" aria-hidden="true"></span> Edit
                                         </a>
                                         <button type="submit" class="btn btn-danger button-delete" aria-hidden="true">

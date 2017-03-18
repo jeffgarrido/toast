@@ -11,7 +11,7 @@
                 <div class="col-md-12">
                     <h1 class="page-header">
                         Manage User
-                        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addAdminUser">
+                        <button class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#addAdminUser">
                             <i class="fa fa-user-plus" aria-hidden="true"></i> Add Admin Account
                         </button>
                     </h1>
@@ -39,7 +39,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Access Level</th>
-                            <th>Actions</th>
+                            <th class="th-fit">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,7 +51,7 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->Access_Level}}</td>
-                                <td>
+                                <td class="td-fit">
                                     {{ Form::open(array('url' => '/users/' . $user->id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
                                     <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editUserDetails({{ $user->id }})">
                                         <span class="fa fa-pencil" aria-hidden="true"></span> Edit

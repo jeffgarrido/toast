@@ -237,8 +237,7 @@
 </div>
 
 <script>
-    $('.outcomeList').multiselect({
-    });
+    $('.outcomeList').multiselect();
 </script>
 
 @endsection

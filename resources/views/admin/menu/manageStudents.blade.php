@@ -11,7 +11,7 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         Manage Students
-                        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addStudent">
+                        <button class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#addStudent">
                             <i class="fa fa-user-plus" aria-hidden="true"></i> Add Student
                         </button>
                     </h1>
