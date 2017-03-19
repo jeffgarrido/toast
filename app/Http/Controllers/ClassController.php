@@ -193,23 +193,23 @@ class ClassController extends Controller
             $grade->SemestralGrade = 0;
             foreach ($student->requirements()->get() as $requirement) {
                 if ($requirement->Term == 1) {
-                    $grade->PrelimGrade += ($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight;
+                    $grade->PrelimGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
                 } elseif ($requirement->Term == 2) {
-                    $grade->FinalGrade += ($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1)) * $requirement->Weight;
+                    $grade->FinalGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
                 }
-                $grade->SemestralGrade = $grade->PrelimGrade * 0.5 + $grade->FinalGrade * 0.5;
+                $grade->SemestralGrade = round($grade->PrelimGrade * 0.5 + $grade->FinalGrade * 0.5, 2);
                 foreach ($requirement->outcomes()->get() as $outcome){
                     $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
                     $evalPivot = $eval->students()->find($student->Student_Id)->pivot;
                     $evalScore = $requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1) * 100 ;
                     if ($evalScore < 40) {
                         $evalPivot->Evaluation = 1;
-                    } elseif ($evalScore >= 80) {
-                        $evalPivot->Evaluation = 4;
-                    } elseif ($evalScore >= 60) {
-                        $evalPivot->Evaluation = 3;
-                    } elseif ($evalScore >= 40) {
+                    } elseif ($evalScore < 60) {
                         $evalPivot->Evaluation = 2;
+                    } elseif ($evalScore < 80) {
+                        $evalPivot->Evaluation = 3;
+                    } else {
+                        $evalPivot->Evaluation = 4;
                     }
                     $evalPivot->update();
                 }
@@ -241,7 +241,61 @@ class ClassController extends Controller
             $grade->update();
         }
 
+        foreach ($students as $student) {
+            foreach ($student->studentOutcomes()->get()->load('performanceIndicators') as $outcome) {
+                $outcome->pivot->Evaluation = 0;
+                $outcome->pivot->P1 = 0;
+                $outcome->pivot->P2 = 0;
+                $outcome->pivot->P3 = 0;
+                $outcome->pivot->EventEval = 0;
+                $p1ctr = 0;
+                $p2ctr = 0;
+                $p3ctr = 0;
+                $eventCtr = 0;
 
+                foreach ($student->SOEvaluations()->get() as $soEval) {
+                    $index = $outcome->performanceIndicators->search($soEval->performanceIndicator);
+                    switch ($index) {
+                        case 0:
+                            $outcome->pivot->P1 += $soEval->pivot->Evaluation;
+                            $p1ctr++;
+                            break;
+                        case 1:
+                            $outcome->pivot->P2 += $soEval->pivot->Evaluation;
+                            $p2ctr++;
+                            break;
+                        case 2:
+                            $outcome->pivot->P3 += $soEval->pivot->Evaluation;
+                            $p3ctr++;
+                            break;
+                    }
+                }
+
+                $outcome->pivot->P1 = round($outcome->pivot->P1 / (($p1ctr == 0)? 1: $p1ctr), 2);
+                $outcome->pivot->P2 = round($outcome->pivot->P2 / (($p2ctr == 0)? 1: $p2ctr), 2);
+                $outcome->pivot->P3 = round($outcome->pivot->P3 / (($p3ctr == 0)? 1: $p3ctr), 2);
+
+                foreach ($student->events()->where('event_student.Attendance', '<>', 0)->get() as $studentEvent) {
+                    if($studentEvent->studentOutcomes()->get()->contains($outcome)) {
+                        $eventCtr++;
+                    }
+                }
+                $eventScore = $eventCtr / (($outcome->Event_Minimum == 0)? 1: $outcome->Event_Minimum) * 100;
+                if($eventScore < 40) {
+                    $outcome->pivot->EventEval = 1;
+                } elseif ($eventScore < 60) {
+                    $outcome->pivot->EventEval = 2;
+                }elseif ($eventScore < 80) {
+                    $outcome->pivot->EventEval = 3;
+                }else {
+                    $outcome->pivot->EventEval = 4;
+                }
+
+                $outcome->pivot->Evaluation = round(($outcome->pivot->P1 + $outcome->pivot->P2 + $outcome->pivot->P3 + $outcome->pivot->EventEval) /4, 2);
+
+                $outcome->pivot->update();
+            }
+        }
 
         return redirect('/class/'. $class->Class_Id);
     }
