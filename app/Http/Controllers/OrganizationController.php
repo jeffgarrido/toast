@@ -135,7 +135,8 @@ class OrganizationController extends Controller
 
     public function getAttendanceList($id) {
         $event = Event::find($id);
-        $students = $event->studentslist;
+        $students = $event->students;
+        dd($students);
         return view('organizationpages.attendancelist', compact('event', 'students'));
     }
 

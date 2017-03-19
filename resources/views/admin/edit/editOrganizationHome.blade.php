@@ -51,7 +51,7 @@
                     <div class="col-lg-12 row row-eq-height" style="margin-bottom: auto">
                             <div class="well well-sm col-lg-10" >
                                 <strong><h4>{{$announcement->Title}}</h4></strong>
-                                <p><font size="2">Date posted: {{$announcement->created_at}}</font></p>
+                                <p><font size="2">Date posted: {{date('F d, Y', strtotime($announcement->created_at))}}</font></p>
                                 <hr>
                                 <p>Content: {{$announcement->Announcement}}</p>
                             </div>
@@ -120,7 +120,7 @@
                                                 <div class="panel-footer">
                                                     {{--<a href="/guest_list/{{$event->Event_Id}}" role="button" class="btn btn-danger btn-block" style="margin-bottom: 5px" id="GuestList">Guest List</a>--}}
                                                     <button class="btn btn-danger btn-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList({{ $event->Event_Id }})">View Attendance</button>
-                                                    <button class="btn btn-danger btn-block" onclick="editEventDetails({{ $event->Event_Id }})" disabled>Edit Details</button>
+                                                    <button class="btn btn-danger btn-block" onclick="editEventDetails({{ $event->Event_Id }})">Edit Details</button>
                                                 </div>
                                             </div>
                                         </div>

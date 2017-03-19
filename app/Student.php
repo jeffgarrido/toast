@@ -14,8 +14,12 @@ class Student extends Model
         return $this->belongsTo(Section::class, 'Section_Id');
     }
 
+//    public function events() {
+//        return $this->belongsToMany(Event::class)->withPivot(array('PaymentStatus', 'Attendance'))->withTimestamps();
+//    }
+
     public function events() {
-        return $this->belongsToMany(Event::class)->withPivot(array('PaymentStatus', 'Attendance'))->withTimestamps();
+        return $this->belongsToMany(Event::class)->withTimestamps();
     }
 
     public function organizations() {

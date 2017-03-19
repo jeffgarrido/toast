@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Add new event</h4>
+                <h4 class="modal-title">Edit {{$event->Event_Name}}</h4>
             </div>
             <div class="modal-body">
                 {{ Form::open(array('url' => '/events/' . $event->Event_Id, 'method' => 'POST', 'class' => 'form-horizontal')) }}
@@ -48,6 +48,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save Event</button>
+                        <a href="/events/delete/{{$event->Event_Id}}" type="button" class="btn btn-danger pull-left">Delete Event</a>
                     </div>
                 </fieldset>
                 {{ Form::close() }}

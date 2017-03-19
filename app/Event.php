@@ -8,14 +8,14 @@ class Event extends Model
 {
     protected $primaryKey = 'Event_Id';
 
-    public function students() {
+    public function studentslist() {
 
         return $this->belongsToMany(Student::class)->withPivot(array('PaymentStatus', 'Attendance'))->withTimestamps();
     }
 
-    public function studentslist() {
+    public function students() {
 
-        return $this->belongsToMany(Student::class)->withPivot(array('PaymentStatus', 'Attendance'))->wherePivot('Attendance', '!=', 'null')->withTimestamps();
+        return $this->belongsToMany(Student::class)->withTimestamps();
 
     }
 

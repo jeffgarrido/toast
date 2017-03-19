@@ -102,6 +102,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('events', 'EventController', ['except' => ['create']]);
 
     Route::post('events/{event}','EventController@updateEvent');
+
+    Route::get('events/delete/{event}','EventController@deleteEvent');
     //</editor-fold>
 
     Route::get('course_details/{course}', 'CourseController@getDetails');

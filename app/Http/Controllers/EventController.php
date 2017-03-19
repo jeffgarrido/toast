@@ -100,7 +100,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 
     public function eventGuest($id){
@@ -131,6 +131,12 @@ class EventController extends Controller
         $event = Event::where('Event_Id',$id)->with('organization')->first();
         $event->Organization_Id = $event->organization->Organization_Id;
         $event->update($request->all());
+        return back();
+    }
+
+    public function deleteEvent($id){
+        $event = Event::find($id);
+        $event->delete();
         return back();
     }
 }
