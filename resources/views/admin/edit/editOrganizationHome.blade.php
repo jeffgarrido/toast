@@ -215,6 +215,16 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="Code" class="col-lg-4 control-label" >Student Outcomes</label>
+                            <div class="col-lg-7">
+                                <select class="form-control outcomeList" multiple="multiple" id="outcome" name="outcomeslist[]">
+                                    @foreach($outcomes as $outcome)
+                                        <option value="{{$outcome->Outcome_Id}}">{{ $outcome->Outcome_Code }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="Venue" class="col-md-4 control-label" >Venue</label>
                             <div class="col-lg-7">
                                 <input class="form-control input-md" id="Venue" name="Venue"  placeholder="Medicine Auditorium" type="text" required/>
@@ -224,6 +234,7 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save Event</button>
                         </div>
+
                     </fieldset>
                     {{ Form::close() }}
                 </div>
@@ -231,5 +242,11 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.outcomeList').multiselect({
+            maxHeight: 200,
+            buttonWidth: '100%'
+        });
+    </script>
 @endsection
 

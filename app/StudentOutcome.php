@@ -18,4 +18,5 @@ class StudentOutcome extends Model
         return $this->belongsToMany(Student::class, 'outcome_student',  'StudentOutcome_Id', 'Student_Id')->withPivot('Evaluation', 'P1', 'P2', 'P3');
     }
 
+
 }

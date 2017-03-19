@@ -75,7 +75,6 @@ class EventController extends Controller
     {
         $uid = Auth::user()->id;
         $event = new Event();
-
         $event->Organization_Id = $id;
         $event->Event_Name = $request->input('Event_Name');
         $event->Description = $request->input('Description');
@@ -87,6 +86,9 @@ class EventController extends Controller
         else $event->Status = "Approved";
 
         $event->save();
+
+        $event->studentOutcomes()->sync($request->input('outcomeslist', []));
+
         return back();
     }
 
