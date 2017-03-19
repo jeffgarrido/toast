@@ -77,6 +77,8 @@ class StudentController extends Controller
 
         $user->student()->save($student);
 
+        $student->studentOutcomes()->attach(StudentOutcome::all());
+
         $this->createLog(
             'Add Student',
             'Student Number: '.$request->input('StudentNumber').  '\n'.
@@ -207,6 +209,7 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $student = Student::find($id);
+        $student->studentOutcomes()->sync([]);
         $acc = $student->Account_Id;
         $user = User::find($acc);
 

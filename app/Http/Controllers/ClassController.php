@@ -120,15 +120,6 @@ class ClassController extends Controller
     {
         $class = _Class::find($id);
 
-        $students = Student::all();
-        $outcomes = StudentOutcome::all();
-
-        foreach ($students as $student) {
-            $student->studentOutcomes()->attach($outcomes);
-        }
-
-        dd('attach done');
-
 //        dd($class->baseClass->requirements()->get()->load('students'));
 
 //        foreach ($class->baseClass->requirements()->get() as $requirement) {
@@ -143,10 +134,9 @@ class ClassController extends Controller
         }
 
         $studentIds = $class->students()->sync($request->input('studentList', []));
-        
         foreach ($studentIds['attached'] as $studentId) {
             $student = Student::find($studentId);
-            $student->attach($class->requirements()->get());
+            $student->requirements()->attach($class->baseClass->requirements()->get());
         }
 
 //        foreach ($class->baseClass->requirements()->get() as $requirement) {
@@ -156,8 +146,6 @@ class ClassController extends Controller
 //                $eval->students()->attach($class->students()->get());
 //            }
 //        }
-
-        dd($class->students()->get()->load('requirements'));
 
         return redirect('/class/' . $class->Class_Id);
     }
