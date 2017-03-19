@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Organization;
+use App\Professor;
 use App\Student;
 use App\StudentOutcome;
 use Illuminate\Http\Request;
@@ -19,8 +21,8 @@ class AdminOrgController extends Controller
     public function index()
     {
         $organizations = Organization::with('professors')->get();
-
-        return view('admin.menu.manageOrganizations',compact('organizations'));
+        $profs = Professor::all();
+        return view('admin.menu.manageOrganizations',compact('organizations','profs'));
     }
 
     /**
@@ -41,7 +43,11 @@ class AdminOrgController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $organization = Organization::find($request->input('Organization_Id'))->first();
+        $organization->update($request->all());
+
+        return back();
     }
 
     /**
@@ -86,7 +92,12 @@ class AdminOrgController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $org = Organization::find($id);
+
+        $org->delete();
+
+
+        return back();
     }
 
     public function showOrganization($id){

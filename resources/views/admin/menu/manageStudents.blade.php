@@ -120,8 +120,10 @@
                                 <label for="Section" class="col-md-4 control-label">Section</label>
                                 <div class="col-lg-7">
                                     <select class="form-control" id="Section" name="Section">
-                                        <option value="Regular">Regular</option>
-                                        <option value="Irregular">Irregular</option>
+                                        <option disabled selected value> -- select a section -- </option>
+                                        @foreach($sections as $section)
+                                            <option value="{{$section->Section_Id}}">{{$section->Code}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
