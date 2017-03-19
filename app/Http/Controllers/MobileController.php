@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Organization;
+use App\Student;
 use Auth;
 use App\Event;
 use App\User;
@@ -63,8 +64,11 @@ class MobileController extends Controller
     /*
      * Log a student for attendance to an event
      */
-    public function logAttendance(Event $event, $studentToken) {
-        $guest = Student::where('StudentNumber', '=', $studentToken)->get()->first();
+    public function logAttendance(Request $request) {
+        $event = Event::findOrFail($request->input('event', 0));
+        $guest = Student::where('StudentNumber', '=', $request->input('token', 0))->get()->first();
+        dd($guest);
+
         try {
             if($guest == null) {
                 return response()->json([

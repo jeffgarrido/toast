@@ -10,6 +10,7 @@ use App\Score;
 use App\Section;
 use App\SOEvaluation;
 use App\Student;
+use App\StudentOutcome;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
@@ -119,16 +120,24 @@ class ClassController extends Controller
     {
         $class = _Class::find($id);
 
+        $students = Student::all();
+        $outcomes = StudentOutcome::all();
+
+        foreach ($students as $student) {
+            $student->studentOutcomes()->attach($outcomes);
+        }
+
+        dd('attach done');
+
 //        dd($class->baseClass->requirements()->get()->load('students'));
 
 //        foreach ($class->baseClass->requirements()->get() as $requirement) {
 //
 //        }
-
         $detachedStudents = $class->students()->whereNotIn('students.Student_Id', $request->input('studentList', []))->get();
 
         if($detachedStudents->count()){
-            foreach ($class->requirements()->get() as $requirement) {
+            foreach ($class->baseClass->requirements()->get() as $requirement) {
                 $requirement->students()->detach($detachedStudents);
             }
         }
@@ -137,18 +146,16 @@ class ClassController extends Controller
         
         foreach ($studentIds['attached'] as $studentId) {
             $student = Student::find($studentId);
-            foreach ( as $item) {
-                
-            }
+            $student->attach($class->requirements()->get());
         }
 
-        foreach ($class->baseClass->requirements()->get() as $requirement) {
-            $requirement->students()->attach($class->students()->get());
-            foreach ($requirement->outcomes()->get() as $outcome){
-                $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
-                $eval->students()->attach($class->students()->get());
-            }
-        }
+//        foreach ($class->baseClass->requirements()->get() as $requirement) {
+//            $requirement->students()->attach($class->students()->get());
+//            foreach ($requirement->outcomes()->get() as $outcome){
+//                $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+//                $eval->students()->attach($class->students()->get());
+//            }
+//        }
 
         dd($class->students()->get()->load('requirements'));
 

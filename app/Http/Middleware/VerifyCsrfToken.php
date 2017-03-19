@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\MobileController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
 class VerifyCsrfToken extends BaseVerifier
@@ -13,5 +14,6 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'mlogin',
+        'toast_api/log_attendance',
     ];
 }
