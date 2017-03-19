@@ -50,18 +50,18 @@
                     <!--<editor-fold desc="Class Table Head">-->
                     <thead>
                     <tr>
-                        <th class="th-fit">Student Number</th>
+                        <th class="th-fit">Student #</th>
                         <th>Name</th>
                         @foreach($class->baseClass->requirements()->where('Term', '=', 1)->get() as $requirement)
                             <th class="th-fit">{{$requirement->Name}}</th>
                         @endforeach
-                        <th class="th-fit">Prelim Grade</th>
+                        <th class="th-fit">PG</th>
                         @foreach($class->baseClass->requirements()->where('Term', '=', 2)->get() as $requirement)
                             <th class="th-fit">{{$requirement->Name}}</th>
                         @endforeach
-                        <th class="th-fit">Final Grade</th>
-                        <th class="th-fit">Semestral Grade</th>
-                        <th class="th-fit">Transmuted Grade</th>
+                        <th class="th-fit">FG</th>
+                        <th class="th-fit">SG</th>
+                        <th class="th-fit">TG</th>
                     </tr>
                     </thead>
                     <!--</editor-fold>-->

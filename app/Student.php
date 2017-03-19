@@ -43,6 +43,6 @@ class Student extends Model
     }
 
     public function studentOutcomes() {
-        return $this->belongsToMany(StudentOutcome::class, 'so_student', 'Student_Id', 'StudentOutcome_Id')->withPivot('Evaluation', 'P1', 'P2', 'P3');
+        return $this->belongsToMany(StudentOutcome::class, 'so_student', 'Student_Id', 'StudentOutcome_Id')->withPivot('Evaluation', 'P1', 'P2', 'P3', 'EventEval');
     }
 }
