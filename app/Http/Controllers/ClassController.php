@@ -90,7 +90,7 @@ class ClassController extends Controller
     {
         $class = _Class::find($id);
         $section = $class->section;
-        $students = $class->students()->get();
+        $students = $class->students()->get()->sortBy('LastName');
         $course = $class->baseClass->course;
         $professor = $class->baseClass->professor;
 
@@ -109,7 +109,7 @@ class ClassController extends Controller
         $course = $class->baseClass->course;
         $professor = $class->baseClass->professor;
         $section = $class->section()->first();
-        $students = Student::all();
+        $students = Student::all()->sortBy('LastName');
 
         return view('admin.edit.editClass', compact('class', 'course', 'professor', 'students', 'section'));
     }
@@ -135,6 +135,10 @@ class ClassController extends Controller
         if($detachedStudents->count()){
             foreach ($class->baseClass->requirements()->get() as $requirement) {
                 $requirement->students()->detach($detachedStudents);
+                foreach ($requirement->outcomes()->get() as $outcome){
+                    $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+                    $eval->students()->detach();
+                }
             }
         }
 
@@ -142,15 +146,13 @@ class ClassController extends Controller
         foreach ($studentIds['attached'] as $studentId) {
             $student = Student::find($studentId);
             $student->requirements()->attach($class->baseClass->requirements()->get());
+            foreach ($class->baseClass->requirements()->get() as $requirement){
+                foreach ($requirement->outcomes()->get() as $outcome) {
+                    $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+                    $eval->students()->attach($class->students()->get());
+                }
+            }
         }
-
-//        foreach ($class->baseClass->requirements()->get() as $requirement) {
-//            $requirement->students()->attach($class->students()->get());
-//            foreach ($requirement->outcomes()->get() as $outcome){
-//                $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
-//                $eval->students()->attach($class->students()->get());
-//            }
-//        }
 
         return redirect('/class/' . $class->Class_Id);
     }
@@ -163,9 +165,17 @@ class ClassController extends Controller
      */
     public function destroy($id)
     {
-        _Class::find($id)->delete();
+        $class = _Class::find($id);
 
-        return redirect('/classes');
+        foreach ($class->baseClass->requirements()->get() as $requirement) {
+            $requirement->students()->detach();
+        }
+
+        $baseClass = $class->baseClass;
+
+        $class->delete();
+
+        return redirect('/classes/' . $baseClass->BaseClass_Id);
     }
 
     public function updateScores(Request $request, _Class $class) {

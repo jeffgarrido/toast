@@ -130,9 +130,6 @@
                                                     </div>
                                                 </div>
                                             @endforeach
-                                            <script>
-                                                $('.outcomeList').multiselect();
-                                            </script>
 
                                             <div class="col-lg-12">
                                                 <div class="form-group">
@@ -237,7 +234,9 @@
 </div>
 
 <script>
-    $('.outcomeList').multiselect();
+    $('.outcomeList').multiselect({
+        includeSelectAllOption: true,
+    });
 </script>
 
 @endsection
