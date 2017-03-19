@@ -70,7 +70,12 @@ class ClassController extends Controller
         $class->Section_Id = $request->input('section');
         $class->save();
 
-        $class->students()->sync($request->input('studentsList', []));
+        $studentIds = $class->students()->sync($request->input('studentsList', []));
+
+        foreach ($studentIds['attached'] as $studentId) {
+            $student = Student::find($studentId);
+            $student->requirements()->attach($class->baseClass->requirements()->get());
+        }
 
         return redirect('/class/' . $class->Course_Id);
     }
