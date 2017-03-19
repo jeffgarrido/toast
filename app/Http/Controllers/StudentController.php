@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AuditLog;
 use App\Event;
 use App\Organization;
+use App\Section;
 use App\Student;
 use App\StudentOutcome;
 use App\User;
@@ -32,7 +33,8 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return view('admin.menu.manageStudents', compact('students'));
+        $sections = Section::all();
+        return view('admin.menu.manageStudents', compact('students','sections'));
     }
 
     /**
@@ -62,7 +64,7 @@ class StudentController extends Controller
         $student->PersonalEmail = $request->input('PersonalEmail');
         $student->Birthday = $request->input('Birthday');
         $student->AcademicStatus = $request->input('AcademicStatus');
-
+        $student->Section = $request->input('Section');
 //        dd($student);
 //        dd($request->input('Email'));
 

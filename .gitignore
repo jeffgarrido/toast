@@ -1,4 +1,9 @@
 /.idea/workspace.xml
 /vendor/composer/autoload_classmap.php
 .env
+<<<<<<< HEAD
 /.env
+.idea/inspectionProfiles/
+=======
+/.env
+>>>>>>> 09831655a5f75a8d978d784e7cdc3a22750b99d3
