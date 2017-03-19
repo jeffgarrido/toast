@@ -23,5 +23,9 @@ class Event extends Model
         return $this->belongsTo(Organization::class, 'Organization_Id');
     }
 
+    public function studentOutcomes() {
+        return $this->belongsToMany(StudentOutcome::class, 'outcome_event','Event_Id','Outcome_Id')->withTimestamps();
+    }
+
     protected $fillable  = array('Event_Name','Organization_Id','Event_Date','Start_Time','End_Time','Venue','Description',);
 }
