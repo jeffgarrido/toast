@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Announcement;
 use App\Event;
 use App\Organization;
 use App\Professor;
@@ -81,7 +82,17 @@ class AdminOrgController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $announcement = new Announcement();
+        $uid = Auth::user()->name;
+
+        $announcement->Organization_Id = $id;
+        $announcement->Title = $request->input('Title');
+        $announcement->Announcement = $request->input('Announcement');
+        $announcement->Uploaded_by = $uid;
+
+        $announcement->save();
+
+        return back();
     }
 
     /**
@@ -106,7 +117,9 @@ class AdminOrgController extends Controller
         $students = $org->students;
         $events = $org->events;
         $prof = $org->professors;
-        return view('admin.edit.editOrganizationHome', compact('$prof','org','events','students','outcomes'));
+        $announcements = Announcement::where('Organization_Id', $id)->get();
+
+        return view('admin.edit.editOrganizationHome', compact('$prof','org','events','students','outcomes','announcements'));
     }
 
     public function studentList(Organization $organization){

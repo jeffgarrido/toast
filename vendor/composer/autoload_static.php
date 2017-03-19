@@ -324,6 +324,7 @@ class ComposerStaticInit88d6170b807a87835d784446fcbaeadb
         'CreateCoursesTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_060240_create_courses_table.php',
         'CreateEventStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_140805_create_event_student_table.php',
         'CreateEventsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_133245_create_events_table.php',
+        'CreateOrganizationAnnouncementsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_19_194939_create_organization_announcements_table.php',
         'CreateOrganizationStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_22_120259_create_organization_student_table.php',
         'CreateOrganizationsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_22_112952_create_organizations_table.php',
         'CreateOutcomeEventTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_19_141536_create_outcome_event_table.php',
