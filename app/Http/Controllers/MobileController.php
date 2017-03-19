@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\AuditLog;
 use App\Organization;
 use App\Student;
 use Auth;
 use App\Event;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -67,7 +69,6 @@ class MobileController extends Controller
     public function logAttendance(Request $request) {
         $event = Event::findOrFail($request->input('event', 0));
         $guest = Student::where('StudentNumber', '=', $request->input('token', 0))->get()->first();
-        dd($guest);
 
         try {
             if($guest == null) {
@@ -111,5 +112,15 @@ class MobileController extends Controller
                 ]
             ]);
         }
+    }
+
+    private function createLog($action, $description = ""){
+        $log = new AuditLog();
+
+        $log->Account_ID = Auth::user()->id;
+        $log->Action = $action;
+        $log->Description = $description;
+
+        $log->save();
     }
 }
