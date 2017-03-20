@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PerformanceIndicator;
+use App\SOEvaluation;
 use App\StudentOutcome;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -85,7 +86,7 @@ class StudentOutcomeController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

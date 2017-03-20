@@ -75,11 +75,6 @@
                 </script>
             </div>
         </div><!-- Professor table row -->
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 6198f634fad1ec2fd0bf0cbc81b717edd18d0b86
     </div><!-- container fluid -->
 
     <!--<editor-fold desc="Modal for adding professor">-->
