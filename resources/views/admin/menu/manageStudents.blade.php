@@ -54,7 +54,7 @@
                                 <td>{{$student->PersonalEmail}}</td>
                                 <td>{{\Carbon\Carbon::parse($student->Birthday)->format('M d, Y')}}</td>
                                 <td>
-                                    {{ Form::open(array('url' => '/students/' . $student->Student_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
+                                    {{ Form::open(array('url' => '/students/' . $student->Student_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
                                     <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editStudentDetails({{ $student->Student_Id }})">
                                         <span class="fa fa-pencil" aria-hidden="true"></span> Edit
                                     </button>
@@ -91,7 +91,7 @@
                         {{ Form::open(array('url' => '/students', 'method' => 'POST', 'class' => 'form-horizontal')) }}
                         <fieldset>
                             <div class="form-group">
-                                <label for="FirstName" class="col-md-4 control-label" >Student Number</label>
+                                <label for="StudentNumber" class="col-md-4 control-label" >Student Number</label>
                                 <div class="col-lg-7">
                                     <input class="form-control input-md" id="StudentNumber" name="StudentNumber" placeholder="ex. 2017010203" type="number" required/>
                                 </div>

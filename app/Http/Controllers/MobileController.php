@@ -63,10 +63,18 @@ class MobileController extends Controller
         ]);
     }
 
+    public function fetchStudent(Request $request) {
+        dd($request);
+        $student = Student::where('StudentNumber', '=', $studentNumber);
+
+        return $student;
+    }
+
     /*
      * Log a student for attendance to an event
      */
     public function logAttendance(Request $request) {
+        dd($request);
         $event = Event::findOrFail($request->input('event', 0));
         $guest = Student::where('StudentNumber', '=', $request->input('token', 0))->get()->first();
 

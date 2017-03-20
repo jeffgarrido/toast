@@ -31,11 +31,13 @@ class HomeController extends Controller
 
         if(Auth::user()->Access_Level == 'Student') {
 
-            $students = Student::where('Account_Id', Auth::user()->id)->first();
+            $student = Student::where('Account_Id', Auth::user()->id)->first();
 
-            $organizations = $students->organizations()->get();
+            $student->load('studentOutcomes');
 
-            return view('studentpages.menu.dashboard', compact('user', 'organizations'));
+            $organizations = $student->organizations()->get();
+
+            return view('studentpages.menu.dashboard', compact('user', 'organizations', 'student'));
         }
         elseif (Auth::user()->Access_Level == 'Admin'){
             $nav = 'navAdminDashboard';

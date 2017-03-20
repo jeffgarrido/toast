@@ -92,6 +92,10 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('students', 'StudentController', ['except' => ['create']]);
     //</editor-fold>
 
+    //<editor-fold desc="<!-- Student Controller -->">
+    Route::resource('outcomes', 'StudentOutcomeController', ['except' => ['create']]);
+    //</editor-fold>
+
     //<editor-fold desc="<!-- UserContoller Routes -->">
     Route::resource('users', 'UserController', ['except' => ['create']]);
     Route::get('/users/{user}/resetpassword', 'UserController@resetPass');
@@ -187,5 +191,7 @@ Route::group(['prefix' => 'toast_api', 'middleware' => 'auth:api'], function() {
     Route::get('fetch_organizations', 'MobileController@getOrganizations');
 
     Route::post('log_attendance', 'MobileController@logAttendance');
+
+    Route::get('fetch_student', 'MobileController@fetchStudent');
 });
 //</editor-fold>
