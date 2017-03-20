@@ -20,7 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($students as $student)
+                        @foreach ($event->students()->where('event_student.Attendance', '<>', 0)->get() as $student)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $student->StudentNumber }}</td>
@@ -28,7 +28,7 @@
                             <td>{{ $student->FirstName }}</td>
                             <td>{{ $student->pivot->Attendance }}</td>
                         </tr>
-                    @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
