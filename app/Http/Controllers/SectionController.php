@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\View;
 
 class SectionController extends Controller
 {
-    private $nav = 'navManageClasses';
+    private $nav = 'navManageSections';
 
     //<editor-fold desc="Construct">
     function __construct()

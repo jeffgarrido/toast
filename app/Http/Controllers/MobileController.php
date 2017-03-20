@@ -64,10 +64,9 @@ class MobileController extends Controller
     }
 
     public function fetchStudent(Request $request) {
-        dd($request);
-        $student = Student::where('StudentNumber', '=', $studentNumber);
+        $student = Student::where('StudentNumber', '=', $request->input('token'))->get()->load('studentOutcomes');
 
-        return $student;
+        return $student->toJson();
     }
 
     /*
