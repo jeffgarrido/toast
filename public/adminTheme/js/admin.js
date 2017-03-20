@@ -326,6 +326,12 @@ $(document).ready(function() {
         }
     });
 
+    $('.record-details-professor').click(function(e) {
+        if(!$(e.target).hasClass('button-delete')) {
+            window.location = $(this).data('href');
+        }
+    });
+
     $('.form-delete').submit(function() {
         return confirm('Are you sure to delete record?');
     });

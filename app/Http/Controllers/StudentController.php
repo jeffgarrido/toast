@@ -20,7 +20,7 @@ class StudentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('student');
+        $this->middleware('auth');
 
         View::share('nav', $this->nav);
     }
@@ -111,7 +111,6 @@ class StudentController extends Controller
     public function show($id)
     {
         $student = Student::find($id);
-
         return view('admin.show.showStudent', compact('student'));
     }
 

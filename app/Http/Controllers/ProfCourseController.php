@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
+use App\Professor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProfStudentController extends Controller
+class ProfCourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class ProfStudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
-        return view('professor.menu.studentlist',compact('students'));
+
     }
 
     /**
@@ -48,8 +47,11 @@ class ProfStudentController extends Controller
      */
     public function show($id)
     {
-        $student = Student::find($id);
-        return view('professor.show.viewstudent', compact('student'));
+        $prof = Professor::where('Account_Id',$id)->first();
+//        $courses = $prof->courses->first()->course;
+//        dd($courses);
+        $courses = $prof->courses;
+        return view('professor.menu.courselist',compact('courses', 'prof'));
     }
 
     /**
@@ -60,7 +62,7 @@ class ProfStudentController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

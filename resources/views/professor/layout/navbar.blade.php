@@ -43,7 +43,7 @@
                 <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li id="navManageCourses">
-                <a href="/courses"><i class="fa fa-fw fa-book"></i> Courses</a>
+                <a href="/pcourses/{{Auth::user()->id}}"><i class="fa fa-fw fa-book"></i> Courses</a>
             </li>
             <li>
                 <a href="/classes"><i class="fa fa-fw fa-edit"></i> Classes</a>

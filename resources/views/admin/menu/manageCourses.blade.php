@@ -12,9 +12,6 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         <b class="fa fa-lg fa-book"></b> Courses
-                        <a href="/courses/create" class="btn btn-lg btn-success pull-right">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add Course
-                        </a>
                     </h1>
                     <ol class="breadcrumb">
                         <li>

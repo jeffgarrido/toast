@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
+use App\_Class;
+use App\BaseClass;
+use App\Course;
+use App\Professor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class ProfStudentController extends Controller
+class ProfClassController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +19,7 @@ class ProfStudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
-        return view('professor.menu.studentlist',compact('students'));
+        //
     }
 
     /**
@@ -48,8 +51,10 @@ class ProfStudentController extends Controller
      */
     public function show($id)
     {
-        $student = Student::find($id);
-        return view('professor.show.viewstudent', compact('student'));
+        $course = Course::find($id);
+        $prof = Professor::where('Account_Id',Auth::user()->id)->first();
+        $baseclasses = $prof->courses->where('Course_Id',$id)->load('classes');
+        return view('professor.menu.classlist',compact('course','baseclasses'));
     }
 
     /**
@@ -60,7 +65,14 @@ class ProfStudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $class = _Class::find($id);
+        $section = $class->section;
+        $students = $class->students()->get()->sortBy('LastName');
+        $course = $class->baseClass->course;
+        $professor = $class->baseClass->professor;
+
+        return view('professor.show.viewclass', compact('class', 'students', 'professor', 'section', 'course'));
+
     }
 
     /**

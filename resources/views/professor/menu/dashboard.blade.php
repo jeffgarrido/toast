@@ -19,7 +19,6 @@
                 </ol>
             </div>
         </div><!-- page heading -->
-
     </div><!-- container fluid -->
 
 </div><!-- page-wrapper -->

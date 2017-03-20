@@ -14,7 +14,10 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li class="active">
-                            <i class="fa fa-dashboard"></i> Students
+                            <i class="fa fa-dashboard"></i> <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-users"></i> Students
                         </li>
                     </ol>
                 </div>
@@ -36,7 +39,7 @@
                         <tbody>
                         <?php $count = 1;?>
                         @foreach($students as $student)
-                            <tr class="record-details" data-href="/students/{{ $student->Student_Id }}">
+                            <tr class="record-details-professor" data-href="/pstudents/{{ $student->Student_Id }}">
                                 <td class="hidden">{{$student->Student_Id}}</td>
                                 <td>{{$count++}}</td>
                                 <td>{{$student->LastName}}, {{$student->FirstName}} {{$student->MiddleName}}</td>
