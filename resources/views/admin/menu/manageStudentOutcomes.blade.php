@@ -26,107 +26,107 @@
             </div>
             <!--</editor-fold>-->
 
-            <div class="row">
-                @foreach($studentOutcomes->chunk(4) as $outcomeChunk)
-                    <div class="col-lg-12 bottom-pad">
-                        @foreach($outcomeChunk as $outcome)
-                            <div class="col-lg-3">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="col-xs-8">
-                                                <div class="huge">{{ $outcome->Outcome_Code }}</div>
-                                            </div>
-                                            <div class="col-xs-4 text-right">
-                                                <div>
-                                                    <button type="button" class="btn btn-sm btn-warning btn-block" data-toggle="modal" data-target="#editOutcome{{ $outcome->Outcome_Id }}">
-                                                        <i class="fa fa-edit"></i> Edit
-                                                    </button>
-                                                </div>
-                                                <div>
-                                                    {{ Form::open(array('url' => '/outcomes/' . $outcome->Outcome_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
-                                                    <button type="submit" class="btn btn-sm btn-danger btn-delete btn-block">
-                                                        <i class="fa fa-remove"></i> Delete
-                                                    </button>
-                                                    {{ Form::close() }}
-                                                </div>
-                                            </div>
+            @foreach($studentOutcomes->chunk(4) as $outcomeChunk)
+                <div class="row">
+                    <div class="custom-flexbox">
+                    @foreach($outcomeChunk as $outcome)
+                        <div class="col-lg-3 flex-content">
+                            <div class="panel panel-default">
+                                <div class="panel-heading flex-stretch">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div class="huge">{{ $outcome->Outcome_Code }}</div>
                                         </div>
+                                        <div class="col-xs-9">
+                                            <small>{{ $outcome->Description }}</small>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <hr/>
+                                        {{ Form::open(array('url' => '/outcomes/' . $outcome->Outcome_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
+                                        <button type="button" class="btn btn-sm btn-warning btn-block" data-toggle="modal" data-target="#editOutcome{{ $outcome->Outcome_Id }}">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </button>
+                                        <button type="submit" class="btn btn-sm btn-danger btn-delete btn-block">
+                                            <i class="fa fa-remove"></i> Delete
+                                        </button>
+                                        {{ Form::close() }}
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!--<editor-fold desc="Modal for editing outcome">-->
-                            <div class="modal fade" id="editOutcome{{ $outcome->Outcome_Id }}" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title"><span class="fa fa-fw fa-compass" aria-hidden="true"></span> Edit Outcome</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            {{ Form::open(array('url' => '/outcomes/' . $outcome->Outcome_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <label for="Outcome_Code" class="col-md-4 control-label" >Outcome Code</label>
-                                                    <div class="col-lg-7">
-                                                        <input class="form-control input-md" id="Outcome_Code" name="Outcome_Code" value="{{ $outcome->Outcome_Code }}" required/>
-                                                    </div>
+                        <!--<editor-fold desc="Modal for editing outcome">-->
+                        <div class="modal fade" id="editOutcome{{ $outcome->Outcome_Id }}" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title"><span class="fa fa-fw fa-compass" aria-hidden="true"></span> Edit Outcome</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ Form::open(array('url' => '/outcomes/' . $outcome->Outcome_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label for="Outcome_Code" class="col-md-4 control-label" >Outcome Code</label>
+                                                <div class="col-lg-7">
+                                                    <input class="form-control input-md" id="Outcome_Code" name="Outcome_Code" value="{{ $outcome->Outcome_Code }}" required/>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group">
-                                                    <label for="Events_Minimum" class="col-md-4 control-label" >Minimum Events</label>
-                                                    <div class="col-lg-7">
-                                                        <input class="form-control input-md" id="Events_Minimum" name="Events_Minimum" type="number" min="0" value="{{ $outcome->Events_Minimum }}" required/>
-                                                    </div>
+                                            <div class="form-group">
+                                                <label for="Events_Minimum" class="col-md-4 control-label" >Minimum Events</label>
+                                                <div class="col-lg-7">
+                                                    <input class="form-control input-md" id="Events_Minimum" name="Events_Minimum" type="number" min="0" value="{{ $outcome->Events_Minimum }}" required/>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group">
-                                                    <label for="Description" class="col-lg-4 control-label" >Description</label>
-                                                    <div class="col-lg-7">
-                                                        <textarea class="form-control" rows="3" id="Description" name="Description">{{ $outcome->Description }}</textarea>
-                                                    </div>
+                                            <div class="form-group">
+                                                <label for="Description" class="col-lg-4 control-label" >Description</label>
+                                                <div class="col-lg-7">
+                                                    <textarea class="form-control" rows="3" id="Description" name="Description">{{ $outcome->Description }}</textarea>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group">
-                                                    <label for="P1Description" class="col-lg-4 control-label" >P1 Description</label>
-                                                    <div class="col-lg-7">
-                                                        <textarea class="form-control" rows="3" id="P1Description" name="P1Description">{{ $outcome->performanceIndicators[0]->Description }}</textarea>
-                                                    </div>
+                                            <div class="form-group">
+                                                <label for="P1Description" class="col-lg-4 control-label" >P1 Description</label>
+                                                <div class="col-lg-7">
+                                                    <textarea class="form-control" rows="3" id="P1Description" name="P1Description">{{ $outcome->performanceIndicators[0]->Description }}</textarea>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group">
-                                                    <label for="P2Description" class="col-lg-4 control-label" >P2 Description</label>
-                                                    <div class="col-lg-7">
-                                                        <textarea class="form-control" rows="3" id="P2Description" name="P2Description">{{ $outcome->performanceIndicators[1]->Description }}</textarea>
-                                                    </div>
+                                            <div class="form-group">
+                                                <label for="P2Description" class="col-lg-4 control-label" >P2 Description</label>
+                                                <div class="col-lg-7">
+                                                    <textarea class="form-control" rows="3" id="P2Description" name="P2Description">{{ $outcome->performanceIndicators[1]->Description }}</textarea>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group">
-                                                    <label for="P3Description" class="col-lg-4 control-label" >P3 Description</label>
-                                                    <div class="col-lg-7">
-                                                        <textarea class="form-control" rows="3" id="P3Description" name="P3Description">{{ $outcome->performanceIndicators[2]->Description }}</textarea>
-                                                    </div>
+                                            <div class="form-group">
+                                                <label for="P3Description" class="col-lg-4 control-label" >P3 Description</label>
+                                                <div class="col-lg-7">
+                                                    <textarea class="form-control" rows="3" id="P3Description" name="P3Description">{{ $outcome->performanceIndicators[2]->Description }}</textarea>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group">
-                                                    <div class="col-lg-10 col-lg-offset-2 text-right">
-                                                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                                                        <button type="reset" class="btn btn-info">Clear Form</button>
-                                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                                    </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-10 col-lg-offset-2 text-right">
+                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                                    <button type="reset" class="btn btn-info">Clear Form</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
                                                 </div>
-                                            </fieldset>
-                                            {{ Form::close() }}
-                                        </div>
+                                            </div>
+                                        </fieldset>
+                                        {{ Form::close() }}
                                     </div>
                                 </div>
                             </div>
-                            <!--</editor-fold>-->
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
+                        </div>
+                        <!--</editor-fold>-->
+                    @endforeach
+                </div>
+                </div>
+            @endforeach
 
             <!--<editor-fold desc="Modal for adding outcome">-->
             <div class="modal fade" id="addOutcome" tabindex="-1" role="dialog">

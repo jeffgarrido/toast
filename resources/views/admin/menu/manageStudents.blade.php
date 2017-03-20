@@ -40,7 +40,7 @@
                             <th>Contact Number</th>
                             <th>Email</th>
                             <th>Birthday</th>
-                            <th>Actions</th>
+                            <th class="th-fit">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -53,7 +53,7 @@
                                 <td>{{$student->Phone}}</td>
                                 <td>{{$student->PersonalEmail}}</td>
                                 <td>{{\Carbon\Carbon::parse($student->Birthday)->format('M d, Y')}}</td>
-                                <td>
+                                <td class="td-fit">
                                     {{ Form::open(array('url' => '/students/' . $student->Student_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
                                     <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editStudentDetails({{ $student->Student_Id }})">
                                         <span class="fa fa-pencil" aria-hidden="true"></span> Edit

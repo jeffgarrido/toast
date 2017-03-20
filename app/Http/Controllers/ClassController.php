@@ -179,6 +179,7 @@ class ClassController extends Controller
     }
 
     public function updateScores(Request $request, _Class $class) {
+
         foreach ($request->input('Score', []) as $item) {
             $score = Score::find($item);
             $score->Score = $request->input($item, 0);
@@ -186,6 +187,7 @@ class ClassController extends Controller
         }
 
         $students = $class->students()->get();
+
         foreach ($students as $student) {
             $grade = $student->pivot;
             $grade->PrelimGrade = 0;

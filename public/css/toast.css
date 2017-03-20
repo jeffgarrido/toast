@@ -42,14 +42,14 @@
     display:flex;
 }
 
-.custom-flexbox > div {
+.flex-content {
     display: flex;
     -webkit-flex-flow: row wrap;
     justify-content: space-between;
 }
 
-.flex-content {
-    flex: 100%;
+.flex-stretch {
+    min-height: 100%;
 }
 
 .dropbtn {
