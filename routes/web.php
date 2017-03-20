@@ -92,8 +92,12 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('students', 'StudentController', ['except' => ['create']]);
     //</editor-fold>
 
-    //<editor-fold desc="<!-- Student Controller -->">
+    //<editor-fold desc="<!-- Student Outcome Controller -->">
     Route::resource('outcomes', 'StudentOutcomeController', ['except' => ['create']]);
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- Professor's Controllers -->">
+    Route::resource('pstudents', 'ProfStudentController', ['except' => ['create']]);
     //</editor-fold>
 
     //<editor-fold desc="<!-- UserContoller Routes -->">

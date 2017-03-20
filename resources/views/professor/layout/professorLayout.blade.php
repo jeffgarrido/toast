@@ -9,6 +9,7 @@
 
             <div id="wrapper">
 
+
                 @include('professor.layout.navbar')
 
                 @yield('body')

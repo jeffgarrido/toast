@@ -101,8 +101,7 @@ class UserController extends Controller
         $this->createLog(
             'Add User',
             'Name: '.$user->name.  '\n'.
-            'Email: '.$user->email.  '\n'.
-            'Acces Level: '.$user->Access_Level.  '\n'
+            'Email: '.$user->email.  '\n'
         );
 
         return back();

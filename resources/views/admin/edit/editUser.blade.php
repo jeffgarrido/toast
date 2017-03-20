@@ -9,25 +9,12 @@
             <div class="modal-body">
                 {{ Form::open(array('url' => '/users/' . $user->id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
                 <fieldset>
-                    <div class="form-group">
+                    <div class="form-group -align-center">
                         <label for="name" class="col-md-4 control-label" >Name</label>
                         <div class="col-lg-7">
                             <input class="form-control input-md" id="name" name="name" value="{{$user->name}}" placeholder="Given Name" type="text" required/>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="Access_Level" class="col-md-4 control-label" >Access Level</label>
-                        <div class="col-lg-7">
-                            <select class="numbers form-control" id="Access_Level" name="Access_Level">
-                                <option id="Student" value="Student" {{ (strcasecmp($user->Access_Level, 'Student') == 0) ? 'selected="selected"': '' }}>Student</option>
-                                <option id="Professor" value="Professor" {{ (strcasecmp($user->Access_Level, 'Professor') == 0) ? 'selected="selected"': '' }}>Professor</option>
-                                <option id="Admin" value="Admin" {{ (strcasecmp($user->Access_Level, 'Admin') == 0) ? 'selected="selected"': '' }}>Admin</option>
-                            </select>
-                            {{--<input class="form-control input-md" id="Access_Level" name="Access_Level" value="Admin" type="email" required/>--}}
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label for="email" class="col-md-4 control-label" >Email</label>
                         <div class="col-lg-7  input-group">
