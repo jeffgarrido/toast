@@ -143,6 +143,11 @@ class StudentOutcomeController extends Controller
      */
     public function destroy($id)
     {
+        $studentOutcome = StudentOutcome::find($id);
 
+        $studentOutcome->performanceIndicators()->delete();
+        $studentOutcome->delete();
+
+        return back();
     }
 }

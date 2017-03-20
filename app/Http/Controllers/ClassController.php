@@ -275,6 +275,7 @@ class ClassController extends Controller
                 $outcome->pivot->P2 = round($outcome->pivot->P2 / (($p2ctr == 0)? 1: $p2ctr), 2);
                 $outcome->pivot->P3 = round($outcome->pivot->P3 / (($p3ctr == 0)? 1: $p3ctr), 2);
 
+                dd($student->events()->get());
                 foreach ($student->events()->where('event_student.Attendance', '<>', 0)->get() as $studentEvent) {
                     if($studentEvent->studentOutcomes()->get()->contains($outcome)) {
                         $eventCtr++;

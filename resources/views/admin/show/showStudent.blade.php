@@ -1,4 +1,4 @@
-@extends('studentpages.layout.studentLayout')
+@extends('admin.layout.adminLayout')
 
 @section('body')
 
@@ -10,11 +10,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    <i class="fa fa-fw fa-dashboard"></i>Student Dashboard <small>Statistics Overview</small>
+                    <i class="fa fa-fw fa-child"></i>{{ $student->LastName }}, {{ $student->FirstName }} {{ $student->MiddleName }}
                 </h1>
                 <ol class="breadcrumb">
-                    <li class="active">
+                    <li>
                         <i class="fa fa-dashboard"></i> Dashboard
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-child"></i> {{ $student->LastName }}, {{ substr($student->FirstName, 0,1) }}
                     </li>
                 </ol>
             </div>
@@ -64,12 +67,4 @@
 
 </div><!-- page-wrapper -->
 
-@endsection
-
-@section('organizations')
-    @foreach($organizations as $org)
-        <li>
-            <a href="/organizations/{{$org->Organization_Id}}"><i class="fa fa-fw fa-edit"></i> {{$org->Organization_Name}}</a>
-        </li>
-    @endforeach
 @endsection

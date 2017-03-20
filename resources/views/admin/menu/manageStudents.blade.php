@@ -31,7 +31,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <table id="StudentTable" class="table table-stripe table-condensed table-responsive table-bordered compact" width="100%" cellspacing="0">
+                    <table id="StudentTable" class="table table-hover table-condensed table-responsive table-bordered compact" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th class="hidden">Id</th>
@@ -46,7 +46,7 @@
                         <tbody>
                         <?php $count = 1;?>
                         @foreach($students as $student)
-                            <tr>
+                            <tr class="record-details" data-href="/students/{{ $student->Student_Id }}">
                                 <td class="hidden">{{$student->Student_Id}}</td>
                                 <td>{{$count++}}</td>
                                 <td>{{$student->LastName}}, {{$student->FirstName}} {{$student->MiddleName}}</td>
