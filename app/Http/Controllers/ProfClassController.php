@@ -6,6 +6,7 @@ use App\_Class;
 use App\BaseClass;
 use App\Course;
 use App\Professor;
+use App\Score;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,7 @@ class ProfClassController extends Controller
      */
     public function show($id)
     {
+
         $course = Course::find($id);
         $prof = Professor::where('Account_Id',Auth::user()->id)->first();
         $baseclasses = $prof->courses->where('Course_Id',$id)->load('classes');
@@ -67,7 +69,11 @@ class ProfClassController extends Controller
     {
         $class = _Class::find($id);
         $section = $class->section;
-        $students = $class->students()->get()->sortBy('LastName');
+        $students = $class->students()->with(array(
+            'requirements' => function ($query) use ($class) {
+                $query->where('course_requirements.BaseClass_Id', '=', $class->BaseClass_Id);
+            },
+        ))->get()->sortBy('LastName');
         $course = $class->baseClass->course;
         $professor = $class->baseClass->professor;
 
@@ -82,9 +88,71 @@ class ProfClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, _Class $class)
     {
-        //
+        foreach ($request->input('Score', []) as $item) {
+            $score = Score::find($item);
+            $score->Score = $request->input($item, 0);
+            $score->update();
+        }
+
+        $students = $class->students()->get();
+
+        foreach ($students as $student) {
+            $grade = $student->pivot;
+            $grade->PrelimGrade = 0;
+            $grade->FinalGrade = 0;
+            $grade->SemestralGrade = 0;
+            foreach ($student->requirements()->get() as $requirement) {
+                if ($requirement->Term == 1) {
+                    $grade->PrelimGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
+                } elseif ($requirement->Term == 2) {
+                    $grade->FinalGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
+                }
+                $grade->SemestralGrade = round($grade->PrelimGrade * 0.5 + $grade->FinalGrade * 0.5, 2);
+                foreach ($requirement->outcomes()->get() as $outcome){
+                    $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+                    $evalPivot = $eval->students()->find($student->Student_Id)->pivot;
+                    $evalScore = $requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1) * 100 ;
+                    if ($evalScore < 40) {
+                        $evalPivot->Evaluation = 1;
+                    } elseif ($evalScore < 60) {
+                        $evalPivot->Evaluation = 2;
+                    } elseif ($evalScore < 80) {
+                        $evalPivot->Evaluation = 3;
+                    } else {
+                        $evalPivot->Evaluation = 4;
+                    }
+                    $evalPivot->update();
+                }
+            }
+
+            $semGrade = $grade->SemestralGrade;
+            if ($semGrade < 60) {
+                $grade->TransmutedGrade = 5.00;
+            }elseif ($semGrade >= 93) {
+                $grade->TransmutedGrade = 1.00;
+            } elseif ($semGrade >= 90) {
+                $grade->TransmutedGrade = 1.25;
+            } elseif ($semGrade >= 87) {
+                $grade->TransmutedGrade = 1.50;
+            } elseif ($semGrade >= 82) {
+                $grade->TransmutedGrade = 1.75;
+            } elseif ($semGrade >= 79) {
+                $grade->TransmutedGrade = 2.00;
+            } elseif ($semGrade >= 74) {
+                $grade->TransmutedGrade = 2.25;
+            } elseif ($semGrade >= 71) {
+                $grade->TransmutedGrade = 2.50;
+            } elseif ($semGrade >= 66) {
+                $grade->TransmutedGrade = 2.75;
+            } elseif ($semGrade >= 60) {
+                $grade->TransmutedGrade = 3.00;
+            }
+
+            $grade->update();
+        }
+        return back();
     }
 
     /**
