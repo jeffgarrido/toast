@@ -104,7 +104,7 @@ class AdminOrgController extends Controller
     public function destroy($id)
     {
         $org = Organization::find($id);
-dd($org);
+        dd($org);
         $org->delete();
 
 

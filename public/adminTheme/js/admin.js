@@ -276,14 +276,16 @@ function getAttendanceList(id){
         alert("Error. Cant create xml object!");
     }
     //--end
-
     if (xmlHttp) {
         xmlHttp.open("GET", "/attendance_list/" + id, true);
 
         xmlHttp.onreadystatechange = function () {
+
             if (isXmlReady(xmlHttp)) {
                 document.getElementById("addEventWrapper").innerHTML = this.responseText;
+
                 $(document).ready(function() {
+
                     $('#attendanceTable').DataTable( {
                         dom: 'Bfrtip',
                         buttons: [
@@ -305,7 +307,6 @@ function getAttendanceList(id){
                 delete xmlHttp;
                 xmlHttp = null;
             }
-
         };
         xmlHttp.send(null);
     }

@@ -119,7 +119,7 @@
                                                 </div>
                                                 <div class="panel-footer">
                                                     {{--<a href="/guest_list/{{$event->Event_Id}}" role="button" class="btn btn-danger btn-block" style="margin-bottom: 5px" id="GuestList">Guest List</a>--}}
-                                                    <button class="btn btn-danger btn-block" id="{{ $event->Event_Id }}" onclick="getAttendanceList({{ $event->Event_Id }})">View Attendance</button>
+                                                    <button class="btn btn-danger btn-block viewlist" onclick="getAttendanceList({{ $event->Event_Id }})">View Attendance</button>
                                                     <button class="btn btn-danger btn-block" onclick="editEventDetails({{ $event->Event_Id }})">Edit Details</button>
                                                 </div>
                                             </div>
@@ -186,7 +186,6 @@
     <!--<editor-fold desc="Modal for editing professor">-->
     <div id="addEventWrapper"></div>
     <!--</editor-fold>-->
-
 
     <!--<editor-fold desc="Modal for adding Event">-->
     <div class="modal fade" id="addEventModal">
@@ -297,6 +296,10 @@
             </div>
         </div>
     </div>
+    <!--</editor-fold>-->
+
+    <!--<editor-fold desc="Modal for viewing attendance">-->
+    <div id="addEventWrapper"></div>
     <!--</editor-fold>-->
 
     <script>

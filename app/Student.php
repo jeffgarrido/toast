@@ -19,7 +19,7 @@ class Student extends Model
 //    }
 
     public function events() {
-        return $this->belongsToMany(Event::class)->withTimestamps();
+        return $this->belongsToMany(Event::class, 'event_student','Student_Id','Event_Id')->withPivot('Attendance')->withTimestamps();
     }
 
     public function organizations() {

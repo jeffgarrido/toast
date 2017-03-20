@@ -134,10 +134,16 @@ class OrganizationController extends Controller
     }
 
     public function getAttendanceList($id) {
+        $events = Event::all();
         $event = Event::find($id);
-        $students = $event->students;
-        dd($students);
-        return view('organizationpages.attendancelist', compact('event', 'students'));
+//        foreach ($events->where('Event_Id',$id) as $event){
+//            foreach ($event->students()->where('event_student.Attendance', '<>', 0)->get() as $studentEvent) {
+//
+//            }
+//        }
+//        dd($students);
+
+        return view('organizationpages.attendancelist', compact('event', '$events'));
     }
 
     public function downloadAttendanceList(Event $event) {
