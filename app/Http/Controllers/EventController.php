@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Student;
+use App\StudentOutcome;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -49,8 +50,10 @@ class EventController extends Controller
      */
     public function show($id)
     {
+        $outcomes = StudentOutcome::all();
+        $studentOutcomes = Event::where('Event_Id',$id)->with('studentOutcomes')->first()->studentOutcomes;
         $event = Event::where('Event_Id',$id)->with('organization')->first();
-        return view('admin.edit.editEvent', compact('event'));
+        return view('admin.edit.editEvent', compact('event','outcomes','studentOutcomes'));
     }
 
     /**
@@ -131,6 +134,10 @@ class EventController extends Controller
         $event = Event::where('Event_Id',$id)->with('organization')->first();
         $event->Organization_Id = $event->organization->Organization_Id;
         $event->update($request->all());
+
+        $event = new Event();
+        $event->Event_Id = $id;
+        $event->studentOutcomes()->sync($request->input('outcomeslist', []));
         return back();
     }
 

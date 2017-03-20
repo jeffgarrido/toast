@@ -255,6 +255,10 @@ function editEventDetails(id){
             if (isXmlReady(xmlHttp)) {
                 document.getElementById("addEventWrapper").innerHTML = this.responseText;
                 $('#addEventWrapper').ready(function() {
+                    $('.outcomeList').multiselect({
+                        maxHeight: 200,
+                        buttonWidth: '100%'
+                    });
                     $('#editEventModal').modal();
                 });
                 delete xmlHttp;

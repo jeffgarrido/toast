@@ -40,6 +40,22 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="Code" class="col-lg-4 control-label" >Student Outcomes</label>
+                        <div class="col-lg-7">
+                            <select class="form-control outcomeList" multiple="multiple" id="outcome" name="outcomeslist[]">
+                                @forelse($studentOutcomes as $so)
+                                    @foreach($outcomes as $outcome)
+                                        <option value="{{$outcome->Outcome_Id}}" {{ (strcasecmp($outcome->Outcome_Id, $so->Outcome_Id) == 0) ? 'selected="selected"': '' }}>{{ $outcome->Outcome_Code }}</option>
+                                    @endforeach
+                                @empty
+                                    @foreach($outcomes as $outcome)
+                                        <option value="{{$outcome->Outcome_Id}}">{{ $outcome->Outcome_Code }}</option>
+                                    @endforeach
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="Venue" class="col-md-4 control-label" >Venue</label>
                         <div class="col-lg-7">
                             <input class="form-control input-md" id="Venue" name="Venue" value="{{$event->Venue}}" placeholder="Medicine Auditorium" type="text" required/>

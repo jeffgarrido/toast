@@ -299,7 +299,7 @@
     <!--</editor-fold>-->
 
     <!--<editor-fold desc="Modal for viewing attendance">-->
-    <div id="addEventWrapper"></div>
+    <div id="editOrgWrapper"></div>
     <!--</editor-fold>-->
 
     <script>
