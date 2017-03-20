@@ -214,7 +214,6 @@
                 </div>
             @endforeach
         </div>
-
     </div><!-- container fluid -->
 
 </div><!-- page-wrapper -->
