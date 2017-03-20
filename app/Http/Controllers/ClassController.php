@@ -182,22 +182,26 @@ class ClassController extends Controller
         return redirect('/classes/' . $baseClass->BaseClass_Id);
     }
 
-    public function updateScores(Request $request, _Class $class) {
-
+    public function updateScores(Request $request, _Class $class)
+    {
         foreach ($request->input('Score', []) as $item) {
             $score = Score::find($item);
             $score->Score = $request->input($item, 0);
             $score->update();
         }
 
-        $students = $class->students()->get();
+        $students = $class->students()->with(array(
+            'requirements' => function ($query) use ($class) {
+                $query->where('course_requirements.BaseClass_Id', '=', $class->BaseClass_Id);
+            },
+        ))->get();
 
         foreach ($students as $student) {
             $grade = $student->pivot;
             $grade->PrelimGrade = 0;
             $grade->FinalGrade = 0;
             $grade->SemestralGrade = 0;
-            foreach ($student->requirements()->get() as $requirement) {
+            foreach ($student->requirements as $requirement) {
                 if ($requirement->Term == 1) {
                     $grade->PrelimGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
                 } elseif ($requirement->Term == 2) {
