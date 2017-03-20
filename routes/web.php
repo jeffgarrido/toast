@@ -90,15 +90,9 @@ Route::group(['middleware' => ['web']], function(){
 
     //<editor-fold desc="<!-- Student Controller -->">
     Route::resource('students', 'StudentController', ['except' => ['create']]);
-
-    Route::get('/student/{student}', 'StudentController@getStudent');
     //</editor-fold>
 
-<<<<<<< HEAD
     //<editor-fold desc="<!-- Student Outcome Controller -->">
-=======
-    //<editor-fold desc="<!-- Student Outcomes Controller -->">
->>>>>>> 1fdc8c27cf9bd249bf511dc7d0e723d4600e9869
     Route::resource('outcomes', 'StudentOutcomeController', ['except' => ['create']]);
     //</editor-fold>
 
