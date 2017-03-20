@@ -2,7 +2,6 @@
 <html>
 
 @include('includes.head')
-@yield('addhead')
 
 <body>
 

@@ -280,6 +280,7 @@ class ClassController extends Controller
                         $eventCtr++;
                     }
                 }
+
                 $eventScore = $eventCtr / (($outcome->Event_Minimum == 0)? 1: $outcome->Event_Minimum) * 100;
                 if($eventScore < 40) {
                     $outcome->pivot->EventEval = 1;

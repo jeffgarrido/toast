@@ -122,7 +122,6 @@ class StudentController extends Controller
             $p1_ave_ctr = 0;
             $p2_ave_ctr = 0;
             $p3_ave_ctr = 0;
-//            dd($student);
             echo 'Outcome: ' . $evaluation->Outcome_Code . '<br/>';
             foreach ($student->SOEvaluations()->get() as $SOEvaluation) {
                 $index = $evaluation->performanceIndicators->search($SOEvaluation->performanceIndicator);
