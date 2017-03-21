@@ -110,7 +110,6 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-
         $student = Student::find($id);
 
         foreach ($student->studentOutcomes()->get()->load('performanceIndicators') as $outcome) {
@@ -125,6 +124,9 @@ class StudentController extends Controller
             $eventCtr = 0;
 
             foreach ($student->SOEvaluations()->get() as $soEval) {
+                if($soEval->pivot->Evaluation == 0){
+                    continue;
+                }
                 $index = $outcome->performanceIndicators->search($soEval->performanceIndicator);
                 switch ($index) {
                     case 0:

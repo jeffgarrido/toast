@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Professor;
+use App\StudentOutcome;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
@@ -33,21 +35,39 @@ class HomeController extends Controller
 
             $student = Student::where('Account_Id', Auth::user()->id)->first();
 
-            $student->load('studentOutcomes');
+            $outcomes = $student->studentOutcomes()->with(array(
+                'events' => function($query) {
+                    $query->where('Event_Date', '>', Carbon::today()->toDateString());
+                },
+            ))->get();
 
             $organizations = $student->organizations()->get();
 
-            return view('studentpages.menu.dashboard', compact('user', 'organizations', 'student'));
+            return view('studentpages.menu.dashboard', compact('user', 'organizations', 'student', 'outcomes'));
         }
         elseif (Auth::user()->Access_Level == 'Admin'){
             $nav = 'navAdminDashboard';
-            return view('admin.menu.dashboard', compact('nav'));
+            $outcomes = StudentOutcome::with(array(
+                'students' => function($query) {
+                    $query->where('Evaluation', '>', 0)->where('Evaluation', '<=', 1);
+                }, 'events' => function($query) {
+                    $query->where('Event_Date', '>', Carbon::today()->toDateString());
+                },
+            ))->get();
+            return view('admin.menu.dashboard', compact('nav', 'outcomes'));
         }
         elseif (Auth::user()->Access_Level == 'Professor'){
             $user = User::find(Auth::user()->id);
             $professor = $user->professor()->first();
+            $outcomes = StudentOutcome::with(array(
+                'students' => function($query) {
+                    $query->where('Evaluation', '>', 0)->where('Evaluation', '<=', 1);
+                }, 'events' => function($query) {
+                    $query->where('Event_Date', '>', Carbon::today()->toDateString());
+                },
+            ))->get();
 
-            return view('professor.menu.dashboard', compact('professor'));
+            return view('professor.menu.dashboard', compact('professor', 'outcomes'));
 
         }
     }

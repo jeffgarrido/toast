@@ -212,7 +212,9 @@ class ClassController extends Controller
                     $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
                     $evalPivot = $eval->students()->find($student->Student_Id)->pivot;
                     $evalScore = $requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1) * 100 ;
-                    if ($evalScore < 40) {
+                    if ($evalScore <= 0) {
+                        $evalPivot->Evaluation = 0;
+                    } elseif ($evalScore < 40) {
                         $evalPivot->Evaluation = 1;
                     } elseif ($evalScore < 60) {
                         $evalPivot->Evaluation = 2;
