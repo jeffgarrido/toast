@@ -137,9 +137,14 @@
                                                                         {{ $course->Code }}: {{ $course->Title }}
                                                                     </div>
                                                                     <div class="panel-body">
-                                                                        {{ $requirement->Name }}: {{ $requirement->students->first()->pivot->Score }} / {{ $requirement->HPS }}
+                                                                        @if($requirement->students->count())
+                                                                            {{ $requirement->Name }}: {{ $requirement->students->first()->pivot->Score }} / {{ $requirement->HPS }}
+                                                                        @else
+                                                                            Not Graded Yet.
+                                                                        @endif
                                                                     </div>
                                                                 </div>
+
                                                             @endforeach
                                                         </div>
                                                     @endforeach
