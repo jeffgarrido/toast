@@ -16,6 +16,7 @@ class RequirementController extends Controller
      */
     public function index(BaseClass $baseClass)
     {
+        dd($baseClass);
         $course = $baseClass->course;
         $professor = $baseClass->professor;
 

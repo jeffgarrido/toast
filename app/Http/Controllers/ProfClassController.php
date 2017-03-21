@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\_Class;
 use App\BaseClass;
 use App\Course;
+use App\CourseRequirement;
 use App\Professor;
 use App\Score;
 use App\SOEvaluation;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +59,7 @@ class ProfClassController extends Controller
         $course = Course::find($id);
         $prof = Professor::where('Account_Id',Auth::user()->id)->first();
         $baseclasses = $prof->courses->where('Course_Id',$id)->load('classes');
+//        dd($baseclasses);
         return view('professor.menu.classlist',compact('course','baseclasses'));
     }
 
@@ -176,9 +179,10 @@ class ProfClassController extends Controller
     public function showRequirements($id){
         $baseClass = BaseClass::find($id);
 
+
         $course = $baseClass->course;
         $professor = $baseClass->professor;
-        dd($baseClass);
+
         switch ($course->Terms){
             case 2:
                 $terms = ['Prelim', 'Final'];
@@ -192,5 +196,32 @@ class ProfClassController extends Controller
         }
 
         return view('professor.edit.managerequirements', compact('baseClass', 'course', 'professor', 'terms'));
+    }
+
+    public function updateRequirements(Request $request, CourseRequirement $requirement){
+
+        $requirement->Name = $request->input('Name', '');
+        $requirement->HPS = $request->input('HPS', 0);
+        $requirement->Weight = $request->input('Weight', 0);
+        $requirement->Description = $request->input('Description', '');
+        $requirement->update();
+
+        $requirement->outcomes()->sync($request->input('outcomes', []));
+
+        return redirect('/pclasses/edit_requirements/' . $requirement->BaseClass_Id);
+    }
+
+    public function addRequirements(Request $request, BaseClass $baseClass){
+        $requirement = new CourseRequirement();
+
+        $requirement->Name = $request->input('Name');
+        $requirement->HPS = $request->input('HPS', 0);
+        $requirement->Weight = $request->input('Weight', 0);
+        $requirement->Description = $request->input('Description', '');
+        $requirement->Term = $request->input('Term');
+
+        $baseClass->requirements()->save($requirement);
+        
+        return redirect('/pclasses/edit_requirements/' . $requirement->BaseClass_Id);
     }
 }

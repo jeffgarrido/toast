@@ -20,7 +20,10 @@
                             <i class="fa fa-book"></i> <a href="/pcourses/{{Auth::user()->id}}">Courses</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-edit"></i> {{ $course->Code }}
+                            <i class="fa fa-edit"></i> <a href="/pclasses/{{ $course->Course_Id }}"> {{ $course->Title }}</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-calculator"></i> Requirements
                         </li>
                     </ol>
                 </div>
@@ -74,7 +77,7 @@
                                             <h3 class="modal-title" id="myModalLabel">Edit Requirement</h3>
                                         </div>
                                         <div class="modal-body">
-                                            {{ Form::open(array('url' => '/requirements/' . $requirement->Requirement_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
+                                            {{ Form::open(array('url' => '/pclasses/editnew_requirements/' . $requirement->Requirement_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
                                             <fieldset>
                                                 <input type="hidden" name="Term" value="{{ $i+1 }}"/>
                                                 <div class="form-group">
@@ -154,7 +157,7 @@
                                         <h3 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i> Add Requirement</h3>
                                     </div>
                                     <div class="modal-body">
-                                        {{ Form::open(array('url' => '/requirements/' . $baseClass->BaseClass_Id, 'method' => 'POST', 'class' => 'form-horizontal')) }}
+                                        {{ Form::open(array('url' => '/pclasses/add_requirements/' . $baseClass->BaseClass_Id, 'method' => 'POST', 'class' => 'form-horizontal')) }}
                                         <fieldset>
                                             <input type="hidden" name="Term" value="{{ $i+1 }}"/>
                                             <div class="form-group">
