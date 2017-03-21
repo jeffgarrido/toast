@@ -32,11 +32,11 @@
         <div class="row">
             <div class="col-lg-12">
                 Legend:
-                <span class="label label-default">No Rating</span>
-                <span class="label label-danger">Developing</span>
-                <span class="label label-warning">Satisfactory</span>
-                <span class="label label-info">Above Average</span>
-                <span class="label label-success">Excellent</span>
+                <span class="label label-default">No Rating (0)</span>
+                <span class="label label-danger">Developing (0.01 - 1)</span>
+                <span class="label label-warning">Satisfactory (1.01 - 2)</span>
+                <span class="label label-info">Above Average (2.01 - 3)</span>
+                <span class="label label-success">Excellent (3.01 - 4)</span>
                 <hr/>
             </div>
         </div>
@@ -95,112 +95,65 @@
                                             </h2>
                                         </div>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="min-height: 40vh;">
                                         <div class="row">
-                                            <!--<editor-fold desc="Panel for P1">-->
-                                            <div class="col-lg-3">
-                                                @if($outcome->pivot->P1 <= 0)
-                                                <div class="panel panel-default">
-                                                @elseif($outcome->pivot->P1 <= 1)
-                                                <div class="panel panel-danger">
-                                                @elseif($outcome->pivot->P1 <=2)
-                                                <div class="panel panel-warning">
-                                                @elseif($outcome->pivot->P1 <= 3)
-                                                <div class="panel panel-info">
-                                                @else
-                                                <div class="panel panel-success">
-                                                @endif
-                                                    <div class="panel-heading">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                P1
-                                                            </div>
-                                                            <div class="col-xs-9 text-right">
-                                                                Overall: {{ $outcome->pivot->P1 }}
-                                                            </div>
+                                            <div class="col-lg-12">
+                                                <!--<editor-fold desc="P1, P2, P3, Event tabs">-->
+                                                <ul class="nav nav-tabs">
+                                                    <li>
+                                                        <a href="#P1{{ $outcome->Outcome_Id }}" data-toggle="tab" aria-expanded="false">
+                                                            P1 <span class="badge">{{ $outcome->pivot->P1 }}</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#P2{{ $outcome->Outcome_Id }}" data-toggle="tab" aria-expanded="false">
+                                                            P2 <span class="badge">{{ $outcome->pivot->P2 }}</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#P3{{ $outcome->Outcome_Id }}" data-toggle="tab" aria-expanded="false">
+                                                            P3 <span class="badge">{{ $outcome->pivot->P3 }}</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#EventEval{{ $outcome->Outcome_Id }}" data-toggle="tab" aria-expanded="false">
+                                                            Event <span class="badge">{{ $outcome->pivot->EventEval }}</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div id="myTabContent" class="tab-content">
+                                                    @foreach($outcome->performanceIndicators as $pi)
+                                                        <div class="tab-pane fade" id="{{ $pi->Code . $outcome->Outcome_Id }}">
+                                                            <div class="well well-sm">Description: {{ $pi->Description }}</div>
+                                                            <legend>Breakdown of Performance Indicator</legend>
+                                                            @foreach($pi->requirements()->with(array(
+                                                                'students' => function($query) use ($student) {
+                                                                    $query->where('students.Student_Id', '=', $student->Student_Id);
+                                                                },
+                                                            ))->get() as $requirement)
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <?php $course = $requirement->baseClass()->get()->first()->course; ?>
+                                                                        {{ $course->Code }}: {{ $course->Title }}
+                                                                    </div>
+                                                                    <div class="panel-body">
+                                                                        @if($requirement->students->count())
+                                                                            {{ $requirement->Name }}: {{ $requirement->students->first()->pivot->Score }} / {{ $requirement->HPS }}
+                                                                        @else
+                                                                            Not Graded Yet.
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+
+                                                            @endforeach
                                                         </div>
+                                                    @endforeach
+                                                    <div class="tab-pane fade" id="EventEval{{ $outcome->Outcome_Id }}">
+
                                                     </div>
                                                 </div>
+                                                <!--</editor-fold>-->
                                             </div>
-                                            <!--</editor-fold>-->
-                                            <!--<editor-fold desc="Panel for P2">-->
-                                            <div class="col-lg-3">
-                                                @if($outcome->pivot->P2 <= 0)
-                                                <div class="panel panel-default">
-                                                @elseif($outcome->pivot->P2 <= 1)
-                                                <div class="panel panel-danger">
-                                                @elseif($outcome->pivot->P2 <=2)
-                                                <div class="panel panel-warning">
-                                                @elseif($outcome->pivot->P2 <= 3)
-                                                <div class="panel panel-info">
-                                                @else
-                                                <div class="panel panel-success">
-                                                @endif
-                                                    <div class="panel-heading">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                P2
-                                                            </div>
-                                                            <div class="col-xs-9 text-right">
-                                                                Overall: {{ $outcome->pivot->P2 }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--</editor-fold>-->
-                                            <!--<editor-fold desc="Panel for P3">-->
-                                            <div class="col-lg-3">
-                                                @if($outcome->pivot->P3 <= 0)
-                                                <div class="panel panel-default">
-                                                @elseif($outcome->pivot->P3 <= 1)
-                                                <div class="panel panel-danger">
-                                                @elseif($outcome->pivot->P3 <=2)
-                                                <div class="panel panel-warning">
-                                                @elseif($outcome->pivot->P3 <= 3)
-                                                <div class="panel panel-info">
-                                                @else
-                                                <div class="panel panel-success">
-                                                @endif
-                                                    <div class="panel-heading">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                P3
-                                                            </div>
-                                                            <div class="col-xs-9 text-right">
-                                                                Overall: {{ $outcome->pivot->P3 }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--</editor-fold>-->
-                                            <!--<editor-fold desc="Panel for Event Evaluation">-->
-                                            <div class="col-lg-3">
-                                                @if($outcome->pivot->EventEval <= 0)
-                                                <div class="panel panel-default">
-                                                @elseif($outcome->pivot->EventEval <= 1)
-                                                <div class="panel panel-danger">
-                                                @elseif($outcome->pivot->EventEval <=2)
-                                                <div class="panel panel-warning">
-                                                @elseif($outcome->pivot->EventEval <= 3)
-                                                <div class="panel panel-info">
-                                                @else
-                                                <div class="panel panel-success">
-                                                @endif
-                                                    <div class="panel-heading">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                Events
-                                                            </div>
-                                                            <div class="col-xs-9 text-right">
-                                                                Overall: {{ $outcome->pivot->EventEval }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--</editor-fold>-->
                                         </div>
                                     </div>
                                     <div class="modal-footer">
