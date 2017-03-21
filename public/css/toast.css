@@ -42,11 +42,6 @@
     display:flex;
 }
 
-.flex-content {
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    justify-content: space-between;
-}
 
 .flex-stretch {
     min-height: 100%;

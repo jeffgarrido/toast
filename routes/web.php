@@ -102,6 +102,9 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('pcourses', 'ProfCourseController', ['except' => ['create']]);
 
     Route::resource('pclasses', 'ProfClassController', ['except' => ['create']]);
+
+    Route::resource('porganization', 'ProfOrgController', ['except' => ['create']]);
+
     Route::get('pclasses/edit_requirements/{course}', 'ProfClassController@showRequirements');
     Route::patch('pclasses/editnew_requirements/{requirement}', 'ProfClassController@updateRequirements');
     Route::post('pclasses/add_requirements/{baseClass}', 'ProfClassController@addRequirements');

@@ -46,7 +46,6 @@ class HomeController extends Controller
         elseif (Auth::user()->Access_Level == 'Professor'){
             $user = User::find(Auth::user()->id);
             $professor = $user->professor()->first();
-
             return view('professor.menu.dashboard', compact('professor'));
 
         }

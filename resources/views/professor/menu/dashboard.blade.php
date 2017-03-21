@@ -22,5 +22,13 @@
     </div><!-- container fluid -->
 
 </div><!-- page-wrapper -->
+{{--{{dd($professor->organizations)}}--}}
+@endsection
 
+@section('organizations')
+    @foreach($professor->organizations as $org)
+        <li>
+            <a href="/porganization/{{$org->Organization_Id}}"><i class="fa fa-fw fa-edit"></i> {{$org->Organization_Name}}</a>
+        </li>
+    @endforeach
 @endsection

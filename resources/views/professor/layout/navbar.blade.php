@@ -46,13 +46,13 @@
                 <a href="/pcourses/{{Auth::user()->id}}"><i class="fa fa-fw fa-book"></i> Courses</a>
             </li>
             <li>
-                <a href="/classes"><i class="fa fa-fw fa-edit"></i> Classes</a>
-            </li>
-            <li>
-                <a href="/sections"><i class="fa fa-fw fa-server"></i> Sections</a>
-            </li>
-            <li>
                 <a href="/pstudents"><i class="fa fa-fw fa-users"></i> Students</a>
+            </li>
+            <li id="navManageUsers">
+                <a href="javascript:;" data-toggle="collapse" data-target="#usersSubMenu"><i class="fa fa-fw fa-users"></i> Organization <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="usersSubMenu" class="collapse">
+                    @yield('organizations')
+                </ul>
             </li>
 
         </ul>
