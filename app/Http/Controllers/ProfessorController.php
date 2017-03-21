@@ -17,7 +17,7 @@ class ProfessorController extends Controller
 
     function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('auth');
 
         View::share('nav', $this->nav);
     }
@@ -49,12 +49,11 @@ class ProfessorController extends Controller
         $professor->Email = $request->input('Email');
         $professor->Birthday = $request->input('Birthday');
 
-//        dd($request->input('Email'));
 
         $user = new User();
-        $user->name = $professor->Lastname . ', ' . $professor->FirstName . ' ' . $professor->Middlename;
+        $user->name = $professor->LastName . ', ' . $professor->FirstName . ' ' . $professor->MiddleName;
         $user->email = $professor->Email;
-        $user->password = bcrypt($professor->birthday);
+        $user->password = bcrypt($professor->Birthday);
         $user->Access_Level = 'Professor';
         $user->api_token = str_random(60);
 

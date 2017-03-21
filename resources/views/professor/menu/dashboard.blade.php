@@ -18,8 +18,7 @@
                     </li>
                 </ol>
             </div>
-        </div><!-- row -->
-
+        </div><!-- page heading -->
     </div><!-- container fluid -->
 
 </div><!-- page-wrapper -->

@@ -31,7 +31,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <table id="ProfTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
+                <table id="ProfTable" class="table table-hover table-condensed table-responsive table-bordered compact" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                         <th class="hidden">Id</th>
@@ -75,6 +75,7 @@
                 </script>
             </div>
         </div><!-- Professor table row -->
+
     </div><!-- container fluid -->
 
     <!--<editor-fold desc="Modal for adding professor">-->

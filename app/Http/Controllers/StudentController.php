@@ -20,7 +20,7 @@ class StudentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('student');
+        $this->middleware('auth');
 
         View::share('nav', $this->nav);
     }
@@ -65,8 +65,6 @@ class StudentController extends Controller
         $student->Birthday = $request->input('Birthday');
         $student->AcademicStatus = $request->input('AcademicStatus');
         $student->Section = $request->input('Section');
-//        dd($student);
-//        dd($request->input('Email'));
 
         $user = new User();
         $user->name = $student->LastName . ', ' . $student->FirstName . ' ' . $student->MiddleName;

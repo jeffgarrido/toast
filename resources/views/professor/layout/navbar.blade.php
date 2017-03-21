@@ -8,7 +8,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">{{ config('app.name', 'TOAsT') }}</a>
+        <a class="navbar-brand" href="/">
+            <img id="app_logo" class="col-sm-1" src="/images/T_Logo.png"/>
+            <div class="pull-right" style="padding: 15px;">{{ config('app.name', 'TOAsT') }}</div>
+        </a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
@@ -39,28 +42,17 @@
             <li id="navAdminDashboard">
                 <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
-            <li id="navManageUsers">
-                <a href="javascript:;" data-toggle="collapse" data-target="#usersSubMenu"><i class="fa fa-fw fa-users"></i> Manage Users <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="usersSubMenu" class="collapse">
-                    <li>
-                        <a href="/professors"><i class="fa fa-fw fa-male"></i> Professors</a>
-                    </li>
-                    <li>
-                        <a href="/students"><i class="fa fa-fw fa-child"></i> Students</a>
-                    </li>
-                    <li>
-                        <a href="/users"><i class="fa fa-fw fa-user"></i> User Accounts</a>
-                    </li>
-                </ul>
-            </li>
             <li id="navManageCourses">
-                <a href="/courses"><i class="fa fa-fw fa-book"></i> Courses</a>
+                <a href="/pcourses/{{Auth::user()->id}}"><i class="fa fa-fw fa-book"></i> Courses</a>
             </li>
             <li>
                 <a href="/classes"><i class="fa fa-fw fa-edit"></i> Classes</a>
             </li>
             <li>
                 <a href="/sections"><i class="fa fa-fw fa-server"></i> Sections</a>
+            </li>
+            <li>
+                <a href="/pstudents"><i class="fa fa-fw fa-users"></i> Students</a>
             </li>
 
         </ul>
