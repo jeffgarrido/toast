@@ -30,8 +30,8 @@
                 <div class="row">
                     <div class="custom-flexbox">
                     @foreach($outcomeChunk as $outcome)
-                        <div class="col-lg-3 flex-content">
-                            <div class="panel panel-default">
+                        <div class="col-lg-3 flex-content" >
+                            <div class="panel panel-default" style="min-height: 348px">
                                 <div class="panel-heading flex-stretch">
                                     <div class="row">
                                         <div class="col-xs-3">
@@ -47,7 +47,7 @@
                                         <button type="button" class="btn btn-sm btn-warning btn-block" data-toggle="modal" data-target="#editOutcome{{ $outcome->Outcome_Id }}">
                                             <i class="fa fa-edit"></i> Edit
                                         </button>
-                                        <button type="submit" class="btn btn-sm btn-danger btn-delete btn-block">
+                                        <button type="submit" class="btn btn-sm btn-danger btn-delete btn-block" style="bottom: 0;">
                                             <i class="fa fa-remove"></i> Delete
                                         </button>
                                         {{ Form::close() }}

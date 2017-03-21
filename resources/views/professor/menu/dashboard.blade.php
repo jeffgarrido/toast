@@ -154,5 +154,13 @@
             $('.eventsTable').DataTable();
         } );
     </script>
+</div><!-- page-wrapper -->
+@endsection
 
+@section('organizations')
+    @foreach($professor->organizations as $org)
+        <li>
+            <a href="/porganization/{{$org->Organization_Id}}"><i class="fa fa-fw fa-edit"></i> {{$org->Organization_Name}}</a>
+        </li>
+    @endforeach
 @endsection
