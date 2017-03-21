@@ -17,7 +17,7 @@
                             <i class="fa fa-dashboard"></i> <a href="/">Dashboard</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-book"></i> <a href="/pcourses">Courses</a>
+                            <i class="fa fa-book"></i> <a href="/pcourses/{{Auth::user()->id}}">Courses</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-edit"></i> {{ $course->Code }}
@@ -28,7 +28,7 @@
 
             <div class="row">
                 <div class="col-lg-12 text-right bottom-pad">
-                    <a href="/requirements/" class="btn btn-success"><i class="fa fa-search"></i> View Requirements</a>
+                    <a href="/pclasses/edit_requirements/{{$baseClass->BaseClass_Id}}" class="btn btn-success"><i class="fa fa-search"></i> View Requirements</a>
                 </div>
                 <div class="col-lg-12">
                     <table id="ClassTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">

@@ -9,28 +9,24 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        <b class="fa fa-lg fa-edit"></b> {{ $course->Code }}: {{ $course->Title }}
+                        <b class="fa fa-lg fa-users"></b> {{ $section->Code }}: {{ $course->Title }}
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-edit"></i> <a href="/classes">Classes</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-book"></i>  <a href="/courses/{{ $course->Course_Id }}">{{ $course->Code }}</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-male"></i> <a href="/classes/{{ $class->baseClass->BaseClass_Id }}">{{ $professor->LastName }}, {{ substr($professor->FirstName, 0,1) }}.</a>
+                            <i class="fa fa-dashboard"></i> <a href="/">Dashboard</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-edit"></i> {{ $section->Code }}
+                            <i class="fa fa-book"></i> <a href="/pcourses/{{Auth::user()->id}}">Courses</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-edit"></i> <a href="/pclasses/{{ $course->Course_Id }}"> {{ $course->Title }}</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-users"></i> {{ $section->Code }}
                         </li>
                     </ol>
                 </div>
             </div>
-            <!--</editor-fold>-->
 
             <div class="row">
                 <div class="col-lg-12">

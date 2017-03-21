@@ -102,6 +102,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('pcourses', 'ProfCourseController', ['except' => ['create']]);
 
     Route::resource('pclasses', 'ProfClassController', ['except' => ['create']]);
+    Route::get('pclasses/edit_requirements/{course}', 'ProfClassController@showRequirements');
     //</editor-fold>
 
     //<editor-fold desc="<!-- UserContoller Routes -->">

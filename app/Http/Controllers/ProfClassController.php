@@ -7,6 +7,7 @@ use App\BaseClass;
 use App\Course;
 use App\Professor;
 use App\Score;
+use App\SOEvaluation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -88,22 +89,28 @@ class ProfClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, _Class $class)
+    public function update(Request $request, $id)
     {
+        $class = _Class::find($id);
+
         foreach ($request->input('Score', []) as $item) {
             $score = Score::find($item);
             $score->Score = $request->input($item, 0);
             $score->update();
         }
 
-        $students = $class->students()->get();
+        $students = $class->students()->with(array(
+            'requirements' => function ($query) use ($class) {
+                $query->where('course_requirements.BaseClass_Id', '=', $class->BaseClass_Id);
+            },
+        ))->get();
 
         foreach ($students as $student) {
             $grade = $student->pivot;
             $grade->PrelimGrade = 0;
             $grade->FinalGrade = 0;
             $grade->SemestralGrade = 0;
-            foreach ($student->requirements()->get() as $requirement) {
+            foreach ($student->requirements as $requirement) {
                 if ($requirement->Term == 1) {
                     $grade->PrelimGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
                 } elseif ($requirement->Term == 2) {
@@ -164,5 +171,26 @@ class ProfClassController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showRequirements($id){
+        $baseClass = BaseClass::find($id);
+
+        $course = $baseClass->course;
+        $professor = $baseClass->professor;
+        dd($baseClass);
+        switch ($course->Terms){
+            case 2:
+                $terms = ['Prelim', 'Final'];
+                break;
+            case 3:
+                $terms = ['Prelim', 'Midterm', 'Final'];
+                break;
+            case 4:
+                $terms = ['Prelim', 'Midterm', 'Pre-final', 'Final'];
+                break;
+        }
+
+        return view('professor.edit.managerequirements', compact('baseClass', 'course', 'professor', 'terms'));
     }
 }
