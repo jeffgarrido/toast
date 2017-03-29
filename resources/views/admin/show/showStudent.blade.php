@@ -33,10 +33,10 @@
             <div class="col-lg-12">
                 Legend:
                 <span class="label label-default">No Rating (0)</span>
-                <span class="label label-danger">Developing (0.01 - 1)</span>
-                <span class="label label-warning">Satisfactory (1.01 - 2)</span>
-                <span class="label label-info">Above Average (2.01 - 3)</span>
-                <span class="label label-success">Excellent (3.01 - 4)</span>
+                <span class="label label-danger">Unsatisfactory (0.01 - 1)</span>
+                <span class="label label-warning">Developing (1.01 - 2)</span>
+                <span class="label label-info">Satisfactory (2.01 - 3)</span>
+                <span class="label label-success">Exemplary (3.01 - 4)</span>
                 <hr/>
             </div>
         </div>
@@ -57,7 +57,6 @@
                             @else
                             <div class="panel panel-success">
                             @endif
-
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-xs-3">
