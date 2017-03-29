@@ -64,9 +64,24 @@ class BaseClassController extends Controller
         $baseClass->Professor_Id = $request->input('ProfessorsList');
         $baseClass->save();
 
-        $baseClass->classes()->sync($request->input('sectionsList', []));
+        $syncData = $baseClass->classes()->sync($request->input('sectionsList', []));
 
-        return view('admin.show.showBaseClass', compact('baseClass'));
+        foreach ($syncData['attached'] as $sectionId) {
+            $students = Section::find($sectionId)->students()->where('AcademicStatus' , '=', 'Regular')->get();
+            $class = _Class::find($baseClass->classes()->where('sections.Section_Id', '=', $sectionId)->first()->pivot->Class_Id);
+            $class->students()->sync($students);
+            foreach($class->baseClass->requirements()->get() as $requirement){
+                $requirement->students()->attach($class->students()->get());
+                foreach ($requirement->outcomes()->get() as $outcome){
+                    $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+                    $eval->students()->attach($class->students()->get());
+                }
+            }
+        }
+
+        $classes = $baseClass->classes()->get();
+
+        return view('admin.show.showBaseClass', compact('baseClass','classes'));
     }
 
     /**
