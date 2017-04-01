@@ -96,22 +96,8 @@
                                     { "searchable": false, "targets": 5},
                                     { "searchable": false, "targets": 6}
                                 ]
-                            }
-                                /*,{
-                                dom: 'Bfrtip',
-                                buttons: [
-                                    {
-                                        extend: 'copy',
-                                        text: 'COPY'
-                                    },
-                                    {
-                                        extend: 'excel',
-                                        text: 'EXCEL'
-                                    }
-                                    , 'csv', 'pdf'
-                                ]
                             } );
-                        }*/ );
+                            )};
                     </script>
                 </div>
             </div><!-- Professor table row -->
