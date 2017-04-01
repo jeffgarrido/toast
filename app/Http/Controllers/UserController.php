@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\AuditLog;
+use Illuminate\Support\Facades\Redirect;
 use Mockery\CountValidator\Exception;
 
 class UserController extends Controller
@@ -60,7 +61,7 @@ class UserController extends Controller
             'Acces Level: '.$user->Access_Level.  '\n'
         );
 
-        return back();
+        return Redirect::back()->withErrors(['Successfully added a new admin account!!']);
     }
 
     /**
@@ -104,7 +105,7 @@ class UserController extends Controller
             'Email: '.$user->email.  '\n'
         );
 
-        return back();
+        return Redirect::back()->withErrors(["Update Successful."]);
     }
 
     /**
@@ -116,13 +117,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-
-        try{
-            $user->delete();
-            return back();
-        }catch(Exception $e){
-            dd($e);
-        }
+        $message = "Deletion of ".$user->name."'s account successful!'";
+        $user->delete();
+        return Redirect::back()->withErrors([$message]);
 
 
 
@@ -157,6 +154,6 @@ class UserController extends Controller
         }
 
         $user->update();
-        return back();
+        return Redirect::back()->withErrors(['Reset Password Successful!']);
     }
 }

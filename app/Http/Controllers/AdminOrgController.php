@@ -117,7 +117,6 @@ class AdminOrgController extends Controller
     public function destroy($id)
     {
         $org = Organization::find($id);
-        dd($org);
         $org->delete();
 
 
@@ -167,7 +166,7 @@ class AdminOrgController extends Controller
             'Adviser ID: '.$request->input('Description', 'No Description Provided').  '\n'
         );
 
-        return back();
+        return Redirect::back()->withErrors(["A new organization has been added!"]);
     }
 
     public function updateStaff(Organization $organization,Request $request)

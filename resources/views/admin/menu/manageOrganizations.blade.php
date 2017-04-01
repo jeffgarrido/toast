@@ -24,6 +24,17 @@
                     </ol>
                 </div>
             </div><!-- row -->
+            @if($errors->any())
+                <div class="alert alert-success alert-dismissable fade in" id="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{$errors->first()}}</strong>
+                </div>
+                <script>
+                    $("#alert").fadeTo(5000, 500).slideUp(500, function(){
+                        $("#alert").slideUp(500);
+                    });
+                </script>
+            @endif
 
             <div class="row">
                 <div class="col-lg-12">
