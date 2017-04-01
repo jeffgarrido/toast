@@ -32,7 +32,7 @@ class ExcelController extends Controller
                         $student->LastName = $results->lastname;
                         $student->Phone = $results->phone;
                         $student->PersonalEmail = $results->personalemail;
-                        $student->Birthday = !empty($student->Birthday) ? $results->birthday->format('Y-m-d') : $student->Birthday = '1900-01-01';
+                        !empty($results->birthday) ? $student->Birthday = $results->birthday->format('Y-m-d') : $student->Birthday = '1900-01-01';
                         $student->AcademicStatus = "Regular";
 
                         $user = new User();

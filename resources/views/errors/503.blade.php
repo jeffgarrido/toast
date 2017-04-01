@@ -22,25 +22,6 @@
 
             }
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                margin-bottom: 40px;
-            }
-
-            .info {
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-            }
         </style>
     </head>
     <body>
