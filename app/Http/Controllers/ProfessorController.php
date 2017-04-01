@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
 class ProfessorController extends Controller
@@ -79,7 +80,7 @@ class ProfessorController extends Controller
             'Access_Level: ' . 'Student' . '\n'
         );
 
-        return back();
+        return Redirect::back()->withErrors(['Successfully added a new student!!']);
     }
 
     /**

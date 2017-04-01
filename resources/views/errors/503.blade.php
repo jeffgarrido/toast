@@ -22,33 +22,13 @@
 
             }
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                margin-bottom: 40px;
-            }
-
-            .info {
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-                font-size: 72px;
-            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
                 <div class="title">
-                    <p class="info">Unauthorized user </p><br>
+                    <p class="info">{{$ex}}</p><br>
                     <a class="btn btn-default" href="/">go back to home page..</a>
                 </div>
             </div>

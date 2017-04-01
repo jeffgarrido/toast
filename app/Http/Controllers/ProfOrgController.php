@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Announcement;
 use App\Organization;
+use App\StudentOutcome;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProfOrgController extends Controller
 {
@@ -47,8 +51,15 @@ class ProfOrgController extends Controller
      */
     public function show($id)
     {
-        $organization = Organization::find($id);
-        dd($organization);
+        $user = User::find(Auth::user()->id);
+        $professor = $user->professor()->first();
+        $org = Organization::find($id);
+        $announcements = Announcement::where('Organization_Id', $id)->get();
+        $students = $org->students;
+        $events = $org->events;
+        $outcomes = StudentOutcome::all();
+
+        return view('professor.menu.organization',compact('professor','org','students','events','announcements','outcomes'));
     }
 
     /**

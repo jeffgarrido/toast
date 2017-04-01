@@ -51,17 +51,33 @@
                         <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">Announcements</a></li>
                         <li><a href="#eventss" data-toggle="tab" aria-expanded="true">Events</a></li>
                         <li><a href="#memberss" data-toggle="tab" aria-expanded="true">Members</a></li>
+                        <li><a href="#staff" data-toggle="tab" aria-expanded="true">Staff</a></li>
                     </ul>
                 </div>
             </div><!-- row -->
             <div id="myTabContent" class="tab-content">
                 <div class="col-lg-12 tab-pane fade active in" id="home">
-                    <h3 class="page-header">
-                        Announcements
-                        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#">
-                            <i class="fa fa-list-alt" aria-hidden="true"></i> Add Announcement
-                        </button>
-                    </h3>
+                    <div class="col-lg-12">
+                        <h3 class="page-header">
+                            Announcements
+                            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addAnnouncement">
+                                <i class="fa fa-list-alt" aria-hidden="true"></i> Add Announcement
+                            </button>
+                        </h3>
+                    </div>
+                    @foreach($announcements as $announcement)
+                        <div class="col-lg-12 row row-eq-height" style="margin-bottom: auto">
+                            <div class="well well-sm col-lg-10" >
+                                <strong><h4>{{$announcement->Title}}</h4></strong>
+                                <p><font size="2">Date posted: {{date('F d, Y', strtotime($announcement->created_at))}}</font></p>
+                                <hr>
+                                <p>Content: {{$announcement->Announcement}}</p>
+                            </div>
+                            <div class="well well-sm col-lg-2" style="height: auto">
+                                <p><font size="2">Posted by: {{$announcement->Uploaded_by}}</font></p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
                 <div class="tab-pane fade" id="eventss">
                     <div class="col-lg-12">
@@ -164,6 +180,35 @@
                         </script>
                     </div>
                 </div>
+                <div class="tab-pane fade" id="staff">
+                    <div class="col-lg-12" style="margin-top: -2ch">
+                        <h3 class="page-header">
+                            Staff Members
+                            <button class="btn btn-success pull-right" onclick="editStaff({{$org->Organization_Id}})">
+                                <i class="fa fa-users" aria-hidden="true"></i> Edit Staff
+                            </button>
+                        </h3>
+                    </div>
+                    <div class="col-lg-5" >
+                        <div class="well well-sm">
+                            <strong>Organization Adviser:</strong> {{$org->professors->FirstName}} {{$org->professors->MiddleName}} {{$org->professors->LastName}}
+                        </div>
+
+                        <div class="well well-sm">
+                            <strong>President: </strong>@foreach($students as $student)@if($student->pivot->Position == 'President') {{$student->FirstName}} {{$student->MiddleName}} {{$student->LastName}}@endif @endforeach
+                        </div>
+                        <div class="well well-sm">
+                            <strong>Vice President: </strong>@foreach($students as $student)@if($student->pivot->Position == 'Vice President') {{$student->FirstName}} {{$student->MiddleName}} {{$student->LastName}}@endif @endforeach
+                        </div>
+                        <div class="well well-sm">
+                            <strong>Treasurer: </strong> @foreach($students as $student)@if($student->pivot->Position == 'Treasurer') {{$student->FirstName}} {{$student->MiddleName}} {{$student->LastName}}@endif @endforeach
+                        </div>
+                        <div class="well well-sm">
+                            <strong>Secretary: </strong>@foreach($students as $student)@if($student->pivot->Position == 'Secretary') {{$student->FirstName}} {{$student->MiddleName}} {{$student->LastName}}@endif @endforeach
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
         </div><!-- container fluid -->
@@ -172,6 +217,49 @@
 
     <!--<editor-fold desc="Modal for editing professor">-->
     <div id="addEventWrapper"></div>
+    <!--</editor-fold>-->
+
+    <!--<editor-fold desc="Modal for editing staff">-->
+    <div id="editStaffWrapper"></div>
+    <!--</editor-fold>-->
+
+    <!--<editor-fold desc="Modal for adding Announcement">-->
+    <div class="modal fade" id="addAnnouncement">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add announcement</h4>
+                </div>
+                <div class="modal-body">
+                    {{ Form::open(array('url' => '/organizations_admin/' . $org->Organization_Id , 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="Title" class="col-md-4 control-label" >Subject/Title</label>
+                            <div class="col-lg-7">
+                                <input class="form-control input-md" id="Title" name="Title"  placeholder="IICS General Assembly" type="text" required/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Announcement" class="col-md-4 control-label" >Content</label>
+                            <div class="col-lg-7">
+                                <textarea class="input" cols="42" rows="7" placeholder="Announcement content" name="Announcement" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Announcement</button>
+                        </div>
+
+                    </fieldset>
+                    {{ Form::close() }}
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!--</editor-fold>-->
 
 

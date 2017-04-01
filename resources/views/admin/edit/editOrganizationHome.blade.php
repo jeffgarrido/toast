@@ -18,9 +18,6 @@
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="/">Dashboard</a>
                         </li>
-                        <li>
-                            <i class="fa fa-users"></i> Manage Users
-                        </li>
                         <li class="active">
                             <i class="fa fa-child"></i> <a href="/organizations_admin">Organizations</a>
                         </li>
@@ -34,6 +31,7 @@
                         <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">Announcements</a></li>
                         <li><a href="#eventss" data-toggle="tab" aria-expanded="true">Events</a></li>
                         <li><a href="#memberss" data-toggle="tab" aria-expanded="true">Members</a></li>
+                        <li><a href="#staff" data-toggle="tab" aria-expanded="true">Staff</a></li>
                     </ul>
                 </div>
             </div><!-- row -->
@@ -131,12 +129,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="memberss">
-                    <div class="col-lg-4" style="margin-top: 3ch">
-                        <div class="well well-sm">
-                            <strong>Organization Adviser:</strong> {{$org->professors->FirstName}} {{$org->professors->MiddleName}} {{$org->professors->LastName}}
-                        </div>
-                    </div>
-                    <div class="col-lg-12" style="margin-top: -5ch">
+                    <div class="col-lg-12" >
                         <h3 class="page-header">
                             Members
                             <a href="/add_member/{{$org->Organization_Id}}" class="btn btn-success pull-right" >
@@ -172,9 +165,45 @@
                         </table>
                         <script>
                             $(document).ready(function() {
-                                $('#memberList').DataTable();
+                                $('#memberList').DataTable( {
+                                    "columnDefs": [
+                                        { "searchable": false, "targets": 0},
+                                        { "searchable": false, "targets": 1},
+                                        { "searchable": false, "targets": 4},
+                                        { "searchable": false, "targets": 5}
+                                    ]
+                                });
                             } );
                         </script>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="staff">
+                    <div class="col-lg-12" style="margin-top: -2ch">
+                        <h3 class="page-header">
+                            Staff Members
+                            <button class="btn btn-success pull-right" onclick="editStaff({{$org->Organization_Id}})">
+                                <i class="fa fa-users" aria-hidden="true"></i> Edit Staff
+                            </button>
+                        </h3>
+                    </div>
+                    <div class="col-lg-5" >
+                        <div class="well well-sm">
+                            <strong>Organization Adviser:</strong> {{$org->professors->FirstName}} {{$org->professors->MiddleName}} {{$org->professors->LastName}}
+                        </div>
+
+                            <div class="well well-sm">
+                                <strong>President: </strong>@foreach($students as $student)@if($student->pivot->Position == 'President') {{$student->FirstName}} {{$student->MiddleName}} {{$student->LastName}}@endif @endforeach
+                            </div>
+                            <div class="well well-sm">
+                                <strong>Vice President: </strong>@foreach($students as $student)@if($student->pivot->Position == 'Vice President') {{$student->FirstName}} {{$student->MiddleName}} {{$student->LastName}}@endif @endforeach
+                            </div>
+                            <div class="well well-sm">
+                                <strong>Treasurer: </strong> @foreach($students as $student)@if($student->pivot->Position == 'Treasurer') {{$student->FirstName}} {{$student->MiddleName}} {{$student->LastName}}@endif @endforeach
+                            </div>
+                            <div class="well well-sm">
+                                <strong>Secretary: </strong>@foreach($students as $student)@if($student->pivot->Position == 'Secretary') {{$student->FirstName}} {{$student->MiddleName}} {{$student->LastName}}@endif @endforeach
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -300,6 +329,10 @@
 
     <!--<editor-fold desc="Modal for viewing attendance">-->
     <div id="editOrgWrapper"></div>
+    <!--</editor-fold>-->
+
+    <!--<editor-fold desc="Modal for editing staff">-->
+    <div id="editStaffWrapper"></div>
     <!--</editor-fold>-->
 
     <script>

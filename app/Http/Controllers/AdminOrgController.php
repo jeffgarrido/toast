@@ -59,7 +59,7 @@ class AdminOrgController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -70,7 +70,20 @@ class AdminOrgController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profs = Professor::all();
+        $org = Organization::find($id)->first();
+        $students = $org->students;
+        $president = "";
+        $vp = "";
+        $tres = "";
+        $sec = "";
+
+        foreach ($students as $student)if($student->pivot->Position == 'President')$president = $student;
+        foreach ($students as $student)if ($student->pivot->Position == 'Vice President')$vp = $student;
+        foreach ($students as $student)if ($student->pivot->Position == 'Treasurer')$tres = $student;
+        foreach ($students as $student)if ($student->pivot->Position == 'Secretary')$sec = $student;
+
+        return view('admin.edit.editStaff', compact('students','president','vp','tres','sec','org','profs'));
     }
 
     /**
@@ -104,7 +117,6 @@ class AdminOrgController extends Controller
     public function destroy($id)
     {
         $org = Organization::find($id);
-        dd($org);
         $org->delete();
 
 
@@ -153,6 +165,56 @@ class AdminOrgController extends Controller
             'Description: '.$request->input('Title').                                         '\n'.
             'Adviser ID: '.$request->input('Description', 'No Description Provided').  '\n'
         );
+
+        return Redirect::back()->withErrors(["A new organization has been added!"]);
+    }
+
+    public function updateStaff(Organization $organization,Request $request)
+    {
+        $organization->Adviser_Id = $request->input('Adviser');
+        $organization->save();
+
+        $president = $organization->students()->wherePivot('Position','=','President')->first();
+        $vice = $organization->students()->wherePivot('Position','=','Vice President')->first();
+        $treasurer = $organization->students()->wherePivot('Position','=','Treasurer')->first();
+        $secretary = $organization->students()->wherePivot('Position','=','Secretary')->first();
+
+        if($president) {
+            $president->pivot->Position = 'Member';
+            $president->pivot->update();
+        }
+
+        if($vice) {
+            $vice->pivot->Position = 'Member';
+            $vice->pivot->update();
+        }
+
+        if($treasurer) {
+            $treasurer->pivot->Position = 'Member';
+            $treasurer->pivot->update();
+        }
+
+        if($secretary) {
+            $secretary->pivot->Position = 'Member';
+            $secretary->pivot->update();
+        }
+
+        $student = $organization->students->where('Student_Id',$request->input('President'))->first();
+        $student->pivot->Position = 'President';
+        $student->pivot->update();
+
+        $student = $organization->students->where('Student_Id',$request->input('Vice_President'))->first();
+        $student->pivot->Position = 'Vice President';
+        $student->pivot->update();
+
+        $student = $organization->students->where('Student_Id',$request->input('Treasurer'))->first();
+        $student->pivot->Position = 'Treasurer';
+        $student->pivot->update();
+
+        $student = $organization->students->where('Student_Id',$request->input('Secretary'))->first();
+        $student->pivot->Position = 'Secretary';
+        $student->pivot->update();
+
 
         return back();
     }

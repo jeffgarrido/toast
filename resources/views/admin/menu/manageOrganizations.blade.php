@@ -24,6 +24,17 @@
                     </ol>
                 </div>
             </div><!-- row -->
+            @if($errors->any())
+                <div class="alert alert-success alert-dismissable fade in" id="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{$errors->first()}}</strong>
+                </div>
+                <script>
+                    $("#alert").fadeTo(5000, 500).slideUp(500, function(){
+                        $("#alert").slideUp(500);
+                    });
+                </script>
+            @endif
 
             <div class="row">
                 <div class="col-lg-12">
@@ -148,7 +159,7 @@
                             <div class="form-group">
                                 <label for="Adviser_Id" class="col-lg-2 control-label" style="text-align: left">Adviser Name</label>
                                 <div class="col-lg-10">
-                                    <select class="form-control" id="Adviser_Id" name="Adviser_Id">
+                                    <select class="form-control" id="Adviser_Id" name="Adviser_Id" required>
                                         <option disabled selected value> -- select a section -- </option>
                                         @foreach($profs as $prof)
                                             <option value="{{$prof->Professor_Id}}">{{$prof->FirstName}} {{$prof->LastName}}</option>

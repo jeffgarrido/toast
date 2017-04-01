@@ -100,7 +100,6 @@ function resetUserPassword(id){
     if (xmlHttp) {
         xmlHttp.open("GET", "/users/" + id + "/resetpassword", true);
         xmlHttp.onreadystatechange = function () {
-            alert(xmlHttp.readyState + ' ' + xmlHttp.status)
             if (isXmlReady(xmlHttp)) {
                 document.getElementById("editUserWrapper").innerHTML = this.responseText;
                 $('#editUserWrapper').ready(function() {
@@ -196,6 +195,34 @@ function editSectionDetails(id){
                         });
                     });
                     $('#editSectionModal').modal();
+                });
+                delete xmlHttp;
+                xmlHttp = null;
+            }
+
+        };
+        xmlHttp.send(null);
+    }
+
+    return false;
+}
+
+function editStaff(id){
+
+    var xmlHttp = getXmlInstance();
+    if (!xmlHttp) {
+        alert("Error. Cant create xml object!");
+    }
+    //--end
+    if (xmlHttp) {
+        xmlHttp.open("GET", "/organizations_admin/" + id + "/edit", true);
+        xmlHttp.onreadystatechange = function () {
+            if (isXmlReady(xmlHttp)) {
+
+                document.getElementById("editStaffWrapper").innerHTML = this.responseText;
+                $('#editStaffWrapper').ready(function() {
+
+                    $('#editStaffModal').modal();
                 });
                 delete xmlHttp;
                 xmlHttp = null;
@@ -317,6 +344,7 @@ function getAttendanceList(id){
 
     return false;
 }
+
 
 $(document).ready(function() {
 
