@@ -148,7 +148,7 @@
                             <div class="form-group">
                                 <label for="Adviser_Id" class="col-lg-2 control-label" style="text-align: left">Adviser Name</label>
                                 <div class="col-lg-10">
-                                    <select class="form-control" id="Adviser_Id" name="Adviser_Id">
+                                    <select class="form-control" id="Adviser_Id" name="Adviser_Id" required>
                                         <option disabled selected value> -- select a section -- </option>
                                         @foreach($profs as $prof)
                                             <option value="{{$prof->Professor_Id}}">{{$prof->FirstName}} {{$prof->LastName}}</option>

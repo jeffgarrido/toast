@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Announcement;
 use App\AuditLog;
 use App\Event;
 use App\Organization;
@@ -59,7 +60,7 @@ class OrganizationController extends Controller
 
         $uid = Auth::user()->id;
         $org = Organization::find($id);
-
+        $announcements = Announcement::where('Organization_Id', $id)->get();
         $students = $org->students;
         $status = $org->students->where('Account_Id',$uid)->first()->pivot->Position;
         $events = $org->events;
@@ -69,11 +70,11 @@ class OrganizationController extends Controller
 
         if($status == 'Member') {
 
-            return view('studentpages.menu.manageOrganizations', compact('org', 'organizations','status','events'));
+            return view('studentpages.menu.manageOrganizations', compact('org', 'organizations','status','events','students','count','announcements'));
         }
-        elseif ($status == 'Staff'){
+        else{
 
-            return view('studentpages.menu.manageOrganizationsStaff', compact('organizations','org','status','events','students','count'));
+            return view('studentpages.menu.manageOrganizationsStaff', compact('organizations','org','status','events','students','count','announcements'));
         }
 
 

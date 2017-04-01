@@ -181,6 +181,9 @@ return [
         //laravel collective
         Collective\Html\HtmlServiceProvider::class,
 
+        //excel import
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ],
 
     /*
@@ -232,6 +235,8 @@ return [
         //laravel collective
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

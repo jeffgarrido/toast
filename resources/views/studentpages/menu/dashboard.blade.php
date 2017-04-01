@@ -12,6 +12,7 @@
                     <h1 class="page-header">
                         <i class="fa fa-fw fa-child"></i>{{ $student->LastName }}, {{ $student->FirstName }} {{ $student->MiddleName }}
                     </h1>
+                    <p style="margin-left: 2ch">- Home page: displays the students' SO Progress</p>
                     <ol class="breadcrumb">
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="/dashboard">Dashboard</a>
@@ -184,9 +185,22 @@
                                     </div><!-- container fluid -->
 
                             </div><!-- page-wrapper -->
-                            <script>
-                                $(document).ready(function() {
-                                    $('.eventsTable').DataTable();
-                                } );
-                            </script>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.eventsTable').DataTable();
+        } );
+    </script>
+@endsection
+
+@section('organizations')
+    @foreach($organizations as $org)
+        <li>
+            <a href="/organizations/{{$org->Organization_Id}}"><i class="fa fa-fw fa-edit"></i> {{$org->Organization_Name}}</a>
+        </li>
+    @endforeach
 @endsection

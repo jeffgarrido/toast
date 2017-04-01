@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
 class StudentController extends Controller
@@ -68,7 +69,7 @@ class StudentController extends Controller
 
         $user = new User();
         $user->name = $student->LastName . ', ' . $student->FirstName . ' ' . $student->MiddleName;
-        $user->email = $student->PersonalEmail;
+        $user->email = $student->StudentNumber .'@ust.edu.ph';
         $user->password = bcrypt($student->Birthday);
         $user->Access_Level = 'Student';
         $user->api_token = str_random(60);
@@ -99,7 +100,7 @@ class StudentController extends Controller
             'Access_Level: ' . 'Student' . '\n'
         );
 
-        return back();
+        return Redirect::back()->withErrors(['msg', 'The Message']);
     }
 
     /**
@@ -273,13 +274,6 @@ class StudentController extends Controller
         return view('studentpages.orgpage', compact('organizations', 'events', 'orgs','students'));
     }
 
-    private function createLog($action, $description = ""){
-        $log = new AuditLog();
 
-        $log->Account_Id = Auth::user()->id;
-        $log->Action = $action;
-        $log->Description = $description;
 
-        $log->save();
-    }
 }

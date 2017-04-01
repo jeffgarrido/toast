@@ -72,6 +72,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::post('populate_members/{organization}', 'AdminOrgController@populateMemberList');
 
     Route::post('add_org', 'AdminOrgController@addOrg');
+
+    Route::post('organizations_admin/{organization}/staff','AdminOrgController@updateStaff');
     //</editor-fold>
 
     //<editor-fold desc="<!-- ProfessorController Routes -->">
@@ -94,6 +96,10 @@ Route::group(['middleware' => ['web']], function(){
 
     //<editor-fold desc="<!-- Student Outcome Controller -->">
     Route::resource('outcomes', 'StudentOutcomeController', ['except' => ['create']]);
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- Student Outcome Controller -->">
+    Route::resource('accounts', 'AccountController', ['except' => ['create']]);
     //</editor-fold>
 
     //<editor-fold desc="<!-- Professor's Controllers -->">
@@ -122,6 +128,12 @@ Route::group(['middleware' => ['web']], function(){
     Route::post('events/{event}','EventController@updateEvent');
 
     Route::get('events/delete/{event}','EventController@deleteEvent');
+    //</editor-fold>
+
+    //<editor-fold desc="<!-- ExcelController Routes -->">
+    Route::post('/getImport','ExcelController@getImport');
+
+    Route::get('exportFile','ExcelController@exportFile');
     //</editor-fold>
 
     Route::get('course_details/{course}', 'CourseController@getDetails');
