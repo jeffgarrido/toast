@@ -171,9 +171,11 @@ class ClassController extends Controller
     {
         $class = _Class::find($id);
 
-        foreach ($class->baseClass->requirements()->get() as $requirement) {
-            $requirement->students()->detach();
+        foreach ($class->students()->get() as $student) {
+            $student->requirements()->detach($class->baseClass-> requirements()->get());
         }
+
+        $class->students()->detach();
 
         $baseClass = $class->baseClass;
 
@@ -208,6 +210,7 @@ class ClassController extends Controller
                     $grade->FinalGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
                 }
                 $grade->SemestralGrade = round($grade->PrelimGrade * 0.5 + $grade->FinalGrade * 0.5, 2);
+
                 foreach ($requirement->outcomes()->get() as $outcome){
                     $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
                     $evalPivot = $eval->students()->find($student->Student_Id)->pivot;
@@ -224,6 +227,7 @@ class ClassController extends Controller
                         $evalPivot->Evaluation = 4;
                     }
                     $evalPivot->update();
+
                 }
             }
 

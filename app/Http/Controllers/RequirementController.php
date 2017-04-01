@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\_Class;
 use App\BaseClass;
 use App\CourseRequirement;
+use App\SOEvaluation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,6 +19,7 @@ class RequirementController extends Controller
     public function index(BaseClass $baseClass)
     {
         $course = $baseClass->course;
+        $outcomes = $course->outcomes()->get();
         $professor = $baseClass->professor;
 
         switch ($course->Terms){
@@ -31,7 +34,7 @@ class RequirementController extends Controller
                 break;
         }
 
-        return view('admin.menu.manageRequirements', compact('baseClass', 'course', 'professor', 'terms'));
+        return view('admin.menu.manageRequirements', compact('baseClass', 'course', 'professor', 'terms', 'outcomes'));
     }
 
     /**
@@ -62,9 +65,25 @@ class RequirementController extends Controller
 
         $baseClass->requirements()->save($requirement);
 
+        $requirement->outcomes()->sync($request->input('outcomes', []));
 
+        $classes = _Class::where('BaseClass_Id', $baseClass->BaseClass_Id)->with('students')->get();
 
-        return redirect('/requirements/' . $baseClass->BaseClass_Id);
+        foreach ($classes as $class) {
+            $students = $class->students;
+            foreach ($students as $student) {
+                $student->requirements()->attach($requirement);
+                $student->SOEvaluations()->attach($requirement->outcomes()->get()->filter(function($query) {
+                    return $query->pivot != null;
+                }));
+                foreach ($requirement->outcomes()->get() as $outcome) {
+                    $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+                    $student->SOEvaluations()->attach($eval);
+                }
+            }
+        }
+
+        return redirect('/requirements/' . $baseClass->BaseClass_Id)->with('messsage', 'Requirements Updated');
     }
 
     /**
@@ -105,6 +124,16 @@ class RequirementController extends Controller
         $requirement->update();
 
         $requirement->outcomes()->sync($request->input('outcomes', []));
+        $classes = _Class::where('BaseClass_Id', $requirement->baseClass()->first()->BaseClass_Id)->with('students')->get();
+
+        foreach ($classes as $class) {
+            foreach ($class->students as $student) {
+                foreach ($requirement->outcomes()->get() as $outcome) {
+                    $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
+                    $student->SOEvaluations()->attach($eval);
+                }
+            }
+        }
 
         return redirect('/requirements/' . $requirement->BaseClass_Id);
     }

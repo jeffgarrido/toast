@@ -53,11 +53,11 @@
                         <th class="th-fit">Student #</th>
                         <th>Name</th>
                         @foreach($class->baseClass->requirements()->where('Term', '=', 1)->get() as $requirement)
-                            <th class="th-fit">{{$requirement->Name}}</th>
+                            <th class="th-fit">{{$requirement->Name}}<br />HPS: {{$requirement->HPS}}</th>
                         @endforeach
                         <th class="th-fit">PG</th>
                         @foreach($class->baseClass->requirements()->where('Term', '=', 2)->get() as $requirement)
-                            <th class="th-fit">{{$requirement->Name}}</th>
+                            <th class="th-fit">{{$requirement->Name}}<br />HPS: {{$requirement->HPS}}</th>
                         @endforeach
                         <th class="th-fit">FG</th>
                         <th class="th-fit">SG</th>
@@ -105,6 +105,7 @@
                 <script>
                     $(document).ready(function() {
                         $('#ClassTable').DataTable({
+                            "paging": false,
                             order: [1, 'asc'],
                             "scrollX": true
                         });

@@ -111,8 +111,7 @@ class StudentController extends Controller
     public function show($id)
     {
         $student = Student::find($id);
-
-        foreach ($student->studentOutcomes()->get()->load('performanceIndicators') as $outcome) {
+        foreach ($student->studentOutcomes()->with('performanceIndicators')->get() as $outcome) {
             $outcome->pivot->Evaluation = 0;
             $outcome->pivot->P1 = 0;
             $outcome->pivot->P2 = 0;
@@ -128,19 +127,23 @@ class StudentController extends Controller
                     continue;
                 }
                 $index = $outcome->performanceIndicators->search($soEval->performanceIndicator);
-                switch ($index) {
-                    case 0:
-                        $outcome->pivot->P1 += $soEval->pivot->Evaluation;
-                        $p1ctr++;
-                        break;
-                    case 1:
-                        $outcome->pivot->P2 += $soEval->pivot->Evaluation;
-                        $p2ctr++;
-                        break;
-                    case 2:
-                        $outcome->pivot->P3 += $soEval->pivot->Evaluation;
-                        $p3ctr++;
-                        break;
+                if($index === false){
+                    continue;
+                } else {
+                    switch ($index) {
+                        case 0:
+                            $outcome->pivot->P1 += $soEval->pivot->Evaluation;
+                            $p1ctr++;
+                            break;
+                        case 1:
+                            $outcome->pivot->P2 += $soEval->pivot->Evaluation;
+                            $p2ctr++;
+                            break;
+                        case 2:
+                            $outcome->pivot->P3 += $soEval->pivot->Evaluation;
+                            $p3ctr++;
+                            break;
+                    }
                 }
             }
 

@@ -301,3 +301,8 @@ input[type=number] {
     display: -ms-flexbox;
     display:         flex;
 }
+
+.hScroll {
+    width: 100px;
+    overflow-x: scroll;
+}

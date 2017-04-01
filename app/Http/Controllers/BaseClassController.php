@@ -8,6 +8,8 @@ use App\Course;
 use App\Professor;
 use App\Section;
 use App\SOEvaluation;
+use App\Student;
+use App\StudentOutcome;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

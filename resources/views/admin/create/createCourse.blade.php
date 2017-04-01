@@ -75,8 +75,8 @@
                 <div class="form-group">
                     <select id="outcomesList" multiple="multiple" name="outcomesList[]">
                         @foreach($outcomes as $outcome)
-                            <option value="{{ $outcome->Outcome_Id}}">
-                                {{ $outcome->Outcome_Code }}
+                            <option value="{{ $outcome->Outcome_Id}}" title="{{ $outcome->Description }}">
+                                {{ $outcome->Outcome_Code }}: {{ $outcome->Description }}
                             </option>
                         @endforeach
                     </select>

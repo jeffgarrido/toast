@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\_Class;
 use App\BaseClass;
+use App\CILO;
 use App\Course;
 use App\CourseRequirement;
 use App\Professor;
@@ -179,8 +180,8 @@ class ProfClassController extends Controller
     public function showRequirements($id){
         $baseClass = BaseClass::find($id);
 
-
         $course = $baseClass->course;
+        $outcomes = $course->outcomes()->get();
         $professor = $baseClass->professor;
 
         switch ($course->Terms){
@@ -195,7 +196,7 @@ class ProfClassController extends Controller
                 break;
         }
 
-        return view('professor.edit.managerequirements', compact('baseClass', 'course', 'professor', 'terms'));
+        return view('professor.edit.managerequirements', compact('baseClass', 'course', 'professor', 'terms', 'outcomes'));
     }
 
     public function updateRequirements(Request $request, CourseRequirement $requirement){
@@ -223,5 +224,17 @@ class ProfClassController extends Controller
         $baseClass->requirements()->save($requirement);
         
         return redirect('/pclasses/edit_requirements/' . $requirement->BaseClass_Id);
+    }
+
+    public function addCILO(BaseClass $baseClass,Request $request) {
+        $CILO = new CILO();
+
+        $CILO->Code = $request->input('Code');
+        $CILO->Description = $request->Description;
+        $baseClass->cilos()->save($CILO);
+
+        $CILO->studentOutcomes()->sync($request->input('outcomesList'));
+
+        return back();
     }
 }

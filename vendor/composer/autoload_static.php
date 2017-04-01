@@ -314,6 +314,8 @@ class ComposerStaticInit88d6170b807a87835d784446fcbaeadb
 
     public static $classMap = array (
         'CreateAuditLogsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_09_072741_create_audit_logs_table.php',
+        'CreateCILOSSOTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_31_152638_create_CILOS_SO_table.php',
+        'CreateCILOsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_31_151838_create_cilos_table.php',
         'CreateClassStudentTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_063325_create_class_student_table.php',
         'CreateClassesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_18_062632_create_classes_table.php',
         'CreateCourseOutcomeTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_17_155834_create_course_outcome_table.php',
