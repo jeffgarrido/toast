@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    <b class="fa fa-lg fa-edit"></b> {{ $course->Code }}: {{ $course->Title }} <small>Requirements</small>
+                    <b class="fa fa-lg fa-edit"></b> {{ $course->Code }}: {{ $course->Title }} <small>Syllabus</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li>
@@ -31,6 +31,135 @@
             </div>
         </div>
         <!--</editor-fold>-->
+
+        <!--<editor-fold desc="Student Outcomes">-->
+        <legend>Applicable Student Outcomes</legend>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-hover table-condensed table-responsive table-bordered">
+                    <thead>
+                    <th class="th-fit">Outcome Code</th>
+                    <th>Description</th>
+                    </thead>
+                    <tbody>
+                    @foreach($outcomes as $outcome)
+                        <tr>
+                            <td class="td-fit">{{ $outcome->Outcome_Code }}</td>
+                            <td>{{ $outcome->Description }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--</editor-fold>-->
+
+        {{--<!--<editor-fold desc="CILOs">-->--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-lg-12">--}}
+                {{--<div class="panel panel-primary">--}}
+                    {{--<div class="panel-body">--}}
+                        {{--<legend>Course Intended Learning Outcomes (CILO)</legend>--}}
+                        {{--@if($baseClass->cilos()->get()->count() > 0)--}}
+                            {{--<table class="table table-hover table-condensed table-responsive">--}}
+                                {{--<thead>--}}
+                                {{--<th>At the end of this period, students should be able to:</th>--}}
+                                {{--<th class="th-fit">SO code links</th>--}}
+                                {{--<th class="th-fit">Actions</th>--}}
+                                {{--</thead>--}}
+                                {{--<tbody>--}}
+                                {{--@foreach($baseClass->cilos()->get() as $CILO)--}}
+                                    {{--<tr>--}}
+                                        {{--<td>{{ $CILO->Code }}. {{ $CILO->Description }}</td>--}}
+                                        {{--<td class="td-fit">{{ $CILO->studentOutcomes()->get()->implode('Outcome_Code', ', ') }}</td>--}}
+                                        {{--<td class="td-fit"><button type="button" class="btn btn-danger btn-xs button-delete"><i class="fa fa-remove"></i> Delete</button></td>--}}
+                                    {{--</tr>--}}
+                                {{--@endforeach--}}
+                                {{--</tbody>--}}
+                            {{--</table>--}}
+                            {{--<h6><span class="help-block">Note: Click on a record to edit.</span></h6>--}}
+                        {{--@else--}}
+                            {{--<span class="help-block">No CILOs yet.</span>--}}
+                        {{--@endif--}}
+                        {{--<button type="button" class="btn btn-default btn-block btn-sm" data-toggle="modal" data-target="#addCILO">--}}
+                            {{--<span class="glyphicon glyphicon-plus"></span>&nbsp;Add CILO--}}
+                        {{--</button>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
+                {{--Add Requirement Modal--}}
+                {{--<div class="modal fade" id="addCILO" tabindex="-1" role="dialog">--}}
+                    {{--<div class="modal-dialog" role="document">--}}
+                        {{--<div class="modal-content">--}}
+                            {{--<div class="modal-header">--}}
+                                {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+                                    {{--<span aria-hidden="true">&times;</span>--}}
+                                {{--</button>--}}
+                                {{--<h3 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i> Add Course Intended Learning Outcome</h3>--}}
+                            {{--</div>--}}
+                            {{--<div class="modal-body">--}}
+                                {{--{{ Form::open(array('url' => '/pclasses/add_cilo/' . $baseClass->BaseClass_Id, 'method' => 'POST', 'class' => 'form-horizontal')) }}--}}
+                                {{--<fieldset>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="Code" class="col-lg-4 control-label">Code</label>--}}
+                                        {{--<div class="col-lg-7">--}}
+                                            {{--<input class="form-control" id="Code" name="Code" type="text" required/>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="Description" class="col-lg-4 control-label">Description</label>--}}
+                                        {{--<div class="col-lg-7">--}}
+                                            {{--<textarea class="form-control" rows="3" id="Description" name="Description"></textarea>--}}
+                                            {{--<span class="help-block">Note: Please give a clear and concise description of this CILO.</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+
+                                    {{--<div class="col-lg-12">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<select id="SOList" multiple="multiple" name="outcomesList[]">--}}
+                                                {{--@foreach($outcomes as $outcome)--}}
+                                                    {{--<option value="{{ $outcome->Outcome_Id}}" title="{{ $outcome->Description }}">--}}
+                                                        {{--{{ $outcome->Outcome_Code }}: {{ $outcome->Description }}--}}
+                                                    {{--</option>--}}
+                                                {{--@endforeach--}}
+                                            {{--</select>--}}
+                                        {{--</div>--}}
+                                        {{--<hr/>--}}
+                                    {{--</div>--}}
+
+                                    {{--<script>--}}
+                                        {{--$(document).ready(function() {--}}
+                                            {{--$('#SOList').bootstrapDualListbox({--}}
+                                                {{--nonSelectedListLabel: 'All SOs',--}}
+                                                {{--selectedListLabel: 'Selected SO/s',--}}
+                                                {{--preserveSelectionOnMove: false,--}}
+                                                {{--moveOnSelect: true,--}}
+                                            {{--});--}}
+                                        {{--});--}}
+                                    {{--</script>--}}
+
+                                    {{--<div class="col-lg-12">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<hr/>--}}
+                                            {{--<div class="col-lg-10 col-lg-offset-2 text-right">--}}
+                                                {{--<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>--}}
+                                                {{--<button type="submit" class="btn btn-primary"><span class="fa fa-floppy-o"></span> Save</button>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</fieldset>--}}
+                                {{--{{ Form::close() }}--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--/Add Requirement Modal--}}
+
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<!--</editor-fold>s-->--}}
 
         <div class="row">
             <div class="col-lg-12">
@@ -101,9 +230,9 @@
                                                 <div class="col-lg-7">
                                                     <input class="form-control" id="Weight" name="Weight" placeholder="%" type="number" step="0.01" min="0" value="{{ $requirement->Weight }}" required/>
                                                     <span class="help-block">
-                                                Note: Percentages are applied on a per term basis.<br>
-                                                Semestral grade is computed as 50% prelim grade + 50% final grade.
-                                            </span>
+                                                        Note: Weight applies to per term basis.<br/>
+                                                        To compute for the final grade, a default of computation of 50% PG + 50% FG is used.
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -136,8 +265,7 @@
                                                     <hr/>
                                                     <div class="col-lg-10 col-lg-offset-2 text-right">
                                                         <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                                                        <button type="reset" class="btn btn-info">Clear Form</button>
-                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                        <button type="submit" class="btn btn-primary"><span class="fa fa-floppy-o"></span> Save Changes</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,9 +309,9 @@
                                             <div class="col-lg-7">
                                                 <input class="form-control" id="Weight" name="Weight" placeholder="%" type="number" step="0.01" min="0" required/>
                                                 <span class="help-block">
-                                                Note: Percentages are applied on a per term basis.<br>
-                                                Semestral grade is computed as 50% prelim grade + 50% final grade.
-                                            </span>
+                                                    Note: Weight applies to per term basis.<br/>
+                                                    To compute for the final grade, a default of computation of 50% PG + 50% FG is used.
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -200,9 +328,11 @@
                                                     <label for="Code" class="col-lg-4 control-label" >{{$outcome->Outcome_Code}}</label>
                                                     <div class="col-lg-7">
                                                         <select class="form-control outcomeList" multiple="multiple" id="course" name="outcomes[]">
-                                                            @foreach($outcome->performanceIndicators()->get() as $pIndicator)
-                                                                <option value="{{$pIndicator->PI_Id}}">{{ $pIndicator->Code }}</option>
-                                                            @endforeach
+                                                                @foreach($outcome->performanceIndicators()->get() as $pIndicator)
+                                                                    <option value="{{$pIndicator->PI_Id}}" title="{{ $pIndicator->Description }}">
+                                                                        {{ $pIndicator->Code }}
+                                                                    </option>
+                                                                @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -214,8 +344,7 @@
                                                 <hr/>
                                                 <div class="col-lg-10 col-lg-offset-2 text-right">
                                                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                                                    <button type="reset" class="btn btn-info">Clear Form</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    <button type="submit" class="btn btn-primary"><span class="fa fa-floppy-o"></span> Save</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -234,8 +363,10 @@
 </div>
 
 <script>
-    $('.outcomeList').multiselect({
-        includeSelectAllOption: true,
+    $(document).ready(function() {
+        $('.outcomeList').multiselect({
+            includeSelectAllOption: true,
+        });
     });
 </script>
 

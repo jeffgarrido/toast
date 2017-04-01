@@ -32,8 +32,6 @@
 
             {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
             <fieldset>
-
-                <!--<editor-fold desc="Course Details Form">-->
                 <div class="col-lg-5">
                     <div class="form-group">
                         <label for="Code" class="col-lg-4 control-label">Course Code</label>
@@ -78,8 +76,8 @@
                     <div class="form-group">
                         <select id="outcomesList" multiple="multiple" name="outcomesList[]">
                             @foreach($outcomes as $outcome)
-                                <option value="{{ $outcome->Outcome_Id}}" {{ $course->outcomes->contains($outcome)? 'selected="selected"' : '' }}>
-                                    {{ $outcome->Outcome_Code }}
+                                <option value="{{ $outcome->Outcome_Id}}" {{ $course->outcomes->contains($outcome)? 'selected="selected"' : '' }} title="{{ $outcome->Description }}">
+                                    {{ $outcome->Outcome_Code }}: {{ $outcome->Description }}
                                 </option>
                             @endforeach
                         </select>
