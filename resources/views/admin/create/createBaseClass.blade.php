@@ -77,7 +77,7 @@
                             selectedListLabel: 'Selected Outcome/s',
                             preserveSelectionOnMove: false,
                             moveOnSelect: true,
-                            nonSelectedFilter: '{{ \Carbon\Carbon::now()->year }} - {{ \Carbon\Carbon::now()->year + 1 }}',
+                            nonSelectedFilter: '{{ \Carbon\Carbon::now()->year - 1 }} - {{ \Carbon\Carbon::now()->year }}',
                         });
                     });
                 </script>

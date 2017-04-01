@@ -15,7 +15,7 @@ class Event extends Model
 
     public function students() {
 
-        return $this->belongsToMany(Student::class, 'event_student')->withPivot('Attendance')->withTimestamps();
+        return $this->belongsToMany(Student::class, 'event_student')->withPivot('PaymentStatus', 'Attendance')->withTimestamps();
 
     }
 
