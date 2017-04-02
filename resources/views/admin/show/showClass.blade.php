@@ -42,6 +42,33 @@
         </div>
         <!--</editor-fold>-->
 
+        <legend>Student Outcomes </legend>
+
+        <div class="row">
+            <div class="col-lg-12">
+                @foreach($outcomes->chunk(4) as $outcomeChunk)
+                    @foreach($outcomeChunk as $outcome)
+                        <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div class="huge">{{ $outcome->Outcome_Code }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-o-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endforeach
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 {{ Form::open(array('url' => '/updatescores/' . $class->Class_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}

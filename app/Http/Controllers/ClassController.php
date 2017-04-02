@@ -89,6 +89,7 @@ class ClassController extends Controller
     public function show($id)
     {
         $class = _Class::find($id);
+        $outcomes = $class->baseClass->course()->first()->outcomes()->get();
         $section = $class->section;
         $students = $class->students()->with(array(
             'requirements' => function ($query) use ($class) {
@@ -98,7 +99,7 @@ class ClassController extends Controller
         $course = $class->baseClass->course;
         $professor = $class->baseClass->professor;
 
-        return view('admin.show.showClass', compact('class', 'students', 'professor', 'section', 'course'));
+        return view('admin.show.showClass', compact('class', 'students', 'professor', 'section', 'course', 'outcomes'));
     }
 
     /**
