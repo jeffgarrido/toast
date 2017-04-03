@@ -90,6 +90,7 @@ class ClassController extends Controller
     {
         $class = _Class::find($id);
         $outcomes = $class->baseClass->course()->first()->outcomes()->get();
+//        dd($outcomes);
         $section = $class->section;
         $students = $class->students()->with(array(
             'requirements' => function ($query) use ($class) {

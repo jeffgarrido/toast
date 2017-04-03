@@ -73,9 +73,9 @@ class RequirementController extends Controller
             $students = $class->students;
             foreach ($students as $student) {
                 $student->requirements()->attach($requirement);
-                $student->SOEvaluations()->attach($requirement->outcomes()->get()->filter(function($query) {
-                    return $query->pivot != null;
-                }));
+                foreach ($requirement->outcomes()->get() as $pi) {
+                    $student->SOEvaluations()->attach(SOEvaluation::find($pi->pivot->id));
+                }
                 foreach ($requirement->outcomes()->get() as $outcome) {
                     $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
                     $student->SOEvaluations()->attach($eval);
