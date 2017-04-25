@@ -12,6 +12,9 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         <b class="fa fa-lg fa-book"></b> Courses
+                        <a href="/courses/create" class="btn btn-success btn-lg pull-right">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i> Add Course
+                        </a>
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -44,25 +47,23 @@
                         <?php $count = 1;?>
                         @foreach($courses as $course)
                             <tr class="record-details" data-href="/courses/{{ $course->Course_Id }}">
-
-                                    <td class="hidden">{{$course->Course_Id}}</td>
-                                    <td>{{$count++}}</td>
-                                    <td>{{$course->Code}}</td>
-                                    <td>{{$course->Title}}</td>
-                                    <td>{{$course->Units}}</td>
-                                    <td>{{$course->Description}}</td>
-                                    <td>{{$course->Terms}}</td>
-                                    <td class="td-fit">
-                                        {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
-                                            <a href="/courses/{{ $course->Course_Id }}/edit" class="btn btn-warning" aria-hidden="true">
-                                                <span class="fa fa-pencil" aria-hidden="true"></span> Edit
-                                            </a>
-                                            <button type="submit" class="btn btn-danger button-delete" aria-hidden="true">
-                                                <span class="fa fa-remove"></span> Delete
-                                            </button>
-                                        {{ Form::close() }}
-                                    </td>
-
+                                <td class="hidden">{{$course->Course_Id}}</td>
+                                <td>{{$count++}}</td>
+                                <td>{{$course->Code}}</td>
+                                <td>{{$course->Title}}</td>
+                                <td>{{$course->Units}}</td>
+                                <td>{{$course->Description}}</td>
+                                <td>{{$course->Terms}}</td>
+                                <td class="td-fit">
+                                    {{ Form::open(array('url' => '/courses/' . $course->Course_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
+                                        <a href="/courses/{{ $course->Course_Id }}/edit" class="btn btn-warning" aria-hidden="true">
+                                            <span class="fa fa-pencil" aria-hidden="true"></span> Edit
+                                        </a>
+                                        <button type="submit" class="btn btn-danger button-delete" aria-hidden="true">
+                                            <span class="fa fa-remove"></span> Delete
+                                        </button>
+                                    {{ Form::close() }}
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

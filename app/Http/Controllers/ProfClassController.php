@@ -56,12 +56,17 @@ class ProfClassController extends Controller
      */
     public function show($id)
     {
+        $class = _Class::find($id);
+        $section = $class->section;
+        $students = $class->students()->with(array(
+            'requirements' => function ($query) use ($class) {
+                $query->where('course_requirements.Course_Id', '=', $class->baseClass->Course_Id);
+            },
+        ))->get()->sortBy('LastName');
+        $course = $class->baseClass->course;
+        $professor = $class->baseClass->professor;
 
-        $course = Course::find($id);
-        $prof = Professor::where('Account_Id',Auth::user()->id)->first();
-        $baseclasses = $prof->courses->where('Course_Id',$id)->load('classes');
-//        dd($baseclasses);
-        return view('professor.menu.classlist',compact('course','baseclasses'));
+        return view('professor.show.viewclass', compact('class', 'students', 'professor', 'section', 'course'));
     }
 
     /**

@@ -118,16 +118,19 @@ class StudentOutcomeController extends Controller
         $studentOutcome->update();
 
         $p1 = $studentOutcome->performanceIndicators[0];
+        $p1->Weight = $request->input('P1Weight', 0);
         $p1->Description = $request->input('P1Description', '');
 
         $p1->update();
 
         $p2 = $studentOutcome->performanceIndicators[1];
+        $p2->Weight = $request->input('P2Weight', 0);
         $p2->Description = $request->input('P2Description', '');
 
         $p2->update();
 
         $p3 = $studentOutcome->performanceIndicators[2];
+        $p3->Weight = $request->input('P3Weight', 0);
         $p3->Description = $request->input('P3Description', '');
 
         $p3->update();

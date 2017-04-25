@@ -32,7 +32,7 @@
                                             <div class="huge">{{ $outcome->Outcome_Code }}</div>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div>Developing: <span class="badge">{{ $outcome->students->count() }}</span></div>
+                                            <div>Developing students: <span class="badge">{{ $outcome->students->count() }}</span></div>
                                             <div>Events: <span class="badge">{{ $outcome->events->count() }}</span></div>
                                         </div>
                                     </div>

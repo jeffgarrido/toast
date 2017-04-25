@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Professor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProfCourseController extends Controller
 {
@@ -15,7 +17,9 @@ class ProfCourseController extends Controller
      */
     public function index()
     {
-
+        $prof = Professor::where('Account_Id', Auth::user()->id)->first();
+        $courses = $prof->courses;
+        return view('professor.menu.courselist',compact('courses', 'prof'));
     }
 
     /**
@@ -47,11 +51,11 @@ class ProfCourseController extends Controller
      */
     public function show($id)
     {
-        $prof = Professor::where('Account_Id',$id)->first();
-//        $courses = $prof->courses->first()->course;
-//        dd($courses);
-        $courses = $prof->courses;
-        return view('professor.menu.courselist',compact('courses', 'prof'));
+        $course = Course::find($id);
+        $prof = Professor::where('Account_Id',Auth::user()->id)->first();
+        $baseclasses = $prof->courses->where('Course_Id',$id)->load('classes');
+
+        return view('professor.menu.classlist', compact('course','baseclasses'));
     }
 
     /**
@@ -86,5 +90,23 @@ class ProfCourseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function viewRequirements(Course $course) {
+        $outcomes = $course->outcomes()->with('performanceIndicators')->get();
+
+        switch ($course->Terms){
+            case 2:
+                $terms = ['Prelim', 'Final'];
+                break;
+            case 3:
+                $terms = ['Prelim', 'Midterm', 'Final'];
+                break;
+            case 4:
+                $terms = ['Prelim', 'Midterm', 'Pre-final', 'Final'];
+                break;
+        }
+
+        return view('professor.show.viewRequirements', compact('course', 'outcomes', 'terms'));
     }
 }

@@ -132,7 +132,7 @@
                                                             ))->get() as $requirement)
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading">
-                                                                        <?php $course = $requirement->baseClass()->get()->first()->course; ?>
+                                                                        <?php $course = $requirement->course()->first(); ?>
                                                                         {{ $course->Code }}: {{ $course->Title }}
                                                                     </div>
                                                                     <div class="panel-body">

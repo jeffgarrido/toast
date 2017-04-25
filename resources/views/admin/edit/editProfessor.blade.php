@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label for="MiddleName" class="col-lg-4 control-label" >Middle Name</label>
                         <div class="col-lg-6">
-                            <input class="form-control input-md" id="MiddleName" name="MiddleName" placeholder="Mother's Maiden Name" type="text" value="{{ $professor->MiddleName }}" required/>
+                            <input class="form-control input-md" id="MiddleName" name="MiddleName" placeholder="Mother's Maiden Name" type="text" value="{{ $professor->MiddleName }}"/>
                         </div>
                     </div>
 

@@ -112,6 +112,7 @@ class StudentController extends Controller
     public function show($id)
     {
         $student = Student::find($id);
+
         foreach ($student->studentOutcomes()->with('performanceIndicators')->get() as $outcome) {
             $outcome->pivot->Evaluation = 0;
             $outcome->pivot->P1 = 0;
@@ -172,7 +173,11 @@ class StudentController extends Controller
                 $outcome->pivot->EventEval = 4;
             }
 
-            $outcome->pivot->Evaluation = round(($outcome->pivot->P1 + $outcome->pivot->P2 + $outcome->pivot->P3 + $outcome->pivot->EventEval) /4, 2);
+            $outcome->pivot->Evaluation = round(
+                (($outcome->pivot->P1 * $outcome->performanceIndicators[0]->Weight / 100) +
+                ($outcome->pivot->P2 * $outcome->performanceIndicators[1]->Weight / 100) +
+                ($outcome->pivot->P3 * $outcome->performanceIndicators[2]->Weight / 100) +
+                    $outcome->pivot->EventEval) /4, 2);
 
             $outcome->pivot->update();
         }

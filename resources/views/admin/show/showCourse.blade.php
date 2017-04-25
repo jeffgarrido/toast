@@ -6,7 +6,6 @@
 
     <div class="container-fluid">
 
-
         <!--<editor-fold desc="Page Header">-->
         <div class="row">
             <div class="col-lg-12">
@@ -40,6 +39,11 @@
         <!--</editor-fold>-->
 
         <div class="row">
+            <div class="col-lg-12 bottom-pad">
+                <a href="/requirements/{{ $course->Course_Id }}" class="btn btn-success pull-right" aria-hidden="true">
+                    <span class="fa fa-search" aria-hidden="true"></span> Manage Requirements
+                </a>
+            </div>
             <div class="col-lg-12">
                 <table id="CourseTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
                     <thead>

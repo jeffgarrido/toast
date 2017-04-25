@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\_Class;
 use App\BaseClass;
+use App\Course;
 use App\CourseRequirement;
 use App\SOEvaluation;
 use Illuminate\Http\Request;
@@ -16,11 +17,9 @@ class RequirementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(BaseClass $baseClass)
+    public function index(Course $course)
     {
-        $course = $baseClass->course;
         $outcomes = $course->outcomes()->get();
-        $professor = $baseClass->professor;
 
         switch ($course->Terms){
             case 2:
@@ -34,7 +33,7 @@ class RequirementController extends Controller
                 break;
         }
 
-        return view('admin.menu.manageRequirements', compact('baseClass', 'course', 'professor', 'terms', 'outcomes'));
+        return view('admin.menu.manageRequirements', compact('course', 'terms', 'outcomes'));
     }
 
     /**
@@ -53,7 +52,7 @@ class RequirementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, BaseClass $baseClass)
+    public function store(Request $request, Course $course)
     {
         $requirement = new CourseRequirement();
 
@@ -63,11 +62,13 @@ class RequirementController extends Controller
         $requirement->Description = $request->input('Description', '');
         $requirement->Term = $request->input('Term');
 
-        $baseClass->requirements()->save($requirement);
+        $course->requirements()->save($requirement);
 
         $requirement->outcomes()->sync($request->input('outcomes', []));
 
-        $classes = _Class::where('BaseClass_Id', $baseClass->BaseClass_Id)->with('students')->get();
+        $classes = _Class::where('Status', 1)
+            ->whereIn('BaseClass_Id', BaseClass::where('Course_Id', $course->Course_Id)->get())
+            ->with('students')->get();
 
         foreach ($classes as $class) {
             $students = $class->students;
@@ -83,7 +84,7 @@ class RequirementController extends Controller
             }
         }
 
-        return redirect('/requirements/' . $baseClass->BaseClass_Id)->with('messsage', 'Requirements Updated');
+        return redirect('/requirements/' . $course->Course_Id)->with('messsage', 'Requirements Updated');
     }
 
     /**
@@ -124,7 +125,7 @@ class RequirementController extends Controller
         $requirement->update();
 
         $requirement->outcomes()->sync($request->input('outcomes', []));
-        $classes = _Class::where('BaseClass_Id', $requirement->baseClass()->first()->BaseClass_Id)->with('students')->get();
+        $classes = _Class::where('BaseClass_Id', $requirement->course()->first()->Course_Id)->with('students')->get();
 
         foreach ($classes as $class) {
             foreach ($class->students as $student) {
@@ -135,7 +136,7 @@ class RequirementController extends Controller
             }
         }
 
-        return redirect('/requirements/' . $requirement->BaseClass_Id);
+        return redirect('/requirements/' . $requirement->Course_Id);
     }
 
     /**
@@ -146,6 +147,20 @@ class RequirementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $requirement = CourseRequirement::find($id);
+
+        foreach ($requirement->students()->get() as $student) {
+            foreach ($student->SOEvaluations()->where('Requirement_Id', $requirement->Requirement_Id)->get() as $SOEvals) {
+                $SOEvals->delete();
+            }
+        }
+
+        $requirement->outcomes()->detach();
+
+        $requirement->students()->detach();
+
+        $requirement->delete();
+
+        return back();
     }
 }

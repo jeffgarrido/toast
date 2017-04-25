@@ -81,9 +81,10 @@ Route::group(['middleware' => ['web']], function(){
     //</editor-fold>
 
     //<editor-fold desc="<!-- RequirementController Routes -->">
-    Route::get('/requirements/{baseClass}', 'RequirementController@index');
+    Route::get('/requirements/{course}', 'RequirementController@index');
     Route::patch('/requirements/{requirement}', 'RequirementController@update');
-    Route::post('/requirements/{baseClass}', 'RequirementController@store');
+    Route::post('/requirements/{course}', 'RequirementController@store');
+    Route::delete('/requirements/{requirement}', 'RequirementController@destroy');
     //</editor-fold>
 
     //<editor-fold desc="<!-- SectionController Routes -->">
@@ -110,6 +111,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('pclasses', 'ProfClassController', ['except' => ['create']]);
 
     Route::resource('porganization', 'ProfOrgController', ['except' => ['create']]);
+
+    Route::get('/p_requirements/{course}', 'ProfCourseController@viewRequirements');
 
     Route::get('pclasses/edit_requirements/{course}', 'ProfClassController@showRequirements');
     Route::patch('pclasses/editnew_requirements/{requirement}', 'ProfClassController@updateRequirements');

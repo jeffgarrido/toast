@@ -10,8 +10,8 @@ class CourseRequirement extends Model
 
     protected $table = 'course_requirements';
 
-    public function baseClass() {
-        return $this->belongsTo(BaseClass::class, 'BaseClass_Id');
+    public function course() {
+        return $this->belongsTo(Course::class, 'Course_Id');
     }
 
     public function professor() {

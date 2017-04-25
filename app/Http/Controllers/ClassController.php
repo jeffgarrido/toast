@@ -89,15 +89,15 @@ class ClassController extends Controller
     public function show($id)
     {
         $class = _Class::find($id);
-        $outcomes = $class->baseClass->course()->first()->outcomes()->get();
-//        dd($outcomes);
         $section = $class->section;
         $students = $class->students()->with(array(
             'requirements' => function ($query) use ($class) {
-                $query->where('course_requirements.BaseClass_Id', '=', $class->BaseClass_Id);
+                $query->where('course_requirements.Course_Id', '=', $class->baseClass->Course_Id);
             },
         ))->get()->sortBy('LastName');
+
         $course = $class->baseClass->course;
+        $outcomes = $course->outcomes()->get();
         $professor = $class->baseClass->professor;
 
         return view('admin.show.showClass', compact('class', 'students', 'professor', 'section', 'course', 'outcomes'));
@@ -196,7 +196,7 @@ class ClassController extends Controller
 
         $students = $class->students()->with(array(
             'requirements' => function ($query) use ($class) {
-                $query->where('course_requirements.BaseClass_Id', '=', $class->BaseClass_Id);
+                $query->where('course_requirements.Course_Id', '=', $class->baseClass->Course_Id);
             },
         ))->get();
 
@@ -206,7 +206,9 @@ class ClassController extends Controller
             $grade->FinalGrade = 0;
             $grade->SemestralGrade = 0;
             foreach ($student->requirements as $requirement) {
-                if ($requirement->Term == 1) {
+                if($requirement->pivot->Score < 0) {
+                    continue;
+                } elseif ($requirement->Term == 1 ) {
                     $grade->PrelimGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
                 } elseif ($requirement->Term == 2) {
                     $grade->FinalGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
@@ -217,7 +219,7 @@ class ClassController extends Controller
                     $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
                     $evalPivot = $eval->students()->find($student->Student_Id)->pivot;
                     $evalScore = $requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1) * 100 ;
-                    if ($evalScore <= 0) {
+                    if ($evalScore < 0) {
                         $evalPivot->Evaluation = 0;
                     } elseif ($evalScore < 40) {
                         $evalPivot->Evaluation = 1;

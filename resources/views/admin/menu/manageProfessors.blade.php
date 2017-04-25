@@ -58,13 +58,13 @@
                     <tbody>
                     <?php $count = 1;?>
                     @foreach($professors as $professor)
-                        <tr class="record-details" data-href="/professors/{{ $professor->Professor_Id }}">
+                        <tr>
                             <td class="hidden">{{$professor->Professor_Id}}</td>
                             <td><?php echo $count; $count++;?></td>
-                            <td>{{$professor->LastName}}, {{$professor->FirstName}} {{$professor->MiddleName}}</td>
-                            <td>{{$professor->Phone}}</td>
-                            <td>{{$professor->Email}}</td>
-                            <td>{{\Carbon\Carbon::parse($professor->Birthday)->format('M d, Y')}}</td>
+                            <td class="record-details" data-href="/professors/{{ $professor->Professor_Id }}">{{$professor->LastName}}, {{$professor->FirstName}} {{$professor->MiddleName}}</td>
+                            <td class="record-details" data-href="/professors/{{ $professor->Professor_Id }}">{{$professor->Phone}}</td>
+                            <td class="record-details" data-href="/professors/{{ $professor->Professor_Id }}">{{$professor->Email}}</td>
+                            <td class="record-details" data-href="/professors/{{ $professor->Professor_Id }}">{{\Carbon\Carbon::parse($professor->Birthday)->format('M d, Y')}}</td>
                             <td class="td-fit">
                                 {{ Form::open(array('url' => '/professors/' . $professor->Professor_Id, 'method' => 'DELETE', 'class' => 'form-delete', 'onsubmit' => 'return confirm("Confirm delete record? All related records will also be deleted.")')) }}
                                     <button type="button" class="btn btn-warning" aria-hidden="true" onclick="editProfessorDetails({{ $professor->Professor_Id }})">

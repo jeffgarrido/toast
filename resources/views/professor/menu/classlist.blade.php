@@ -27,9 +27,6 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-12 text-right bottom-pad">
-                    <a href="/pclasses/edit_requirements/{{$baseclasses->first()->BaseClass_Id}}" class="btn btn-success"><i class="fa fa-search"></i> View Syllabus</a>
-                </div>
                 <div class="col-lg-12">
                     <table id="ClassTable" class="table table-hover table-condensed table-responsive table-bordered" width="100%" cellspacing="0">
 
@@ -46,7 +43,7 @@
                         <tbody>
                         @foreach($baseclasses as $bc)
                             @foreach($bc->classes as $class)
-                            <tr class="record-details-professor" data-href="/pclasses/{{$class->pivot->Class_Id}}/edit">
+                            <tr class="record-details-professor" data-href="/pclasses/{{$class->pivot->Class_Id}}">
                                 <td>{{$loop->iteration}}.</td>
                                 <td>{{$class->Code}}</td>
                                 <td>{{$class->AcademicYearStart}} - {{$class->AcademicYearEnd}}</td>

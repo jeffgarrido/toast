@@ -40,7 +40,7 @@
                         <tbody>
                         <?php $count = 1;?>
                         @foreach($courses as $course)
-                            <tr class="record-details-professor" data-href="/pclasses/{{ $course->course->Course_Id }}">
+                            <tr class="record-details-professor" data-href="/pcourses/{{ $course->course->Course_Id }}">
 
                                 <td class="hidden">{{$course->course->Course_Id}}</td>
                                 <td>{{$count++}}</td>

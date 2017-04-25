@@ -42,32 +42,36 @@
         </div>
         <!--</editor-fold>-->
 
-        <legend>Student Outcomes </legend>
+        {{--<legend>Student Outcomes Overview</legend>--}}
 
-        <div class="row">
-            <div class="col-lg-12">
-                @foreach($outcomes->chunk(4) as $outcomeChunk)
-                    @foreach($outcomeChunk as $outcome)
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <div class="huge">{{ $outcome->Outcome_Code }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-o-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endforeach
-            </div>
-        </div>
+        {{--<div class="row">--}}
+            {{--<div class="col-lg-12">--}}
+                {{--@foreach($outcomes->chunk(4) as $outcomeChunk)--}}
+                    {{--@foreach($outcomeChunk as $outcome)--}}
+                        {{--<div class="col-lg-3">--}}
+                            {{--<div class="panel panel-default">--}}
+                                {{--<div class="panel-heading">--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="col-xs-3">--}}
+                                            {{--<div class="huge">{{ $outcome->Outcome_Code }}</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="panel-footer">--}}
+                                    {{--<span class="pull-left">View Details</span>--}}
+                                    {{--<span class="pull-right"><i class="fa fa-arrow-circle-o-right"></i></span>--}}
+                                    {{--<div class="clearfix"></div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--@endforeach--}}
+                {{--@endforeach--}}
+            {{--</div>--}}
+        {{--</div>--}}
+
+        <legend>Grading Sheet</legend>
+
+        <small>Note: Grades with scores of -1 means a student has not taken the evaluation yet.</small>
 
         <div class="row">
             <div class="col-lg-12">
@@ -79,11 +83,11 @@
                     <tr>
                         <th class="th-fit">Student #</th>
                         <th>Name</th>
-                        @foreach($class->baseClass->requirements()->where('Term', '=', 1)->get() as $requirement)
-                            <th class="th-fit">{{$requirement->Name}}<br />HPS: {{$requirement->HPS}}</th>
+                        @foreach($course->requirements()->where('Term', '=', 1)->get() as $requirement)
+                            <th class="th-fit">{{ $requirement->Name }}<br />HPS: {{ $requirement->HPS }}</th>
                         @endforeach
                         <th class="th-fit">PG</th>
-                        @foreach($class->baseClass->requirements()->where('Term', '=', 2)->get() as $requirement)
+                        @foreach($course->requirements()->where('Term', '=', 2)->get() as $requirement)
                             <th class="th-fit">{{$requirement->Name}}<br />HPS: {{$requirement->HPS}}</th>
                         @endforeach
                         <th class="th-fit">FG</th>
@@ -101,7 +105,7 @@
                             @foreach($student->requirements->filter(function($requirement) { return $requirement->Term == 1; }) as $requirement)
                                 <td class="td-fit">
                                     <input type="hidden"  name="Score[]" value="{{$requirement->pivot->id}}"/>
-                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="0" max="{{$requirement->HPS}}"/>
+                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="-1" max="{{$requirement->HPS}}"/>
                                 </td>
                             @endforeach
                             <td class="td-fit">
@@ -110,7 +114,7 @@
                             @foreach($student->requirements->filter(function($requirement) { return $requirement->Term == 2; }) as $requirement)
                                 <td class="td-fit">
                                     <input type="hidden"  name="Score[]" value="{{$requirement->pivot->id}}"/>
-                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="0" max="{{$requirement->HPS}}"/>
+                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="-1" max="{{$requirement->HPS}}"/>
                                 </td>
                             @endforeach
                             <td class="td-fit">

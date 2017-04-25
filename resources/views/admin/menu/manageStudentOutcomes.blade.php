@@ -28,11 +28,10 @@
 
             @foreach($studentOutcomes->chunk(4) as $outcomeChunk)
                 <div class="row">
-                    <div class="custom-flexbox">
                     @foreach($outcomeChunk as $outcome)
-                        <div class="col-lg-3 flex-content" >
-                            <div class="panel panel-default" style="min-height: 348px">
-                                <div class="panel-heading flex-stretch">
+                        <div class="col-lg-3" >
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-xs-3">
                                             <div class="huge">{{ $outcome->Outcome_Code }}</div>
@@ -89,6 +88,13 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="P1Weight" class="col-md-4 control-label" >P1 Weight</label>
+                                                <div class="col-lg-7">
+                                                    <input class="form-control input-md" id="P1Weight" name="P1Weight" type="number" min="0" value="{{ $outcome->performanceIndicators[0]->Weight }}" required/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="P1Description" class="col-lg-4 control-label" >P1 Description</label>
                                                 <div class="col-lg-7">
                                                     <textarea class="form-control" rows="3" id="P1Description" name="P1Description">{{ $outcome->performanceIndicators[0]->Description }}</textarea>
@@ -96,9 +102,23 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="P2Weight" class="col-md-4 control-label" >P2 Weight</label>
+                                                <div class="col-lg-7">
+                                                    <input class="form-control input-md" id="P2Weight" name="P2Weight" type="number" min="0" value="{{ $outcome->performanceIndicators[1]->Weight }}" required/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="P2Description" class="col-lg-4 control-label" >P2 Description</label>
                                                 <div class="col-lg-7">
                                                     <textarea class="form-control" rows="3" id="P2Description" name="P2Description">{{ $outcome->performanceIndicators[1]->Description }}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="P3Weight" class="col-md-4 control-label" >P3 Weight</label>
+                                                <div class="col-lg-7">
+                                                    <input class="form-control input-md" id="P3Weight" name="P3Weight" type="number" min="0" value="{{ $outcome->performanceIndicators[2]->Weight }}" required/>
                                                 </div>
                                             </div>
 
@@ -124,7 +144,6 @@
                         </div>
                         <!--</editor-fold>-->
                     @endforeach
-                </div>
                 </div>
             @endforeach
 
@@ -161,6 +180,20 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="Events_Minimum" class="col-md-4 control-label" >Minimum Events</label>
+                                    <div class="col-lg-7">
+                                        <input class="form-control input-md" id="Events_Minimum" name="Events_Minimum" type="number" min="0" required/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="P1Weight" class="col-md-4 control-label" >P1 Weight</label>
+                                    <div class="col-lg-7">
+                                        <input class="form-control input-md" id="P1Weight" name="P1Weight" type="number" min="0" required/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="P1Description" class="col-lg-4 control-label">P1 Description</label>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" rows="3" id="P1Description" name="P1Description"></textarea>
@@ -168,9 +201,23 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="P2Weight" class="col-md-4 control-label" >P2 Weight</label>
+                                    <div class="col-lg-7">
+                                        <input class="form-control input-md" id="P2Weight" name="P2Weight" type="number" min="0" required/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="P2Description" class="col-lg-4 control-label">P2 Description</label>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" rows="3" id="P2Description" name="P2Description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="P3Weight" class="col-md-4 control-label" >P3 Weight</label>
+                                    <div class="col-lg-7">
+                                        <input class="form-control input-md" id="P3Weight" name="P3Weight" type="number" min="0" required/>
                                     </div>
                                 </div>
 

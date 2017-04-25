@@ -23,8 +23,4 @@ class BaseClass extends Model
     public function classes() {
         return $this->belongsToMany(Section::class, 'classes', 'BaseClass_Id')->withPivot('Class_Id')->withTimestamps();
     }
-
-    public function requirements() {
-        return $this->hasMany(CourseRequirement::class, 'BaseClass_Id');
-    }
 }

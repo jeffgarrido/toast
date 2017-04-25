@@ -8,8 +8,8 @@ class Course extends Model
 {
     public $primaryKey = "Course_Id";
 
-    public function requirements(){
-        return $this->hasMany(CourseRequirement::class, 'Requirement_Id');
+    public function requirements() {
+        return $this->hasMany(CourseRequirement::class, 'Course_Id');
     }
 
     public function professors() {
