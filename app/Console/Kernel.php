@@ -102,10 +102,10 @@ class Kernel extends ConsoleKernel
              }
 
              $update = new DashLastUpdate();
-             $update->timestamp = Carbon::now();
+             $update->timestamp = Carbon::now(new \DateTimeZone('PHT'));
              $update->save();
 
-         })->everyMinute();
+         })->cron('* * * * * *');
     }
 
     /**

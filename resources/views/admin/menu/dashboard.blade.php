@@ -22,7 +22,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <legend>Dashboard is updated hourly. Last update was {{ \Carbon\Carbon::parse(\App\DashLastUpdate::all()->last()->updated_at)->format('jS \o\f F, Y g:i:s a') }}</legend>
+                <legend>Dashboard is updated hourly. Last update was {{ \Carbon\Carbon::parse(\App\DashLastUpdate::all()->last()->timestamp)->format('jS \o\f F, Y g:i:s a') }}</legend>
             </div>
             @foreach($outcomes->chunk(4) as $outcomeChunk)
                 <div class="col-lg-12 bottom-pad">
