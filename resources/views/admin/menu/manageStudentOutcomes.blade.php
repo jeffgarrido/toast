@@ -180,13 +180,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="Events_Minimum" class="col-md-4 control-label" >Minimum Events</label>
-                                    <div class="col-lg-7">
-                                        <input class="form-control input-md" id="Events_Minimum" name="Events_Minimum" type="number" min="0" required/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <label for="P1Weight" class="col-md-4 control-label" >P1 Weight</label>
                                     <div class="col-lg-7">
                                         <input class="form-control input-md" id="P1Weight" name="P1Weight" type="number" min="0" required/>

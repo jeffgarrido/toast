@@ -58,12 +58,13 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $course = new Course();
+//        dd($request->input('Terms', 2));
 
         $course->Code = $request->input('Code');
         $course->Title = $request->input('Title');
         $course->Units = $request->input('Units');
         $course->Description = $request->input('Description');
-        $course->Terms = $request->input('Terms', 2);
+        $course->Terms = $request->input('Terms', 2) - 1;
 
         $course->save();
 
@@ -189,10 +190,6 @@ class CourseController extends Controller
         $course->save();
 
         return back()->with('id', $course->id);
-    }
-
-    public function deleteCourse(Course $course){
-        $course->delete();
     }
 
     public function getDetails(Course $course){

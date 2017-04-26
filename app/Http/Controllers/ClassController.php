@@ -74,7 +74,7 @@ class ClassController extends Controller
 
         foreach ($studentIds['attached'] as $studentId) {
             $student = Student::find($studentId);
-            $student->requirements()->attach($class->baseClass->requirements()->get());
+            $student->requirements()->attach($class->baseClass->course->requirements()->get());
         }
 
         return redirect('/class/' . $class->Course_Id);
@@ -131,15 +131,10 @@ class ClassController extends Controller
     {
         $class = _Class::find($id);
 
-//        dd($class->baseClass->requirements()->get()->load('students'));
-
-//        foreach ($class->baseClass->requirements()->get() as $requirement) {
-//
-//        }
         $detachedStudents = $class->students()->whereNotIn('students.Student_Id', $request->input('studentList', []))->get();
 
         if($detachedStudents->count()){
-            foreach ($class->baseClass->requirements()->get() as $requirement) {
+            foreach ($class->baseClass->course->requirements()->get() as $requirement) {
                 $requirement->students()->detach($detachedStudents);
                 foreach ($requirement->outcomes()->get() as $outcome){
                     $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
@@ -151,8 +146,8 @@ class ClassController extends Controller
         $studentIds = $class->students()->sync($request->input('studentList', []));
         foreach ($studentIds['attached'] as $studentId) {
             $student = Student::find($studentId);
-            $student->requirements()->attach($class->baseClass->requirements()->get());
-            foreach ($class->baseClass->requirements()->get() as $requirement){
+            $student->requirements()->attach($class->baseClass->course->requirements()->get());
+            foreach ($class->baseClass->course->requirements()->get() as $requirement){
                 foreach ($requirement->outcomes()->get() as $outcome) {
                     $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
                     $eval->students()->attach($class->students()->get());
@@ -173,12 +168,6 @@ class ClassController extends Controller
     {
         $class = _Class::find($id);
 
-        foreach ($class->students()->get() as $student) {
-            $student->requirements()->detach($class->baseClass-> requirements()->get());
-        }
-
-        $class->students()->detach();
-
         $baseClass = $class->baseClass;
 
         $class->delete();
@@ -190,7 +179,7 @@ class ClassController extends Controller
     {
         foreach ($request->input('Score', []) as $item) {
             $score = Score::find($item);
-            $score->Score = $request->input($item, 0);
+            $score->Score = strlen($request->input($item)) > 0 ? (int)$request->input($item) : null;
             $score->update();
         }
 
@@ -206,7 +195,7 @@ class ClassController extends Controller
             $grade->FinalGrade = 0;
             $grade->SemestralGrade = 0;
             foreach ($student->requirements as $requirement) {
-                if($requirement->pivot->Score < 0) {
+                if(is_null($requirement->pivot->Score)) {
                     continue;
                 } elseif ($requirement->Term == 1 ) {
                     $grade->PrelimGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);

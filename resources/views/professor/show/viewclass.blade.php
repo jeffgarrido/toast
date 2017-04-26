@@ -49,7 +49,7 @@
 
                     <small>Note: Grades with scores of -1 means a student has not taken the evaluation yet.</small>
 
-                    {{ Form::open(array('url' => '/updatescores/' . $class->Class_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
+                    {{ Form::open(array('url' => '/p_updatescores/' . $class->Class_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
                     <table id="ClassTable" class="table table-hover table-condensed table-responsive table-bordered compact nowrap" width="100%" cellspacing="0">
 
                         <!--<editor-fold desc="Class Table Head">-->

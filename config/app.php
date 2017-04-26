@@ -184,6 +184,9 @@ return [
         //excel import
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        //cron
+//        Liebig\Cron\Laravel5ServiceProvider::class,
+
     ],
 
     /*

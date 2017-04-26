@@ -98,10 +98,8 @@ class ProfClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateScores(Request $request, _Class $class)
     {
-        $class = _Class::find($id);
-
         foreach ($request->input('Score', []) as $item) {
             $score = Score::find($item);
             $score->Score = $request->input($item, 0);
@@ -110,7 +108,7 @@ class ProfClassController extends Controller
 
         $students = $class->students()->with(array(
             'requirements' => function ($query) use ($class) {
-                $query->where('course_requirements.BaseClass_Id', '=', $class->BaseClass_Id);
+                $query->where('course_requirements.Course_Id', '=', $class->baseClass->Course_Id);
             },
         ))->get();
 
@@ -120,17 +118,22 @@ class ProfClassController extends Controller
             $grade->FinalGrade = 0;
             $grade->SemestralGrade = 0;
             foreach ($student->requirements as $requirement) {
-                if ($requirement->Term == 1) {
+                if($requirement->pivot->Score < 0) {
+                    continue;
+                } elseif ($requirement->Term == 1 ) {
                     $grade->PrelimGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
                 } elseif ($requirement->Term == 2) {
                     $grade->FinalGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);
                 }
                 $grade->SemestralGrade = round($grade->PrelimGrade * 0.5 + $grade->FinalGrade * 0.5, 2);
+
                 foreach ($requirement->outcomes()->get() as $outcome){
                     $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);
                     $evalPivot = $eval->students()->find($student->Student_Id)->pivot;
                     $evalScore = $requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1) * 100 ;
-                    if ($evalScore < 40) {
+                    if ($evalScore < 0) {
+                        $evalPivot->Evaluation = 0;
+                    } elseif ($evalScore < 40) {
                         $evalPivot->Evaluation = 1;
                     } elseif ($evalScore < 60) {
                         $evalPivot->Evaluation = 2;
@@ -140,6 +143,7 @@ class ProfClassController extends Controller
                         $evalPivot->Evaluation = 4;
                     }
                     $evalPivot->update();
+
                 }
             }
 
@@ -168,7 +172,8 @@ class ProfClassController extends Controller
 
             $grade->update();
         }
-        return back();
+
+        return redirect('/pclasses/'. $class->Class_Id);
     }
 
     /**

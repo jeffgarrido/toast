@@ -105,7 +105,7 @@
                             @foreach($student->requirements->filter(function($requirement) { return $requirement->Term == 1; }) as $requirement)
                                 <td class="td-fit">
                                     <input type="hidden"  name="Score[]" value="{{$requirement->pivot->id}}"/>
-                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="-1" max="{{$requirement->HPS}}"/>
+                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="0" max="{{$requirement->HPS}}"/>
                                 </td>
                             @endforeach
                             <td class="td-fit">
@@ -114,7 +114,7 @@
                             @foreach($student->requirements->filter(function($requirement) { return $requirement->Term == 2; }) as $requirement)
                                 <td class="td-fit">
                                     <input type="hidden"  name="Score[]" value="{{$requirement->pivot->id}}"/>
-                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="-1" max="{{$requirement->HPS}}"/>
+                                    <input type="number" class="form-control" name="{{$requirement->pivot->id}}" value="{{$requirement->pivot->Score}}" min="0" max="{{$requirement->HPS}}"/>
                                 </td>
                             @endforeach
                             <td class="td-fit">

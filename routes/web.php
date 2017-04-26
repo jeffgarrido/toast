@@ -36,6 +36,8 @@ Route::group(['middleware' => ['web']], function(){
     //<editor-fold desc="<!-- ClassController Routes -->">
     Route::resource('class', 'ClassController');
     Route::patch('/updatescores/{class}', 'ClassController@updateScores');
+    Route::patch('/p_updatescores/{class}', 'ProfClassController@updateScores');
+
     //</editor-fold>
 
     //<editor-fold desc="<!-- CourseController Routes -->">

@@ -67,7 +67,7 @@ class RequirementController extends Controller
         $requirement->outcomes()->sync($request->input('outcomes', []));
 
         $classes = _Class::where('Status', 1)
-            ->whereIn('BaseClass_Id', BaseClass::where('Course_Id', $course->Course_Id)->get())
+            ->whereIn('BaseClass_Id', explode(',', BaseClass::where('Course_Id', $course->Course_Id)->get()->implode('BaseClass_Id', ',')))
             ->with('students')->get();
 
         foreach ($classes as $class) {

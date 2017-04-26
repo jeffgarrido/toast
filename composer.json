@@ -10,7 +10,8 @@
         "laravelcollective/html": "5.3.*",
         "league/csv": "8.*",
         "guzzlehttp/guzzle": "^6.2",
-        "maatwebsite/excel": "^2.1"
+        "maatwebsite/excel": "^2.1",
+        "liebig/cron": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
