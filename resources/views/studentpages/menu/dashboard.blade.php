@@ -125,7 +125,7 @@
                                                                                                 ))->get() as $requirement)
                                                                                                     <div class="panel panel-default">
                                                                                                         <div class="panel-heading">
-                                                                                                            <?php $course = $requirement->baseClass()->get()->first()->course; ?>
+                                                                                                            <?php $course = $requirement->course()->first(); ?>
                                                                                                             {{ $course->Code }}: {{ $course->Title }}
                                                                                                         </div>
                                                                                                         <div class="panel-body">
@@ -155,9 +155,9 @@
                                                                                                 <tbody>
                                                                                                 @foreach($outcome->events as $event)
                                                                                                     <tr>
-                                                                                                        <td>{{$loop->iteration}}</td>
+                                                                                                        <td>{{ $loop->iteration }}</td>
                                                                                                         <td>{{ $event->Event_Name }}</td>
-                                                                                                        <td>{{ $event->Organization }}</td>
+                                                                                                        <td>{{ $event->Organization->Organization_Name }}</td>
                                                                                                         <td>{{ $event->Event_Date }}</td>
                                                                                                         <th>{{ $event->Start_Time }} - {{ $event->End_Time }}</th>
                                                                                                         <th>{{ $event->Venue }}</th>

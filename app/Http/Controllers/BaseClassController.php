@@ -72,7 +72,7 @@ class BaseClassController extends Controller
             $students = Section::find($sectionId)->students()->where('AcademicStatus' , '=', 'Regular')->get();
             $class = _Class::find($baseClass->classes()->where('sections.Section_Id', '=', $sectionId)->first()->pivot->Class_Id);
             $class->students()->sync($students);
-            foreach($class->baseClass->requirements()->get() as $requirement){
+            foreach($class->baseClass->course->requirements()->get() as $requirement){
                 $requirement->students()->attach($class->students()->get());
                 foreach ($requirement->outcomes()->get() as $outcome){
                     $eval = SOEvaluation::find($outcome->pivot->SOEval_Id);

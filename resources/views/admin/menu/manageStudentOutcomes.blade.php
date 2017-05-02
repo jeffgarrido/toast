@@ -81,6 +81,13 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="EventWeight" class="col-md-4 control-label" >Event Weight</label>
+                                                <div class="col-lg-7">
+                                                    <input class="form-control input-md" id="EventWeight" name="EventWeight" type="number" min="0" value="{{ $outcome->Event_Weight }}" required/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="Description" class="col-lg-4 control-label" >Description</label>
                                                 <div class="col-lg-7">
                                                     <textarea class="form-control" rows="3" id="Description" name="Description">{{ $outcome->Description }}</textarea>
@@ -169,6 +176,13 @@
                                     <label for="Events_Minimum" class="col-md-4 control-label" >Minimum Events</label>
                                     <div class="col-lg-7">
                                         <input class="form-control input-md" id="Events_Minimum" name="Events_Minimum" type="number" min="0" required/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="EventWeight" class="col-md-4 control-label" >Event Weight</label>
+                                    <div class="col-lg-7">
+                                        <input class="form-control input-md" id="EventWeight" name="EventWeight" type="number" min="0" required/>
                                     </div>
                                 </div>
 

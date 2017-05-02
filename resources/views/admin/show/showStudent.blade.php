@@ -97,6 +97,33 @@
                                     <div class="modal-body" style="min-height: 40vh;">
                                         <div class="row">
                                             <div class="col-lg-12">
+                                                <legend>
+                                                    Rubric of Score Conversion to Performance Indicator Rating
+                                                </legend>
+                                                <table class="table table-hover table-condensed table-responsive">
+                                                    <thead>
+                                                        <th>Score Range</th>
+                                                        <th>Evaluation Equivalent</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>80 - 100</td>
+                                                            <td>4</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>60 - 80</td>
+                                                            <td>3</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>40 - 60</td>
+                                                            <td>2</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>0 - 40</td>
+                                                            <td>1</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                                 <!--<editor-fold desc="P1, P2, P3, Event tabs">-->
                                                 <ul class="nav nav-tabs">
                                                     <li>
@@ -148,7 +175,35 @@
                                                         </div>
                                                     @endforeach
                                                     <div class="tab-pane fade" id="EventEval{{ $outcome->Outcome_Id }}">
-
+                                                        <legend>Events attended</legend>
+                                                        <table class="eventsTable table table-hover table-condensed table-responsive table-bordered compact" width="100%" cellspacing="0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No.</th>
+                                                                    <th>Name</th>
+                                                                    <th>Organization</th>
+                                                                    <th>Date</th>
+                                                                    <th>Time</th>
+                                                                    <th>Venue</th>
+                                                                    <th>Attendance</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($student->events as $event)
+                                                                    @if ($event->studentOutcomes()->get()->contains($outcome))
+                                                                        <tr class="record-details" data-href="/events/{{ $event->Event_Id }}">
+                                                                            <td>{{$loop->iteration}}</td>
+                                                                            <td>{{ $event->Event_Name }}</td>
+                                                                            <td>{{ $event->Organization->Organization_Name }}</td>
+                                                                            <td>{{ $event->Event_Date }}</td>
+                                                                            <td>{{ $event->Start_Time }} - {{ $event->End_Time }}</td>
+                                                                            <td>{{ $event->Venue }}</td>
+                                                                            <td>{{ $event->pivot->Attendance }}</td>
+                                                                        </tr>
+                                                                    @endif
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                                 <!--</editor-fold>-->

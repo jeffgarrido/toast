@@ -53,6 +53,7 @@ class StudentOutcomeController extends Controller
 
         $studentOutcome->Outcome_Code = $request->input('Outcome_Code', '');
         $studentOutcome->Events_Minimum = $request->input('Events_Minimum', 0);
+        $studentOutcome->Event_Weight = $request->input('EventWeight', 0);
         $studentOutcome->Description = $request->input('Description', '');
 
         $studentOutcome->save();
@@ -113,6 +114,7 @@ class StudentOutcomeController extends Controller
 
         $studentOutcome->Outcome_Code = $request->input('Outcome_Code', '');
         $studentOutcome->Events_Minimum = $request->input('Events_Minimum', 0);
+        $studentOutcome->Event_Weight = $request->input('EventWeight', 0);
         $studentOutcome->Description = $request->input('Description', '');
 
         $studentOutcome->update();

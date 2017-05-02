@@ -93,9 +93,9 @@ class Kernel extends ConsoleKernel
 
                      $outcome->pivot->Evaluation = round(
                          (($outcome->pivot->P1 * $outcome->performanceIndicators[0]->Weight / 100) +
-                             ($outcome->pivot->P2 * $outcome->performanceIndicators[1]->Weight / 100) +
-                             ($outcome->pivot->P3 * $outcome->performanceIndicators[2]->Weight / 100) +
-                             $outcome->pivot->EventEval) / 4, 2);
+                         ($outcome->pivot->P2 * $outcome->performanceIndicators[1]->Weight / 100) +
+                         ($outcome->pivot->P3 * $outcome->performanceIndicators[2]->Weight / 100) +
+                         ($outcome->pivot->EventEval * $outcome->EventWeight / 100)), 2);
 
                      $outcome->pivot->update();
                  }
@@ -105,7 +105,7 @@ class Kernel extends ConsoleKernel
              $update->timestamp = Carbon::now(new \DateTimeZone('PHT'));
              $update->save();
 
-         })->cron('* * * * * *');
+         })->name('Update_Dashboard')->withoutOverlapping();
     }
 
     /**

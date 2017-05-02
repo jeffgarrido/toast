@@ -9,6 +9,7 @@ use App\Section;
 use App\Student;
 use App\StudentOutcome;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -113,6 +114,12 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
 
+        $student->load(array(
+            'events' => function ($query) {
+                $query->where('event_student.Attendance', '<>', '');
+            }
+        ));
+
         foreach ($student->studentOutcomes()->with('performanceIndicators')->get() as $outcome) {
             $outcome->pivot->Evaluation = 0;
             $outcome->pivot->P1 = 0;
@@ -153,7 +160,7 @@ class StudentController extends Controller
             $outcome->pivot->P2 = round($outcome->pivot->P2 / (($p2ctr == 0) ? 1 : $p2ctr), 2);
             $outcome->pivot->P3 = round($outcome->pivot->P3 / (($p3ctr == 0) ? 1 : $p3ctr), 2);
 
-            foreach ($student->events()->where('event_student.Attendance', '<>', 0)->get() as $studentEvent) {
+            foreach ($student->events()->where('event_student.Attendance', '<>', '')->get() as $studentEvent) {
                 if ($studentEvent->studentOutcomes()->get()->contains($outcome)) {
                     $eventCtr++;
                 }
@@ -177,10 +184,11 @@ class StudentController extends Controller
                 (($outcome->pivot->P1 * $outcome->performanceIndicators[0]->Weight / 100) +
                 ($outcome->pivot->P2 * $outcome->performanceIndicators[1]->Weight / 100) +
                 ($outcome->pivot->P3 * $outcome->performanceIndicators[2]->Weight / 100) +
-                    $outcome->pivot->EventEval) /4, 2);
+                ($outcome->pivot->EventEval * $outcome->Event_Weight / 100)), 2);
 
             $outcome->pivot->update();
         }
+
         return view('admin.show.showStudent', compact('student'));
     }
 

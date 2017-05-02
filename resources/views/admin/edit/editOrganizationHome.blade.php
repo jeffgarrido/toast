@@ -251,11 +251,11 @@
                         <div class="form-group">
                             <label for="Start_Time" class="col-md-4 control-label" >Event Time</label>
                             <div class="col-lg-3">
-                                <input class="form-control input-md col-sm-3" id="Start_Time" name="Start_Time"  placeholder="ex. 2017-03-30" type="time" required/>
+                                <input class="form-control input-md col-sm-3" id="Start_Time" name="Start_Time"  placeholder="ex. 23:59" type="time" required/>
                             </div>
                             <div class="col-lg-1">to</div>
                             <div class="col-lg-3">
-                                <input class="form-control input-md col-sm-3" id="End_Time" name="End_Time"  placeholder="ex. 2017-03-30" type="time" required/>
+                                <input class="form-control input-md col-sm-3" id="End_Time" name="End_Time"  placeholder="ex. 23:59" type="time" required/>
                             </div>
                         </div>
                         <div class="form-group">
