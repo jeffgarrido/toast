@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    <i class="fa fa-fw fa-dashboard"></i>Dashboard <small>Statistics Overview</small>
+                    <i class="fa fa-fw fa-dashboard"></i>Dashboard <small>Student Outcomes Overview</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li class="active">

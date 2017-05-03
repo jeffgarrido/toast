@@ -102,7 +102,7 @@ class ProfClassController extends Controller
     {
         foreach ($request->input('Score', []) as $item) {
             $score = Score::find($item);
-            $score->Score = $request->input($item, 0);
+            $score->Score = strlen($request->input($item)) > 0 ? (int)$request->input($item) : null;
             $score->update();
         }
 
@@ -118,7 +118,7 @@ class ProfClassController extends Controller
             $grade->FinalGrade = 0;
             $grade->SemestralGrade = 0;
             foreach ($student->requirements as $requirement) {
-                if($requirement->pivot->Score < 0) {
+                if(is_null($requirement->pivot->Score)) {
                     continue;
                 } elseif ($requirement->Term == 1 ) {
                     $grade->PrelimGrade += round(($requirement->pivot->Score / (($requirement->HPS > 0)? $requirement->HPS : 1))  * $requirement->Weight, 2);

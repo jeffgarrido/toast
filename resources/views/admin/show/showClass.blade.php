@@ -71,8 +71,6 @@
 
         <legend>Grading Sheet</legend>
 
-        <small>Note: Grades with scores of -1 means a student has not taken the evaluation yet.</small>
-
         <div class="row">
             <div class="col-lg-12">
                 {{ Form::open(array('url' => '/updatescores/' . $class->Class_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}

@@ -10,16 +10,6 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         <b class="fa fa-lg fa-edit"></b> {{ $course->Code }}: {{ $course->Title }}
-                        <div class="pull-right">
-                            {{ Form::open(array('url' => '/class/' . $class->Class_Id, 'method' => 'DELETE', 'class' => 'form-delete')) }}
-                            <a href="/class/{{ $class->Class_Id }}/edit" class="btn btn-lg btn-warning" aria-hidden="true">
-                                <span class="fa fa-pencil" aria-hidden="true"></span> Edit
-                            </a>
-                            <button type="submit" class="btn btn-lg btn-danger button-delete" aria-hidden="true">
-                                <span class="fa fa-remove"></span> Delete
-                            </button>
-                            {{ Form::close() }}
-                        </div>
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -46,8 +36,6 @@
                 </div>
 
                 <div class="col-lg-12">
-
-                    <small>Note: Grades with scores of -1 means a student has not taken the evaluation yet.</small>
 
                     {{ Form::open(array('url' => '/p_updatescores/' . $class->Class_Id, 'method' => 'PATCH', 'class' => 'form-horizontal')) }}
                     <table id="ClassTable" class="table table-hover table-condensed table-responsive table-bordered compact nowrap" width="100%" cellspacing="0">
