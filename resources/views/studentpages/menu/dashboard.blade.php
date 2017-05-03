@@ -85,6 +85,7 @@
                                                                                         Overall Rating: {{ $outcome->pivot->Evaluation }}
                                                                                     </div>
                                                                                 </h2>
+                                                                                <small>{{ $outcome->Description }}</small>
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-body" style="min-height: 40vh;">

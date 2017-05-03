@@ -59,6 +59,7 @@
                                             <h2 class="modal-title">
                                                 <span class="fa fa-fw fa-compass" aria-hidden="true"></span> {{ $outcome->Outcome_Code }}
                                             </h2>
+                                            <small>{{ $outcome->Description }}</small>
                                         </div>
                                     </div>
                                     <div class="modal-body" style="min-height: 40vh;">
@@ -121,7 +122,7 @@
                                                                 <tr class="record-details" data-href="/events/{{ $event->Event_Id }}">
                                                                     <td>{{$loop->iteration}}</td>
                                                                     <td>{{ $event->Event_Name }}</td>
-                                                                    <td>{{ $event->Organization }}</td>
+                                                                    <td>{{ $event->Organization->Organization_Name }}</td>
                                                                     <td>{{ $event->Event_Date }}</td>
                                                                     <th>{{ $event->Start_Time }} - {{ $event->End_Time }}</th>
                                                                     <th>{{ $event->Venue }}</th>

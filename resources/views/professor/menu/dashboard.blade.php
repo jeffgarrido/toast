@@ -56,6 +56,7 @@
                                                 <h2 class="modal-title">
                                                     <span class="fa fa-fw fa-compass" aria-hidden="true"></span> {{ $outcome->Outcome_Code }}
                                                 </h2>
+                                                <small>{{ $outcome->Description }}</small>
                                             </div>
                                         </div>
                                         <div class="modal-body" style="min-height: 40vh;">
