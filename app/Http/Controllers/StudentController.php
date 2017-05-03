@@ -290,6 +290,13 @@ class StudentController extends Controller
         return view('studentpages.orgpage', compact('organizations', 'events', 'orgs','students'));
     }
 
+    private function createLog($action, $description = ""){
+        $log = new AuditLog();
 
+        $log->Account_Id = Auth::user()->id;
+        $log->Action = $action;
+        $log->Description = $description;
 
+        $log->save();
+    }
 }
